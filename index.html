@@ -53,7 +53,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-05-13 12:46:58'
+  postUpdate: '2023-05-13 16:11:00'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -157,7 +157,64 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="ZOE's Blog"><span class="site-name">ZOE's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">ZOE's Blog</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/05/11/remove-element/" title="remove-element">remove-element</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-05-11T12:49:29.000Z" title="Created 2023-05-11 20:49:29">2023-05-11</time></span></div><div class="content">27. 移除元素C++ solutionclass Solution &#123;
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="ZOE's Blog"><span class="site-name">ZOE's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">ZOE's Blog</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/05/12/README/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-05-12T13:33:56.717Z" title="Created 2023-05-12 21:33:56">2023-05-12</time></span></div><div class="content">   
+GitTocGenerate a Readme toc for your Github repository.
+中文版
+GlimpseThis simple script can parse your markdown file and generate a Toc like this:
+
+
+This generated toc supports inner page jumping.
+UsageAssuming that your target file’s name is targetFile.md. Just type this command in shell:
+ 1&gt; python gitToc.py targetFile.md
+
+You will get a new markdown file named targetFile_with_toc.md in current directory.  
+Platform
+Windows
+This simple script has been packed into windows PE file(.exe) wit ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/05/12/README_CN/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-05-12T13:33:56.717Z" title="Created 2023-05-12 21:33:56">2023-05-12</time></span></div><div class="content">   
+GitToc为你的Github仓库的Readme自动生成一个目录
+English readme
+简介如下是转换效果：
+
+
+转换后的目录支持页内跳转
+使用教程假设你的目标文件名为 targetFile.md. 在你的命令行下键入下面命令即可:
+ 1&gt; python gitToc.py targetFile.md
+
+你会在你的当前目录下获得一个名为 targetFile_with_toc.md 的文件。
+平台
+Windows
+这个脚本已经通过 pyinstaller 打包成windows下可用的程序，在release里。 现在你可以直接点击 gitToc_GUI.exe 来完成你的文件转换任务（window机器上）。
+
+
+在线使用作者@lzw5399 基于GitToc制作了一个在线转换工具TocGenerator。
+TocGenerator仓库地址： https://github.com/lzw5399/TocGenerator 
+在线转换地址：https://toc.codepie.fun/
+使用方法：
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/05/12/demo_with_toc/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-05-12T13:33:56.717Z" title="Created 2023-05-12 21:33:56">2023-05-12</time></span></div><div class="content">
+Heading level 1
+Heading level 1.1
+Heading level 1.1.1
+Heading level 1.1.2
+
+
+Heading levle 1.2
+
+
+Heading level 2
+Heading level 2.1 
+Heading level 2.2
+
+
+ Heading
+
+Heading level 1hello world.
+Heading level 1.1Heading level 1.1.1Heading level 1.1.21234print(&#x27;hello world!&#x27;)# test indentfor i in range(10):    print(&#x27;hhh&#x27;)
+
+Heading levle 1.2Heading level 2Heading level 2.1 Heading level 2.2 Heading</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/05/12/demo/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-05-12T13:33:56.717Z" title="Created 2023-05-12 21:33:56">2023-05-12</time></span></div><div class="content">Heading level 1hello world.
+Heading level 1.1Heading level 1.1.1Heading level 1.1.21234print(&#x27;hello world!&#x27;)# test indentfor i in range(10):    print(&#x27;hhh&#x27;)
+
+Heading levle 1.2Heading level 2Heading level 2.1Heading level 2.2Heading</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/05/11/remove-element/" title="remove-element">remove-element</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-05-11T12:49:29.000Z" title="Created 2023-05-11 20:49:29">2023-05-11</time></span></div><div class="content">27. 移除元素C++ solutionclass Solution &#123;
 public:
     int removeElement(vector&lt;int&gt;&amp; nums, int val) &#123;
         int len=nums.size();
@@ -171,37 +228,14 @@ public:
 
 Java solution    
 
-</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/05/10/binary-search/" title="Binary Search">Binary Search</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-05-09T16:00:00.000Z" title="Created 2023-05-10 00:00:00">2023-05-10</time></span></div><div class="content">
- Ⅰ 704 二分查找 
- note
-1. 二分法的两种区间划分
-2. 二分法取中间值防溢出
-
-
-C++ solution
-Java solution
-
-
-Ⅱ  35. 搜索插入位置
-C++ solution
-Java solution
-
-
-Ⅲ 34. 在排序数组中查找元素的第一个和最后一个位置
-C++ solution
-Java solution
-
-
-
- Ⅰ 704 二分查找 
- note1. 二分法的两种区间划分每次写二分最容易纠结的part就是下面C++代码里面的A,B,C,D行:
-
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/05/10/binary-search/" title="Binary Search">Binary Search</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-05-09T16:00:00.000Z" title="Created 2023-05-10 00:00:00">2023-05-10</time></span></div><div class="content">Ⅰ 704 二分查找
+NOTE1. 每次写二分最容易纠结的part就是下面C++代码里面的A,B,C,D行:
 A 处是用nums.size()-1还是nums.size()?
 B 处是 &lt;&#x3D; 还是 &lt; ?
 C 处是 mid 还是 mid - 1 ?
 D 处是 mid 还是 mid + 1 ?
 
-实际上这些不同的本质实际上是对于数组区间的划分法不同：
+null- 实际上这些不同的本质实际上是对于数组区间的划分法不同：
 
 
 
@@ -222,4 +256,56 @@ B
 
 
 C
- high=mid-1 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoe Bezos</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/11/remove-element/" title="remove-element">remove-element</a><time datetime="2023-05-11T12:49:29.000Z" title="Created 2023-05-11 20:49:29">2023-05-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/10/binary-search/" title="Binary Search">Binary Search</a><time datetime="2023-05-09T16:00:00.000Z" title="Created 2023-05-10 00:00:00">2023-05-10</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">May 2023</span><span class="card-archive-list-count">2</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-05-13T04:46:58.817Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Zoe Bezos</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
+ high=mid-1;
+ high=mid;
+
+
+D
+low=mid+1;
+low=mid+1;
+
+
+2. 二分法取中间值防溢出1mid = (low+high) / 2
+E 处的写法在两大数相加的时候容易发生溢出，可以改成下面的写法：
+1mid = low + (( high - low ) / 2)
+
+C++ solution12345678910111213141516171819202 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/05/10/binary-search_with_toc/" title="Binary Search">Binary Search</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-05-09T16:00:00.000Z" title="Created 2023-05-10 00:00:00">2023-05-10</time></span></div><div class="content">
+ [Ⅰ 704 二分查找] 
+ NOTE
+1. 每次写二分最容易纠结的part就是下面C++代码里面的A,B,C,D行:
+2. 二分法取中间值防溢出
+
+
+C++ solution
+Java solution
+
+
+[Ⅱ  35. 搜索插入位置]
+C++ solution
+Java solution
+
+
+[ Ⅲ 34. 在排序数组中查找元素的第一个和最后一个位置]
+ NOTE
+1. 使用二分法在有序数组中查找某个数的左边界，即某个数第一次出现的位置
+2. 使用二分法在有序数组中查找某个数的右边界，即某个数最后一次出现的位置
+
+
+C++ solution
+Java solution
+
+
+
+ Ⅰ 704 二分查找 
+ NOTE1. 每次写二分最容易纠结的part就是下面C++代码里面的A,B,C,D行:
+A 处是用nums.size()-1还是nums.size()?
+B 处是 &lt;&#x3D; 还是 &lt; ?
+C 处是 mid 还是 mid - 1 ?
+D 处是 mid 还是 mid + 1 ?
+
+null- 实际上这些不同的本质实际上是对于数组区间的划分法不同：
+
+
+
+
+左闭右闭 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoe Bezos</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/12/README/" title="No title">No title</a><time datetime="2023-05-12T13:33:56.717Z" title="Created 2023-05-12 21:33:56">2023-05-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/12/README_CN/" title="No title">No title</a><time datetime="2023-05-12T13:33:56.717Z" title="Created 2023-05-12 21:33:56">2023-05-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/12/demo_with_toc/" title="No title">No title</a><time datetime="2023-05-12T13:33:56.717Z" title="Created 2023-05-12 21:33:56">2023-05-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/12/demo/" title="No title">No title</a><time datetime="2023-05-12T13:33:56.717Z" title="Created 2023-05-12 21:33:56">2023-05-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/11/remove-element/" title="remove-element">remove-element</a><time datetime="2023-05-11T12:49:29.000Z" title="Created 2023-05-11 20:49:29">2023-05-11</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">May 2023</span><span class="card-archive-list-count">7</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">7</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-05-13T08:11:00.459Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Zoe Bezos</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
