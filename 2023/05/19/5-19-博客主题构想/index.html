@@ -129,6 +129,71 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
 
     
     <article class="post-wrap">
@@ -158,18 +223,63 @@
         </header>
 
         <div class="post-content">
-            <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="抱歉, 当前文章不能被校验, 不过您还是可以看看解密后的内容。">
-  <script id="hbeData" type="hbeData" data-hmacdigest="55117879be40d76dd39d6e2bbc9e254ff8c5cafca45e13591375cbce8ce060cf">9ab8eeb89182dbd47bc9c58c85287dafab1f550aa59fc36539a53cf1c54e13569179b4689faff99a9d2e72d9a09e102c1fbbe80be766d47096c771b197f17507076bd86c8e19be5b05507f9f86ce738714ae780b55dc82387ad89d8271227c8f561daa569155b878ce60a5cbc16bcf4de1e9b2d8a60f506ace846230443bc4bce363ff762d52899b6f45fc44ff42aad8aca5e20bfdbfebb99c2bccfbff0f4ca7db39a814c7495f08601c08f9be8b1d6936f08636fe21aa3f2e72ab218f037a8a329291455f9fa42bc091f53f8f36d836f55a70f88a0169d494f072f4f42135675c167300092bcf539f0a5573a0ede742db6a0e57d3d49b178f73706dee5cfabfe7c6783a1725c59d2eb994dc795ef2462b6302646498a5a4c9b848b88cb7a34d2a3f2ad5740fbc870642da093ef5351f0b90230f063970e20c161550fb6fb000eea4f04175025cae971423a98a80cade7e67b9bd7f4a5c4ad0b2da29f62d032e09cdfc34a9b74e3609e69397386eaf701e95b41ba4de069650ba46bf7695ec7512b42005da8e0b2fe7755a1a0af5af48470ea791e74f62b43005332c4c8154986394fc6a690991003f9d122c7877d61a6b53323eea5105a18a1c3978913e3966b5f322cfc73f213d8b47efb73c821359d5fedd2802a1a2e8b3355ef95f5d12214c3488925aa51d02333d037d4bfb7b15ba73c47c3b85be0527290b1bdfb8d31b111e8cdffaf8c4fc165fbb35ae9a4c6e13a03386ccb96b0212bdc29fea3471d4c3ab60b77be6e30d45e65612cfd314427c95500f1e4014c39daa59af737d001529f294eb0f7de0abeb59f31b51068f81d0d2ccdec0621ea71e574650d5b28989cb4fb789d37395c3345bfb93446ad0331b3fdfd0a8c66443cb03639904b0fd1e136ae6273b4264b5e76cdc6a9fe42366bde99faf74de4c8643f93acc08b363fefd68cc87dd4d2c7a168c2860036eddff2be8ee3c88ddb8c96d1ad3df29f890f3606ef732626983489c7407b805f5a5af0aecff03ce1d3d4b910dae8b198fd219f262ecdc905e5d1d8fa5403874c4948c1b8e7e001286344fa0fbfdc7f2e3459482321f8ebb2df81affb33c7b730be878b1dace5299629d522ae696cb72d641bf5adfcf3e361b79bc2ac7f79ee2321bfc7401abb4a32d8ae62f8de1a19b65087ca23ab1de27073d3587ac87d1d4fc13d6c652c7e767ed77d2f4e88c036211972981b27d8b33e028bb3a70675a904fe0837081a879ab96d4a9d17efb586277f7ad4ed39822df23c4003a75d46b1843a6687e83de35ad396dde25d1296eecd302951853fc32f07587f6a0b8551ae1a1e72ee300b83c8059dd54a58b6c434d1abb27b628691b1d662bd026266b9b97c10720ceb1c37d7f163680837d8ff49ac940ac37f3d326a24cce46c07cb5c82ffa78d33cb21f23b8d1654313e40ecae750046e82d6e55053e246af945afd7b3e1de520b2b52f11b4d9d0f239153a517f515fa60906de44a08aa223337e9f2a01866cb9fe93782befbbbb59ec1860ce7f3c5fdb902ec3e762a1af845ba8f596862ae20aad1fb607cd02fdf002aacd0b72c88cdaf8dae07852308fc6b48d21516a2e28bcfa13e8af195bd15b3a92dff8d04a4a8ba36dc5c8b2b98f603760f2a95d56eef132548f74fa2c90cd14f6ac102fd45deb90644d694ee307796b017c9e7be5de1f0abd4a25d1f1baa0edd42f283b1e647ac894551193170cefa60d8b1a20f556af9fbf76809d8d47a2b0cb369037ade089aa71d66c23dd2a3c94d03a98871bd9ae37a0b895023c1bbd2c0224196b0222ab947b48872d505b96fd735d9dba038669879e10ed02405b24f4377573d6b33207b0364f2cb79c3b2455d281adb3ec68e628572f07fcd3b90113d8a8f4a662f2b0e8c283f92b53b75492c9705b5b932411b293e413d3a6b0665400a99a2b50d38fb27063ee983c48c6144f7f9d57b7fd1f78404d0b15667be9d56ddc66b58e1800b3439b2bde7979761648afbb35db05242133edf2e98a92cfa7a57effdac53c9ef6993720ba49a94106af172c786c994bc2e45e7f586d1d2226dfe82750af4488fd237d22470040ce7cfd568372e7931fad27dc24d53816a45d9b822c2526bf2d1a4014faec473b78737d68c89a1b44263022fdb85add3463121dd8727551fe6328dfeb4f23a6573cd76873c43245a77a2a097c2bce2debd60301be8f9000d61bfe970705135c88603928bc5d996e7219060c1f11d9470cb6dbcdd13866c0f414f7b492b8699c9b9f237fccc884ca69d88f7e004d7309a13ca2a7f3f8d35035c9278967dc37143ec8e6644cdab41d20daca6b514c332354650e8970f99ac072ba2c35f4783a2c93f4d4c213f0a09a59c7d0beff9818b0c94b1563dc09aaddd9062ed4e41d2b4fd08a45f5a405f89e05a84b4b050df85d2c107999d70fbf5d2a57743ff2c59b8f3407343d76cbd1b1c9288e385c45aaf4b5db0526b799b24f2bdbd6b10860efa9c9a2996b4291df2ec70c584da35399ced94e6eded6e3e627e55530071463f734061463d57f8d8ca2700d16d3250fddc7ed2f5326e5e0446d677eefb2af94abac4234a056ae83ceeb6407d104fcb13ea814dee996cf2ba6d4a172f9b37a0dec358595287797cafe45271a4f66c6d5c08666793ab60b64304913e108b1461e711345f59a14ef9ccbfee1c377e4b97ee0514f3405d4e223777baffe13be4bdc158b11c986f98cfb87a007f5ea6a28a19457e9546bf829ffb6e9e4a07cde67bb40516f5cd10b24e201fcdb4c665704c4b39f7f3417c796334b8e4ad8f5d05aeeda69b530d91a5d298ddfa4108db136df40082a21618ae2819be2cfddc6e551a64f7cedd81998167a8fef9e32a21ac5cb41375e0558ed54b0f358861b3f4a793f7be3bec30917cc3475e363b1a7f8961a95e225b29db15c471b9b355ca8dce354abcd3526898c08fa15c53e7ee11457a7245467142d97003451699cf5914e4a21877e32050a81bad4c983dad23ecf0516b69ddde45f93005272da54ceab07747700f0f1fe759bad4520586fe6c85cf9983761e7b6d3d674898f3c740a1c70d34ff66f006c6aac84b3fbcc161c066970bebd2017cc67e44ac9e9ac5b4c35308377a90328be86f3255f9688dfa0173b3b4a9f157179f263bafc5850062faafa295f3ac3449738a45cf7265ccc1f4902de179575ee1260095d4327787e128023cb7259578f812633d9cf69da42b87088477592dc95632926d8c5615f3f7bb1dc4e7954e1bf33956f06dcbc386cfcbc3df12b205ae0a5596f8935987d30787d83cdc89d15dfdc8c563ca9b5e19617e6ee3b129ea0b0f38807aea9c83b737b71031b720bfefa37a77004fe6c27de7db1daad4f1ab8e7c6c8f4623c233e5e351ae6c1cd17d6d4223dfdc104552eb27c1071438c0127ca44efdabfb23dc8c4c3ead03951218c669d120a07f0af7915ec43feeafa4cb369883d3a458d4f7973e625f17617e5a93ba571700c7e8bd5556fc0e49ead91eeda579cbeaa6ca08f60443cb1e3fe491194ef800b24a91b15ada529e303e78f49f5d64d34963240aa4fe269f03b43b90897a4b176be3a884a4feb43efdfa5c776c49e0a85f2bc79f4e598ef7868c47094b320453a266f97d7d6d1b2b24cd8b11633646b131707cc37d3a5ed9905e1874011019321dffb9a938982a9f7385015ff1bf3a3c907816b08892f88e7dbf9a0216a8647cb57aab6e32f6c645a3441dea2de6531bc1c764b12e62bcf2188af46ddec18ea1455795955a3a8d7828718b99b56216871a89891a5499e998e25681c6eca0076a04c09ef137090e17b16ac228e78366221ba508bebf0c3c665a510c3414143544349f08baeeedc1ed86863afda7036237bbe6e51d0e338f242a34796e522f2397c77b51dc59a00c5cd3e2bf867fd714fa61c9893e262c9f10db3a8afc0ed2f09a4ba4deb52cad283a827501742979b3f005f91e6760a761123b8b92a5a5d19a1f6b39672003196420651053ac3a70e690546a7f5b86733262877c6b2fab35cf53fbf7210b5437fc497d07c46a5f739433e2e7da480b431997acdf0d2dfcedf946e8e63209a92d9268271fc02d2b65185a16d4eda90a12b9c9847f0e908c7c02c17ed0bfae41211ec4e71d83493594048eb2fb66e922a39987f48f4b0e101af591170cb2ec9b2b5cb14dc67697d1bf82b8fa3863a97cf3649c12e1df9f9c1490dba99045a8734b949bc23626d9eee105e7f337968bfb2a9f6d9caab11a531a764272f8d6881f702c372db0f133d22bb2297c1bbd308e9ee1796393a0249ff0a64125326f4e25a1a360a1547372fa947436b684e82e1de2b5010a2d1efa0619e66e4bcc36ac80638a287a9438f712bfb5096749515469f6b0e5c94d9c39eaa4aea251e2cc4061916b34107a421027ac53162c2bb2af3ee028377c63925c0f3bb2d84e43d7a3fd7f4f18f3be548fadf4bf1fb360a474b3752d14fcf28f119765462dd552016b10519ad48d0f38a3842b2d09293374bcf18edc4645d7b442b101c853bffc0c36c39831ae31fabb1bb00ff278cca20912ddecd3f59129e72b8331889e5382b1b67729cb398f0e77539cd2cb93147e53b6e1e64e5c018d290212c1f46ce05e504295283e3fd221983f5261c7546bfbbc280b1f574485baf684c2a859e58824c210058d92598d4421d1d2ac29f78da134cd110e8e5ca467285b122c4aa2d5b8baf713c0fffbf1ad7c0b419bbcb93d6465b479a96025cc6e509e8b36428e6e2881360a98f4c93cb97106b64d32c149f062d5a6081f71680857360fcf228cc42245c3b2fc1f28a7ad39796a58558f3eb0233b31fabb7a03f47aad1c718978451faf8e074ab2b111f48ee8671cdb56443d65a27610bd4def8a3f551d85bd07c412fab7553cc6fe1648f743bc57341a23c66e2750db97678e6538b0d75b69f274b98bfa93151207557038d76ee3d2b439c252dc2584a43f1f87d49be5d29275fddf80d30811f755fbabc302787993e3eb4b74fea044c1b16f430b3d19e59ab7b17a1ead4d851c07965fca1afb37673e11e731cf34479419181aa9d35df0bbe7d623cca6dea1b430c0827508464c6bb424e99844bd3a952e8ace6b6056bc318809ea1b24474feee83fa80796068cedcd47df9101c83c1857a34945f51d6103c84473b3b4d42d5821d1893201ceb66d2be6a34640322a0e58c51a3355c830eb45d3e3080d54ae7df101818eb1281c19817725264f03cf4bc925ece84badbc7906c3f678778072ed6ac7d78fba22d22176c62f633f31383</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">当前文章暂不对外可见，请输入密码后查看！</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+            <ul>
+<li><a href="#head1"> HOME</a></li>
+<li><a href="#head2"> BLOG</a></li>
+<li><a href="#head3"> RESUME</a></li>
+<li><a href="#head4"> HOBBY</a></li>
+<li><a href="#head5"> DIARY</a></li>
+<li><a href="#head6"> REVIEW</a></li>
+<li><a href="#head7"> PREVIEW</a></li>
+</ul>
+<h1 id="HOME"><a href="#HOME" class="headerlink" title=" HOME"></a><span id="head1"> HOME</span></h1><p><img src="/2023/05/19/5-19-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9E%84%E6%83%B3/img.png" alt="img.png"></p>
+<ul>
+<li>可以到达六个模块</li>
+<li>左上角可以转换四种语言</li>
+<li>右上角连接到GitHub账号</li>
+</ul>
+<h1 id="BLOG"><a href="#BLOG" class="headerlink" title=" BLOG"></a><span id="head2"> BLOG</span></h1><p><img src="/2023/05/19/5-19-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9E%84%E6%83%B3/img_1.png" alt="img_1.png"></p>
+<ul>
+<li>左部：按照类别和目录归纳，左上角是BLOG首页</li>
+<li>中部：博客内容，左上角是类别，右上角是修改时间，底部是评论区</li>
+<li>右部：文章toc，右上角是HOME页链接</li>
+</ul>
+<h1 id="RESUME"><a href="#RESUME" class="headerlink" title=" RESUME"></a><span id="head3"> RESUME</span></h1><p><img src="/2023/05/19/5-19-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9E%84%E6%83%B3/img_2.png" alt="img_2.png"></p>
+<ul>
+<li>左部：左上角是RESUME首页，左下角转换四种语言</li>
+<li>中部：简历</li>
+<li>右部：简历toc，右上角是HOME页链接</li>
+</ul>
+<h1 id="HOBBY"><a href="#HOBBY" class="headerlink" title=" HOBBY"></a><span id="head4"> HOBBY</span></h1><p><img src="/2023/05/19/5-19-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9E%84%E6%83%B3/img_3.png" alt="img_3.png"></p>
+<ul>
+<li>左部：按照类别和目录归纳，左上角是HOBBY首页</li>
+<li>中部：内容，左上角是类别，右上角是时间戳</li>
+<li>右部：内容toc，右上角是HOME页链接</li>
+</ul>
+<h1 id="DIARY"><a href="#DIARY" class="headerlink" title=" DIARY"></a><span id="head5"> DIARY</span></h1><p><img src="/2023/05/19/5-19-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9E%84%E6%83%B3/img_4.png" alt="img_4.png"></p>
+<ul>
+<li>左部：日期+题目，左上角是DIARY首页</li>
+<li>中部：内容，左上角是今日心情、新日天气，右上角是时间戳</li>
+<li>右部：本月心情记录，本月天气记录，右上角是HOME页链接</li>
+</ul>
+<h1 id="REVIEW"><a href="#REVIEW" class="headerlink" title=" REVIEW"></a><span id="head6"> REVIEW</span></h1><p><img src="/2023/05/19/5-19-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9E%84%E6%83%B3/img_5.png" alt="img_5.png"></p>
+<ul>
+<li>左部：年、月、日归纳，点击年有年复盘，点击月有月复盘，点击日是日复盘，左上角是REVIEW首页</li>
+<li>中部：<ul>
+<li>日复盘：按日复盘，左上角是第几周周几，右上角是时间戳</li>
+<li>月复盘：按月复盘，左上角是几月，右上角是时间戳</li>
+<li>年复盘：按年复盘，左上角是几年，右上角是时间戳</li>
+</ul>
+</li>
+<li>右部：在日历上，按照周次和周几复盘，点击第几周是周复盘，右上角是HOME页链接</li>
+</ul>
+<h1 id="PREVIEW"><a href="#PREVIEW" class="headerlink" title="&nbsp;PREVIEW"></a><span id="head7">&nbsp;PREVIEW</span></h1><p><img src="/2023/05/19/5-19-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9E%84%E6%83%B3/img_6.png" alt="img_6.png"></p>
+<ul>
+<li>左部：按照规划类型归纳，左上角是PREVIEW首页</li>
+<li>中部：</li>
+<li>右部：内容toc，右上角是HOME页链接</li>
+</ul>
+
         </div>
 
         
@@ -207,7 +317,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/private/"># private</a>
+                        <a href="/tags/hobby/"># hobby</a>
                     
                         
                 </span>
