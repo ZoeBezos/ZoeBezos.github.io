@@ -1,90 +1,162 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf8" />
-    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    <title>
-      
-        Life Road | ZOE's site
-      
-    </title>
-    <meta name="description" content=""/>
-    <meta name="keywords" content=""/>
-    
-      <link rel="apple-touch-icon"
-            sizes="180x180"
-            href="/images/apple-touch-icon.png"/>
-    
-    
-      <link rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/images/favicon-32x32.png"/>
-    
-    
-      <link rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/images/favicon-16x16.png"/>
-    
-    
-      <link rel="mask-icon"
-            href="/images/logo.svg"
-            color=""/>
-    
-    
-    <link rel="stylesheet" type="text/css" href="/css/layout.css"/>
-    
-    
-  <link rel="stylesheet" type="text/css" href="/css/post.css"/>
-  
+<html lang="en">
 
-  <meta name="generator" content="Hexo 6.3.0"></head>
-  <body>
-    <div class="head">
-      <div class="nav">
-        <a href="/" class="nav-logo">
-          <img alt="logo" height="60px" width="60px" src="/images/logo.svg" />
-        </a>
-        <input id="navBtn" type="checkbox"/>
-        <div class="nav-menu">
-          
-            <a href="/blog/">博客</a>
-          
-        </div>
-        <label class="nav-btn" for="navBtn"></label>
-      </div>
-    </div>
-    <div class="body">
-      
-  <article class="post-content">
-    <div class="post-inner">
-      <div class="post-content__head">
-        <div class="post-title">Life Road</div>
-        <div class="post-info">
-          
-  
-    <a href="/tags/preview/" class="post-tag">#preview</a>
-  
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zoe">
 
 
-          <span class="post-date">2023-06-07</span>
-        </div>
-      </div>
-      <div id="postBody" class="post-content__body--toc">
-        <div id="tocAnchor" class="toc-anchor">
-          <ol id="toc" class="post-toc">
-            
-              
-            
-          </ol>
-        </div>
+
+
+
+<title>Life Road | ZOE&#39;s site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
         
-          <div class="post-gallery">
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ZOE&#39;s</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ZOE&#39;s</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Life Road</h1>
             
-          </div>
-        
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="抱歉, 当前文章不能被校验, 不过您还是可以看看解密后的内容。">
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 7, 2023&nbsp;&nbsp;20:44:54</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/life-road/">life-road</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="抱歉, 当前文章不能被校验, 不过您还是可以看看解密后的内容。">
   <script id="hbeData" type="hbeData" data-hmacdigest="e890f2e9905ea349ce66270a2887d1462f122cc747ebefc914e0d6c80355c11a">9ab8eeb89182dbd47bc9c58c85287dafab1f550aa59fc36539a53cf1c54e13569179b4689faff99a9d2e72d9a09e102c1fbbe80be766d47096c771b197f17507076bd86c8e19be5b05507f9f86ce738714ae780b55dc82387ad89d8271227c8f561daa569155b878ce60a5cbc16bcf4de1e9b2d8a60f506ace846230443bc4bce363ff762d52899b6f45fc44ff42aad8aca5e20bfdbfebb99c2bccfbff0f4ca7db39a814c7495f08601c08f9be8b1d6936f08636fe21aa3f2e72ab218f037a8a329291455f9fa42bc091f53f8f36d83684d9734ba5103929caa0b0dfe01c390766274b9b1d4d9ea89eb44bbb341e683a95f725d86d7b34faf2420ebd5d2f6d6c5282c147e34dfde97a1e049bdb6421a8c900e110b105b6df98cd23569efbe176dea8a1224b6f515e08b270e63b7cf036f7641e5f1e315a7451e026ae649be81f20756bc2a20f8ff165d32fe08ecae59e77eda3527be92c6c9696763c1f5946f91c43bfbb4a7a706e7b7bb16a09c05d7313921ebf4a129328d1343b2d87238529d6b9a47edf496c9077e4a4bc77e744a413aee0961b18be0b04363c62ad0c294f68bdb4c47ca97dbca1a2af78edc413ebbdb2f8e2127eaf23dd8f4c7ac9852d37107ca0fe5a3edecce13edea5f798239323bee20eec5523819373c15694acd079a6606390b1d8bc1180d1c1d5aef80860f63b316575fb2ce93f3279cee9d699c3d4009ecbd05ff2d12c3725efca33dfa5da7985d2e33f9d1d1e1e364b04c584a34263149a28d9ce0af54c4c616143bf65c43e055192aa3a476377f7a90ea58c5fbbf210088a8e4d4b6346ac516379ed47fbb85aad8447ecb1ef263c5c0871451b6f0d1c7dcf303eaf0f40819c838d8851baab12f49b585d2d2fbe44cbc291f768dd28334f918acb35feb6a4c1c721d30bf1431ee2c6f6eb37a98fdabd8e58beea7f3aaf898298c8be1887c42818d0409d</script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-default">
@@ -96,146 +168,75 @@
   </div>
 </div>
 <script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
-      </div>
-    </div>
-  </article>
-  <div class="post__foot">
-    
-    <div class="post-nav">
-  
-    <a class="post-nav-item-left" href="/2023/06/08/6-8-vedio-review/">
-      <div class="text-align">
-        <svg t="1670570876164"
-             class="icon"
-             viewBox="0 0 1024 1024"
-             width="16"
-             height="16">
-          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
-        </svg>
-        <span class="text-small">上一篇</span>
-      </div>
-      <div>Video Review</div>
-    </a>
-  
-  <div class="vhr"></div>
-  
-    <a class="post-nav-item-right" href="/2023/06/04/6-4-diary/">
-      <div class="text-align">
-        <span class="text-small">下一篇</span>
-        <svg t="1670570876164"
-             class="icon"
-             viewBox="0 0 1024 1024"
-             transform="scale(-1,-1)"
-             width="16"
-             height="16">
-          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
-        </svg>
-      </div>
-      Diary 6/4
-    </a>
-  
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zoe</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://zoebezos.github.io/2023/06/07/6-7-life-road/">https://zoebezos.github.io/2023/06/07/6-7-life-road/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/preview/"># preview</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/06/08/6-8-vedio-review/">Video Review</a>
+            
+            
+            <a class="next" rel="next" href="/2023/06/04/6-4-diary/">Diary 6/4</a>
+            
+        </section>
+
+
+    </article>
 </div>
 
-    
-    
-  </div>
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zoe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
 
     </div>
-    <div class="foot">
-      <div class="foot-inner">
-        <div class="foot__head">
-          
-            <div class="foot-line">
-              <div class="matts">海</div><div class="matts">内</div><div class="matts">存</div><div class="matts">知</div><div class="matts">己</div>
-            </div>
-          
-            <div class="foot-line">
-              <div class="matts">天</div><div class="matts">涯</div><div class="matts">若</div><div class="matts">比</div><div class="matts">邻</div>
-            </div>
-          
-        </div>
-        <div class="foot__body">
-          
-            <div class="foot-item">
-              <div class="foot-item__head">朋友</div>
-              <div class="foot-item__body">
-                
-                  <div class="text">
-                    <img alt="link"
-                         height="20px"
-                         width="20px"
-                         src="/images/icon/icon-link.svg"/>
-                    <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">Theme Tranquility</a>
-                  </div>
-                
-                <div class="text">
-                  <img alt="link"
-                       height="20px"
-                       width="20px"
-                       src="/images/icon/icon-link+.svg"/>
-                  <a class="foot-link"
-                     href="mailto:example@email.com?subject=%E7%94%B3%E8%AF%B7%20Hozen.site%20%E7%9A%84%E5%8F%8B%E9%93%BE%E4%BD%8D%E7%BD%AE">
-                  申请友链</a>
-                </div>
-              </div>
-            </div>
-          
-          
-            <div class="foot-item">
-              <div class="foot-item__head">账号</div>
-              <div class="foot-item__body">
-                
-                  <div class="text">
-                    <img alt="link" height="20px" width="20px" src="/images/logo-github.svg"/>
-                    <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/">github</a>
-                  </div>
-                
-                  <div class="text">
-                    <img alt="link" height="20px" width="20px" src="/images/logo-wx.svg"/>
-                    <a class="foot-link" target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3NzQ4NDkzNg==&mid=2247484469&idx=1&sn=8a442bb67397f52cce5c38c3f9b41e36&chksm=eb64c0d2dc1349c40d2e1bb55615ae28b3f2951be22f00717b9ade98c851082e42dc666ab45d#rd">微信公众号</a>
-                  </div>
-                
-                  <div class="text">
-                    <img alt="link" height="20px" width="20px" src="/images/logo-zh.svg"/>
-                    <a class="foot-link" target="_blank" rel="noopener" href="https://www.zhihu.com/">知乎</a>
-                  </div>
-                
-              </div>
-            </div>
-          
-          <div class="foot-item">
-            <div class="foot-item__head">联系</div>
-            <div class="foot-item__body">
-              <div class="text">
-                <img alt="link"
-                     height="20px"
-                     width="20px"
-                     src="/images/icon/icon-email.svg"/>
-                <a class="foot-link" href="mailto:example@email.com">example@email.com</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="copyright">
-          <a href="https://zoebezos.github.io">ZOE's site</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
-          <svg width="20" height="20" viewBox="0 0 725 725">
-            <path fill-rule="evenodd" fill="rgb(221, 221, 221)"
-            d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z" />
-            <path fill-rule="evenodd" fill="rgb(159, 159, 159)"
-            d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z" />
-            <path fill-rule="evenodd" fill="rgb(0, 0, 0)"
-            d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z" />
-          </svg>
-          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
-        </div>
-      </div>
-    </div>
-    
-    
-  
-  
-    <script type="text/javascript" src=/js/toc.js></script>
-  
+</body>
 
-  </body>
 </html>

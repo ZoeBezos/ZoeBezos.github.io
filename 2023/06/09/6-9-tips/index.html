@@ -1,90 +1,162 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf8" />
-    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    <title>
-      
-        Tips | ZOE's site
-      
-    </title>
-    <meta name="description" content=""/>
-    <meta name="keywords" content=""/>
-    
-      <link rel="apple-touch-icon"
-            sizes="180x180"
-            href="/images/apple-touch-icon.png"/>
-    
-    
-      <link rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/images/favicon-32x32.png"/>
-    
-    
-      <link rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/images/favicon-16x16.png"/>
-    
-    
-      <link rel="mask-icon"
-            href="/images/logo.svg"
-            color=""/>
-    
-    
-    <link rel="stylesheet" type="text/css" href="/css/layout.css"/>
-    
-    
-  <link rel="stylesheet" type="text/css" href="/css/post.css"/>
-  
+<html lang="en">
 
-  <meta name="generator" content="Hexo 6.3.0"></head>
-  <body>
-    <div class="head">
-      <div class="nav">
-        <a href="/" class="nav-logo">
-          <img alt="logo" height="60px" width="60px" src="/images/logo.svg" />
-        </a>
-        <input id="navBtn" type="checkbox"/>
-        <div class="nav-menu">
-          
-            <a href="/blog/">博客</a>
-          
-        </div>
-        <label class="nav-btn" for="navBtn"></label>
-      </div>
-    </div>
-    <div class="body">
-      
-  <article class="post-content">
-    <div class="post-inner">
-      <div class="post-content__head">
-        <div class="post-title">Tips</div>
-        <div class="post-info">
-          
-  
-    <a href="/tags/review/" class="post-tag">#review</a>
-  
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zoe">
 
 
-          <span class="post-date">2023-06-09</span>
-        </div>
-      </div>
-      <div id="postBody" class="post-content__body--toc">
-        <div id="tocAnchor" class="toc-anchor">
-          <ol id="toc" class="post-toc">
-            
-              
-            
-          </ol>
-        </div>
+
+
+
+<title>Tips | ZOE&#39;s site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
         
-          <div class="post-gallery">
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ZOE&#39;s</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ZOE&#39;s</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Tips</h1>
             
-          </div>
-        
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="抱歉, 当前文章不能被校验, 不过您还是可以看看解密后的内容。">
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 9, 2023&nbsp;&nbsp;22:42:45</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/tips/">tips</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="抱歉, 当前文章不能被校验, 不过您还是可以看看解密后的内容。">
   <script id="hbeData" type="hbeData" data-hmacdigest="408fc968c4e8c3e2d0aada327c83855f4fabd0a70ad209ce074114d31afd725a">9ab8eeb89182dbd47bc9c58c85287dafab1f550aa59fc36539a53cf1c54e13569179b4689faff99a9d2e72d9a09e102c1fbbe80be766d47096c771b197f17507076bd86c8e19be5b05507f9f86ce738714ae780b55dc82387ad89d8271227c8f561daa569155b878ce60a5cbc16bcf4de1e9b2d8a60f506ace846230443bc4bce363ff762d52899b6f45fc44ff42aad8aca5e20bfdbfebb99c2bccfbff0f4ca7db39a814c7495f08601c08f9be8b1d6936f08636fe21aa3f2e72ab218f037a8a329291455f9fa42bc091f53f8f36d8369ffdbe440c8fa5db20bdc875afc7eff117314e5de3aedcc331363f0a80f3e51e2188ab4c1f3edf523b504c7c8dd45397069a8d83a6cb0cae82b70e27c9358359b90ebb10ab3b7aac0ad9204d78d3518dd40d9a891493d36f5bd4031f74eaa05d149cb4ba954db412f7c1c4d076b4f73d3776c17358465c77789499a0d22d68f74c83733cef45c9f4ebcb0f1fa5acb6d3057ac161af682b81dd6de91624e6c9464c1d71e96fe463e80ffec51ff07630eca594b1e955188e3a42352e209ef8f7aba3a1eff98a6bc5c4b6b3031896cb73371ade9eb509e21d1190c353b8b362a63e422557965152aab22f5d2cb1d7fb8825e35b3748ed9cdb8940ae160cd83726044604a4e626efb831f09f4e57437ab5a17099251143212cd2ed0fcfe827f668a9826d3801e484ac9e137e17efe7a035de386d662ce1e3547a08ca5abb62a0f7ad96f2059f40a590e547ddb774d13b8315c007193f46aca77b8d545ca99061061cbc3384272db4ee1066e1fc07338b909ecc4273bea8007d936c40cfcb47659993e48894075292452b3d8a25ad0df148cec441f402f3727ffad9cf8bc407cc7889ae48f91770f1474b411cb1b2989dca4d5357f5e10f79fcf06be76f85bce629e27855ef8009dfe0bcee4e46e1c6364a1c27d8551812bac19c5933d5a301df2b2f544a41fbc3a169f5decd826b9312f3a6b285a44e7bb9c88ce7cdc82bf18642e929958d65238275b151bfda6cab4bbc5b87c3bd3de76970a5ec6962d6236bd847f3e6d04ee050a10c80a82723977c687c75b4f0ed1c37d8daa4fed2847e2efbc0fecbe09d228f9c8139b79f8a8790d9294a60f07c79368bc4dc82fede67e32cd198d0aa151eaa95f09fde933f286b2572e2bc2a2f49119a2da2d77f80b9385418967b45755aae4df6a328e0379eff69448cfe4dcddae6fbe5c8276782c9ed6d53b044b4df099de906ddcbac884cb4b4a76fe961696d179e3f1f26e536a04fa5838d21ffa65a56283770eaccb96e89bf67c0a012a23276034e9c4d35ebe378d21c47ce5b6dc563663b4f4fafbc400e0796b78017c78d2220c5c392c4c3ccab3858686d874959648efc46c47b2e76faf6c40ca0b9815f6874fb66c8d964f04248291f6a0a5b3de1baa8730c9aef7f678c19e17509edd90412cb4cd2da8a0cff77e374ca173250993e7f62b6ff92555b636a83c748c1b6510db7a1e07d876a082c3151ff8ea691fc3bbc255387526c38948d98693fd22ae21b869188345b721c4f000941bc797789db9f62c9e28c8972aeba06c592101f38c57090f63e6f7468b763d19efa9044c68b8ff7a220cd311c5c4a2afc304dbb17d77dc860b91c6cd1377748400eb3c0f3b5a5deaa640fc65ace76aa5c59329114a64cb903d7fb039b0f4cae912b37246852b2b96fa3ede47a01f013b1844d16346da0f9d108301897b7f7f67b701de7e66ef5244454c85dbdd86711d8ad1853c8c00de3fdead02689c111b7f79994aa950c3196a3bbaab065f7d43c608783c161540f021382be0e0812bfd9a33da97836ea87720b8c4198342e6f7b51325a3af52e3e1695ec84121d1b900b4b8ffa811a2fac2cff3a332044179a1fbade5c3471ec01cf545a452b36ee133d82f79691187219164bd5e995617cda344981ebb3b8be4ec94cb598b0c22d64abf08cc4916ae157fc3294f9fe5d51711329dfd147f57dea6caaf5ce5f02ca91e7912cf68bafd3d82e7f07a2689f58acfefd50cadc82856d479335aedd7b1ceb37b53ad621f6172eb083ebe95a62658586e82eef9b18141a033727be16e248ad36109e96aefe049f8a09461a66481bf22d6658b4adc893990e0d5f9c100bb505b8462b622f0e73373397ea0f8d796f1131391a89a5363f9e67ec40ab7905fe0777f346d41947728010ec9669ae90e302e8db0e6df8ca5ab900108b3158ee3f1023870c42044a7b11df69837f7ba191a87bbd0bef86c570b843d71bfab8c272ed9b21be4ff6de698617fc2d13535d2682ed8f4b799b12afd6968b99215e61bc1862417226fefa513eb8c7fb6b8c2cd132dc8eb6264f07f3dcb7f3f269ef5bbf3e1e7fbdac994321a6f534572214950e3970d4c24af145efe3b6e793d24b6255d1f39d52713547917a985b4eb5fb18bbe911c8e92787fa03090a7a4dbe2ae0969ab45a6dad879ba5b07de222d2319c8a3588ad51810a6fbdc0991917f12f2e53af3de065f35c86857b97f16402fc9411ff7aaeece3b690aeabae65be602f41cded9d2f932adaf491fedfd3631389c91f6d4d01ae1566f59229b2a6f2f24d45945b43324f8a26202e1f968294e0efb691068bcebe797d63b2b7cc1b04126ed89bfcd820810f1d0646f5db70564690e0f9d76dc740b4554c283394dd68ff640e606f812e39bdab5b8477762549dc581bf49df335da34fd7bff86bc3ca8e1623fdbfa1c6ac6b19900a38a3a0bc288de2e1f9edb31b392b1b689b207f8b391b147552111ae5c9969781f26aa83fdc0b739b74d2ba6529f543398379f67f20c8e68542d416b1bfcb43f9a323d2ba66ce7b0cb810c1f7b5ded945239735659a5fcfcbd913b55b3574b66126d5dfae0db8579069f812006ad6fcddd05b272425e51e7196ab8dabdae0f42af05a01bc626a5d48396166ba0e482dc4cc2e25a6f77794ebd8e894c8f63bc95002e5753dbef3595c41ab6c33ffa539f19666b14a35bf75d014a5316c27f4e96ea4dac0ee81c73353fa62455431fcc18e5f428f154eabe65a957cc65089f6c17f9dd9bf41ab6a0ee1c2087fd2a6f3ef8a9855b87609d0554fe7bface68ae2f6f4b58c83969014929cba3978ca76d9cd2ea63e68b293cf20f246e067f2e038329f90df14dc48777cb0bbd4ec71fe802bfe7040e44921b9f4152171933cbe9a5529eb91bb3a02ca52bf2d9ebf6de89286c7f8478dfc87af328be7c476197a8ab1087dcdbc2cb3f1a26d219a19986f45260851dfc3bcd194fb354d495c9909d692230b68d00cc68a14d629dd612f5cf6c0d121c86cc562042837d5fb3c64c7c7e1662eaf2d95fba26c1aeb1a819a6f08c82dfc83692424665e36345130d0d40b6956d8cc83aa42de6cbc3b42488bcc1ac008d1957b8fabd07c1b3dd430a9ab32ea9045ee194e97fd8270e87b338b0e79a83875761b1b3c142e3b198f677a714f76605b29945d88ed73c7301fb5388db8a6c0b0b1377c67dd7491b040aa926b2d74bd04aea5c49333ab0d569ce5a2ad65f0e8235bb81146014f1137589563e98aaafcc49c436a3014024a8865b40641c83f37246d14a8638b0ee678905add497e1be76dd0d5a50dc13ac7f9f44c73def00400dc825df6793d7431eae886268b11b1078190ec8c4c16dc4b7334da7cc33abe8d303c0137778ddfc30b8122e05418290f6be802d1778541d5cfa1d2e6dddc06a3595a60003a1df2622b7d8c16eeb7ac1e9d63a84df04816bc3b017885b3b537243cb5aaf4ff4309e4d61144b07c4195684deac415be9620a3bab6b557c031f22e5bb7008f082598d489624ab3426780d0651412e17f530bfadc7aa44c3e0f5d47a41e88ebd431ce02897bc5793a5f85b8b4269202934da3bfe80451284647341c9955c66370eb4ecb37553c5dce847aa4e0ad57e40ba214b60b7a4b2d706162e14a727ed43343e036a9fa6888d0194d4a0720d36f37ac4b8b9ff0db99938f32d555054edcacc45ef59964a95d7dbe533571dec499b6ea289212a7289d0559ed645d74380cc8eeef855d6dd6e7040a66766a7ae07352898583409adc00efa7fd3b567c623fb55763b9a08cd2610696b10f0bf649834c12650877dc463f252830a538f2b93ffb697d72f1526b5a9dd683c9e7e4d17eb1b08f7db34a88dc9aed25114c0567284a61d4041e6583a91f60826f64e3c21a205514781b9dd37049afd9ebeda3e19d04740d57c5f805cc8ab43b2869e42b366c6d0b4b9c20207eacef50967c6f1d549a493f3ce516150aca2e6f58c0a2ee2413add4523d92c34f97727ae49c9ed7681ade188c2239da979aeb66270108321747aa293f7b13fdb2026b0ce5034aac2150dd344fb263de8aa409eca8d0873a5d8fb7d2fa9357ce94aedba22ae7ceb74c4f48b0b29c529b1b5fa10381b2ce64080db3910c2688dbd70736fdb4898ba21acb6346807984fa290c314a470886d15c62140d6ec7144abb1dadf73c0d365946dcf53d2e751d22e9c9c5012d91ecae052fa862d4606c523df517f088b20ed8403ca206eada3fe6cad4d6bee28dffd72b689bd34997638f8c633a3befda87bc3e8b297891d1c03a76513ae2cd0ed708f988052531458</script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-default">
@@ -96,134 +168,73 @@
   </div>
 </div>
 <script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
-      </div>
-    </div>
-  </article>
-  <div class="post__foot">
-    
-    <div class="post-nav">
-  
-    <div class="post-nav-item-left"></div>
-  
-  <div class="vhr"></div>
-  
-    <a class="post-nav-item-right" href="/2023/06/09/6-9-book-list/">
-      <div class="text-align">
-        <span class="text-small">下一篇</span>
-        <svg t="1670570876164"
-             class="icon"
-             viewBox="0 0 1024 1024"
-             transform="scale(-1,-1)"
-             width="16"
-             height="16">
-          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
-        </svg>
-      </div>
-      Book List
-    </a>
-  
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zoe</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://zoebezos.github.io/2023/06/09/6-9-tips/">https://zoebezos.github.io/2023/06/09/6-9-tips/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/review/"># review</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2023/06/09/6-9-book-list/">Book List</a>
+            
+        </section>
+
+
+    </article>
 </div>
 
-    
-    
-  </div>
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zoe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
 
     </div>
-    <div class="foot">
-      <div class="foot-inner">
-        <div class="foot__head">
-          
-            <div class="foot-line">
-              <div class="matts">海</div><div class="matts">内</div><div class="matts">存</div><div class="matts">知</div><div class="matts">己</div>
-            </div>
-          
-            <div class="foot-line">
-              <div class="matts">天</div><div class="matts">涯</div><div class="matts">若</div><div class="matts">比</div><div class="matts">邻</div>
-            </div>
-          
-        </div>
-        <div class="foot__body">
-          
-            <div class="foot-item">
-              <div class="foot-item__head">朋友</div>
-              <div class="foot-item__body">
-                
-                  <div class="text">
-                    <img alt="link"
-                         height="20px"
-                         width="20px"
-                         src="/images/icon/icon-link.svg"/>
-                    <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">Theme Tranquility</a>
-                  </div>
-                
-                <div class="text">
-                  <img alt="link"
-                       height="20px"
-                       width="20px"
-                       src="/images/icon/icon-link+.svg"/>
-                  <a class="foot-link"
-                     href="mailto:example@email.com?subject=%E7%94%B3%E8%AF%B7%20Hozen.site%20%E7%9A%84%E5%8F%8B%E9%93%BE%E4%BD%8D%E7%BD%AE">
-                  申请友链</a>
-                </div>
-              </div>
-            </div>
-          
-          
-            <div class="foot-item">
-              <div class="foot-item__head">账号</div>
-              <div class="foot-item__body">
-                
-                  <div class="text">
-                    <img alt="link" height="20px" width="20px" src="/images/logo-github.svg"/>
-                    <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/">github</a>
-                  </div>
-                
-                  <div class="text">
-                    <img alt="link" height="20px" width="20px" src="/images/logo-wx.svg"/>
-                    <a class="foot-link" target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3NzQ4NDkzNg==&mid=2247484469&idx=1&sn=8a442bb67397f52cce5c38c3f9b41e36&chksm=eb64c0d2dc1349c40d2e1bb55615ae28b3f2951be22f00717b9ade98c851082e42dc666ab45d#rd">微信公众号</a>
-                  </div>
-                
-                  <div class="text">
-                    <img alt="link" height="20px" width="20px" src="/images/logo-zh.svg"/>
-                    <a class="foot-link" target="_blank" rel="noopener" href="https://www.zhihu.com/">知乎</a>
-                  </div>
-                
-              </div>
-            </div>
-          
-          <div class="foot-item">
-            <div class="foot-item__head">联系</div>
-            <div class="foot-item__body">
-              <div class="text">
-                <img alt="link"
-                     height="20px"
-                     width="20px"
-                     src="/images/icon/icon-email.svg"/>
-                <a class="foot-link" href="mailto:example@email.com">example@email.com</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="copyright">
-          <a href="https://zoebezos.github.io">ZOE's site</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
-          <svg width="20" height="20" viewBox="0 0 725 725">
-            <path fill-rule="evenodd" fill="rgb(221, 221, 221)"
-            d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z" />
-            <path fill-rule="evenodd" fill="rgb(159, 159, 159)"
-            d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z" />
-            <path fill-rule="evenodd" fill="rgb(0, 0, 0)"
-            d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z" />
-          </svg>
-          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
-        </div>
-      </div>
-    </div>
-    
-    
-  
-  
-    <script type="text/javascript" src=/js/toc.js></script>
-  
+</body>
 
-  </body>
 </html>
