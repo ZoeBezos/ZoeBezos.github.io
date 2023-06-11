@@ -35,8 +35,6 @@
     
     <script src="/js/tocbot.min.js"></script>
     
-    <script src="/js/jquery.min.js"></script>
-    
     <script src="/js/jquery-3.7.0.min.js"></script>
     
 
@@ -269,23 +267,36 @@
         <header>
     <nav class="navbar">
         <div class="container">
-            <div class="navbar-header header-logo"><a href="/">ZOE&#39;s site</a></div>
+            <!-- <div class="navbar-header header-logo"><a href="/">ZOE&#39;s site</a></div> -->
+            <div class="navbar-header header-logo"><a href="/"><i class="iconfont icon-zhuye" style="font-size: 1em;"></i>ZOE&#39;s site</a></div>
             <div class="menu navbar-right">
+                <!-- 这里表示的是pc端搜索框 -->
                 
-                    <a class="menu-item" href="/archives">Posts</a>
                 
-                    <a class="menu-item" href="/category">Categories</a>
+    <div class="search ">
+        <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div>
+        <form class="form-search">
+            <input class="input" placeholder="点此搜索" autocomplete="off" id="pc-search-input"/>
+        </form>
+    </div>
+
                 
-                    <a class="menu-item" href="/tag">Tags</a>
+                <a class="menu-item" href="/archives">Posts</a>
                 
-                    <a class="menu-item" href="/about">About</a>
+                <a class="menu-item" href="/category">Categories</a>
+                
+                <a class="menu-item" href="/tag">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
                 
                 <input id="switch_default" type="checkbox" class="switch_default">
                 <label for="switch_default" class="toggleBtn"></label>
             </div>
         </div>
     </nav>
-
+    
     
     <nav class="navbar-mobile" id="nav-mobile">
         <div class="container">
@@ -293,17 +304,31 @@
                 <div>
                     <a href="/">ZOE&#39;s site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
                 </div>
-                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+                <div class="navbar-mobile-right">
+                    
+                    
+    <div class="search ">
+        <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div>
+        <form class="form-search">
+            <input class="input" placeholder="点此搜索" autocomplete="off" id="mobile-search-input"/>
+        </form>
+    </div>
+
+                    <div class="menu-toggle" onclick="mobileBtn()">&#9776; 目录</div>
+                </div>
+    
             </div>
             <div class="menu" id="mobile-menu">
                 
-                    <a class="menu-item" href="/archives">Posts</a>
+                <a class="menu-item" href="/archives">Posts</a>
                 
-                    <a class="menu-item" href="/category">Categories</a>
+                <a class="menu-item" href="/category">Categories</a>
                 
-                    <a class="menu-item" href="/tag">Tags</a>
+                <a class="menu-item" href="/tag">Tags</a>
                 
-                    <a class="menu-item" href="/about">About</a>
+                <a class="menu-item" href="/about">About</a>
                 
             </div>
         </div>
@@ -334,15 +359,11 @@
                 
                     <a href="/tags/blog/">blog<small>(3)</small></a>
                 
-                    <a href="/tags/diary/">diary<small>(3)</small></a>
-                
-                    <a href="/tags/preview/">preview<small>(4)</small></a>
-                
                     <a href="/tags/hobby/">hobby<small>(2)</small></a>
                 
                     <a href="/tags/private/">private<small>(2)</small></a>
                 
-                    <a href="/tags/review/">review<small>(2)</small></a>
+                    <a href="/tags/preview/">preview<small>(1)</small></a>
                 
             </div>
         </div>
@@ -351,17 +372,47 @@
 
             </div>
             <footer id="footer" class="footer">
+
     <div class="copyright">
-        <!-- <span>© zoe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> -->
-            <span>© zoe  
-            <!-- 访客数量 -->
-            <!-- <div> -->
-            
-            <!-- </div> -->
-        </span>
+   
+    <span>© zoe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a>
+   
+    |
+   
+    <!-- 访客数量 -->
+   
+    
+   
+    </span>
+   
     </div>
-</footer>
+   
+   </footer>
     </div>
 </body>
+
+<!-- 搜索功能 -->
+<!-- Chic/layout.ejs -->
+<div id="u-search">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="container">
+                <form id="u-search-modal-form" class="u-search-modal-form">
+                    <button type="submit" class="form-submit-btn">
+                        <img src="/image/search.png" class="search-btn-img" />
+                    </button>
+                    <input placeholder="搜索内容..." class="form-input" id="modal-form-input">
+                </form>
+                <a class="modal-close">x</a>
+            </div>
+            <div class="search-loading">
+                <div class="search-loading-bar"></div>
+            </div>
+        </div>
+        <div class="modal-body">
+        </div>
+    </div>
+    <div class="modal-overlay"></div>
+</div>
 
 </html>
