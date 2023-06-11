@@ -844,28 +844,6 @@ input[type="radio"]:not(:checked) + label:after {
 }
 
 
-@font-face {
-  font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1686491408852') format('truetype');
-}
-
-.iconfont {
-  font-family: "iconfont" !important;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-yx_eye:before {
-  content: "\e67e";
-}
-
-.icon-yx_user:before {
-  content: "\e681";
-}
-
-
 .header-logo a {
   padding: 0;
 }
