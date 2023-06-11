@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zoe">
+
+
+
+
+
+<title>Array 3:Squares of a Sorted Array | ZOE&#39;s site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+    <script src="/js/jquery-3.7.0.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<!-- 搜索的部分 -->
+
+
+
+    <script>
+    // function searchToggle() {
+    //     const width = $(document.body).width()
+    //     if(width > 479) {
+    //         return;
+    //     }
+    //     const search = $('.search');
+    //     const searchForm = $('.form-search')
+
+    //     if(!search.hasClass("mobile-search")) {
+    //         search.addClass("mobile-search");
+    //     } else {
+    //         search.removeClass("mobile-search");
+    //     } 
+    // }
+
+    function searchToggle() {
+        const width = $(document.body).width()
+        if(width > 479) {
+            return;
+        }
+        const search = $('.search');
+        const searchForm = $('.form-search');
+        const menuToggle = $('.menu-toggle');
+        const title = $('.navbar-header-title ');
+
+        if(!search.hasClass("mobile-search")) {
+            search.addClass("mobile-search");
+            menuToggle.addClass("open-search")
+            title.addClass("mobile-title-hidden")
+        } else {
+            search.removeClass("mobile-search");
+            menuToggle.removeClass("open-search")
+            // title.css({visibility: 'visible'})
+            title.removeClass("mobile-title-hidden")
+        } 
+    }
+
+
+
+    function search(searchInputEl, formEl, flag) {
+        const path = "/" + "search.json"; // 可以在public 下查看这个search.json
+        $(formEl).submit(function(e){
+            e.preventDefault();
+            let target = null
+            if(searchInputEl == null) {
+                const screenWidth = $(document.body).width();
+                target = screenWidth > 479 ? $('#pc-search-input') : $('#mobile-search-input');
+                console.log(target);
+            } else {
+                target = $(searchInputEl)
+            }
+
+            if(!flag && target.val() === '') {
+                return ;
+            }
+
+            $("#u-search").fadeIn(500, function() {
+                $("body > .wrapper").addClass("modal-active");
+
+                $.ajax({
+                    url: path,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        $input = target.val();
+                        $(".form-input").val($input);
+                        const loadingBar = $('.search-loading-bar') 
+                        loadingBar.css({
+                            width:'100%',
+                            display: 'block'
+                        });
+                    },
+                    success: function( datas ) {
+                        console.log(datas);
+                        const $resultPanel = $(".modal-body")[0];
+                        let str = `<ul class="modal-results">`;
+                        var keywords = $(".form-input").val().trim().toLowerCase().split(/[\s\-]+/);
+                        $resultPanel.innerHTML = "";
+                        let hasResult = false
+                        let text = `<div class="no-result">找不到与关键词相关的内容....</div>`;
+
+                        if ($(".form-input").val().trim().length <= 0) {
+                            // 没有结果
+                            $resultPanel.innerHTML = text;
+                            return;
+                        }
+                        datas.forEach(function (data, index) {
+                            var isMatch = true;
+                            if (!data.title || data.title.trim() === '') {
+                                data.title = "Untitled";
+                            }
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content && data.content.trim().replace(/<[^>]+>/g, "").toLowerCase() || '';
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty contents
+                            if (data_content !== '') {
+                                keywords.forEach(function (keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        hasResult = true
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            } else {
+                                isMatch = false;
+                            }
+                            // show search results
+                            if (isMatch) {
+                                str += `<li class='result-item'><a href='${data_url}' class='result-item-detail'> <span class="title">${data_title}</span>`;
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 200 characters
+                                    var start = first_occur - 40;
+                                    var end = first_occur + 160;
+
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+
+                                    if (start == 0) {
+                                        end = 200;
+                                    }
+
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+
+                                    var match_content = content.substring(start, end);
+
+                                    // highlight all keywords
+                                    keywords.forEach(function (keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, `<em class="search-keyword">${keyword}</em>`);
+                                    });
+
+                                    str += `<span class="content"> ${match_content} ...</span></a>`;
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        if(hasResult) {
+                            $resultPanel.innerHTML = str;
+                        } else {
+                            $resultPanel.innerHTML = text;
+                        }
+
+                    },
+                    complete: function() {
+                        setTimeout(() => {
+                                const loadingBar = $('.search-loading-bar') 
+                                loadingBar.css({
+                                    width:'0%',
+                                    display: 'none'
+                                });
+                        }, 300)
+                    }
+                });
+            })
+
+        });
+    }
+
+    $(document).ready(function() {
+        $('.modal-close').click(function () { 
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+
+        $('.modal-overlay').click(function() {
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+        search(null, ".form-search", false)
+        search("#u-search-modal-form .form-input", ".u-search-modal-form", true)
+    })
+</script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <!-- <div class="navbar-header header-logo"><a href="/">ZOE&#39;s site</a></div> -->
+            <div class="navbar-header header-logo"><a href="/"><i class="iconfont icon-zhuye" style="font-size: 1em;"></i>ZOE&#39;s site</a></div>
+            <div class="menu navbar-right">
+                <!-- 这里表示的是pc端搜索框 -->
+                
+                
+    <div class="search ">
+        <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div>
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="off" id="pc-search-input"/>
+        </form>
+    </div>
+
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/category">Categories</a>
+                
+                <a class="menu-item" href="/tag">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+    
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ZOE&#39;s site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="navbar-mobile-right">
+                    
+                    
+    <div class="search ">
+        <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div>
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="off" id="mobile-search-input"/>
+        </form>
+    </div>
+
+                    <div class="menu-toggle" onclick="mobileBtn()">&#9776; 目录</div>
+                </div>
+    
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/category">Categories</a>
+                
+                <a class="menu-item" href="/tag">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Array 3:Squares of a Sorted Array</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 14, 2023&nbsp;&nbsp;0:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/algorithm-training/">algorithm-training</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <ul>
+<li><a href="#head1">977. 有序数组的平方</a><ul>
+<li><a href="#head2"> NOTE</a></li>
+<li><a href="#head3">c++ solution</a></li>
+<li><a href="#head4">java solution</a></li>
+<li><a href="#head5">improved solution</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="977-有序数组的平方"><a href="#977-有序数组的平方" class="headerlink" title="977. 有序数组的平方"></a><span id="head1"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/description/">977. 有序数组的平方</a></span></h1><p><img src="/2023/05/14/5-14-array-3-squares-of-a-sorted-array/img.png" alt="977"></p>
+<h2 id="NOTE"><a href="#NOTE" class="headerlink" title=" NOTE"></a><span id="head2"> NOTE</span></h2><p>原本自己读完题想着要先挨个平方完，然后快排（没错本人就是这么垃圾<span class="github-emoji"><span>😭</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>）这样的话，是复杂度是O(n+nlogn)，<br>绝对超过了O(n)。之后看到了提示说用双指针，就恍然大悟：①遍历数组找到正负分界点②从这个点向两端依次确定<br>最小值，直到有一侧达到尽头③处理剩下的数组。写完之后，发现卡哥的思路：从数组两端向中间聚拢，以此确定最大值，<br>这样省了找分界点和处理剩下元素的时间，respect！！</p>
+<h2 id="c-solution"><a href="#c-solution" class="headerlink" title="c++ solution"></a><span id="head3">c++ solution</span></h2><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">sortedSquares</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>{</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">ans</span><span class="params">(nums.size())</span></span>;</span><br><span class="line">        <span class="type">int</span> FLAG=<span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> r=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(nums[r]&lt;<span class="number">0</span>){</span><br><span class="line">            r++;</span><br><span class="line">            <span class="keyword">if</span>(r&gt;=nums.<span class="built_in">size</span>())<span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> l=r<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span>(l&lt;<span class="number">0</span>||r&gt;=nums.<span class="built_in">size</span>())FLAG=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> idx=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(FLAG&amp;&amp;idx&lt;nums.<span class="built_in">size</span>()){</span><br><span class="line">            <span class="keyword">if</span>(nums[l]*(<span class="number">-1</span>)&lt;nums[r]){</span><br><span class="line">                ans[idx]=nums[l]*nums[l];</span><br><span class="line">                l--;</span><br><span class="line">                <span class="keyword">if</span>(l&lt;<span class="number">0</span>)FLAG=<span class="number">0</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                ans[idx]=nums[r]*nums[r];</span><br><span class="line">                r++;</span><br><span class="line">                <span class="keyword">if</span>(r&gt;=nums.<span class="built_in">size</span>())FLAG=<span class="number">0</span>;</span><br><span class="line">            }</span><br><span class="line">            idx++;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(FLAG==<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">if</span>(l&lt;<span class="number">0</span>){<span class="comment">//剩下右边</span></span><br><span class="line">                <span class="keyword">while</span>(idx&lt;nums.<span class="built_in">size</span>()&amp;&amp;r&lt;nums.<span class="built_in">size</span>()){</span><br><span class="line">                    ans[idx]=nums[r]*nums[r];</span><br><span class="line">                    idx++;</span><br><span class="line">                    r++;</span><br><span class="line">                }</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                 <span class="keyword">while</span>(idx&lt;nums.<span class="built_in">size</span>()&amp;&amp;l&gt;=<span class="number">0</span>){</span><br><span class="line">                    ans[idx]=nums[l]*nums[l];</span><br><span class="line">                    idx++;</span><br><span class="line">                    l--;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="java-solution"><a href="#java-solution" class="headerlink" title="java solution"></a><span id="head4">java solution</span></h2><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortedSquares(<span class="type">int</span>[] nums) {</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> len=nums.length;</span><br><span class="line">        <span class="type">int</span>[]ans=<span class="keyword">new</span> <span class="title class_">int</span>[len];</span><br><span class="line">        <span class="type">int</span> FLAG=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> r=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(nums[r]&lt;<span class="number">0</span>){</span><br><span class="line">            r++;</span><br><span class="line">            <span class="keyword">if</span>(r&gt;=len){</span><br><span class="line">                FLAG=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> l=r-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(l&lt;<span class="number">0</span>) FLAG=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> idx=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(FLAG==<span class="number">1</span>&amp;&amp;idx&lt;len){</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(nums[l]*(-<span class="number">1</span>)&lt;nums[r]){</span><br><span class="line">                ans[idx]=nums[l]*nums[l];</span><br><span class="line">                l--;</span><br><span class="line">                <span class="keyword">if</span>(l&lt;<span class="number">0</span>)FLAG=<span class="number">0</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                ans[idx]=nums[r]*nums[r];</span><br><span class="line">                r++;</span><br><span class="line">                <span class="keyword">if</span>(r&gt;=len)FLAG=<span class="number">0</span>;</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            idx++;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(FLAG==<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">if</span>(l&lt;<span class="number">0</span>){<span class="comment">//只剩右边</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">while</span>(idx&lt;len&amp;&amp;r&lt;len){</span><br><span class="line">                    ans[idx]=nums[r]*nums[r];</span><br><span class="line">                    idx++;</span><br><span class="line">                    r++;</span><br><span class="line">                }</span><br><span class="line">                </span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                <span class="keyword">while</span>(idx&lt;len&amp;&amp;l&gt;=<span class="number">0</span>){</span><br><span class="line">                    ans[idx]=nums[l]*nums[l];</span><br><span class="line">                    idx++;</span><br><span class="line">                    l--;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="improved-solution"><a href="#improved-solution" class="headerlink" title="improved solution"></a><span id="head5">improved solution</span></h2><p>显然代码短了很多</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>{</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">sortedSquares</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span></span>{</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;<span class="built_in">ans</span>(len);</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> l=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> r=len<span class="number">-1</span>;</span><br><span class="line">        <span class="type">int</span> idx=len<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(idx&gt;=<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">if</span>(nums[l]*nums[l]&gt;nums[r]*nums[r]){</span><br><span class="line">                ans[idx]=nums[l]*nums[l];</span><br><span class="line">                l++;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                ans[idx]=nums[r]*nums[r];</span><br><span class="line">                r--;</span><br><span class="line">            }</span><br><span class="line">            idx--;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/blog/"># blog</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/05/19/5-19-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9E%84%E6%83%B3/">创建新的Hexo-Blog主题构想</a>
+            
+            
+            <a class="next" rel="next" href="/2023/05/11/5-11-array-2-remove-element/">Array 2:Remove Element</a>
+            
+        </section>
+        <!-- 引入插件 -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" />
+<style>
+  .post-gitalk {
+    margin-top: 5rem;
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+<section class="post-gitalk">
+  <div id="gitalk-container"></div>
+</section>
+
+<script>
+  const gitalk = new Gitalk({
+    clientID: 'ab9c50402509221b9113',
+    clientSecret: '891f4f712433db2344543b1202aa3eb5f5dfbcc6',
+    repo: 'zoebezos.github.io', // The repository of store comments,
+    owner: 'zoebezos',
+    admin: ['zoebezos'],
+    id: location.pathname, // Ensure uniqueness and length less than 50
+    distractionFreeMode: false, // Facebook-like distraction free mode
+    language: 'en',
+  });
+
+  gitalk.render('gitalk-container');
+</script>
+
+    </article>
+</div>
+
+
+            </div>
+            <footer id="footer" class="footer">
+
+    <div class="copyright">
+   
+    <span>© zoe 
+           
+    |
+   
+    <!-- 访客数量 -->
+   
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    total number of visitors:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    total number of visits:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+      
+
+      <!-- 2023 -->
+
+   
+    </span>
+   
+    </div>
+   
+   </footer>
+    </div>
+</body>
+
+<!-- 搜索功能 -->
+<!-- Chic/layout.ejs -->
+<div id="u-search">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="container">
+                <form id="u-search-modal-form" class="u-search-modal-form">
+                    <button type="submit" class="form-submit-btn">
+                        <img src="/image/search.png" class="search-btn-img" />
+                    </button>
+                    <input placeholder="搜索内容..." class="form-input" id="modal-form-input">
+                </form>
+                <a class="modal-close">x</a>
+            </div>
+            <div class="search-loading">
+                <div class="search-loading-bar"></div>
+            </div>
+        </div>
+        <div class="modal-body">
+        </div>
+    </div>
+    <div class="modal-overlay"></div>
+</div>
+
+</html>
