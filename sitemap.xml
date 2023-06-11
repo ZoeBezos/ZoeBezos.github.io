@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zoebezos.github.io/google50a5ec8127133b84.html</loc>
+    <loc>https://zoebezos.github.io/resume/index.html</loc>
     
     <lastmod>2023-06-11</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/resume/index.html</loc>
+    <loc>https://zoebezos.github.io/google50a5ec8127133b84.html</loc>
     
     <lastmod>2023-06-11</lastmod>
     
@@ -135,13 +135,6 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/tags/preview/</loc>
-    <lastmod>2023-06-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://zoebezos.github.io/tags/hobby/</loc>
     <lastmod>2023-06-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -150,6 +143,13 @@
   
   <url>
     <loc>https://zoebezos.github.io/tags/private/</loc>
+    <lastmod>2023-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/tags/preview/</loc>
     <lastmod>2023-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -165,13 +165,6 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/categories/interest-list/</loc>
-    <lastmod>2023-06-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://zoebezos.github.io/categories/thoughts/</loc>
     <lastmod>2023-06-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -179,7 +172,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/categories/paper/</loc>
+    <loc>https://zoebezos.github.io/categories/interest-list/</loc>
     <lastmod>2023-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -187,6 +180,13 @@
   
   <url>
     <loc>https://zoebezos.github.io/categories/reading/</loc>
+    <lastmod>2023-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/categories/paper/</loc>
     <lastmod>2023-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
