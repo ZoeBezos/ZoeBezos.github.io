@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zoe">
+
+
+
+
+
+<title>Diary 6/2 | ZOE&#39;s site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+    <script src="/js/jquery-3.7.0.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<!-- 搜索的部分 -->
+
+
+
+    <script>
+    // function searchToggle() {
+    //     const width = $(document.body).width()
+    //     if(width > 479) {
+    //         return;
+    //     }
+    //     const search = $('.search');
+    //     const searchForm = $('.form-search')
+
+    //     if(!search.hasClass("mobile-search")) {
+    //         search.addClass("mobile-search");
+    //     } else {
+    //         search.removeClass("mobile-search");
+    //     } 
+    // }
+
+    function searchToggle() {
+        const width = $(document.body).width()
+        if(width > 479) {
+            return;
+        }
+        const search = $('.search');
+        const searchForm = $('.form-search');
+        const menuToggle = $('.menu-toggle');
+        const title = $('.navbar-header-title ');
+
+        if(!search.hasClass("mobile-search")) {
+            search.addClass("mobile-search");
+            menuToggle.addClass("open-search")
+            title.addClass("mobile-title-hidden")
+        } else {
+            search.removeClass("mobile-search");
+            menuToggle.removeClass("open-search")
+            // title.css({visibility: 'visible'})
+            title.removeClass("mobile-title-hidden")
+        } 
+    }
+
+
+
+    function search(searchInputEl, formEl, flag) {
+        const path = "/" + "search.json"; // 可以在public 下查看这个search.json
+        $(formEl).submit(function(e){
+            e.preventDefault();
+            let target = null
+            if(searchInputEl == null) {
+                const screenWidth = $(document.body).width();
+                target = screenWidth > 479 ? $('#pc-search-input') : $('#mobile-search-input');
+                console.log(target);
+            } else {
+                target = $(searchInputEl)
+            }
+
+            if(!flag && target.val() === '') {
+                return ;
+            }
+
+            $("#u-search").fadeIn(500, function() {
+                $("body > .wrapper").addClass("modal-active");
+
+                $.ajax({
+                    url: path,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        $input = target.val();
+                        $(".form-input").val($input);
+                        const loadingBar = $('.search-loading-bar') 
+                        loadingBar.css({
+                            width:'100%',
+                            display: 'block'
+                        });
+                    },
+                    success: function( datas ) {
+                        console.log(datas);
+                        const $resultPanel = $(".modal-body")[0];
+                        let str = `<ul class="modal-results">`;
+                        var keywords = $(".form-input").val().trim().toLowerCase().split(/[\s\-]+/);
+                        $resultPanel.innerHTML = "";
+                        let hasResult = false
+                        let text = `<div class="no-result">找不到与关键词相关的内容....</div>`;
+
+                        if ($(".form-input").val().trim().length <= 0) {
+                            // 没有结果
+                            $resultPanel.innerHTML = text;
+                            return;
+                        }
+                        datas.forEach(function (data, index) {
+                            var isMatch = true;
+                            if (!data.title || data.title.trim() === '') {
+                                data.title = "Untitled";
+                            }
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content && data.content.trim().replace(/<[^>]+>/g, "").toLowerCase() || '';
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty contents
+                            if (data_content !== '') {
+                                keywords.forEach(function (keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        hasResult = true
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            } else {
+                                isMatch = false;
+                            }
+                            // show search results
+                            if (isMatch) {
+                                str += `<li class='result-item'><a href='${data_url}' class='result-item-detail'> <span class="title">${data_title}</span>`;
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 200 characters
+                                    var start = first_occur - 40;
+                                    var end = first_occur + 160;
+
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+
+                                    if (start == 0) {
+                                        end = 200;
+                                    }
+
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+
+                                    var match_content = content.substring(start, end);
+
+                                    // highlight all keywords
+                                    keywords.forEach(function (keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, `<em class="search-keyword">${keyword}</em>`);
+                                    });
+
+                                    str += `<span class="content"> ${match_content} ...</span></a>`;
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        if(hasResult) {
+                            $resultPanel.innerHTML = str;
+                        } else {
+                            $resultPanel.innerHTML = text;
+                        }
+
+                    },
+                    complete: function() {
+                        setTimeout(() => {
+                                const loadingBar = $('.search-loading-bar') 
+                                loadingBar.css({
+                                    width:'0%',
+                                    display: 'none'
+                                });
+                        }, 300)
+                    }
+                });
+            })
+
+        });
+    }
+
+    $(document).ready(function() {
+        $('.modal-close').click(function () { 
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+
+        $('.modal-overlay').click(function() {
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+        search(null, ".form-search", false)
+        search("#u-search-modal-form .form-input", ".u-search-modal-form", true)
+    })
+</script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <!-- <div class="navbar-header header-logo"><a href="/">ZOE&#39;s site</a></div> -->
+            <div class="navbar-header header-logo"><a href="/"><i class="iconfont icon-zhuye" style="font-size: 1em;"></i>ZOE&#39;s site</a></div>
+            <div class="menu navbar-right">
+                <!-- 这里表示的是pc端搜索框 -->
+                
+                
+    <div class="search ">
+        <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div>
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="off" id="pc-search-input"/>
+        </form>
+    </div>
+
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/category">Categories</a>
+                
+                <a class="menu-item" href="/tag">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+    
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ZOE&#39;s site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="navbar-mobile-right">
+                    
+                    
+    <div class="search ">
+        <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div>
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="off" id="mobile-search-input"/>
+        </form>
+    </div>
+
+                    <div class="menu-toggle" onclick="mobileBtn()">&#9776; 目录</div>
+                </div>
+    
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/category">Categories</a>
+                
+                <a class="menu-item" href="/tag">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Diary 6/2</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 2, 2023&nbsp;&nbsp;0:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/diary/">diary</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Sorry, the password you entered is wrong. Please check it and enter it again." data-whm="Sorry, the current article cannot be checked, but you can still take a look at the decrypted content.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="be919985eae668eb4fd2af2ec7f2e3427e8045a9ed293429146cae8528ef6920">9ab8eeb89182dbd47bc9c58c85287dafab1f550aa59fc36539a53cf1c54e13569179b4689faff99a9d2e72d9a09e102c1fbbe80be766d47096c771b197f17507076bd86c8e19be5b05507f9f86ce738714ae780b55dc82387ad89d8271227c8f561daa569155b878ce60a5cbc16bcf4de1e9b2d8a60f506ace846230443bc4bce363ff762d52899b6f45fc44ff42aad8aca5e20bfdbfebb99c2bccfbff0f4ca7db39a814c7495f08601c08f9be8b1d6936f08636fe21aa3f2e72ab218f037a8a329291455f9fa42bc091f53f8f36d8369a0f641b713123ce11c31bf7d2b2ce1e02087d7035763ed6873e6b6713ea2454ef94138141535af1593cbf72d16ff5241c1d263c2ae92694c10c09129a08f0e4fb4902cc64244bdd8f8efdf205298af97fe1037583298bb908038abb27d6d5b5249df795fc68e480b91cdcd44077fa41ed8ab10a439cb382f64eb1f9636240b6ea9984b86f25ca005b3bc9576a940496c097badd76ae57b12eeffa522a45ce75f9c69310883781122b42b57b1f7e795c9014d4bf636a142213382f37b8493dcf6744a70e35ee5c4ab26730a4026c7746e09c16ad36e2faffebd358fbcd08b4256000be06ce4d48c215b7d0d0d543ae0e50c0fb745e1424e99110056fca9d1986f225419711bcc40efe36ccc3044fd17a67228a676092f56f0d36e848eb501c016580c44be01e28c4e96335fbac1c49cf261caaa9874a5a610d8bfb81b5dd43b77bd5aa0c09e04369fee5a40d48bd2f9239a8721c5d6b0022b373dbacb8fe5b53a7f8fe28a9d4b5cffa9b004a82bd8bc876dbb0f5ecb59d1bfa2bec6676ad898634753d8e36258396401b902d4feda71e49b24a3e9930c8260239883ef749f42ff945595bb46d219e74ca5093baeb313b6a46da82d57bd976f24709a71a2fbc3477e300d330b775f7a4dc03e4ed6c04c31ba0b10a0d9a4411f7783d629078fac5412f91c293fb056c375698259480a7c29c45e1dfc9c22edf4d48a63c73ec68e07526943ab7481f0ac99c3e7181ae579c063ef96e3e3b97911ccc83beebdd2deb15619fcbf9fd5c2c5b17068dfb3e766e55fbb7c2608d5f7b27360ea712c343a31b5590d000bbdd322732c21b979d6b62dd1deabc52778519e5d296501496689ae6f3288cf700a589f04325f664ab54f7a12bf1862e10e117349498a41e00981922f6145baa7b7b8676c917c49cf6017f796df9ba5f914124bfd13854526258aa7df3a771f8bd6fe1d69d20f91626b2e2c492923a174c6d6b096e0ebf2a5843712159635823d346bc8f8b31cbfc1ff3e33533aa79b7771a1572dba838cf8b11c6bde2a7f8dc070207675bfd2627ada60bdfb29a546385cc1a0370ed9caa0f5d51a5423fa17345b3f22956182fba51582c44df4504a6d666245050c6d5d547cae5a189dfd320bd5b4151381d5e962a063558cb8866753383322b97bcb2297d10e7e286ca35ee853814519ccc9325f401901db72b0a371c7e8dcdac0ab3fd6d72a82d1e16529435af84a1f53d5b141904304bbfee50b42bcf271a058c360fe3cf0dd9897d22b1c6bb718da3c64892e439990c262e8b8510bddaebd705b075732f12802995f6074814ba4b9730b2f3b62dab32a5ef6fc76b57b45db24e0d39d4969f0bfd32534a444d92048c2191309085e363df858aaf586e7da8236d9462294984ce8a62a49339b43c16ae60e22d9d6b3d5170fedf60eb0f37910bbab99bd29ffc69d0ddc4d0b56ac3a2f7971c3fe6e548cb5d1ea73b41d11e588bb79f87f38ba6a768c631b95d234f619e57fe518daabea99ee611905657b6c040b5fce731c69413b55a842fc09dd54745a6743faa47cf60dafe514d4c5b0d496f31783eceb22e49d80a2cad28bf44d01738ab53f417ccde89740be0bdd0a3943eca6026597928c9eb163ff1ca4b3a2e6812608f7b98c2b0c209e78da9390f4bddf7171ab45fa85f1900f0e69c90bb2e26bc946fe371e7e4e915651c140b78bcaeb777654e472a0f5d683f42f5eae1d7d6e56caaf02c7471d9ba5cff55c0aa50e0b0198b53acfae086be916229af4a5621230ea9e7923b93742d79de1d1426816902122793fe8729456537ae8cb2e3b2c562a5c73272f1b4ce8a3842a4b906c599414c0b8f3f4a6672e8b0f3754771da8da06909980dafb2da925390b97ce945e8d553799778e1081cacbf5a37bc31221473864fb30964253269162e64a762b70f402179e0422bf453f0d3d039b091d8e23f6ffda72945acb0b5580d31b468de71435be973a657c831c53dc738c0e6569fb9b2322af126fb9a4a15cea99cc61b0efaa8d1aafc8a75cfb7a090ecce2604914c03c6d1c5a864fc0269168d82edd75858642a422ed5d12f7728e678ed4a130aaf0db658021aa24d1cab01e805f203290543f2193e771dcf2c1d25ed75e9db55f2d93d3524430581a70e8bcbcf077e1e73a58037e20a5e1c5c6ec875451263f9c6ede69f3189d13012a2ce7f23154d4d962a55f1338418ab1d4a47b664a292d3fd0fc7131313ce7da468aa75638e86bcb694eada0fa65ab7fbf0213a7b87354d8ed129e88d7fd49843427f834a71604dcce32f8c26bc1cfc05cfb2c98ce16faf2fc14e7748185073881666d50c0bbd0a260d74b9a2c10c3d3be7710ec43c124f650ec89f3cd78cb6250a29d16fd7e04c11d4ebf3b367da54568e6d10093423e77759fddbc55dee4a85b52e7f29036e8a6facf9ae69b1596596929b9a6b07d8526a03254b0ec87ecc6a8024b00d84f0dd8930a204c43d66386b511564ea7929b757713dbe9fd2d0c0cc8f81935f5ec095175796281708a3d003e2e83656000eb6d90b1c89a353</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">The current article is not visible to the public, please enter the password and check it!</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/diary/"># diary</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/06/04/6-4-diary/">Diary 6/4</a>
+            
+            
+            <a class="next" rel="next" href="/2023/06/01/6-1-june-schedule/">June Schedule</a>
+            
+        </section>
+        <!-- 引入插件 -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" />
+<style>
+  .post-gitalk {
+    margin-top: 5rem;
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+<section class="post-gitalk">
+  <div id="gitalk-container"></div>
+</section>
+
+<script>
+  const gitalk = new Gitalk({
+    clientID: 'ab9c50402509221b9113',
+    clientSecret: '891f4f712433db2344543b1202aa3eb5f5dfbcc6',
+    repo: 'zoebezos.github.io', // The repository of store comments,
+    owner: 'zoebezos',
+    admin: ['zoebezos'],
+    id: location.pathname, // Ensure uniqueness and length less than 50
+    distractionFreeMode: false, // Facebook-like distraction free mode
+    language: 'en',
+  });
+
+  gitalk.render('gitalk-container');
+</script>
+
+    </article>
+</div>
+
+
+            </div>
+            <footer id="footer" class="footer">
+
+    <div class="copyright">
+   
+    <span>© zoe 
+           
+    |
+   
+    <!-- 访客数量 -->
+   
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    👤
+    <!-- <i class="iconfont icon-yx_user "></i> -->
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    👁️
+    <!-- <i class="iconfont icon-yx_eye "></i> -->
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+      
+
+      <!-- 2023 -->
+
+   
+    </span>
+   
+    </div>
+   
+   </footer>
+    </div>
+    
+</body>
+
+<!-- 搜索功能 -->
+<!-- Chic/layout.ejs -->
+<div id="u-search">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="container">
+                <form id="u-search-modal-form" class="u-search-modal-form">
+                    <button type="submit" class="form-submit-btn">
+                        <img src="/image/search.png" class="search-btn-img" />
+                    </button>
+                    <input placeholder="Search content..." class="form-input" id="modal-form-input">
+                </form>
+                <a class="modal-close">x</a>
+            </div>
+            <div class="search-loading">
+                <div class="search-loading-bar"></div>
+            </div>
+        </div>
+        <div class="modal-body">
+        </div>
+    </div>
+    <div class="modal-overlay"></div>
+</div>
+
+</html>

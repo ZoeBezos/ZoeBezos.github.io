@@ -253,11 +253,11 @@
             const pagebody = document.getElementsByTagName('body')[0]
             if (isDark) {
                 pagebody.classList.add('dark-theme');
-           
+                // mobile
                 document.getElementById("mobile-toggle-theme").innerText = "· Dark"
             } else {
                 pagebody.classList.remove('dark-theme');
-        
+                // mobile
                 document.getElementById("mobile-toggle-theme").innerText = "· Light"
             }
         })();
@@ -361,11 +361,15 @@
                 
                     <a href="/tags/blog/">blog<small>(3)</small></a>
                 
+                    <a href="/tags/diary/">diary<small>(3)</small></a>
+                
+                    <a href="/tags/preview/">preview<small>(4)</small></a>
+                
                     <a href="/tags/hobby/">hobby<small>(2)</small></a>
                 
                     <a href="/tags/private/">private<small>(2)</small></a>
                 
-                    <a href="/tags/preview/">preview<small>(1)</small></a>
+                    <a href="/tags/review/">review<small>(2)</small></a>
                 
             </div>
         </div>
@@ -423,7 +427,7 @@
                     <button type="submit" class="form-submit-btn">
                         <img src="/image/search.png" class="search-btn-img" />
                     </button>
-                    <input placeholder="搜索内容..." class="form-input" id="modal-form-input">
+                    <input placeholder="Search content..." class="form-input" id="modal-form-input">
                 </form>
                 <a class="modal-close">x</a>
             </div>

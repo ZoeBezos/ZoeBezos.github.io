@@ -253,11 +253,11 @@
             const pagebody = document.getElementsByTagName('body')[0]
             if (isDark) {
                 pagebody.classList.add('dark-theme');
-           
+                // mobile
                 document.getElementById("mobile-toggle-theme").innerText = "· Dark"
             } else {
                 pagebody.classList.remove('dark-theme');
-        
+                // mobile
                 document.getElementById("mobile-toggle-theme").innerText = "· Light"
             }
         })();
@@ -369,6 +369,24 @@
         
 
         <article class="archive-item">
+            <a class="archive-item-link" href="/2023/06/10/6-10-certificate/">Certificate</a>
+            <span class="archive-item-date">June 10, 2023</span>
+        </article>
+    
+        
+
+        
+
+        <article class="archive-item">
+            <a class="archive-item-link" href="/2023/06/10/6-10-interest-list/">Interest List</a>
+            <span class="archive-item-date">June 10, 2023</span>
+        </article>
+    
+        
+
+        
+
+        <article class="archive-item">
             <a class="archive-item-link" href="/2023/06/10/6-10-software-development-ideas/">Software Development Ideas</a>
             <span class="archive-item-date">June 10, 2023</span>
         </article>
@@ -428,7 +446,7 @@
                     <button type="submit" class="form-submit-btn">
                         <img src="/image/search.png" class="search-btn-img" />
                     </button>
-                    <input placeholder="搜索内容..." class="form-input" id="modal-form-input">
+                    <input placeholder="Search content..." class="form-input" id="modal-form-input">
                 </form>
                 <a class="modal-close">x</a>
             </div>
