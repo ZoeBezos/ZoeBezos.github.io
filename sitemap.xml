@@ -214,7 +214,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/tags/preview/</loc>
+    <loc>https://zoebezos.github.io/tags/hobby/</loc>
     <lastmod>2023-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -228,7 +228,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/tags/hobby/</loc>
+    <loc>https://zoebezos.github.io/tags/preview/</loc>
     <lastmod>2023-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -258,7 +258,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/categories/monthly-preview/</loc>
+    <loc>https://zoebezos.github.io/categories/thoughts/</loc>
     <lastmod>2023-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -272,21 +272,14 @@
   </url>
   
   <url>
+    <loc>https://zoebezos.github.io/categories/monthly-preview/</loc>
+    <lastmod>2023-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/categories/paper/</loc>
-    <lastmod>2023-06-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/categories/thoughts/</loc>
-    <lastmod>2023-06-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/categories/tips/</loc>
     <lastmod>2023-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -301,6 +294,13 @@
   
   <url>
     <loc>https://zoebezos.github.io/categories/reading/</loc>
+    <lastmod>2023-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/categories/tips/</loc>
     <lastmod>2023-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
