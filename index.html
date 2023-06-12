@@ -129,7 +129,7 @@
                         var keywords = $(".form-input").val().trim().toLowerCase().split(/[\s\-]+/);
                         $resultPanel.innerHTML = "";
                         let hasResult = false
-                        let text = `<div class="no-result">找不到与关键词相关的内容....</div>`;
+                        let text = `<div class="no-result">No content related to keywords was found.....</div>`;
 
                         if ($(".form-input").val().trim().length <= 0) {
                             // 没有结果
@@ -360,14 +360,15 @@
         <div class="nickname">𝒁𝒐𝒆 𝑩𝒆𝒛𝒐𝒔</div>
         <div class="description"><p>𝐷𝑎𝑛𝑐𝑒 𝑢𝑛𝑡𝑖𝑙 𝑦𝑜𝑢𝑟 𝑓𝑒𝑒𝑡 ℎ𝑢𝑟𝑡. 𝑆𝑖𝑛𝑔 𝑢𝑛𝑡𝑖𝑙 𝑦𝑜𝑢𝑟 𝑙𝑢𝑛𝑔𝑠 ℎ𝑢𝑟𝑡.<br>𝐴𝑐𝑡 𝑢𝑛𝑡𝑖𝑙 𝑦𝑜𝑢’𝑟𝑒 𝑊𝑖𝑙𝑙𝑖𝑎𝑚 𝐻𝑢𝑟𝑡.</p>
 </div>
-        <!-- map begin -->
         
-        <!--  -->
-            <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=004c97&w=a&t=n&d=u-tVbewovdcQO-C1EFHdG9N9VUT_otsrVGy7SDCxHtg&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=808080'></script>
-        <!--  -->
-
-        <!-- map end -->
-
+        <div style="text-align:center;">
+            <div>
+                <!-- map begin -->
+                <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=004c97&w=a&t=n&d=u-tVbewovdcQO-C1EFHdG9N9VUT_otsrVGy7SDCxHtg&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=808080'></script>
+                <!-- map end -->
+            </div>
+        </div>
+        
         <div class="links">
             
                 
@@ -416,6 +417,7 @@
             
             
         </div>
+        
 
     </div>
 </div>

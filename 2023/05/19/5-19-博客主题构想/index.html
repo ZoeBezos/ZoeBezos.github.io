@@ -129,7 +129,7 @@
                         var keywords = $(".form-input").val().trim().toLowerCase().split(/[\s\-]+/);
                         $resultPanel.innerHTML = "";
                         let hasResult = false
-                        let text = `<div class="no-result">找不到与关键词相关的内容....</div>`;
+                        let text = `<div class="no-result">No content related to keywords was found.....</div>`;
 
                         if ($(".form-input").val().trim().length <= 0) {
                             // 没有结果
@@ -404,9 +404,9 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/hobby/"># hobby</a>
-                    
                         <a href="/tags/private/"># private</a>
+                    
+                        <a href="/tags/hobby/"># hobby</a>
                     
                         
                 </span>
