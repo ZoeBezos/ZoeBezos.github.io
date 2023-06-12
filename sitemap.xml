@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zoebezos.github.io/secret/index.html</loc>
+    <loc>https://zoebezos.github.io/2023/06/12/6-12-resume-en/</loc>
     
     <lastmod>2023-06-12</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/resume/index.html</loc>
+    <loc>https://zoebezos.github.io/2023/06/12/6-12-resume-cn/</loc>
     
     <lastmod>2023-06-12</lastmod>
     
@@ -21,15 +21,6 @@
   
   <url>
     <loc>https://zoebezos.github.io/2023/06/12/6-12-minimalist-life/</loc>
-    
-    <lastmod>2023-06-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/about/index.html</loc>
     
     <lastmod>2023-06-12</lastmod>
     
@@ -191,15 +182,6 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/link/index.html</loc>
-    
-    <lastmod>2023-06-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://zoebezos.github.io/tag/index.html</loc>
     
     <lastmod>2023-06-10</lastmod>
@@ -259,6 +241,13 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://zoebezos.github.io/tags/resume/</loc>
+    <lastmod>2023-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -283,13 +272,6 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/categories/interest-list/</loc>
-    <lastmod>2023-06-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://zoebezos.github.io/categories/monthly-preview/</loc>
     <lastmod>2023-06-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -304,6 +286,13 @@
   </url>
   
   <url>
+    <loc>https://zoebezos.github.io/categories/interest-list/</loc>
+    <lastmod>2023-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/categories/daily-review/</loc>
     <lastmod>2023-06-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -311,7 +300,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/categories/reading/</loc>
+    <loc>https://zoebezos.github.io/categories/resume/</loc>
     <lastmod>2023-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -319,6 +308,13 @@
   
   <url>
     <loc>https://zoebezos.github.io/categories/video-review/</loc>
+    <lastmod>2023-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/categories/reading/</loc>
     <lastmod>2023-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
