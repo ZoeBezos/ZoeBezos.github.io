@@ -53,7 +53,7 @@ document.ready(
                 document.getElementById("mobile-toggle-theme").innerText = "· Dark"
             } else {
                 pagebody.classList.remove('dark-theme');
-                // mobile
+                mobile
                 document.getElementById("mobile-toggle-theme").innerText = "· Light"
             }
             document.getElementsByClassName('toggleBtn')[0].addEventListener('click', () => {
