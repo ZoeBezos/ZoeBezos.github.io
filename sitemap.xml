@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zoebezos.github.io/2023/06/13/6-13-movie-list/</loc>
+    <loc>https://zoebezos.github.io/2023/06/09/6-9-book-list/</loc>
     
     <lastmod>2023-06-13</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/2023/06/09/6-9-book-list/</loc>
+    <loc>https://zoebezos.github.io/2023/06/13/6-13-movie-list/</loc>
     
     <lastmod>2023-06-13</lastmod>
     
@@ -209,14 +209,14 @@
 
   
   <url>
-    <loc>https://zoebezos.github.io/tags/diary/</loc>
+    <loc>https://zoebezos.github.io/tags/blog/</loc>
     <lastmod>2023-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/tags/blog/</loc>
+    <loc>https://zoebezos.github.io/tags/diary/</loc>
     <lastmod>2023-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
