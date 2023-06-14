@@ -13,7 +13,7 @@
 
 
 
-<title>Archives: 2023/6 | ZOE&#39;s site</title>
+<title>Curve Integral &amp; Surface Integral | ZOE&#39;s site</title>
 
 
 
@@ -42,6 +42,45 @@
 
     
     
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
         
     
 
@@ -339,148 +378,167 @@
     }
 </script>
             <div class="main">
-                <div class="post-wrap archive">
+                <div class="container">
     
     
-        
-
-        
-            <h3>2023</h3>
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/14/6-14-curve-integral-and-surface-integral/">Curve Integral &amp; Surface Integral</a>
-            <span class="archive-item-date">June 14, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/13/6-13-movie-list/">Movie List</a>
-            <span class="archive-item-date">June 13, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/12/6-12-resume-cn/">简历</a>
-            <span class="archive-item-date">June 12, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/12/6-12-resume-en/">Resume</a>
-            <span class="archive-item-date">June 12, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/12/6-12-minimalist-life/">Minimalist Life 1.0</a>
-            <span class="archive-item-date">June 12, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/10/6-10-certificate/">Certificate</a>
-            <span class="archive-item-date">June 10, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/10/6-10-interest-list/">Interest List</a>
-            <span class="archive-item-date">June 10, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/10/6-10-software-development-ideas/">Software Development Ideas</a>
-            <span class="archive-item-date">June 10, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/09/6-9-tips/">Tips 1.0</a>
-            <span class="archive-item-date">June 9, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/09/6-9-book-list/">Book List</a>
-            <span class="archive-item-date">June 9, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/08/6-8-vedio-review/">Video Review 1.0</a>
-            <span class="archive-item-date">June 8, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/04/6-4-diary/">Diary 6/4</a>
-            <span class="archive-item-date">June 4, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/02/6-2-diary/">Diary 6/2</a>
-            <span class="archive-item-date">June 2, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/01/6-1-june-schedule/">June Schedule</a>
-            <span class="archive-item-date">June 1, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/01/6-1-my-paper/">Graduate Paper</a>
-            <span class="archive-item-date">June 1, 2023</span>
-        </article>
-    
-    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
 </div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Curve Integral &amp; Surface Integral</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 14, 2023&nbsp;&nbsp;8:58:54</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/math/">math</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="对弧长曲线积分"><a href="#对弧长曲线积分" class="headerlink" title="对弧长曲线积分"></a>对弧长曲线积分</h1><h2 id="对弧长的曲线积分的概念与性质"><a href="#对弧长的曲线积分的概念与性质" class="headerlink" title="对弧长的曲线积分的概念与性质"></a>对弧长的曲线积分的概念与性质</h2><p>函数$f(x,y)$在曲线$L$上对弧长的曲线积分（第一曲线积分），记作</p>
+<p>$$\int_Lf(x,y)\text{d}s  或  \int_{\mathop{\frown}\limits_{AB}}f(x,y)\text{d}s$$</p>
+<p>即</p>
+<p>$$\int_Lf(x,y)\text{d}s=\lim_{ \lambda\to 0}\sum_{i=1}^nf(\xi_i, \eta_i) \bigtriangleup s_i$$</p>
+<p>其中$f(x,y)$叫做被积函数，曲线$L$叫做积分路径，$\text d s$叫做弧长元素（弧微分）。</p>
+<h2 id="对弧长的曲线积分的计算与应用"><a href="#对弧长的曲线积分的计算与应用" class="headerlink" title="对弧长的曲线积分的计算与应用"></a>对弧长的曲线积分的计算与应用</h2><h1 id="对坐标的曲线积分"><a href="#对坐标的曲线积分" class="headerlink" title="对坐标的曲线积分"></a>对坐标的曲线积分</h1><h1 id="格林公式及其应用"><a href="#格林公式及其应用" class="headerlink" title="格林公式及其应用"></a>格林公式及其应用</h1><h1 id="对面积的曲面积分"><a href="#对面积的曲面积分" class="headerlink" title="对面积的曲面积分"></a>对面积的曲面积分</h1><h1 id="对坐标的曲面积分"><a href="#对坐标的曲面积分" class="headerlink" title="对坐标的曲面积分"></a>对坐标的曲面积分</h1><h1 id="高斯公式与散度"><a href="#高斯公式与散度" class="headerlink" title="高斯公式与散度"></a>高斯公式与散度</h1><h1 id="斯托克斯公式与旋度"><a href="#斯托克斯公式与旋度" class="headerlink" title="斯托克斯公式与旋度"></a>斯托克斯公式与旋度</h1>
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/blog/"># blog</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2023/06/13/6-13-movie-list/">Movie List</a>
+            
+        </section>
+        <!-- 引入插件 -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" />
+<style>
+  .post-gitalk {
+    margin-top: 5rem;
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+<section class="post-gitalk">
+  <div id="gitalk-container"></div>
+</section>
+
+<script>
+  const gitalk = new Gitalk({
+    clientID: 'ab9c50402509221b9113',
+    clientSecret: '891f4f712433db2344543b1202aa3eb5f5dfbcc6',
+    repo: 'zoebezos.github.io', // The repository of store comments,
+    owner: 'zoebezos',
+    admin: ['zoebezos'],
+    id: location.pathname, // Ensure uniqueness and length less than 50
+    distractionFreeMode: false, // Facebook-like distraction free mode
+    language: 'en',
+  });
+
+  gitalk.render('gitalk-container');
+</script>
+
+    </article>
+</div>
+
+
             </div>
             <footer id="footer" class="footer">
   <div class="copyright">
