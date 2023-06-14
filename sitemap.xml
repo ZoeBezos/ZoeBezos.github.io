@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/category/index.html</loc>
+    <loc>https://zoebezos.github.io/2023/06/09/6-9-book-list/</loc>
     
     <lastmod>2023-06-14</lastmod>
     
@@ -20,9 +20,9 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/2023/06/09/6-9-book-list/</loc>
+    <loc>https://zoebezos.github.io/category/index.html</loc>
     
-    <lastmod>2023-06-13</lastmod>
+    <lastmod>2023-06-14</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -232,7 +232,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/tags/preview/</loc>
+    <loc>https://zoebezos.github.io/tags/private/</loc>
     <lastmod>2023-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -246,14 +246,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/tags/private/</loc>
-    <lastmod>2023-06-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/tags/review/</loc>
+    <loc>https://zoebezos.github.io/tags/preview/</loc>
     <lastmod>2023-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -261,6 +254,13 @@
   
   <url>
     <loc>https://zoebezos.github.io/tags/resume/</loc>
+    <lastmod>2023-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/tags/review/</loc>
     <lastmod>2023-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
