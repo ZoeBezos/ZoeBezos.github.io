@@ -2,9 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zoebezos.github.io/2023/06/20/6-20-life-road/</loc>
+    
+    <lastmod>2023-06-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/06/20/6-20-preview-of-5-year/</loc>
+    
+    <lastmod>2023-06-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/2023/06/12/6-12-minimalist-life/</loc>
     
-    <lastmod>2023-06-19</lastmod>
+    <lastmod>2023-06-20</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -234,6 +252,13 @@
   </url>
   
   <url>
+    <loc>https://zoebezos.github.io/tags/diary/</loc>
+    <lastmod>2023-06-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/tags/hobby/</loc>
     <lastmod>2023-06-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -242,13 +267,6 @@
   
   <url>
     <loc>https://zoebezos.github.io/tags/private/</loc>
-    <lastmod>2023-06-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/tags/diary/</loc>
     <lastmod>2023-06-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
