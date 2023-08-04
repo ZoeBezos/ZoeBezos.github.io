@@ -422,7 +422,7 @@
                         <button type="submit" class="form-submit-btn">
                             <img src="/image/search.png" class="search-btn-img" />
                         </button>
-                        <input placeholder="search content..." class="form-input" id="modal-form-input">
+                        <input placeholder="搜索文章。。。" class="form-input" onchange="inputChange(event)" id="modal-form-input">
                     </form>
                     <a class="modal-close">x</a>
                 </div>
@@ -431,6 +431,17 @@
                 </div>
             </div>
             <div class="modal-body">
+                <!-- <ul class="modal-results">
+                    <li class="result-item">
+                        <a class="result-item-detail">
+                            <span class="title">页面配置</span>
+                            <span class="content">
+                                网址，例如： front-matter---layout: postdate: <b mark></b>
+                                7-07-05title: [转]如何搭建基于Hexo的独立博客categories: [Dev, Hexo]tags: - Hexoauthor: name: xaoxuu avatar: https://cdn.jsdelivr.......
+                            </span>
+                        </a>
+                    </li>
+                </ul> -->
             </div>
         </div>
         <div class="modal-overlay"></div>

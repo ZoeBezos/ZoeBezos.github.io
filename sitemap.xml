@@ -2,7 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zoebezos.github.io/leetcode/index.html</loc>
+    <loc>https://zoebezos.github.io/algorithm/index.html</loc>
+    
+    <lastmod>2023-08-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/05/10/5-10-array-1-binary-search/</loc>
     
     <lastmod>2023-08-04</lastmod>
     
@@ -30,15 +39,6 @@
   
   <url>
     <loc>https://zoebezos.github.io/2023/05/11/5-11-array-2-remove-element/</loc>
-    
-    <lastmod>2023-08-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/05/10/5-10-array-1-binary-search/</loc>
     
     <lastmod>2023-08-04</lastmod>
     
@@ -117,6 +117,13 @@
     <priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>https://zoebezos.github.io/tags/algorithm-huh/</loc>
+    <lastmod>2023-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/blog/</loc>
