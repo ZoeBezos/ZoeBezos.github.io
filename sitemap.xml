@@ -2,108 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zoebezos.github.io/2023/06/12/6-12-minimalist-life/</loc>
+    <loc>https://zoebezos.github.io/2023/05/19/5-19-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9E%84%E6%83%B3/</loc>
     
-    <lastmod>2023-07-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/07/07/7-7-diary/</loc>
-    
-    <lastmod>2023-07-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/06/20/6-20-preview-of-5-year/</loc>
-    
-    <lastmod>2023-07-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/06/10/6-10-interest-list/</loc>
-    
-    <lastmod>2023-07-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/05/11/5-11-array-2-remove-element/</loc>
-    
-    <lastmod>2023-07-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/06/09/6-9-tips/</loc>
-    
-    <lastmod>2023-07-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/06/14/6-14-diary/</loc>
-    
-    <lastmod>2023-07-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/05/10/5-10-array-1-binary-search/</loc>
-    
-    <lastmod>2023-07-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/leetcode/index.html</loc>
-    
-    <lastmod>2023-07-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/06/20/6-20-life-road/</loc>
-    
-    <lastmod>2023-07-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/category/index.html</loc>
-    
-    <lastmod>2023-06-20</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/06/09/6-9-book-list/</loc>
-    
-    <lastmod>2023-06-19</lastmod>
+    <lastmod>2023-08-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -112,43 +13,34 @@
   <url>
     <loc>https://zoebezos.github.io/2023/05/14/5-14-array-3-squares-of-a-sorted-array/</loc>
     
-    <lastmod>2023-06-19</lastmod>
+    <lastmod>2023-08-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/2023/06/14/6-14-curve-integral-and-surface-integral/</loc>
+    <loc>https://zoebezos.github.io/2023/05/11/5-11-array-2-remove-element/</loc>
     
-    <lastmod>2023-06-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/05/19/5-19-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9E%84%E6%83%B3/</loc>
-    
-    <lastmod>2023-06-14</lastmod>
+    <lastmod>2023-08-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/2023/06/13/6-13-movie-list/</loc>
+    <loc>https://zoebezos.github.io/2023/05/10/5-10-array-1-binary-search/</loc>
     
-    <lastmod>2023-06-13</lastmod>
+    <lastmod>2023-08-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/2023/06/12/6-12-resume-cn/</loc>
+    <loc>https://zoebezos.github.io/2023/06/01/6-1-my-paper/</loc>
     
-    <lastmod>2023-06-13</lastmod>
+    <lastmod>2023-08-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -156,6 +48,33 @@
   
   <url>
     <loc>https://zoebezos.github.io/2023/06/10/6-10-software-development-ideas/</loc>
+    
+    <lastmod>2023-08-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/category/index.html</loc>
+    
+    <lastmod>2023-08-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/tag/index.html</loc>
+    
+    <lastmod>2023-08-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/06/12/6-12-resume-cn/</loc>
     
     <lastmod>2023-06-13</lastmod>
     
@@ -173,33 +92,6 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/2023/06/10/6-10-certificate/</loc>
-    
-    <lastmod>2023-06-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/06/08/6-8-vedio-review/</loc>
-    
-    <lastmod>2023-06-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/06/01/6-1-my-paper/</loc>
-    
-    <lastmod>2023-06-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://zoebezos.github.io/google50a5ec8127133b84.html</loc>
     
     <lastmod>2023-06-11</lastmod>
@@ -208,76 +100,32 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://zoebezos.github.io/tag/index.html</loc>
-    
-    <lastmod>2023-06-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   <url>
     <loc>https://zoebezos.github.io/</loc>
-    <lastmod>2023-07-14</lastmod>
+    <lastmod>2023-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://zoebezos.github.io/tags/algorithm-binary/</loc>
-    <lastmod>2023-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://zoebezos.github.io/tags/blog/</loc>
-    <lastmod>2023-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/tags/hobby/</loc>
-    <lastmod>2023-07-14</lastmod>
+    <lastmod>2023-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/private/</loc>
-    <lastmod>2023-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/tags/preview/</loc>
-    <lastmod>2023-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/tags/review/</loc>
-    <lastmod>2023-07-14</lastmod>
+    <lastmod>2023-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/resume/</loc>
-    <lastmod>2023-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/tags/diary/</loc>
-    <lastmod>2023-07-14</lastmod>
+    <lastmod>2023-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -286,21 +134,21 @@
   
   <url>
     <loc>https://zoebezos.github.io/categories/algorithm/</loc>
-    <lastmod>2023-07-14</lastmod>
+    <lastmod>2023-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/categories/thoughts/</loc>
-    <lastmod>2023-07-14</lastmod>
+    <lastmod>2023-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/categories/math/</loc>
-    <lastmod>2023-07-14</lastmod>
+    <loc>https://zoebezos.github.io/categories/paper/</loc>
+    <lastmod>2023-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
