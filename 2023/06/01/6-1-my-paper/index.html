@@ -254,9 +254,9 @@
             const isDark = currentTheme === 'dark';
             const pagebody = document.getElementsByTagName('body')[0]
             if (isDark) {
-                pagebody.classList.add('dark-theme');
+                // pagebody.classList.add('dark-theme');
                 // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+                // document.getElementById("mobile-toggle-theme").innerText = "· Dark"
             } else {
                 pagebody.classList.remove('dark-theme');
                 // mobile
@@ -359,13 +359,20 @@
                         </span>
                     
                     
-                        <span class="post-category">
-                    Category:
-                            
-                                <a href="/categories/paper/">paper</a>
+
+                        <span class="post-category">                        
+                            Category:                        
+                                                    
+                            <a href="/categories/paper/">paper</a>
                             
                         </span>
+
                     
+
+                    
+                                                                        
+                    
+                        
                 </div>
             
         </header>
@@ -393,7 +400,36 @@
             </div>
             <footer id="footer" class="footer">
     <div class="copyright">
-        <span>© zoe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        <span>© zoe | <a href="https://hexo.io" target="_blank"></a>  <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank"></a>
+              
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<span class="site-uv">
+
+👤
+
+ <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+
+</span>&nbsp;
+
+
+
+
+
+<span class="site-pv">
+
+ | 👁️
+
+ <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+
+</span>
+
+
+  
+               
+        </span>
     </div>
 </footer>
 
@@ -409,7 +445,7 @@
                         <button type="submit" class="form-submit-btn">
                             <img src="/image/search.png" class="search-btn-img" />
                         </button>
-                        <input placeholder="搜索内容..." class="form-input" id="modal-form-input">
+                        <input placeholder="search content..." class="form-input" id="modal-form-input">
                     </form>
                     <a class="modal-close">x</a>
                 </div>
