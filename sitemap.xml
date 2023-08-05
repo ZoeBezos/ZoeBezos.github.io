@@ -4,7 +4,7 @@
   <url>
     <loc>https://zoebezos.github.io/algorithm/index.html</loc>
     
-    <lastmod>2023-08-04</lastmod>
+    <lastmod>2023-08-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -112,7 +112,7 @@
 
   <url>
     <loc>https://zoebezos.github.io/</loc>
-    <lastmod>2023-08-04</lastmod>
+    <lastmod>2023-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -120,28 +120,28 @@
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-huh/</loc>
-    <lastmod>2023-08-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/tags/blog/</loc>
-    <lastmod>2023-08-04</lastmod>
+    <lastmod>2023-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/private/</loc>
-    <lastmod>2023-08-04</lastmod>
+    <lastmod>2023-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/tags/blog/</loc>
+    <lastmod>2023-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/resume/</loc>
-    <lastmod>2023-08-04</lastmod>
+    <lastmod>2023-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -150,21 +150,21 @@
   
   <url>
     <loc>https://zoebezos.github.io/categories/algorithm/</loc>
-    <lastmod>2023-08-04</lastmod>
+    <lastmod>2023-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/categories/thoughts/</loc>
-    <lastmod>2023-08-04</lastmod>
+    <lastmod>2023-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/categories/paper/</loc>
-    <lastmod>2023-08-04</lastmod>
+    <lastmod>2023-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
