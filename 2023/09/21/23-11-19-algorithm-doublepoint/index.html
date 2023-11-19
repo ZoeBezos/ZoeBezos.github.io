@@ -13,7 +13,7 @@
 
 
 
-<title>Tag: private | ZOE&#39;s site</title>
+<title>5. TwoPointers | ZOE&#39;s site</title>
 
 
 
@@ -339,38 +339,224 @@
     }
 </script>
             <div class="main">
-                
-
+                <div class="container">
     
-<div class="container">
-    <div class="post-wrap tags">
-        <h2 class="post-title">-&nbsp;Resume&nbsp;-</h2>
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
     </div>
-    <div class="post-wrap archive">
-    
-    
-        
-
-        
-            <h3>2023</h3>
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/09/13/23-9-13-algorithm-list/">2. List</a>
-            <span class="archive-item-date">September 13, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/08/27/23-8-27-algorithm-array/">1. Array</a>
-            <span class="archive-item-date">August 27, 2023</span>
-        </article>
-    
-    
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
 </div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">5. TwoPointers</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">September 21, 2023&nbsp;&nbsp;20:14:58</a>
+                        </span>
+                    
+                    
+
+                        <span class="post-category">                        
+                            Category:                        
+                                                    
+                            <a href="/categories/algorithm/">algorithm</a>
+                            
+                        </span>
+
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">229</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">1min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <table>
+<thead>
+<tr>
+<th></th>
+<th align="center">是否完成</th>
+<th>题号</th>
+<th align="left">标签</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td align="center"></td>
+<td><a href="#head1"> 🟢27. 移除元素</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>2</td>
+<td align="center"></td>
+<td><a href="#head2">🟢26. 删除有序数组中的重复项  </a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>3</td>
+<td align="center"></td>
+<td><a href="#head3">🟢283. 移动零</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>4</td>
+<td align="center"></td>
+<td><a href="#head4">🟢844. 比较含退格的字符串</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>5</td>
+<td align="center"></td>
+<td><a href="#head5">🟢977. 有序数组的平方</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>6</td>
+<td align="center"></td>
+<td><a href="#head6">🟢344. 反转字符串</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>7</td>
+<td align="center"></td>
+<td><a href="#head7">🟢LCR 122. 路径加密</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>8</td>
+<td align="center"></td>
+<td><a href="#head8">🟡151. 反转字符串中的单词</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>9</td>
+<td align="center"></td>
+<td><a href="#head9">🟢206. 反转链表</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>10</td>
+<td align="center"></td>
+<td><a href="#head10">🟡19. 删除链表的倒数第 N 个结点</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>11</td>
+<td align="center"></td>
+<td><a href="#head11">🟢面试题 02.07. 链表相交</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>12</td>
+<td align="center"></td>
+<td><a href="#head12">🟡142. 环形链表</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>13</td>
+<td align="center"></td>
+<td><a href="#head13">🟡15. 三数之和</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>14</td>
+<td align="center"></td>
+<td><a href="#head14">🟡18. 四数之和</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h1><span id="27-yi-chu-yuan-su"><span id="head1"> 🟢27. 移除元素</span></span><a href="#27-yi-chu-yuan-su" class="header-anchor">#</a></h1><h1><span id="26-shan-chu-you-xu-shu-zu-zhong-de-chong-fu-xiang"><span id="head2">🟢26. 删除有序数组中的重复项 </span></span><a href="#26-shan-chu-you-xu-shu-zu-zhong-de-chong-fu-xiang" class="header-anchor">#</a></h1><h1><span id="283-yi-dong-ling"><span id="head4">🟢283. 移动零</span></span><a href="#283-yi-dong-ling" class="header-anchor">#</a></h1><h1><span id="844-bi-jiao-han-tui-ge-de-zi-fu-chuan"><span id="head5">🟢844. 比较含退格的字符串</span></span><a href="#844-bi-jiao-han-tui-ge-de-zi-fu-chuan" class="header-anchor">#</a></h1><h1><span id="977-you-xu-shu-zu-de-ping-fang"><span id="head6">🟢977. 有序数组的平方</span></span><a href="#977-you-xu-shu-zu-de-ping-fang" class="header-anchor">#</a></h1><h1><span id="344-fan-zhuan-zi-fu-chuan"><span id="head7">🟢344. 反转字符串</span></span><a href="#344-fan-zhuan-zi-fu-chuan" class="header-anchor">#</a></h1><h1><span id="lcr-122-lu-jing-jia-mi"><span id="head8">🟢LCR 122. 路径加密</span></span><a href="#lcr-122-lu-jing-jia-mi" class="header-anchor">#</a></h1><h1><span id="151-fan-zhuan-zi-fu-chuan-zhong-de-dan-ci"><span id="head9">🟡151. 反转字符串中的单词</span></span><a href="#151-fan-zhuan-zi-fu-chuan-zhong-de-dan-ci" class="header-anchor">#</a></h1><h1><span id="206-fan-zhuan-lian-biao"><span id="head10">🟢206. 反转链表</span></span><a href="#206-fan-zhuan-lian-biao" class="header-anchor">#</a></h1><h1><span id="19-shan-chu-lian-biao-de-dao-shu-di-n-ge-jie-dian"><span id="head11">🟡19. 删除链表的倒数第 N 个结点</span></span><a href="#19-shan-chu-lian-biao-de-dao-shu-di-n-ge-jie-dian" class="header-anchor">#</a></h1><h1><span id="mian-shi-ti-02-07-lian-biao-xiang-jiao"><span id="head12">🟢面试题 02.07. 链表相交</span></span><a href="#mian-shi-ti-02-07-lian-biao-xiang-jiao" class="header-anchor">#</a></h1><h1><span id="142-huan-xing-lian-biao-ii"><span id="head13">🟡142. 环形链表 II</span></span><a href="#142-huan-xing-lian-biao-ii" class="header-anchor">#</a></h1><h1><span id="15-san-shu-zhi-he"><span id="head14">🟡15. 三数之和</span></span><a href="#15-san-shu-zhi-he" class="header-anchor">#</a></h1><h1><span id="18-si-shu-zhi-he"><span id="head15">🟡18. 四数之和</span></span><a href="#18-si-shu-zhi-he" class="header-anchor">#</a></h1>
+        </div>
+
+
+
+    </article>
 </div>
 
             </div>
