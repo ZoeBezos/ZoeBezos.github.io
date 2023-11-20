@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://zoebezos.github.io/2023/06/12/6-12-resume-cn/</loc>
+    <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-cn/</loc>
+    <lastmod>2023-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-en/</loc>
     <lastmod>2023-11-20</lastmod>
   </url>
   <url>
@@ -47,9 +51,5 @@
   <url>
     <loc>https://zoebezos.github.io/2023/08/27/23-8-27-algorithm-array/</loc>
     <lastmod>2023-11-19</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/06/12/6-12-resume-en/</loc>
-    <lastmod>2023-06-13</lastmod>
   </url>
 </urlset> 

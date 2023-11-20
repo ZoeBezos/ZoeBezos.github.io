@@ -2,7 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zoebezos.github.io/2023/06/12/6-12-resume-cn/</loc>
+    <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-cn/</loc>
+    
+    <lastmod>2023-11-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-en/</loc>
     
     <lastmod>2023-11-20</lastmod>
     
@@ -131,15 +140,6 @@
     <loc>https://zoebezos.github.io/tag/index.html</loc>
     
     <lastmod>2023-08-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/06/12/6-12-resume-en/</loc>
-    
-    <lastmod>2023-06-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
