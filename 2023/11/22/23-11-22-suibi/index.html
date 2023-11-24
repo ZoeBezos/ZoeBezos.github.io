@@ -13,7 +13,7 @@
 
 
 
-<title>11/22 should I get a cat or not? | ZOE&#39;s site</title>
+<title>should I get a cat or not? | ZOE&#39;s site</title>
 
 
 
@@ -342,76 +342,11 @@
                 <div class="container">
     
     
-        <div class="post-toc">
-    <div class="tocbot-list">
-    </div>
-    <div class="tocbot-list-menu">
-        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-    </div>
-</div>
-
-<script>
-    var tocbot_timer;
-    var DEPTH_MAX = 6; // 为 6 时展开所有
-    var tocbot_default_config = {
-        tocSelector: '.tocbot-list',
-        contentSelector: '.post-content',
-        headingSelector: 'h1, h2, h3, h4, h5',
-        orderedList: false,
-        scrollSmooth: true,
-        onClick: extend_click,
-    };
-
-    function extend_click() {
-        clearTimeout(tocbot_timer);
-        tocbot_timer = setTimeout(function() {
-            tocbot.refresh(obj_merge(tocbot_default_config, {
-                hasInnerContainers: true
-            }));
-        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
-    }
-
-    document.ready(function() {
-        tocbot.init(obj_merge(tocbot_default_config, {
-            collapseDepth: 1
-        }));
-    });
-
-    function expand_toc() {
-        var b = document.querySelector('.tocbot-toc-expand');
-        var expanded = b.getAttribute('data-expanded');
-        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
-        tocbot.refresh(obj_merge(tocbot_default_config, {
-            collapseDepth: expanded ? 1 : DEPTH_MAX
-        }));
-        b.innerText = expanded ? 'Expand all' : 'Collapse all';
-    }
-
-    function go_top() {
-        window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-    function obj_merge(target, source) {
-        for (var item in source) {
-            if (source.hasOwnProperty(item)) {
-                target[item] = source[item];
-            }
-        }
-        return target;
-    }
-</script>
-    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">11/22 should I get a cat or not?</h1>
+            <h1 class="post-title">should I get a cat or not?</h1>
             
                 <div class="post-meta">
                     
@@ -438,7 +373,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">65</a>                         
+                            <a href="">17</a>                         
                         </span>
                         
                     
@@ -457,18 +392,18 @@
         </header>
 
         <div class="post-content">
-            <h1><span id="shi-fou-ying-gai-yang-yi-zhi-mao">是否应该养一只猫？</span><a href="#shi-fou-ying-gai-yang-yi-zhi-mao" class="header-anchor">#</a></h1><table>
-<thead>
-<tr>
-<th><img src="/2023/11/22/23-11-22-suibi/微信图片_20231122192031.jpg" style="zoom:25%;"></th>
-<th><img src="/2023/11/22/23-11-22-suibi/微信图片_20231122192039.jpg" style="zoom:25%;"></th>
-<th><img src="/2023/11/22/23-11-22-suibi/微信图片_20231122192045.jpg" style="zoom:25%;"></th>
-</tr>
-</thead>
-</table>
-<p>2023年11月21日，也就是昨天，我第一次体会到了撸猫的感觉——彻底改变了我对养猫的看法。</p>
-<p>在此之前，我遇到的猫主要分成两类：家养猫和街边野猫。</p>
-
+            <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Sorry, the password you entered is wrong. Please check it and enter it again." data-whm="Sorry, the current article cannot be checked, but you can still take a look at the decrypted content.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="f71bf7e9271de9b5145282a251b242c81fcda97fc39de104f11771dd1227c683">9ab8eeb89182dbd47bc9c58c85287dafab1f550aa59fc36539a53cf1c54e13569179b4689faff99a9d2e72d9a09e102c1fbbe80be766d47096c771b197f17507076bd86c8e19be5b05507f9f86ce738714ae780b55dc82387ad89d8271227c8f561daa569155b878ce60a5cbc16bcf4de1e9b2d8a60f506ace846230443bc4bce363ff762d52899b6f45fc44ff42aad8aca5e20bfdbfebb99c2bccfbff0f4ca7db39a814c7495f08601c08f9be8b1d6936f08636fe21aa3f2e72ab218f037a8a329291455f9fa42bc091f53f8f36d8366d01293c6fb8557b6bbd2b048e9b768880f643eb4ab9ea357a12bf94954ec5aa5678d9550ac7aa02f953aa8f8225d1d5e3cd26f6aae476383941d3d0e55a80b4a44377df04addd58d5794d3f784d9eef1ac2a80f67a917af457051939d544b9df3e36079049b638fd831f225e20481b72e61c1a64f8da0ba1cdadc0cb06e341199eb9026089277da89308b4307067e2b7c5a64835c4c501292ada22c324bbdf4bc1d21809cb239c772bbb8c633b40ba851d6d3b4ff4d85438dd56ba1d0122cba642f62eedd4d0c69e516e332d5b58f31cbef1c1570b1f6abefda770f693cfc4ba9f83deccea7e01443b11c28199ede039f088216f919cd3548921c7afceb6a322fe9a712cb06a9ddc0745663b0c4e364aa2832616f59eaa5fc2e6542d92ef2d33c623eabb6ef2b078123cce4e7bd71d5217cf2c6d07aba53813ab78e53403ca29dba43c6fcc0ad6290db643012fe799239b051a9632a2024a00df3ce0dfc81492aa27b1125350609a74ae5647978f8352367a9a023d55a8b2f3a2acaa156aad46883a99e68af330264bdc40dfbcd93bf6db6c91e8bc7a1b21534f8c0680a7c199ab9b4259b1ccc62f4c2460e5a720d717ae71aebf6b2598492cd6030b8b3582d0af37afdbc2c673a9a08731a1370450425ba60a24d8f6eaf75544f6054d3ceba6702c55383810f3823da83991d1845d9ef80936624a8b68d08dcfffd1a31e29e68ac46d9fdea0f2e24565fe62eac380c134f6ef7861a2f6aaebe03db3fadcf9497379997254b45c966e2d3fa3ee2a9a76df7a13911149ad84bc71df7a4a113414a18f78542c4b19ec0f51fea24acc0e2729dc1eeb75b1a77b5978991d280df036cbe0822d5b0037c2e5612f0b1eb6730915ba61ddc12607209c420d36c12ed0dd116741c4bb5200ebcd5b42cb127f2b374d6e6a0c5e4a163efe937573503a95116783bbdf7416d37351a6f8207cd11d8f55f258df9fa85710f3f2024eed4921281ef3b7ce70f460df43c5fe5a449a4fc55bea1d411b499a889d9bad166de8079ecba831dd9892b8ae7ec815431318ac08b0bc2a1e5f187e9546547e1bf54346af64cc0807bed7a2d8eb8d0591e5f0059b9f3b7d1ce60cf058950477e70a1b8ba38189b9d17fcd36c3a82ac3412bce84a3ff96a8a025942434d302747f729201ace830e7dd1720173236d5101aed0704354b35fd3582266823a0b4e44fd4d6d68bd1316f48e05b28b7bb4616b3c950191ed41062227b9ece565f1dbc35b2e876b6113482434ef60e6f7510f246d5cf90fd5352b5041f3f7a5667f54a4c6bbc961b5670016137dc5540e6c3148a68fc27bc3ca445e34940f5907fd10e7d48c2274</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">The current article is not visible to the public, please enter the password and check it!</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
         </div>
 
 
