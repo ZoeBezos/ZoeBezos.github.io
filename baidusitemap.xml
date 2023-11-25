@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-en/</loc>
+    <lastmod>2023-11-25</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-cn/</loc>
+    <lastmod>2023-11-25</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2023/11/22/23-11-22-suibi/</loc>
     <lastmod>2023-11-23</lastmod>
   </url>
@@ -15,14 +23,6 @@
   <url>
     <loc>https://zoebezos.github.io/2023/08/21/%E3%80%8A%E4%B8%89%E4%BD%93%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</loc>
     <lastmod>2023-11-21</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-cn/</loc>
-    <lastmod>2023-11-20</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-en/</loc>
-    <lastmod>2023-11-20</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2023/09/22/23-11-19-algorithm-bitree/</loc>
