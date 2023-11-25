@@ -206,13 +206,6 @@
     <priority>0.2</priority>
   </url>
   
-  <url>
-    <loc>https://zoebezos.github.io/tags/resume/</loc>
-    <lastmod>2023-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
 
   
   <url>
@@ -224,13 +217,6 @@
   
   <url>
     <loc>https://zoebezos.github.io/categories/thoughts/</loc>
-    <lastmod>2023-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/categories/private/</loc>
     <lastmod>2023-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
