@@ -2,6 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zoebezos.github.io/2023/11/26/test2/</loc>
+    
+    <lastmod>2023-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/11/26/test1/</loc>
+    
+    <lastmod>2023-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/08/27/23-8-27-algorithm-array/</loc>
+    
+    <lastmod>2023-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/algorithm/index.html</loc>
+    
+    <lastmod>2023-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-en/</loc>
     
     <lastmod>2023-11-25</lastmod>
@@ -66,15 +102,6 @@
   
   <url>
     <loc>https://zoebezos.github.io/2023/09/21/23-11-19-algorithm-stackandqueue/</loc>
-    
-    <lastmod>2023-11-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/algorithm/index.html</loc>
     
     <lastmod>2023-11-19</lastmod>
     
@@ -155,15 +182,6 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/2023/08/27/23-8-27-algorithm-array/</loc>
-    
-    <lastmod>2023-11-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://zoebezos.github.io/category/index.html</loc>
     
     <lastmod>2023-08-04</lastmod>
@@ -214,7 +232,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/tags/ressume/</loc>
+    <loc>https://zoebezos.github.io/tags/algorithm-array/</loc>
     <lastmod>2023-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
