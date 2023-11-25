@@ -2,16 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zoebezos.github.io/2023/11/26/test2/</loc>
-    
-    <lastmod>2023-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/11/26/test1/</loc>
+    <loc>https://zoebezos.github.io/2023/11/26/23-11-26-836-rectangle-overlap/</loc>
     
     <lastmod>2023-11-25</lastmod>
     
@@ -232,7 +223,14 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/tags/algorithm-array/</loc>
+    <loc>https://zoebezos.github.io/tags/algorithm-geometry/</loc>
+    <lastmod>2023-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/tags/algorithm-math/</loc>
     <lastmod>2023-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
