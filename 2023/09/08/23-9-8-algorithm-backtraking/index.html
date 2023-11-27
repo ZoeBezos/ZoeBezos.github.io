@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zoe">
+
+
+
+
+
+<title>8. Back Traking | ZOE&#39;s site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+    <script src="/js/jquery-3.7.0.min.js"></script>
+    
+    <script src="/js/mathjax2.7.5.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<!-- 搜索的部分 -->
+
+
+
+    <script>
+    // function searchToggle() {
+    //     const width = $(document.body).width()
+    //     if(width > 479) {
+    //         return;
+    //     }
+    //     const search = $('.search');
+    //     const searchForm = $('.form-search')
+
+    //     if(!search.hasClass("mobile-search")) {
+    //         search.addClass("mobile-search");
+    //     } else {
+    //         search.removeClass("mobile-search");
+    //     } 
+    // }
+
+    function searchToggle() {
+        const width = $(document.body).width()
+        if(width > 479) {
+            return;
+        }
+        const search = $('.search');
+        const searchForm = $('.form-search');
+        const menuToggle = $('.menu-toggle');
+        const title = $('.navbar-header-title ');
+
+        if(!search.hasClass("mobile-search")) {
+            search.addClass("mobile-search");
+            menuToggle.addClass("open-search")
+            title.addClass("mobile-title-hidden")
+        } else {
+            search.removeClass("mobile-search");
+            menuToggle.removeClass("open-search")
+            // title.css({visibility: 'visible'})
+            title.removeClass("mobile-title-hidden")
+        } 
+    }
+
+
+
+    function search(searchInputEl, formEl, flag) {
+        const path = "/" + "search.json"; // 可以在public 下查看这个search.json
+        $(formEl).submit(function(e){
+            e.preventDefault();
+            let target = null
+            if(searchInputEl == null) {
+                const screenWidth = $(document.body).width();
+                target = screenWidth > 479 ? $('#pc-search-input') : $('#mobile-search-input');
+                console.log(target);
+            } else {
+                target = $(searchInputEl)
+            }
+
+            if(!flag && target.val() === '') {
+                return ;
+            }
+
+            $("#u-search").fadeIn(500, function() {
+                $("body > .wrapper").addClass("modal-active");
+
+                $.ajax({
+                    url: path,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        $input = target.val();
+                        $(".form-input").val($input);
+                        const loadingBar = $('.search-loading-bar') 
+                        loadingBar.css({
+                            width:'100%',
+                            display: 'block'
+                        });
+                    },
+                    success: function( datas ) {
+                        console.log(datas);
+                        const $resultPanel = $(".modal-body")[0];
+                        let str = `<ul class="modal-results">`;
+                        var keywords = $(".form-input").val().trim().toLowerCase().split(/[\s\-]+/);
+                        $resultPanel.innerHTML = "";
+                        let hasResult = false
+                        let text = `<div class="no-result">找不到与关键词相关的内容....</div>`;
+
+                        if ($(".form-input").val().trim().length <= 0) {
+                            // 没有结果
+                            $resultPanel.innerHTML = text;
+                            return;
+                        }
+                        datas.forEach(function (data, index) {
+                            var isMatch = true;
+                            if (!data.title || data.title.trim() === '') {
+                                data.title = "Untitled";
+                            }
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content && data.content.trim().replace(/<[^>]+>/g, "").toLowerCase() || '';
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty contents
+                            if (data_content !== '') {
+                                keywords.forEach(function (keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        hasResult = true
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            } else {
+                                isMatch = false;
+                            }
+                            // show search results
+                            if (isMatch) {
+                                str += `<li class='result-item'><a href='${data_url}' class='result-item-detail'> <span class="title">${data_title}</span>`;
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 200 characters
+                                    var start = first_occur - 40;
+                                    var end = first_occur + 160;
+
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+
+                                    if (start == 0) {
+                                        end = 200;
+                                    }
+
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+
+                                    var match_content = content.substring(start, end);
+
+                                    // highlight all keywords
+                                    keywords.forEach(function (keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, `<em class="search-keyword">${keyword}</em>`);
+                                    });
+
+                                    str += `<span class="content"> ${match_content} ...</span></a>`;
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        if(hasResult) {
+                            $resultPanel.innerHTML = str;
+                        } else {
+                            $resultPanel.innerHTML = text;
+                        }
+
+                    },
+                    complete: function() {
+                        setTimeout(() => {
+                                const loadingBar = $('.search-loading-bar') 
+                                loadingBar.css({
+                                    width:'0%',
+                                    display: 'none'
+                                });
+                        }, 300)
+                    }
+                });
+            })
+
+        });
+    }
+
+    $(document).ready(function() {
+        $('.modal-close').click(function () { 
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+
+        $('.modal-overlay').click(function() {
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+        search(null, ".form-search", false)
+        search("#u-search-modal-form .form-input", ".u-search-modal-form", true)
+    })
+</script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                // pagebody.classList.add('dark-theme');
+                // mobile
+                // document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <!-- <div class="navbar-header header-logo"><a href="/">ZOE&#39;s site</a></div> -->
+            <div class="navbar-header header-logo"><a href="/"><i class="iconfont icon-zhuye" style="font-size: 1em;"></i>ZOE&#39;s site</a></div>
+            <div class="menu navbar-right">
+                <!-- 这里表示的是pc端搜索框 -->
+                
+                
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="pc-search-input"/>
+        </form>
+    </div>
+
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <!-- <label for="switch_default" class="toggleBtn"></label> -->
+            </div>
+        </div>
+    </nav>
+    
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ZOE&#39;s site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="navbar-mobile-right">
+                    
+                    
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="mobile-search-input"/>
+        </form>
+    </div>
+
+                    <!-- <div class="menu-toggle" onclick="mobileBtn()">&#9776; menu</div> -->
+                </div>
+    
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">8. Back Traking</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">September 8, 2023&nbsp;&nbsp;20:20:41</a>
+                        </span>
+                    
+                    
+
+                        <span class="post-category">                        
+                            Category:                        
+                                                    
+                            <a href="/categories/algorithm/">algorithm</a>
+                            
+                        </span>
+
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">4.5k</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">22min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <table>
+<thead>
+<tr>
+<th align="center">分类</th>
+<th>编号</th>
+<th align="center">是否完成</th>
+<th align="left">题号</th>
+<th>标签</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><a href="#head1"> 组合</a></td>
+<td>1</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head2">🟡77. 组合</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td>2</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head3"> 🟡17.电话号码的字母组合</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td></td>
+<td align="center">✅</td>
+<td align="left"><a href="#head22">🟡216. 组合总和 III</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td>3</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head4"> 🟡39.组合总和</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td>4</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head5">🟡40. 组合总和 II</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"><a href="#head7"> 分割</a></td>
+<td>5</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head8">🟡131. 分割回文串</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td>6</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head9">🟡93. 复原 IP 地址</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"><a href="#head10"> 子集</a></td>
+<td>7</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head11">🟡78. 子集</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td>8</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head12">🟡90. 子集 II</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td>9</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head13">🟡491. 递增子序列</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"><a href="#head14"> 排列</a></td>
+<td>10</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head15"> 🟡46.全排列</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td>11</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head16">🟡47. 全排列 II</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"><a href="#head17"> 棋盘问题</a></td>
+<td>12</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head18">🟠51. N 皇后</a></td>
+<td>回溯</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td>13</td>
+<td align="center">✅</td>
+<td align="left"><a href="#head19">🟠37. 解数独</a></td>
+<td>二维回溯</td>
+</tr>
+<tr>
+<td align="center"><a href="#head20"> 其他</a></td>
+<td>14</td>
+<td align="center"></td>
+<td align="left"><a href="#head21">🟠332. 重新安排行程</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1><span id="zu-he"><span id="head1"> 组合</span></span><a href="#zu-he" class="header-anchor">#</a></h1><h2><span id="77-zu-he"><span id="head2">🟡77. 组合</span></span><a href="#77-zu-he" class="header-anchor">#</a></h2><blockquote>
+<p>给定两个整数 <code>n</code> 和 <code>k</code>，返回范围 <code>[1, n]</code> 中所有可能的 <code>k</code> 个数的组合。</p>
+<p>你可以按 <strong>任何顺序</strong> 返回答案。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 4, k = 2</span><br><span class="line">输出：</span><br><span class="line">[</span><br><span class="line">[2,4],</span><br><span class="line">[3,4],</span><br><span class="line">[2,3],</span><br><span class="line">[1,2],</span><br><span class="line">[1,3],</span><br><span class="line">[1,4],</span><br><span class="line">]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 1, k = 1</span><br><span class="line">输出：[[1]]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 20</code></li>
+<li><code>1 &lt;= k &lt;= n</code></li>
+</ul>
+<p>Related Topics</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt; path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">combine</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> k)</span> {</span><br><span class="line">        backtracking(n,k,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtracking</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> k, <span class="type">int</span> num)</span> {</span><br><span class="line">        <span class="keyword">if</span> (path.size()==k) {</span><br><span class="line">            res.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=num;i&lt;=n;i++) {</span><br><span class="line">            path.add(i);</span><br><span class="line">            backtracking(n,k,i+<span class="number">1</span>); <span class="comment">// 递归</span></span><br><span class="line">            path.removeLast();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="17-dian-hua-hao-ma-de-zi-mu-zu-he"><span id="head3"> 🟡17.电话号码的字母组合</span></span><a href="#17-dian-hua-hao-ma-de-zi-mu-zu-he" class="header-anchor">#</a></h2><blockquote>
+<p>给定一个仅包含数字 <code>2-9</code> 的字符串，返回所有它能表示的字母组合。答案可以按 <strong>任意顺序</strong> 返回。</p>
+<p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/11/09/200px-telephone-keypad2svg.png" alt="img"></p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：digits = "23"</span><br><span class="line">输出：["ad","ae","af","bd","be","bf","cd","ce","cf"]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：digits = ""</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：digits = "2"</span><br><span class="line">输出：["a","b","c"]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= digits.length &lt;= 4</code></li>
+<li><code>digits[i]</code> 是范围 <code>['2', '9']</code> 的一个数字。</li>
+</ul>
+<p>Related Topics</p>
+<p>哈希表</p>
+<p>字符串</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;String&gt; res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    StringBuilder path=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    String[]string={<span class="string">"abc"</span>,<span class="string">"def"</span>,<span class="string">"ghi"</span>,<span class="string">"jkl"</span>,<span class="string">"mno"</span>,<span class="string">"pqrs"</span>,<span class="string">"tuv"</span>,<span class="string">"wxyz"</span>};</span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; <span class="title function_">letterCombinations</span><span class="params">(String digits)</span> {</span><br><span class="line">        <span class="keyword">if</span>(digits.length()==<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        }</span><br><span class="line">        backtraking(<span class="number">0</span>,digits);<span class="comment">//</span></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtraking</span><span class="params">(<span class="type">int</span> num,String digits)</span>{<span class="comment">//</span></span><br><span class="line">        <span class="keyword">if</span>(path.length()==digits.length()){</span><br><span class="line">            res.add(path.toString());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; string[digits.charAt(num)-<span class="string">'2'</span>].length(); i++) {<span class="comment">//</span></span><br><span class="line">            path.append(string[digits.charAt(num)-<span class="string">'2'</span>].charAt(i));<span class="comment">//</span></span><br><span class="line">            backtraking(num+<span class="number">1</span>,digits);<span class="comment">//</span></span><br><span class="line">            path.deleteCharAt(path.length()-<span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="216-zu-he-zong-he-iii"><span id="head22"> 🟡216. 组合总和 III</span></span><a href="#216-zu-he-zong-he-iii" class="header-anchor">#</a></h2><blockquote>
+<p>找出所有相加之和为 <code>n</code> 的 <code>k</code> 个数的组合，且满足下列条件：</p>
+<ul>
+<li>只使用数字1到9</li>
+<li>每个数字 <strong>最多使用一次</strong></li>
+</ul>
+<p>返回 <em>所有可能的有效组合的列表</em> 。该列表不能包含相同的组合两次，组合可以以任何顺序返回。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: k = 3, n = 7</span><br><span class="line">输出: [[1,2,4]]</span><br><span class="line">解释:</span><br><span class="line">1 + 2 + 4 = 7</span><br><span class="line">没有其他符合的组合了。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入: k = 3, n = 9</span><br><span class="line">输出: [[1,2,6], [1,3,5], [2,3,4]]</span><br><span class="line">解释:</span><br><span class="line">1 + 2 + 6 = 9</span><br><span class="line">1 + 3 + 5 = 9</span><br><span class="line">2 + 3 + 4 = 9</span><br><span class="line">没有其他符合的组合了。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: k = 4, n = 1</span><br><span class="line">输出: []</span><br><span class="line">解释: 不存在有效的组合。</span><br><span class="line">在[1,9]范围内使用4个不同的数字，我们可以得到的最小和是1+2+3+4 = 10，因为10 &gt; 1，没有有效的组合。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示:</strong></p>
+<ul>
+<li><code>2 &lt;= k &lt;= 9</code></li>
+<li><code>1 &lt;= n &lt;= 60</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt;path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">combinationSum3</span><span class="params">(<span class="type">int</span> k, <span class="type">int</span> n)</span> {</span><br><span class="line">        backtracking(k,n,<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtracking</span><span class="params">(<span class="type">int</span> k,<span class="type">int</span> n,<span class="type">int</span> start,<span class="type">int</span> sum)</span>{</span><br><span class="line">        <span class="keyword">if</span>(path.size()==k&amp;&amp;sum==n){</span><br><span class="line">            res.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start; i &lt;= <span class="number">9</span>; i++) {</span><br><span class="line">            path.add(i);</span><br><span class="line">            sum+=i;</span><br><span class="line">            backtracking(k,n,i+<span class="number">1</span>,sum);</span><br><span class="line">            path.removeLast();</span><br><span class="line">            sum-=i;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="39-zu-he-zong-he"><span id="head4"> 🟡39.组合总和</span></span><a href="#39-zu-he-zong-he" class="header-anchor">#</a></h2><blockquote>
+<p>给你一个 <strong>无重复元素</strong> 的整数数组 <code>candidates</code> 和一个目标整数 <code>target</code> ，找出 <code>candidates</code> 中可以使数字和为目标数 <code>target</code> 的 所有 <strong>不同组合</strong> ，并以列表形式返回。你可以按 <strong>任意顺序</strong> 返回这些组合。</p>
+<p><code>candidates</code> 中的 <strong>同一个</strong> 数字可以 <strong>无限制重复被选取</strong> 。如果至少一个数字的被选数量不同，则两种组合是不同的。</p>
+<p>对于给定的输入，保证和为 <code>target</code> 的不同组合数少于 <code>150</code> 个。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：candidates = [2,3,6,7], target = 7</span><br><span class="line">输出：[[2,2,3],[7]]</span><br><span class="line">解释：</span><br><span class="line">2 和 3 可以形成一组候选，2 + 2 + 3 = 7 。注意 2 可以使用多次。</span><br><span class="line">7 也是一个候选， 7 = 7 。</span><br><span class="line">仅有这两种组合。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: candidates = [2,3,5], target = 8</span><br><span class="line">输出: [[2,2,2,2],[2,3,3],[3,5]]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: candidates = [2], target = 1</span><br><span class="line">输出: []</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= candidates.length &lt;= 30</code></li>
+<li><code>2 &lt;= candidates[i] &lt;= 40</code></li>
+<li><code>candidates</code> 的所有元素 <strong>互不相同</strong></li>
+<li><code>1 &lt;= target &lt;= 40</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt; path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">combinationSum</span><span class="params">(<span class="type">int</span>[] candidates, <span class="type">int</span> target)</span>{</span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        backtracking(candidates,target,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtracking</span><span class="params">(<span class="type">int</span>[] candidates,<span class="type">int</span> target,<span class="type">int</span> start,<span class="type">int</span> sum)</span>{</span><br><span class="line">        <span class="keyword">if</span>(sum==target) {</span><br><span class="line">            res.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start; i &lt; candidates.length ; i++) {</span><br><span class="line">            <span class="keyword">if</span>(sum+candidates[i]&gt;target){</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }</span><br><span class="line">            path.add(candidates[i]);</span><br><span class="line">            backtracking(candidates,target,i,sum+candidates[i]);</span><br><span class="line">            path.removeLast();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="40-zu-he-zong-he-ii"><span id="head5">🟡40. 组合总和 II</span></span><a href="#40-zu-he-zong-he-ii" class="header-anchor">#</a></h2><blockquote>
+<p>给定一个候选人编号的集合 <code>candidates</code> 和一个目标数 <code>target</code> ，找出 <code>candidates</code> 中所有可以使数字和为 <code>target</code> 的组合。</p>
+<p><code>candidates</code> 中的每个数字在每个组合中只能使用 <strong>一次</strong> 。</p>
+<p><strong>注意：</strong>解集不能包含重复的组合。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入: candidates = [10,1,2,7,6,1,5], target = 8,</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">[1,1,6],</span><br><span class="line">[1,2,5],</span><br><span class="line">[1,7],</span><br><span class="line">[2,6]</span><br><span class="line">]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: candidates = [2,5,2,1,2], target = 5,</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">[1,2,2],</span><br><span class="line">[5]</span><br><span class="line">]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示:</strong></p>
+<ul>
+<li><code>1 &lt;= candidates.length &lt;= 100</code></li>
+<li><code>1 &lt;= candidates[i] &lt;= 50</code></li>
+<li><code>1 &lt;= target &lt;= 30</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;List&lt;Integer&gt; &gt; res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt; path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">combinationSum2</span><span class="params">(<span class="type">int</span>[] candidates, <span class="type">int</span> target)</span>{</span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        backtracking(candidates,target,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtracking</span><span class="params">(<span class="type">int</span>[] candidates,<span class="type">int</span> target,<span class="type">int</span> start,<span class="type">int</span> sum)</span>{</span><br><span class="line">        <span class="keyword">if</span>(sum==target) {</span><br><span class="line">            res.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start; i &lt; candidates.length ; i++) {</span><br><span class="line">            <span class="keyword">if</span>(sum+candidates[i]&gt;target){</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(i&gt;start&amp;&amp;candidates[i]==candidates[i-<span class="number">1</span>]){<span class="comment">//key：同一层的树节点去重</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            path.add(candidates[i]);</span><br><span class="line">            sum+=candidates[i];</span><br><span class="line">            backtracking(candidates,target,i+<span class="number">1</span>,sum);</span><br><span class="line">            path.removeLast();</span><br><span class="line">            sum-=candidates[i];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="131-fen-ge-hui-wen-chuan"><span id="head8">🟡131. 分割回文串</span></span><a href="#131-fen-ge-hui-wen-chuan" class="header-anchor">#</a></h2><blockquote>
+<p>给你一个字符串 <code>s</code>，请你将 <code>s</code> 分割成一些子串，使每个子串都是 <strong>回文串</strong> 。返回 <code>s</code> 所有可能的分割方案。</p>
+<p><strong>回文串</strong> 是正着读和反着读都一样的字符串。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "aab"</span><br><span class="line">输出：[["a","a","b"],["aa","b"]]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "a"</span><br><span class="line">输出：[["a"]]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 16</code></li>
+<li><code>s</code> 仅由小写英文字母组成</li>
+</ul>
+<p>Related Topics</p>
+<p>字符串</p>
+<p>动态规划</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;List&lt;String&gt;&gt; res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;String&gt; path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="title function_">partition</span><span class="params">(String s)</span> {</span><br><span class="line">        <span class="keyword">if</span>(s.length()==<span class="number">1</span>){</span><br><span class="line">            path.add(s);</span><br><span class="line">            res.add(path);</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        }</span><br><span class="line">        backtraking(<span class="number">0</span>,s);<span class="comment">//</span></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtraking</span><span class="params">(<span class="type">int</span> start,String s)</span>{<span class="comment">//</span></span><br><span class="line">        <span class="keyword">if</span>(start==s.length()){</span><br><span class="line">            res.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start+<span class="number">1</span>; i &lt;= s.length(); i++) {<span class="comment">//</span></span><br><span class="line">            <span class="keyword">if</span>(isHuiWen(s.substring(start,i))){</span><br><span class="line">                path.add(s.substring(start,i));<span class="comment">//</span></span><br><span class="line">                backtraking(i,s);<span class="comment">//</span></span><br><span class="line">                path.removeLast();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">isHuiWen</span><span class="params">(String str)</span>{</span><br><span class="line">        <span class="type">int</span> i=<span class="number">0</span>,j=str.length()-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(j==<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(j&lt;<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j){</span><br><span class="line">            <span class="keyword">if</span>(str.charAt(i)!=str.charAt(j)){</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">            i++;</span><br><span class="line">            j--;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="93-fu-yuan-ip-di-zhi"><span id="head9">🟡93. 复原 IP 地址</span></span><a href="#93-fu-yuan-ip-di-zhi" class="header-anchor">#</a></h2><blockquote>
+<p><strong>有效 IP 地址</strong> 正好由四个整数（每个整数位于 <code>0</code> 到 <code>255</code> 之间组成，且不能含有前导 <code>0</code>），整数之间用 <code>'.'</code> 分隔。</p>
+<ul>
+<li>例如：<code>"0.1.2.201"</code> 和<code> "192.168.1.1"</code> 是 <strong>有效</strong> IP 地址，但是 <code>"0.011.255.245"</code>、<code>"192.168.1.312"</code> 和 <code>"192.168@1.1"</code> 是 <strong>无效</strong> IP 地址。</li>
+</ul>
+<p>给定一个只包含数字的字符串 <code>s</code> ，用以表示一个 IP 地址，返回所有可能的<strong>有效 IP 地址</strong>，这些地址可以通过在 <code>s</code> 中插入 <code>'.'</code> 来形成。你 <strong>不能</strong> 重新排序或删除 <code>s</code> 中的任何数字。你可以按 <strong>任何</strong> 顺序返回答案。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "25525511135"</span><br><span class="line">输出：["255.255.11.135","255.255.111.35"]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "0000"</span><br><span class="line">输出：["0.0.0.0"]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "101023"</span><br><span class="line">输出：["1.0.10.23","1.0.102.3","10.1.0.23","10.10.2.3","101.0.2.3"]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 20</code></li>
+<li><code>s</code> 仅由数字组成</li>
+</ul>
+<p>Related Topics</p>
+<p>字符串</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;String&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt;path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; <span class="title function_">restoreIpAddresses</span><span class="params">(String s)</span> {</span><br><span class="line">        backtraking(<span class="number">0</span>,s);<span class="comment">//</span></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtraking</span><span class="params">(<span class="type">int</span> start,String s)</span>{<span class="comment">//</span></span><br><span class="line">        <span class="keyword">if</span>(path.size()==<span class="number">4</span>&amp;&amp;start==s.length()){</span><br><span class="line">            res.add(build((path)));<span class="comment">//</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(path.size()&gt;<span class="number">4</span>){</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start+<span class="number">1</span>; i &lt;=s.length(); i++) {</span><br><span class="line">            <span class="keyword">if</span>(s.substring(start,i).length()&gt;<span class="number">1</span>&amp;&amp;s.substring(start,i).charAt(<span class="number">0</span>)==<span class="string">'0'</span>){</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="type">int</span> temp=convert(s.substring(start,i));</span><br><span class="line">            <span class="keyword">if</span>(temp&lt;=<span class="number">255</span>&amp;&amp;temp&gt;=<span class="number">0</span>){</span><br><span class="line">                path.add(temp);</span><br><span class="line">                backtraking(i,s);</span><br><span class="line">                path.removeLast();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    String <span class="title function_">build</span><span class="params">(LinkedList&lt;Integer&gt; al)</span>{</span><br><span class="line">        StringBuilder sb=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        sb.append(al.get(<span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; <span class="number">4</span>; i++) {</span><br><span class="line">            sb.append(<span class="string">'.'</span>);</span><br><span class="line">            sb.append(al.get(i));</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    }</span><br><span class="line">    <span class="type">int</span> <span class="title function_">convert</span><span class="params">(String str)</span>{</span><br><span class="line">        <span class="type">int</span> out=<span class="number">0</span>,k=<span class="number">1</span>,i=str.length()-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&gt;=<span class="number">0</span>){</span><br><span class="line">            out+=k*(str.charAt(i)-<span class="string">'0'</span>);</span><br><span class="line">            k*=<span class="number">10</span>;</span><br><span class="line">            i--;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> out;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="zi-ji"><span id="head10"> 子集</span></span><a href="#zi-ji" class="header-anchor">#</a></h1><h2><span id="78-zi-ji"><span id="head11">🟡78. 子集</span></span><a href="#78-zi-ji" class="header-anchor">#</a></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code> ，数组中的元素 <strong>互不相同</strong> 。返回该数组所有可能的子集（幂集）。</p>
+<p>解集 <strong>不能</strong> 包含重复的子集。你可以按 <strong>任意顺序</strong> 返回解集。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3]</span><br><span class="line">输出：[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0]</span><br><span class="line">输出：[[],[0]]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 10</code></li>
+<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
+<li><code>nums</code> 中的所有元素 <strong>互不相同</strong></li>
+</ul>
+<p>Related Topics</p>
+<p>位运算</p>
+<p>数组</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt;path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">subsets</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        backtraking(<span class="number">0</span>,nums);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtraking</span><span class="params">(<span class="type">int</span> start,<span class="type">int</span>[]nums)</span>{</span><br><span class="line">        res.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(path));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start; i &lt; nums.length; i++) {</span><br><span class="line">            path.add(nums[i]);</span><br><span class="line">            backtraking(i+<span class="number">1</span>,nums);</span><br><span class="line">            path.removeLast();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2><span id="90-zi-ji-ii"><span id="head12">🟡90. 子集 II</span></span><a href="#90-zi-ji-ii" class="header-anchor">#</a></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code> ，其中可能包含重复元素，请你返回该数组所有可能的子集（幂集）。</p>
+<p>解集 <strong>不能</strong> 包含重复的子集。返回的解集中，子集可以按 <strong>任意顺序</strong> 排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,2]</span><br><span class="line">输出：[[],[1],[1,2],[1,2,2],[2],[2,2]]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0]</span><br><span class="line">输出：[[],[0]]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 10</code></li>
+<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
+</ul>
+<p>Related Topics</p>
+<p>位运算</p>
+<p>数组</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt; path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">subsetsWithDup</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        backtraking(<span class="number">0</span>,nums);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtraking</span><span class="params">(<span class="type">int</span> start,<span class="type">int</span>[]nums)</span>{</span><br><span class="line">        res.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(path));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(i&gt;start&amp;&amp;nums[i]==nums[i-<span class="number">1</span>]){</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            path.add(nums[i]);</span><br><span class="line">            backtraking(i+<span class="number">1</span>,nums);</span><br><span class="line">            path.removeLast();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="491-di-zeng-zi-xu-lie"><span id="head13">🟡491. 递增子序列</span></span><a href="#491-di-zeng-zi-xu-lie" class="header-anchor">#</a></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code> ，找出并返回所有该数组中不同的递增子序列，递增子序列中 <strong>至少有两个元素</strong> 。你可以按 <strong>任意顺序</strong> 返回答案。</p>
+<p>数组中可能含有重复元素，如出现两个整数相等，也可以视作递增序列的一种特殊情况。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [4,6,7,7]</span><br><span class="line">输出：[[4,6],[4,6,7],[4,6,7,7],[4,7],[4,7,7],[6,7],[6,7,7],[7,7]]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [4,4,3,2,1]</span><br><span class="line">输出：[[4,4]]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 15</code></li>
+<li><code>-100 &lt;= nums[i] &lt;= 100</code></li>
+</ul>
+<p>Related Topics</p>
+<p>位运算</p>
+<p>数组</p>
+<p>哈希表</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt; path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    Set&lt;String&gt;set=<span class="keyword">new</span> <span class="title class_">TreeSet</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">findSubsequences</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        backtraking(<span class="number">0</span>,nums);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtraking</span><span class="params">(<span class="type">int</span> start,<span class="type">int</span>[]nums)</span>{</span><br><span class="line">        <span class="keyword">if</span>(check(path)&amp;&amp;!set.contains(path.toString())){</span><br><span class="line">            res.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(path));</span><br><span class="line">            set.add(path.toString());</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(i&gt;start&amp;&amp;nums[i]==nums[i-<span class="number">1</span>]){</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            path.add(nums[i]);</span><br><span class="line">            backtraking(i+<span class="number">1</span>,nums);</span><br><span class="line">            path.removeLast();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">check</span><span class="params">(List&lt;Integer&gt;al)</span>{</span><br><span class="line">        <span class="keyword">if</span>(al.size()&lt;<span class="number">2</span>){</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; al.size(); i++) {</span><br><span class="line">            <span class="keyword">if</span>(al.get(i)&lt;al.get(i-<span class="number">1</span>)){</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="pai-lie"><span id="head14"> 排列</span></span><a href="#pai-lie" class="header-anchor">#</a></h1><h2><span id="46-quan-pai-lie"><span id="head15"> 🟡46.全排列</span></span><a href="#46-quan-pai-lie" class="header-anchor">#</a></h2><blockquote>
+<p>给定一个不含重复数字的数组 <code>nums</code> ，返回其 <em>所有可能的全排列</em> 。你可以 <strong>按任意顺序</strong> 返回答案。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3]</span><br><span class="line">输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,1]</span><br><span class="line">输出：[[0,1],[1,0]]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1]</span><br><span class="line">输出：[[1]]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 6</code></li>
+<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
+<li><code>nums</code> 中的所有整数 <strong>互不相同</strong></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt;path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="type">boolean</span>[] used;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">permute</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        <span class="keyword">if</span>(len==<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        }</span><br><span class="line">        used=<span class="keyword">new</span> <span class="title class_">boolean</span>[len];</span><br><span class="line">        backtraking(nums);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtraking</span><span class="params">(<span class="type">int</span>[]nums)</span>{</span><br><span class="line">        <span class="keyword">if</span>(path.size()==nums.length){</span><br><span class="line">            res.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(used[i]){</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            path.add(nums[i]);</span><br><span class="line">            used[i]=<span class="literal">true</span>;</span><br><span class="line">            backtraking(nums);</span><br><span class="line">            path.removeLast();</span><br><span class="line">            used[i]=<span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2><span id="47-quan-pai-lie-ii"><span id="head16">🟡47. 全排列 II</span></span><a href="#47-quan-pai-lie-ii" class="header-anchor">#</a></h2><blockquote>
+<p>给定一个可包含重复数字的序列 <code>nums</code> ，<em><strong>按任意顺序</strong></em> 返回所有不重复的全排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,1,2]</span><br><span class="line">输出：</span><br><span class="line">[[1,1,2],</span><br><span class="line">[1,2,1],</span><br><span class="line">[2,1,1]]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3]</span><br><span class="line">输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 8</code></li>
+<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt;path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    Set&lt;String&gt;set=<span class="keyword">new</span> <span class="title class_">TreeSet</span>&lt;&gt;();</span><br><span class="line">    <span class="type">boolean</span>[] used;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">permuteUnique</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        <span class="keyword">if</span>(len==<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        }</span><br><span class="line">        used=<span class="keyword">new</span> <span class="title class_">boolean</span>[len];</span><br><span class="line">        backtraking(nums);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtraking</span><span class="params">(<span class="type">int</span>[]nums)</span>{</span><br><span class="line">        <span class="keyword">if</span>(path.size()==nums.length&amp;&amp;!set.contains(path.toString())){</span><br><span class="line">            res.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(path));</span><br><span class="line">            set.add(path.toString());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(used[i]){</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            path.add(nums[i]);</span><br><span class="line">            used[i]=<span class="literal">true</span>;</span><br><span class="line">            backtraking(nums);</span><br><span class="line">            path.removeLast();</span><br><span class="line">            used[i]=<span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h1><span id="qi-pan-wen-ti"><span id="head17"> 棋盘问题</span></span><a href="#qi-pan-wen-ti" class="header-anchor">#</a></h1><h2><span id="51-n-huang-hou"><span id="head18">🟠51. N 皇后</span></span><a href="#51-n-huang-hou" class="header-anchor">#</a></h2><blockquote>
+<p>按照国际象棋的规则，皇后可以攻击与之处在同一行或同一列或同一斜线上的棋子。</p>
+<p><strong>n 皇后问题</strong> 研究的是如何将 <code>n</code> 个皇后放置在 <code>n×n</code> 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
+<p>给你一个整数 <code>n</code> ，返回所有不同的 <strong>n 皇后问题</strong> 的解决方案。</p>
+<p>每一种解法包含一个不同的 <strong>n 皇后问题</strong> 的棋子放置方案，该方案中 <code>'Q'</code> 和 <code>'.'</code> 分别代表了皇后和空位。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/13/queens.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 4</span><br><span class="line">输出：[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]</span><br><span class="line">解释：如上图所示，4 皇后问题存在两个不同的解法。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 1</span><br><span class="line">输出：[["Q"]]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 9</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>回溯</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;List&lt;String&gt;&gt; res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;String&gt; path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="title function_">solveNQueens</span><span class="params">(<span class="type">int</span> n)</span> {</span><br><span class="line">        backtraking(<span class="number">0</span>,n);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtraking</span><span class="params">(<span class="type">int</span> start,<span class="type">int</span> n)</span>{</span><br><span class="line">        <span class="keyword">if</span>(path.size()==n){</span><br><span class="line">            res.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(path));</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) {</span><br><span class="line">            <span class="type">boolean</span> flag=<span class="literal">true</span>;<span class="comment">//</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; path.size(); j++) {</span><br><span class="line">                <span class="type">int</span> index=path.get(j).indexOf(<span class="string">'Q'</span>);</span><br><span class="line">                <span class="keyword">if</span>(index==i){</span><br><span class="line">                    flag=<span class="literal">false</span>;</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">if</span>(Math.abs(index-i)==Math.abs(j- path.size())){</span><br><span class="line">                    flag=<span class="literal">false</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(flag){</span><br><span class="line">                path.add(build(n,i));</span><br><span class="line">                backtraking(i+<span class="number">1</span>,n);</span><br><span class="line">                path.removeLast();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    String <span class="title function_">build</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> k)</span>{</span><br><span class="line">        StringBuilder sb=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) {</span><br><span class="line">            <span class="keyword">if</span>(i==k){</span><br><span class="line">                sb.append(<span class="string">"Q"</span>);</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                sb.append(<span class="string">"."</span>);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2><span id="37-jie-shu-du"><span id="head19">🟠37. 解数独</span></span><a href="#37-jie-shu-du" class="header-anchor">#</a></h2><blockquote>
+<p>编写一个程序，通过填充空格来解决数独问题。</p>
+<p>数独的解法需 <strong>遵循如下规则</strong>：</p>
+<ol>
+<li>数字 <code>1-9</code> 在每一行只能出现一次。</li>
+<li>数字 <code>1-9</code> 在每一列只能出现一次。</li>
+<li>数字 <code>1-9</code> 在每一个以粗实线分隔的 <code>3x3</code> 宫内只能出现一次。（请参考示例图）</li>
+</ol>
+<p>数独部分空格内已填入了数字，空白格用 <code>'.'</code> 表示。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2023/09/08/23-9-8-algorithm-backtraking/250px-sudoku-by-l2g-20050714svg.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：board = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]</span><br><span class="line">输出：[["5","3","4","6","7","8","9","1","2"],["6","7","2","1","9","5","3","4","8"],["1","9","8","3","4","2","5","6","7"],["8","5","9","7","6","1","4","2","3"],["4","2","6","8","5","3","7","9","1"],["7","1","3","9","2","4","8","5","6"],["9","6","1","5","3","7","2","8","4"],["2","8","7","4","1","9","6","3","5"],["3","4","5","2","8","6","1","7","9"]]</span><br><span class="line">解释：输入的数独如上图所示，唯一有效的解决方案如下所示：</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="/2023/09/08/23-9-8-algorithm-backtraking/250px-sudoku-by-l2g-20050714_solutionsvg.png" alt="img"></p>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>board.length == 9</code></li>
+<li><code>board[i].length == 9</code></li>
+<li><code>board[i][j]</code> 是一位数字或者 <code>'.'</code></li>
+<li>题目数据 <strong>保证</strong> 输入数独仅有一个解</li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>哈希表</p>
+<p>回溯</p>
+<p>矩阵</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">solveSudoku</span><span class="params">(<span class="type">char</span>[][] board)</span> {</span><br><span class="line">        backtraking(board);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">backtraking</span><span class="params">(<span class="type">char</span>[][] board)</span>{</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; <span class="number">9</span>; j++) {</span><br><span class="line">                <span class="keyword">if</span>(board[i][j]!=<span class="string">'.'</span>){</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                }<span class="keyword">else</span>{</span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">char</span> <span class="variable">k</span> <span class="operator">=</span> <span class="string">'1'</span>; k &lt;= <span class="string">'9'</span>; k++) {</span><br><span class="line">                        <span class="keyword">if</span>(check(i,j,k,board)){</span><br><span class="line">                            board[i][j]=k;</span><br><span class="line">                            <span class="keyword">if</span>(backtraking(board)){</span><br><span class="line">                                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                            }</span><br><span class="line">                            board[i][j]=<span class="string">'.'</span>;</span><br><span class="line">                        }</span><br><span class="line">                    }</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">check</span><span class="params">(<span class="type">int</span> i,<span class="type">int</span> j,<span class="type">char</span> k,<span class="type">char</span>[][] board)</span>{</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>; l &lt; <span class="number">9</span>; l++) {</span><br><span class="line">            <span class="keyword">if</span>(board[i][l]==k){</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(board[l][j]==k){</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> row=(i/<span class="number">3</span>)*<span class="number">3</span>,col=(j/<span class="number">3</span>)*<span class="number">3</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>; l &lt; <span class="number">3</span>; l++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> <span class="number">0</span>; m &lt; <span class="number">3</span>; m++) {</span><br><span class="line">                <span class="keyword">if</span>(board[row+l][col+m]==k){</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="qi-ta"><span id="head20"> 其他</span></span><a href="#qi-ta" class="header-anchor">#</a></h1><h2><span id="332-chong-xin-an-pai-xing-cheng"><span id="head21">🟠332. 重新安排行程</span></span><a href="#332-chong-xin-an-pai-xing-cheng" class="header-anchor">#</a></h2><blockquote>
+<p>给你一份航线列表 <code>tickets</code> ，其中 <code>tickets[i] = [fromi, toi]</code> 表示飞机出发和降落的机场地点。请你对该行程进行重新规划排序。</p>
+<p>所有这些机票都属于一个从 <code>JFK</code>（肯尼迪国际机场）出发的先生，所以该行程必须从 <code>JFK</code> 开始。如果存在多种有效的行程，请你按字典排序返回最小的行程组合。</p>
+<ul>
+<li>例如，行程 <code>["JFK", "LGA"]</code> 与 <code>["JFK", "LGB"]</code> 相比就更小，排序更靠前。</li>
+</ul>
+<p>假定所有机票至少存在一种合理的行程。且所有的机票 必须都用一次 且 只能用一次。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/14/itinerary1-graph.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：tickets = [["MUC","LHR"],["JFK","MUC"],["SFO","SJC"],["LHR","SFO"]]</span><br><span class="line">输出：["JFK","MUC","LHR","SFO","SJC"]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/14/itinerary2-graph.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：tickets = [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]</span><br><span class="line">输出：["JFK","ATL","JFK","SFO","ATL","SFO"]</span><br><span class="line">解释：另一种有效的行程是 ["JFK","SFO","ATL","JFK","ATL","SFO"] ，但是它字典排序更大更靠后。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= tickets.length &lt;= 300</code></li>
+<li><code>tickets[i].length == 2</code></li>
+<li><code>fromi.length == 3</code></li>
+<li><code>toi.length == 3</code></li>
+<li><code>fromi</code> 和 <code>toi</code> 由大写英文字母组成</li>
+<li><code>fromi != toi</code></li>
+</ul>
+<p>Related Topics</p>
+<p>深度优先搜索</p>
+<p>图</p>
+<p>欧拉回路</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+        </div>
+
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zoe | <a href="https://hexo.io" target="_blank"></a>  <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank"></a>
+              
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<span class="site-uv">
+
+👤
+
+ <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+
+</span>&nbsp;
+
+
+
+
+
+<span class="site-pv">
+
+ | 👁️
+
+ <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+
+</span>
+
+
+  
+               
+        </span>
+    </div>
+</footer>
+
+    </div>
+
+    <!-- 搜索功能 -->
+    <!-- Chic/layout.ejs -->
+    <div id="u-search">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="container">
+                    <form id="u-search-modal-form" class="u-search-modal-form">
+                        <button type="submit" class="form-submit-btn">
+                            <img src="/image/search.png" class="search-btn-img" />
+                        </button>
+                        <input placeholder="搜索文章。。。" class="form-input" onchange="inputChange(event)" id="modal-form-input">
+                    </form>
+                    <a class="modal-close">x</a>
+                </div>
+                <div class="search-loading">
+                    <div class="search-loading-bar"></div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- <ul class="modal-results">
+                    <li class="result-item">
+                        <a class="result-item-detail">
+                            <span class="title">页面配置</span>
+                            <span class="content">
+                                网址，例如： front-matter---layout: postdate: <b mark></b>
+                                7-07-05title: [转]如何搭建基于Hexo的独立博客categories: [Dev, Hexo]tags: - Hexoauthor: name: xaoxuu avatar: https://cdn.jsdelivr.......
+                            </span>
+                        </a>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+        <div class="modal-overlay"></div>
+    </div>
+
+
+</body>
+
+
+
+</html>
+
+
