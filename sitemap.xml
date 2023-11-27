@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-en/</loc>
+    
+    <lastmod>2023-11-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-cn/</loc>
+    
+    <lastmod>2023-11-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/2023/11/26/23-11-26-algorithm-summary/</loc>
     
     <lastmod>2023-11-26</lastmod>
@@ -57,24 +75,6 @@
   
   <url>
     <loc>https://zoebezos.github.io/algorithm/index.html</loc>
-    
-    <lastmod>2023-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-en/</loc>
-    
-    <lastmod>2023-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/11/20/6-12-resume-cn/</loc>
     
     <lastmod>2023-11-25</lastmod>
     
@@ -202,7 +202,7 @@
 
   <url>
     <loc>https://zoebezos.github.io/</loc>
-    <lastmod>2023-11-26</lastmod>
+    <lastmod>2023-11-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -210,28 +210,28 @@
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-geometry/</loc>
-    <lastmod>2023-11-26</lastmod>
+    <lastmod>2023-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-math/</loc>
-    <lastmod>2023-11-26</lastmod>
+    <lastmod>2023-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/private/</loc>
-    <lastmod>2023-11-26</lastmod>
+    <lastmod>2023-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/resume/</loc>
-    <lastmod>2023-11-26</lastmod>
+    <lastmod>2023-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -240,14 +240,14 @@
   
   <url>
     <loc>https://zoebezos.github.io/categories/algorithm/</loc>
-    <lastmod>2023-11-26</lastmod>
+    <lastmod>2023-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/categories/thoughts/</loc>
-    <lastmod>2023-11-26</lastmod>
+    <lastmod>2023-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
