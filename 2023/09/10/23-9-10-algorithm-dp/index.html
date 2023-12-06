@@ -440,7 +440,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">1.1k</a>                         
+                            <a href="">2.6k</a>                         
                         </span>
                         
                     
@@ -449,7 +449,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">4min</a>                         
+                            <a href="">11min</a>                         
                         </span>
                         
                     
@@ -476,55 +476,55 @@
 <td>1</td>
 <td align="center">✅</td>
 <td align="left"><a href="#head2"> 🟢509.斐波那契数</a></td>
-<td></td>
+<td>dp</td>
 </tr>
 <tr>
 <td align="center"></td>
 <td></td>
 <td>2</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head3">🟢70. 爬楼梯</a></td>
-<td></td>
+<td>dp</td>
 </tr>
 <tr>
 <td align="center"></td>
 <td></td>
 <td>3</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head4">🟢746. 使用最小花费爬楼梯</a></td>
-<td></td>
+<td>dp</td>
 </tr>
 <tr>
 <td align="center"></td>
 <td></td>
 <td>4</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head5">🟡62. 不同路径</a></td>
-<td></td>
+<td>二维dp</td>
 </tr>
 <tr>
 <td align="center"></td>
 <td></td>
 <td>5</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head6">🟡63. 不同路径 II</a></td>
-<td></td>
+<td>二维dp</td>
 </tr>
 <tr>
 <td align="center"></td>
 <td></td>
 <td>6</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head7">🟡343. 整数拆分</a></td>
-<td></td>
+<td>dp</td>
 </tr>
 <tr>
 <td align="center"></td>
 <td></td>
 <td>7</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head8">🟡96. 不同的二叉搜索树</a></td>
-<td></td>
+<td>dp 图</td>
 </tr>
 <tr>
 <td align="center"><a href="#head9"> 背包系列</a></td>
@@ -579,7 +579,7 @@
 <td></td>
 <td>14</td>
 <td align="center"></td>
-<td align="left"><a href="#head18"> 🟢70.爬楼梯</a></td>
+<td align="left"><a href="#head18"> 🟢57. 爬楼梯（第八期模拟笔试）</a></td>
 <td></td>
 </tr>
 <tr>
@@ -823,11 +823,165 @@
 <p>数学</p>
 <p>动态规划</p>
 </blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">climbStairs</span><span class="params">(<span class="type">int</span> n)</span> {</span><br><span class="line">        <span class="keyword">if</span>(n&lt;<span class="number">2</span>){</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span>[]dp=<span class="keyword">new</span> <span class="title class_">int</span>[n+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">2</span>]=<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">3</span>; i &lt;= n; i++) {</span><br><span class="line">            dp[i]=dp[i-<span class="number">1</span>]+dp[i-<span class="number">2</span>];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3><span id="746-shi-yong-zui-xiao-hua-fei-pa-lou-ti"><span id="head4">🟢746. 使用最小花费爬楼梯</span></span><a href="#746-shi-yong-zui-xiao-hua-fei-pa-lou-ti" class="header-anchor">#</a></h3><blockquote>
+<p>给你一个整数数组 <code>cost</code> ，其中 <code>cost[i]</code> 是从楼梯第 <code>i</code> 个台阶向上爬需要支付的费用。一旦你支付此费用，即可选择向上爬一个或者两个台阶。</p>
+<p>你可以选择从下标为 <code>0</code> 或下标为 <code>1</code> 的台阶开始爬楼梯。</p>
+<p>请你计算并返回达到楼梯顶部的最低花费。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：cost = [10,15,20]</span><br><span class="line">输出：15</span><br><span class="line">解释：你将从下标为 1 的台阶开始。</span><br><span class="line">- 支付 15 ，向上爬两个台阶，到达楼梯顶部。</span><br><span class="line">总花费为 15 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：cost = [1,100,1,1,1,100,1,1,100,1]</span><br><span class="line">输出：6</span><br><span class="line">解释：你将从下标为 0 的台阶开始。</span><br><span class="line">- 支付 1 ，向上爬两个台阶，到达下标为 2 的台阶。</span><br><span class="line">- 支付 1 ，向上爬两个台阶，到达下标为 4 的台阶。</span><br><span class="line">- 支付 1 ，向上爬两个台阶，到达下标为 6 的台阶。</span><br><span class="line">- 支付 1 ，向上爬一个台阶，到达下标为 7 的台阶。</span><br><span class="line">- 支付 1 ，向上爬两个台阶，到达下标为 9 的台阶。</span><br><span class="line">- 支付 1 ，向上爬一个台阶，到达楼梯顶部。</span><br><span class="line">总花费为 6 。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= cost.length &lt;= 1000</code></li>
+<li><code>0 &lt;= cost[i] &lt;= 999</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>动态规划</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minCostClimbingStairs</span><span class="params">(<span class="type">int</span>[] cost)</span> {</span><br><span class="line">        <span class="type">int</span> len=cost.length;</span><br><span class="line">        <span class="type">int</span>[]dp=<span class="keyword">new</span> <span class="title class_">int</span>[len+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= len; i++) {</span><br><span class="line">            dp[i]=Math.min(dp[i-<span class="number">1</span>]+cost[i-<span class="number">1</span>],dp[i-<span class="number">2</span>]+cost[i-<span class="number">2</span>]) ;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[len];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3><span id="62-bu-tong-lu-jing"><span id="head5">🟡62. 不同路径</span></span><a href="#62-bu-tong-lu-jing" class="header-anchor">#</a></h3><blockquote>
+<p>一个机器人位于一个 <code>m x n</code> 网格的左上角 （起始点在下图中标记为 “Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。</p>
+<p>问总共有多少条不同的路径？</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://pic.leetcode.cn/1697422740-adxmsI-image.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：m = 3, n = 7</span><br><span class="line">输出：28</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：m = 3, n = 2</span><br><span class="line">输出：3</span><br><span class="line">解释：</span><br><span class="line">从左上角开始，总共有 3 条路径可以到达右下角。</span><br><span class="line">1. 向右 -&gt; 向下 -&gt; 向下</span><br><span class="line">2. 向下 -&gt; 向下 -&gt; 向右</span><br><span class="line">3. 向下 -&gt; 向右 -&gt; 向下</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：m = 7, n = 3</span><br><span class="line">输出：28</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：m = 3, n = 3</span><br><span class="line">输出：6</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= m, n &lt;= 100</code></li>
+<li>题目数据保证答案小于等于 <code>2 * 109</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数学</p>
+<p>动态规划</p>
+<p>组合数学</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">uniquePaths</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span> {</span><br><span class="line">        <span class="type">int</span>[][]dp=<span class="keyword">new</span> <span class="title class_">int</span>[m][n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; m; i++) {</span><br><span class="line">            dp[i][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) {</span><br><span class="line">            dp[<span class="number">0</span>][i]=<span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; m; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; n; j++) {</span><br><span class="line">                dp[i][j]=dp[i][j-<span class="number">1</span>]+dp[i-<span class="number">1</span>][j];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[m-<span class="number">1</span>][n-<span class="number">1</span>];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3><span id="63-bu-tong-lu-jing-ii"><span id="head6">🟡63. 不同路径 II</span></span><a href="#63-bu-tong-lu-jing-ii" class="header-anchor">#</a></h3><blockquote>
+<p>一个机器人位于一个 <code>m x n</code> 网格的左上角 （起始点在下图中标记为 “Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish”）。</p>
+<p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？</p>
+<p>网格中的障碍物和空位置分别用 <code>1</code> 和 <code>0</code> 来表示。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/04/robot1.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]</span><br><span class="line">输出：2</span><br><span class="line">解释：3x3 网格的正中间有一个障碍物。</span><br><span class="line">从左上角到右下角一共有 2 条不同的路径：</span><br><span class="line">1. 向右 -&gt; 向右 -&gt; 向下 -&gt; 向下</span><br><span class="line">2. 向下 -&gt; 向下 -&gt; 向右 -&gt; 向右</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/04/robot2.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：obstacleGrid = [[0,1],[0,0]]</span><br><span class="line">输出：1</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>m == obstacleGrid.length</code></li>
+<li><code>n == obstacleGrid[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 100</code></li>
+<li><code>obstacleGrid[i][j]</code> 为 <code>0</code> 或 <code>1</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>动态规划</p>
+<p>矩阵</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">uniquePathsWithObstacles</span><span class="params">(<span class="type">int</span>[][] obstacleGrid)</span> {</span><br><span class="line">        <span class="type">int</span> m=obstacleGrid.length,n=obstacleGrid[<span class="number">0</span>].length;</span><br><span class="line">        <span class="type">int</span>[][]dp=<span class="keyword">new</span> <span class="title class_">int</span>[m][n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; m; i++) {</span><br><span class="line">            <span class="keyword">if</span>(obstacleGrid[i][<span class="number">0</span>]==<span class="number">1</span>){</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                dp[i][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) {</span><br><span class="line">            <span class="keyword">if</span>(obstacleGrid[<span class="number">0</span>][i]==<span class="number">1</span>){</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                dp[<span class="number">0</span>][i]=<span class="number">1</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; m; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; n; j++) {</span><br><span class="line">                <span class="keyword">if</span>(obstacleGrid[i][j]==<span class="number">1</span>){</span><br><span class="line">                    dp[i][j]=<span class="number">0</span>;</span><br><span class="line">                }<span class="keyword">else</span>{</span><br><span class="line">                    dp[i][j]=dp[i][j-<span class="number">1</span>]+dp[i-<span class="number">1</span>][j];</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[m-<span class="number">1</span>][n-<span class="number">1</span>];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3><span id="343-zheng-shu-chai-fen"><span id="head7">🟡343. 整数拆分</span></span><a href="#343-zheng-shu-chai-fen" class="header-anchor">#</a></h3><blockquote>
+<p>给定一个正整数 <code>n</code> ，将其拆分为 <code>k</code> 个 <strong>正整数</strong> 的和（ <code>k &gt;= 2</code> ），并使这些整数的乘积最大化。</p>
+<p>返回 <em>你可以获得的最大乘积</em> 。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: n = 2</span><br><span class="line">输出: 1</span><br><span class="line">解释: 2 = 1 + 1, 1 × 1 = 1。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: n = 10</span><br><span class="line">输出: 36</span><br><span class="line">解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示:</strong></p>
+<ul>
+<li><code>2 &lt;= n &lt;= 58</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数学</p>
+<p>动态规划</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">integerBreak</span><span class="params">(<span class="type">int</span> n)</span> {</span><br><span class="line">         <span class="type">int</span>[]dp=<span class="keyword">new</span> <span class="title class_">int</span>[n+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">2</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">3</span>; i &lt;= n; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= i-j; j++) {</span><br><span class="line">                dp[i]=Math.max(dp[i],Math.max(j*(i-j),j*dp[i-j]));</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3><span id="96-bu-tong-de-er-cha-sou-suo-shu"><span id="head8">🟡96. 不同的二叉搜索树</span></span><a href="#96-bu-tong-de-er-cha-sou-suo-shu" class="header-anchor">#</a></h3><blockquote>
+<p>给你一个整数 <code>n</code> ，求恰由 <code>n</code> 个节点组成且节点值从 <code>1</code> 到 <code>n</code> 互不相同的 <strong>二叉搜索树</strong> 有多少种？返回满足题意的二叉搜索树的种数。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/01/18/uniquebstn3.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3</span><br><span class="line">输出：5</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 1</span><br><span class="line">输出：1</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 19</code></li>
+</ul>
+<p>Related Topics</p>
+<p>树</p>
+<p>二叉搜索树</p>
+<p>数学</p>
+<p>动态规划</p>
+<p>二叉树</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numTrees</span><span class="params">(<span class="type">int</span> n)</span> {</span><br><span class="line">        <span class="type">int</span>[]dp=<span class="keyword">new</span> <span class="title class_">int</span>[n+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; j++) {</span><br><span class="line">                dp[i]+=dp[j]*dp[i-j-<span class="number">1</span>];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>思路：</p>
+<p>计算两个节点的过程：dp [ 2 ] = dp [  0 ] × dp [  1 ] +  dp [  1 ] × dp [  0 ]</p>
+<p>计算三个节点的过程：dp [ 3 ] = dp [  0 ] × dp [  2 ] +  dp [  1 ] × dp [  1 ] +  dp [  2 ] × dp [  0 ]</p>
+<h1><span id="bei-bao-xi-lie"><span id="head9"> 背包系列</span></span><a href="#bei-bao-xi-lie" class="header-anchor">#</a></h1><h2><span id="01-bei-bao-wen-ti"><span id="head10"> 01背包问题</span></span><a href="#01-bei-bao-wen-ti" class="header-anchor">#</a></h2><h3><span id="416-fen-ge-deng-he-zi-ji"><span id="head11">🟡416. 分割等和子集</span></span><a href="#416-fen-ge-deng-he-zi-ji" class="header-anchor">#</a></h3><blockquote>
+<p>给你一个 <strong>只包含正整数</strong> 的 <strong>非空</strong> 数组 <code>nums</code> 。请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,5,11,5]</span><br><span class="line">输出：true</span><br><span class="line">解释：数组可以分割成 [1, 5, 5] 和 [11] 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3,5]</span><br><span class="line">输出：false</span><br><span class="line">解释：数组不能分割成两个元素和相等的子集。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 200</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 100</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>动态规划</p>
+</blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
 
 
-<h3><span id="746-shi-yong-zui-xiao-hua-fei-pa-lou-ti"><span id="head4">🟢746. 使用最小花费爬楼梯</span></span><a href="#746-shi-yong-zui-xiao-hua-fei-pa-lou-ti" class="header-anchor">#</a></h3><h3><span id="62-bu-tong-lu-jing"><span id="head5">🟡62. 不同路径</span></span><a href="#62-bu-tong-lu-jing" class="header-anchor">#</a></h3><h3><span id="63-bu-tong-lu-jing-ii"><span id="head6">🟡63. 不同路径 II</span></span><a href="#63-bu-tong-lu-jing-ii" class="header-anchor">#</a></h3><h3><span id="343-zheng-shu-chai-fen"><span id="head7">🟡343. 整数拆分</span></span><a href="#343-zheng-shu-chai-fen" class="header-anchor">#</a></h3><h3><span id="96-bu-tong-de-er-cha-sou-suo-shu"><span id="head8">🟡96. 不同的二叉搜索树</span></span><a href="#96-bu-tong-de-er-cha-sou-suo-shu" class="header-anchor">#</a></h3><h1><span id="bei-bao-xi-lie"><span id="head9"> 背包系列</span></span><a href="#bei-bao-xi-lie" class="header-anchor">#</a></h1><h2><span id="01-bei-bao-wen-ti"><span id="head10"> 01背包问题</span></span><a href="#01-bei-bao-wen-ti" class="header-anchor">#</a></h2><h3><span id="416-fen-ge-deng-he-zi-ji"><span id="head11">🟡416. 分割等和子集</span></span><a href="#416-fen-ge-deng-he-zi-ji" class="header-anchor">#</a></h3><h3><span id="1049-zui-hou-yi-kuai-shi-tou-de-chong-liang-ii"><span id="head12">🟡1049. 最后一块石头的重量 II</span></span><a href="#1049-zui-hou-yi-kuai-shi-tou-de-chong-liang-ii" class="header-anchor">#</a></h3><h3><span id="494-mu-biao-he"><span id="head13">🟡494. 目标和</span></span><a href="#494-mu-biao-he" class="header-anchor">#</a></h3><h3><span id="474-yi-he-ling"><span id="head14">🟡474. 一和零</span></span><a href="#474-yi-he-ling" class="header-anchor">#</a></h3><h2><span id="wan-quan-bei-bao-wen-ti"><span id="head15"> 完全背包问题</span></span><a href="#wan-quan-bei-bao-wen-ti" class="header-anchor">#</a></h2><h3><span id="518-ling-qian-dui-huan-ii"><span id="head16">🟡518. 零钱兑换 II</span></span><a href="#518-ling-qian-dui-huan-ii" class="header-anchor">#</a></h3><h3><span id="377-zu-he-zong-he-iv"><span id="head17">🟡377. 组合总和 Ⅳ</span></span><a href="#377-zu-he-zong-he-iv" class="header-anchor">#</a></h3><h3><span id="70-pa-lou-ti"><span id="head18"> 🟢70.爬楼梯</span></span><a href="#70-pa-lou-ti" class="header-anchor">#</a></h3><h3><span id="322-ling-qian-dui-huan"><span id="head19">🟡322. 零钱兑换</span></span><a href="#322-ling-qian-dui-huan" class="header-anchor">#</a></h3><h3><span id="279-wan-quan-ping-fang-shu"><span id="head20">🟡279. 完全平方数</span></span><a href="#279-wan-quan-ping-fang-shu" class="header-anchor">#</a></h3><h3><span id="139-dan-ci-chai-fen"><span id="head21">🟡139. 单词拆分</span></span><a href="#139-dan-ci-chai-fen" class="header-anchor">#</a></h3><h1><span id="da-jia-jie-she-xi-lie"><span id="head22"> 打家劫舍系列</span></span><a href="#da-jia-jie-she-xi-lie" class="header-anchor">#</a></h1><h3><span id="198-da-jia-jie-she"><span id="head23">🟡198. 打家劫舍</span></span><a href="#198-da-jia-jie-she" class="header-anchor">#</a></h3><h3><span id="213-da-jia-jie-she-ii"><span id="head24">🟡213. 打家劫舍 II</span></span><a href="#213-da-jia-jie-she-ii" class="header-anchor">#</a></h3><h3><span id="337-da-jia-jie-she-iii"><span id="head25">🟡337. 打家劫舍 III</span></span><a href="#337-da-jia-jie-she-iii" class="header-anchor">#</a></h3><h1><span id="gu-piao-xi-lie"><span id="head26"> 股票系列</span></span><a href="#gu-piao-xi-lie" class="header-anchor">#</a></h1><h3><span id="121-mai-mai-gu-piao-de-zui-jia-shi-ji"><span id="head27">🟢121. 买卖股票的最佳时机</span></span><a href="#121-mai-mai-gu-piao-de-zui-jia-shi-ji" class="header-anchor">#</a></h3><h3><span id="122-mai-mai-gu-piao-de-zui-jia-shi-ji-ii"><span id="head28">🟡122. 买卖股票的最佳时机 II</span></span><a href="#122-mai-mai-gu-piao-de-zui-jia-shi-ji-ii" class="header-anchor">#</a></h3><h3><span id="123-mai-mai-gu-piao-de-zui-jia-shi-ji-iii"><span id="head29">🟠123. 买卖股票的最佳时机 III</span></span><a href="#123-mai-mai-gu-piao-de-zui-jia-shi-ji-iii" class="header-anchor">#</a></h3><h3><span id="188-mai-mai-gu-piao-de-zui-jia-shi-ji-iv"><span id="head30">🟠188. 买卖股票的最佳时机 IV</span></span><a href="#188-mai-mai-gu-piao-de-zui-jia-shi-ji-iv" class="header-anchor">#</a></h3><h3><span id="309-mai-mai-gu-piao-de-zui-jia-shi-ji-han-leng-dong-qi"><span id="head31">🟡309. 买卖股票的最佳时机含冷冻期</span></span><a href="#309-mai-mai-gu-piao-de-zui-jia-shi-ji-han-leng-dong-qi" class="header-anchor">#</a></h3><h3><span id="714-mai-mai-gu-piao-de-zui-jia-shi-ji-han-shou-xu-fei"><span id="head32">🟡714. 买卖股票的最佳时机含手续费</span></span><a href="#714-mai-mai-gu-piao-de-zui-jia-shi-ji-han-shou-xu-fei" class="header-anchor">#</a></h3><h1><span id="zi-xu-lie-xi-lie"><span id="head33"> 子序列系列</span></span><a href="#zi-xu-lie-xi-lie" class="header-anchor">#</a></h1><h2><span id="bu-lian-xu-zi-xu-lie"><span id="head34"> 不连续子序列</span></span><a href="#bu-lian-xu-zi-xu-lie" class="header-anchor">#</a></h2><h3><span id="300-zui-chang-di-zeng-zi-xu-lie"><span id="head35">🟡300. 最长递增子序列</span></span><a href="#300-zui-chang-di-zeng-zi-xu-lie" class="header-anchor">#</a></h3><h3><span id="1143-zui-chang-gong-gong-zi-xu-lie"><span id="head36">🟡1143. 最长公共子序列</span></span><a href="#1143-zui-chang-gong-gong-zi-xu-lie" class="header-anchor">#</a></h3><h3><span id="1035-bu-xiang-jiao-de-xian"><span id="head37">🟡1035. 不相交的线</span></span><a href="#1035-bu-xiang-jiao-de-xian" class="header-anchor">#</a></h3><h2><span id="lian-xu-zi-xu-lie"><span id="head38"> 连续子序列</span></span><a href="#lian-xu-zi-xu-lie" class="header-anchor">#</a></h2><h3><span id="674-zui-chang-lian-xu-di-zeng-xu-lie"><span id="head39">🟢674. 最长连续递增序列</span></span><a href="#674-zui-chang-lian-xu-di-zeng-xu-lie" class="header-anchor">#</a></h3><h3><span id="718-zui-chang-chong-fu-zi-shu-zu"><span id="head40">🟡718. 最长重复子数组</span></span><a href="#718-zui-chang-chong-fu-zi-shu-zu" class="header-anchor">#</a></h3><h3><span id="53-zui-da-zi-shu-zu-he"><span id="head41">🟡53. 最大子数组和</span></span><a href="#53-zui-da-zi-shu-zu-he" class="header-anchor">#</a></h3><h2><span id="bian-ji-ju-chi"><span id="head42"> 编辑距离</span></span><a href="#bian-ji-ju-chi" class="header-anchor">#</a></h2><h3><span id="392-pan-duan-zi-xu-lie"><span id="head43">🟢392. 判断子序列</span></span><a href="#392-pan-duan-zi-xu-lie" class="header-anchor">#</a></h3><h3><span id="115-bu-tong-de-zi-xu-lie"><span id="head44">🟠115. 不同的子序列</span></span><a href="#115-bu-tong-de-zi-xu-lie" class="header-anchor">#</a></h3><h3><span id="583-liang-ge-zi-fu-chuan-de-shan-chu-cao-zuo"><span id="head45">🟡583. 两个字符串的删除操作</span></span><a href="#583-liang-ge-zi-fu-chuan-de-shan-chu-cao-zuo" class="header-anchor">#</a></h3><h3><span id="72-bian-ji-ju-chi"><span id="head46">🟠72. 编辑距离</span></span><a href="#72-bian-ji-ju-chi" class="header-anchor">#</a></h3><h2><span id="hui-wen"><span id="head47"> 回文</span></span><a href="#hui-wen" class="header-anchor">#</a></h2><h3><span id="647-hui-wen-zi-chuan"><span id="head48">🟡647. 回文子串</span></span><a href="#647-hui-wen-zi-chuan" class="header-anchor">#</a></h3><h3><span id="516-zui-chang-hui-wen-zi-xu-lie"><span id="head49">🟡516. 最长回文子序列</span></span><a href="#516-zui-chang-hui-wen-zi-xu-lie" class="header-anchor">#</a></h3>
+<h3><span id="1049-zui-hou-yi-kuai-shi-tou-de-chong-liang-ii"><span id="head12">🟡1049. 最后一块石头的重量 II</span></span><a href="#1049-zui-hou-yi-kuai-shi-tou-de-chong-liang-ii" class="header-anchor">#</a></h3><h3><span id="494-mu-biao-he"><span id="head13">🟡494. 目标和</span></span><a href="#494-mu-biao-he" class="header-anchor">#</a></h3><h3><span id="474-yi-he-ling"><span id="head14">🟡474. 一和零</span></span><a href="#474-yi-he-ling" class="header-anchor">#</a></h3><h2><span id="wan-quan-bei-bao-wen-ti"><span id="head15"> 完全背包问题</span></span><a href="#wan-quan-bei-bao-wen-ti" class="header-anchor">#</a></h2><h3><span id="518-ling-qian-dui-huan-ii"><span id="head16">🟡518. 零钱兑换 II</span></span><a href="#518-ling-qian-dui-huan-ii" class="header-anchor">#</a></h3><h3><span id="377-zu-he-zong-he-iv"><span id="head17">🟡377. 组合总和 Ⅳ</span></span><a href="#377-zu-he-zong-he-iv" class="header-anchor">#</a></h3><h3><span id="57-pa-lou-ti-di-ba-qi-mo-ni-bi-shi"><span id="head18"> 🟢57. 爬楼梯（第八期模拟笔试）</span></span><a href="#57-pa-lou-ti-di-ba-qi-mo-ni-bi-shi" class="header-anchor">#</a></h3><h3><span id="322-ling-qian-dui-huan"><span id="head19">🟡322. 零钱兑换</span></span><a href="#322-ling-qian-dui-huan" class="header-anchor">#</a></h3><h3><span id="279-wan-quan-ping-fang-shu"><span id="head20">🟡279. 完全平方数</span></span><a href="#279-wan-quan-ping-fang-shu" class="header-anchor">#</a></h3><h3><span id="139-dan-ci-chai-fen"><span id="head21">🟡139. 单词拆分</span></span><a href="#139-dan-ci-chai-fen" class="header-anchor">#</a></h3><h1><span id="da-jia-jie-she-xi-lie"><span id="head22"> 打家劫舍系列</span></span><a href="#da-jia-jie-she-xi-lie" class="header-anchor">#</a></h1><h3><span id="198-da-jia-jie-she"><span id="head23">🟡198. 打家劫舍</span></span><a href="#198-da-jia-jie-she" class="header-anchor">#</a></h3><h3><span id="213-da-jia-jie-she-ii"><span id="head24">🟡213. 打家劫舍 II</span></span><a href="#213-da-jia-jie-she-ii" class="header-anchor">#</a></h3><h3><span id="337-da-jia-jie-she-iii"><span id="head25">🟡337. 打家劫舍 III</span></span><a href="#337-da-jia-jie-she-iii" class="header-anchor">#</a></h3><h1><span id="gu-piao-xi-lie"><span id="head26"> 股票系列</span></span><a href="#gu-piao-xi-lie" class="header-anchor">#</a></h1><h3><span id="121-mai-mai-gu-piao-de-zui-jia-shi-ji"><span id="head27">🟢121. 买卖股票的最佳时机</span></span><a href="#121-mai-mai-gu-piao-de-zui-jia-shi-ji" class="header-anchor">#</a></h3><h3><span id="122-mai-mai-gu-piao-de-zui-jia-shi-ji-ii"><span id="head28">🟡122. 买卖股票的最佳时机 II</span></span><a href="#122-mai-mai-gu-piao-de-zui-jia-shi-ji-ii" class="header-anchor">#</a></h3><h3><span id="123-mai-mai-gu-piao-de-zui-jia-shi-ji-iii"><span id="head29">🟠123. 买卖股票的最佳时机 III</span></span><a href="#123-mai-mai-gu-piao-de-zui-jia-shi-ji-iii" class="header-anchor">#</a></h3><h3><span id="188-mai-mai-gu-piao-de-zui-jia-shi-ji-iv"><span id="head30">🟠188. 买卖股票的最佳时机 IV</span></span><a href="#188-mai-mai-gu-piao-de-zui-jia-shi-ji-iv" class="header-anchor">#</a></h3><h3><span id="309-mai-mai-gu-piao-de-zui-jia-shi-ji-han-leng-dong-qi"><span id="head31">🟡309. 买卖股票的最佳时机含冷冻期</span></span><a href="#309-mai-mai-gu-piao-de-zui-jia-shi-ji-han-leng-dong-qi" class="header-anchor">#</a></h3><h3><span id="714-mai-mai-gu-piao-de-zui-jia-shi-ji-han-shou-xu-fei"><span id="head32">🟡714. 买卖股票的最佳时机含手续费</span></span><a href="#714-mai-mai-gu-piao-de-zui-jia-shi-ji-han-shou-xu-fei" class="header-anchor">#</a></h3><h1><span id="zi-xu-lie-xi-lie"><span id="head33"> 子序列系列</span></span><a href="#zi-xu-lie-xi-lie" class="header-anchor">#</a></h1><h2><span id="bu-lian-xu-zi-xu-lie"><span id="head34"> 不连续子序列</span></span><a href="#bu-lian-xu-zi-xu-lie" class="header-anchor">#</a></h2><h3><span id="300-zui-chang-di-zeng-zi-xu-lie"><span id="head35">🟡300. 最长递增子序列</span></span><a href="#300-zui-chang-di-zeng-zi-xu-lie" class="header-anchor">#</a></h3><h3><span id="1143-zui-chang-gong-gong-zi-xu-lie"><span id="head36">🟡1143. 最长公共子序列</span></span><a href="#1143-zui-chang-gong-gong-zi-xu-lie" class="header-anchor">#</a></h3><h3><span id="1035-bu-xiang-jiao-de-xian"><span id="head37">🟡1035. 不相交的线</span></span><a href="#1035-bu-xiang-jiao-de-xian" class="header-anchor">#</a></h3><h2><span id="lian-xu-zi-xu-lie"><span id="head38"> 连续子序列</span></span><a href="#lian-xu-zi-xu-lie" class="header-anchor">#</a></h2><h3><span id="674-zui-chang-lian-xu-di-zeng-xu-lie"><span id="head39">🟢674. 最长连续递增序列</span></span><a href="#674-zui-chang-lian-xu-di-zeng-xu-lie" class="header-anchor">#</a></h3><h3><span id="718-zui-chang-chong-fu-zi-shu-zu"><span id="head40">🟡718. 最长重复子数组</span></span><a href="#718-zui-chang-chong-fu-zi-shu-zu" class="header-anchor">#</a></h3><h3><span id="53-zui-da-zi-shu-zu-he"><span id="head41">🟡53. 最大子数组和</span></span><a href="#53-zui-da-zi-shu-zu-he" class="header-anchor">#</a></h3><h2><span id="bian-ji-ju-chi"><span id="head42"> 编辑距离</span></span><a href="#bian-ji-ju-chi" class="header-anchor">#</a></h2><h3><span id="392-pan-duan-zi-xu-lie"><span id="head43">🟢392. 判断子序列</span></span><a href="#392-pan-duan-zi-xu-lie" class="header-anchor">#</a></h3><h3><span id="115-bu-tong-de-zi-xu-lie"><span id="head44">🟠115. 不同的子序列</span></span><a href="#115-bu-tong-de-zi-xu-lie" class="header-anchor">#</a></h3><h3><span id="583-liang-ge-zi-fu-chuan-de-shan-chu-cao-zuo"><span id="head45">🟡583. 两个字符串的删除操作</span></span><a href="#583-liang-ge-zi-fu-chuan-de-shan-chu-cao-zuo" class="header-anchor">#</a></h3><h3><span id="72-bian-ji-ju-chi"><span id="head46">🟠72. 编辑距离</span></span><a href="#72-bian-ji-ju-chi" class="header-anchor">#</a></h3><h2><span id="hui-wen"><span id="head47"> 回文</span></span><a href="#hui-wen" class="header-anchor">#</a></h2><h3><span id="647-hui-wen-zi-chuan"><span id="head48">🟡647. 回文子串</span></span><a href="#647-hui-wen-zi-chuan" class="header-anchor">#</a></h3><h3><span id="516-zui-chang-hui-wen-zi-xu-lie"><span id="head49">🟡516. 最长回文子序列</span></span><a href="#516-zui-chang-hui-wen-zi-xu-lie" class="header-anchor">#</a></h3>
         </div>
 
 

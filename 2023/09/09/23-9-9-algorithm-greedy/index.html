@@ -440,7 +440,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">7.2k</a>                         
+                            <a href="">8k</a>                         
                         </span>
                         
                     
@@ -449,7 +449,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">32min</a>                         
+                            <a href="">36min</a>                         
                         </span>
                         
                     
@@ -530,9 +530,9 @@
 <td></td>
 <td align="center"><a href="#head11"> 两个维度的权衡问题</a></td>
 <td>8</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head12"> 🟠135.分发糖果</a></td>
-<td></td>
+<td>贪心</td>
 </tr>
 <tr>
 <td></td>
@@ -594,9 +594,9 @@
 <td></td>
 <td align="center"><a href="#head21"> 其他</a></td>
 <td>16</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head22">🟡53. 最大子数组和</a></td>
-<td></td>
+<td>贪心</td>
 </tr>
 <tr>
 <td></td>
@@ -810,7 +810,39 @@
 </blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
-<h1><span id="liang-ge-wei-du-de-quan-heng-wen-ti"><span id="head11"> 两个维度的权衡问题</span></span><a href="#liang-ge-wei-du-de-quan-heng-wen-ti" class="header-anchor">#</a></h1><h2><span id="135-fen-fa-tang-guo"><span id="head12"> 🟠135.分发糖果</span></span><a href="#135-fen-fa-tang-guo" class="header-anchor">#</a></h2><h2><span id="406-gen-ju-shen-gao-chong-jian-dui-lie"><span id="head13">🟡406. 根据身高重建队列</span></span><a href="#406-gen-ju-shen-gao-chong-jian-dui-lie" class="header-anchor">#</a></h2><blockquote>
+<h1><span id="liang-ge-wei-du-de-quan-heng-wen-ti"><span id="head11"> 两个维度的权衡问题</span></span><a href="#liang-ge-wei-du-de-quan-heng-wen-ti" class="header-anchor">#</a></h1><h2><span id="135-fen-fa-tang-guo"><span id="head12"> 🟠135.分发糖果</span></span><a href="#135-fen-fa-tang-guo" class="header-anchor">#</a></h2><blockquote>
+<p><code>n</code> 个孩子站成一排。给你一个整数数组 <code>ratings</code> 表示每个孩子的评分。</p>
+<p>你需要按照以下要求，给这些孩子分发糖果：</p>
+<ul>
+<li>每个孩子至少分配到 <code>1</code> 个糖果。</li>
+<li>相邻两个孩子评分更高的孩子会获得更多的糖果。</li>
+</ul>
+<p>请你给每个孩子分发糖果，计算并返回需要准备的 <strong>最少糖果数目</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：ratings = [1,0,2]</span><br><span class="line">输出：5</span><br><span class="line">解释：你可以分别给第一个、第二个、第三个孩子分发 2、1、2 颗糖果。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：ratings = [1,2,2]</span><br><span class="line">输出：4</span><br><span class="line">解释：你可以分别给第一个、第二个、第三个孩子分发 1、2、1 颗糖果。</span><br><span class="line">     第三个孩子只得到 1 颗糖果，这满足题面中的两个条件。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>n == ratings.length</code></li>
+<li><code>1 &lt;= n &lt;= 2 * 104</code></li>
+<li><code>0 &lt;= ratings[i] &lt;= 2 * 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>贪心</p>
+<p>数组</p>
+</blockquote>
+<p>按照模拟的简单思路，写了一个妥妥超时。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">candy</span><span class="params">(<span class="type">int</span>[] ratings)</span> {</span><br><span class="line">        <span class="type">int</span> len=ratings.length;</span><br><span class="line">        <span class="type">int</span>[]arr=<span class="keyword">new</span> <span class="title class_">int</span>[len];</span><br><span class="line">        Arrays.fill(arr,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">while</span>(!check(ratings,arr)){</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; ratings.length; i++) {</span><br><span class="line">                <span class="keyword">if</span>(ratings[i]&gt;ratings[i-<span class="number">1</span>]&amp;&amp;arr[i]&lt;=arr[i-<span class="number">1</span>]){</span><br><span class="line">                    arr[i]++;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; ratings.length-<span class="number">1</span>; i++) {</span><br><span class="line">                <span class="keyword">if</span>(ratings[i]&gt;ratings[i+<span class="number">1</span>]&amp;&amp;arr[i]&lt;=arr[i+<span class="number">1</span>]){</span><br><span class="line">                    arr[i]++;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; ratings.length; i++) {</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        }</span><br><span class="line">        System.out.println();</span><br><span class="line">        <span class="keyword">return</span> Arrays.stream(arr).sum();</span><br><span class="line">    }</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">check</span><span class="params">(<span class="type">int</span>[] ratings,<span class="type">int</span>[] arr)</span>{</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; ratings.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(ratings[i]&gt;ratings[i-<span class="number">1</span>]&amp;&amp;arr[i]&lt;=arr[i-<span class="number">1</span>]){</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; ratings.length-<span class="number">1</span>; i++) {</span><br><span class="line">            <span class="keyword">if</span>(ratings[i]&gt;ratings[i+<span class="number">1</span>]&amp;&amp;arr[i]&lt;=arr[i+<span class="number">1</span>]){</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>看了官方题解，左右两次遍历：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">candy</span><span class="params">(<span class="type">int</span>[] ratings)</span> {</span><br><span class="line">        <span class="type">int</span> len=ratings.length;</span><br><span class="line">        <span class="type">int</span>[]arr=<span class="keyword">new</span> <span class="title class_">int</span>[len];</span><br><span class="line">        Arrays.fill(arr,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; ratings.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(ratings[i]&gt;ratings[i-<span class="number">1</span>]){</span><br><span class="line">                arr[i]=arr[i-<span class="number">1</span>]+<span class="number">1</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> ratings.length-<span class="number">2</span>; i &gt;=<span class="number">0</span> ; i--) {</span><br><span class="line">            <span class="keyword">if</span>(ratings[i]&gt;ratings[i+<span class="number">1</span>]&amp;&amp;arr[i]&lt;=arr[i+<span class="number">1</span>]){</span><br><span class="line">                arr[i]=Math.max(arr[i+<span class="number">1</span>]+<span class="number">1</span>,arr[i]);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> Arrays.stream(arr).sum();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="406-gen-ju-shen-gao-chong-jian-dui-lie"><span id="head13">🟡406. 根据身高重建队列</span></span><a href="#406-gen-ju-shen-gao-chong-jian-dui-lie" class="header-anchor">#</a></h2><blockquote>
 <p>假设有打乱顺序的一群人站成一个队列，数组 <code>people</code> 表示队列中一些人的属性（不一定按顺序）。每个 <code>people[i] = [hi, ki]</code> 表示第 <code>i</code> 个人的身高为 <code>hi</code> ，前面 <strong>正好</strong> 有 <code>ki</code> 个身高大于或等于 <code>hi</code> 的人。</p>
 <p>请你重新构造并返回输入数组 <code>people</code> 所表示的队列。返回的队列应该格式化为数组 <code>queue</code> ，其中 <code>queue[j] = [hj, kj]</code> 是队列中第 <code>j</code> 个人的属性（<code>queue[0]</code> 是排在队列前面的人）。</p>
 <p><strong>示例 1：</strong></p>
@@ -1044,6 +1076,8 @@
 <p>分治</p>
 <p>动态规划</p>
 </blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxSubArray</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> len= nums.length,sum=<span class="number">0</span>,max=Integer.MIN_VALUE;</span><br><span class="line">        <span class="keyword">if</span>(len==<span class="number">1</span>){</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> idx=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(idx&lt;len){</span><br><span class="line">            sum+=nums[idx];</span><br><span class="line">            <span class="keyword">if</span>(max&lt;sum){</span><br><span class="line">                max=sum;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(sum&lt;<span class="number">0</span>){</span><br><span class="line">                sum=<span class="number">0</span>;</span><br><span class="line">            }</span><br><span class="line">            idx++;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <h2><span id="134-jia-you-zhan"><span id="head23"> 🟡134.加油站</span></span><a href="#134-jia-you-zhan" class="header-anchor">#</a></h2><blockquote>
 <p>在一条环路上有 <code>n</code> 个加油站，其中第 <code>i</code> 个加油站有汽油 <code>gas[i]</code> 升。</p>
 <p>你有一辆油箱容量无限的的汽车，从第 <code>i</code> 个加油站开往第 <code>i+1</code> 个加油站需要消耗汽油 <code>cost[i]</code> 升。你从其中的一个加油站出发，开始时油箱为空。</p>
@@ -1067,11 +1101,14 @@
 <p>贪心</p>
 <p>数组</p>
 </blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## &lt;span id=<span class="string">"head24"</span>&gt;🟠<span class="number">968.</span> 监控二叉树&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">&gt; 给定一个二叉树，我们在树的节点上安装摄像头。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 节点上的每个摄影头都可以监视**其父对象、自身及其直接子对象。**</span><br><span class="line">&gt;</span><br><span class="line">&gt; 计算监控树的所有节点所需的最小摄像头数量。</span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br><span class="line">&gt; ![img](https:<span class="comment">//assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/29/bst_cameras_01.png)</span></span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>输入：[0,0,null,0,0]<br>输出：1<br>解释：如图所示，一台摄像头足以监控所有节点。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br><span class="line">![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/29/bst_cameras_02.png)</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>输入：[0,0,null,0,null,0,null,null,0]<br>输出：2<br>解释：需要至少两个摄像头来监视树的所有节点。 上图显示了摄像头放置的有效位置之一。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">**提示：**</span><br><span class="line"></span><br><span class="line">1. 给定树的节点数的范围是 `[1, 1000]`。</span><br><span class="line">2. 每个节点的值都是 0。</span><br><span class="line"></span><br><span class="line">Related Topics</span><br><span class="line"></span><br><span class="line">树</span><br><span class="line"></span><br><span class="line">深度优先搜索</span><br><span class="line"></span><br><span class="line">动态规划</span><br><span class="line"></span><br><span class="line">二叉树</span><br><span class="line"></span><br><span class="line">```java</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
 
-
-
-<h2><span id="968-jian-kong-er-cha-shu"><span id="head24">🟠968. 监控二叉树</span></span><a href="#968-jian-kong-er-cha-shu" class="header-anchor">#</a></h2>
         </div>
 
 
