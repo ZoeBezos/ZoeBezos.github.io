@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zoebezos.github.io/2023/12/24/23-12-24-algorithm-OD_with_toc/</loc>
-    
-    <lastmod>2023-12-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://zoebezos.github.io/2023/12/24/23-12-24-algorithm-OD/</loc>
     
     <lastmod>2023-12-24</lastmod>
@@ -234,13 +225,6 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/tags/resume/</loc>
-    <lastmod>2023-12-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://zoebezos.github.io/tags/algorithm-geometry/</loc>
     <lastmod>2023-12-24</lastmod>
     <changefreq>weekly</changefreq>
@@ -249,6 +233,13 @@
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-math/</loc>
+    <lastmod>2023-12-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/tags/resume/</loc>
     <lastmod>2023-12-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
