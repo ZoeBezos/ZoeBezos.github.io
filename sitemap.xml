@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zoebezos.github.io/2023/12/30/23-12-30-reading-yigemoshengnvrendelaixin/</loc>
+    
+    <lastmod>2023-12-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/category/index.html</loc>
+    
+    <lastmod>2023-12-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/2023/09/10/23-9-10-algorithm-dp/</loc>
     
     <lastmod>2023-12-29</lastmod>
@@ -182,15 +200,6 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/category/index.html</loc>
-    
-    <lastmod>2023-11-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://zoebezos.github.io/algorithm/index.html</loc>
     
     <lastmod>2023-11-25</lastmod>
@@ -239,6 +248,13 @@
   </url>
   
   <url>
+    <loc>https://zoebezos.github.io/tags/reading-notes/</loc>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/tags/resume/</loc>
     <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -256,6 +272,13 @@
   
   <url>
     <loc>https://zoebezos.github.io/categories/algorithm/</loc>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/categories/reading-notes/</loc>
     <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
