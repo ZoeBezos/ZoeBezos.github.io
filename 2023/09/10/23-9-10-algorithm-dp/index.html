@@ -440,7 +440,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">5.4k</a>                         
+                            <a href="">9.6k</a>                         
                         </span>
                         
                     
@@ -449,7 +449,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">24min</a>                         
+                            <a href="">43min</a>                         
                         </span>
                         
                     
@@ -548,7 +548,7 @@
 <td>10</td>
 <td align="center">✅</td>
 <td align="left"><a href="#head13">🟡494. 目标和</a></td>
-<td>01背包（累加）</td>
+<td>01背包（累加最大）</td>
 </tr>
 <tr>
 <td align="center"></td>
@@ -586,57 +586,57 @@
 <td align="center"></td>
 <td></td>
 <td>15</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head19">🟡322. 零钱兑换</a></td>
-<td></td>
+<td>完全背包（累加最小）</td>
 </tr>
 <tr>
 <td align="center"></td>
 <td></td>
 <td>16</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head20">🟡279. 完全平方数</a></td>
-<td></td>
+<td>完全背包（累加最小）</td>
 </tr>
 <tr>
 <td align="center"></td>
 <td></td>
 <td>17</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head21">🟡139. 单词拆分</a></td>
-<td></td>
+<td>完全背包</td>
 </tr>
 <tr>
 <td align="center"><a href="#head22"> 打家劫舍系列</a></td>
 <td></td>
 <td>18</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head23">🟡198. 打家劫舍</a></td>
-<td></td>
+<td>dp</td>
 </tr>
 <tr>
 <td align="center"></td>
 <td></td>
 <td>19</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head24">🟡213. 打家劫舍 II</a></td>
-<td></td>
+<td>dp</td>
 </tr>
 <tr>
 <td align="center"></td>
 <td></td>
 <td>20</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head25">🟡337. 打家劫舍 III</a></td>
-<td></td>
+<td>树形dp</td>
 </tr>
 <tr>
 <td align="center"><a href="#head26"> 股票系列</a></td>
 <td></td>
 <td>21</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td align="left"><a href="#head27">🟢121. 买卖股票的最佳时机</a></td>
-<td></td>
+<td>dp</td>
 </tr>
 <tr>
 <td align="center"></td>
@@ -1201,11 +1201,337 @@
 <p>数学</p>
 <p>动态规划</p>
 </blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numSquares</span><span class="params">(<span class="type">int</span> n)</span> {</span><br><span class="line">        <span class="type">int</span>[]dp=<span class="keyword">new</span> <span class="title class_">int</span>[n+<span class="number">1</span>];</span><br><span class="line">        <span class="type">int</span> max=Integer.MAX_VALUE;</span><br><span class="line">        Arrays.fill(dp,max);</span><br><span class="line">        dp[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i*i; j &lt;= n; j++) {</span><br><span class="line">                <span class="keyword">if</span>(dp[j-i*i]!=max){</span><br><span class="line">                    dp[j]=Math.min(dp[j],dp[j-i*i]+<span class="number">1</span>);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3><span id="139-dan-ci-chai-fen"><span id="head21">🟡139. 单词拆分</span></span><a href="#139-dan-ci-chai-fen" class="header-anchor">#</a></h3><blockquote>
+<p>给你一个字符串 <code>s</code> 和一个字符串列表 <code>wordDict</code> 作为字典。请你判断是否可以利用字典中出现的单词拼接出 <code>s</code> 。</p>
+<p><strong>注意：</strong>不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: s = "leetcode", wordDict = ["leet", "code"]</span><br><span class="line">输出: true</span><br><span class="line">解释: 返回 true 因为 "leetcode" 可以由 "leet" 和 "code" 拼接成。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: s = "applepenapple", wordDict = ["apple", "pen"]</span><br><span class="line">输出: true</span><br><span class="line">解释: 返回 true 因为 "applepenapple" 可以由 "apple" "pen" "apple" 拼接成。</span><br><span class="line">     注意，你可以重复使用字典中的单词。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]</span><br><span class="line">输出: false</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 300</code></li>
+<li><code>1 &lt;= wordDict.length &lt;= 1000</code></li>
+<li><code>1 &lt;= wordDict[i].length &lt;= 20</code></li>
+<li><code>s</code> 和 <code>wordDict[i]</code> 仅由小写英文字母组成</li>
+<li><code>wordDict</code> 中的所有字符串 <strong>互不相同</strong></li>
+</ul>
+<p>Related Topics</p>
+<p>字典树</p>
+<p>记忆化搜索</p>
+<p>数组</p>
+<p>哈希表</p>
+<p>字符串</p>
+<p>动态规划</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">wordBreak</span><span class="params">(String s, List&lt;String&gt; wordDict)</span> {</span><br><span class="line">        Set&lt;String&gt;set=<span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(wordDict);</span><br><span class="line">        <span class="type">int</span> num=s.length();</span><br><span class="line">        <span class="type">boolean</span> []dp=<span class="keyword">new</span> <span class="title class_">boolean</span>[num+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>]=<span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= num; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i&amp;&amp;!dp[i]; j++) {</span><br><span class="line">                <span class="keyword">if</span>(set.contains(s.substring(j,i))&amp;&amp;dp[j]){</span><br><span class="line">                    dp[i]=<span class="literal">true</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[num];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="da-jia-jie-she-xi-lie"><span id="head22"> 打家劫舍系列</span></span><a href="#da-jia-jie-she-xi-lie" class="header-anchor">#</a></h1><h3><span id="198-da-jia-jie-she"><span id="head23">🟡198. 打家劫舍</span></span><a href="#198-da-jia-jie-she" class="header-anchor">#</a></h3><blockquote>
+<p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，<strong>如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警</strong>。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你 <strong>不触动警报装置的情况下</strong> ，一夜之内能够偷窃到的最高金额。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,2,3,1]</span><br><span class="line">输出：4</span><br><span class="line">解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。</span><br><span class="line">     偷窃到的最高金额 = 1 + 3 = 4 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：[2,7,9,3,1]</span><br><span class="line">输出：12</span><br><span class="line">解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。</span><br><span class="line">     偷窃到的最高金额 = 2 + 9 + 1 = 12 。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 100</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 400</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>动态规划</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">rob</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="keyword">if</span>(nums.length==<span class="number">1</span>){</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> num= nums.length;</span><br><span class="line">        <span class="type">int</span>[]dp=<span class="keyword">new</span> <span class="title class_">int</span>[num];</span><br><span class="line">        dp[<span class="number">0</span>]=nums[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>]=Math.max(nums[<span class="number">0</span>],nums[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt; num; i++) {</span><br><span class="line">            dp[i]=Math.max(dp[i-<span class="number">2</span>]+nums[i],dp[i-<span class="number">1</span>]);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[num-<span class="number">1</span>];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3><span id="213-da-jia-jie-she-ii"><span id="head24">🟡213. 打家劫舍 II</span></span><a href="#213-da-jia-jie-she-ii" class="header-anchor">#</a></h3><blockquote>
+<p>你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 <strong>围成一圈</strong> ，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，<strong>如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警</strong> 。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你 <strong>在不触动警报装置的情况下</strong> ，今晚能够偷窃到的最高金额。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,3,2]</span><br><span class="line">输出：3</span><br><span class="line">解释：你不能先偷窃 1 号房屋（金额 = 2），然后偷窃 3 号房屋（金额 = 2）, 因为他们是相邻的。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3,1]</span><br><span class="line">输出：4</span><br><span class="line">解释：你可以先偷窃 1 号房屋（金额 = 1），然后偷窃 3 号房屋（金额 = 3）。</span><br><span class="line">     偷窃到的最高金额 = 1 + 3 = 4 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3]</span><br><span class="line">输出：3</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 100</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 1000</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>动态规划</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">rob</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        <span class="keyword">if</span>(len==<span class="number">1</span>){</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> without_head=rob_(nums,<span class="number">1</span>,len);</span><br><span class="line">        <span class="type">int</span> without_tail=rob_(nums,<span class="number">0</span>,len-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Math.max(without_head,without_tail);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">rob_</span><span class="params">(<span class="type">int</span>[] nums,<span class="type">int</span> start,<span class="type">int</span> end)</span>{</span><br><span class="line">        <span class="type">int</span> x=<span class="number">0</span>,y=<span class="number">0</span>,z=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start; i &lt; end; i++) {</span><br><span class="line">            y=z;</span><br><span class="line">            z=Math.max(x+nums[i],y);</span><br><span class="line">            x=y;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> z;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3><span id="337-da-jia-jie-she-iii"><span id="head25">🟡337. 打家劫舍 III</span></span><a href="#337-da-jia-jie-she-iii" class="header-anchor">#</a></h3><blockquote>
+<p>小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为 <code>root</code> 。</p>
+<p>除了 <code>root</code> 之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果 <strong>两个直接相连的房子在同一天晚上被打劫</strong> ，房屋将自动报警。</p>
+<p>给定二叉树的 <code>root</code> 。返回 <em><strong>在不触动警报的情况下</strong> ，小偷能够盗取的最高金额</em> 。</p>
+<p><strong>示例 1:</strong></p>
+<p><img src="/2023/09/10/23-9-10-algorithm-dp/rob1-tree.jpg" alt="rob1-tree"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: root = [3,2,3,null,3,null,1]</span><br><span class="line">输出: 7 </span><br><span class="line">解释: 小偷一晚能够盗取的最高金额 3 + 3 + 1 = 7</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<p><img src="/2023/09/10/23-9-10-algorithm-dp/rob2-tree.jpg" alt="rob2-tree"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: root = [3,4,5,1,3,null,1]</span><br><span class="line">输出: 9</span><br><span class="line">解释: 小偷一晚能够盗取的最高金额 4 + 5 = 9</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>树的节点数在 <code>[1, 104]</code> 范围内</li>
+<li><code>0 &lt;= Node.val &lt;= 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>树</p>
+<p>深度优先搜索</p>
+<p>动态规划</p>
+<p>二叉树</p>
+</blockquote>
+<p>在后序遍历+树形DP的思路下，写出以下代码，超时了</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">rob</span><span class="params">(TreeNode root)</span> {</span><br><span class="line">        <span class="comment">//后序遍历-stack</span></span><br><span class="line">        Stack&lt;TreeNode&gt;s=<span class="keyword">new</span> <span class="title class_">Stack</span>&lt;TreeNode&gt;();</span><br><span class="line">        s.push(root);</span><br><span class="line">        <span class="type">int</span>[]tou=<span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">while</span>(!s.isEmpty()){</span><br><span class="line">            TreeNode node=s.peek();</span><br><span class="line">            <span class="keyword">if</span>(node!=<span class="literal">null</span>){</span><br><span class="line">                s.pop();</span><br><span class="line">                s.push(node);</span><br><span class="line">                s.push(<span class="literal">null</span>);</span><br><span class="line">                <span class="keyword">if</span>(node.right!=<span class="literal">null</span>){</span><br><span class="line">                    s.push(node.right);</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">if</span>(node.left!=<span class="literal">null</span>){</span><br><span class="line">                    s.push(node.left);</span><br><span class="line">                }</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                s.pop();</span><br><span class="line">                node=s.pop();</span><br><span class="line">                tou=fuc(node);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> Math.max(tou[<span class="number">0</span>],tou[<span class="number">1</span>]);</span><br><span class="line">    }</span><br><span class="line">    <span class="type">int</span>[]fuc(TreeNode root){</span><br><span class="line">        <span class="type">int</span>[]tou=<span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">if</span>(root.left==<span class="literal">null</span>&amp;&amp;root.right==<span class="literal">null</span>){<span class="comment">//叶子节点</span></span><br><span class="line">            tou[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">            tou[<span class="number">1</span>]=root.val;</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (root.left==<span class="literal">null</span>) {</span><br><span class="line">            tou[<span class="number">0</span>]=Math.max(fuc(root.right)[<span class="number">0</span>],fuc(root.right)[<span class="number">1</span>]);</span><br><span class="line">            tou[<span class="number">1</span>]=root.val+fuc(root.right)[<span class="number">0</span>];</span><br><span class="line">        }<span class="keyword">else</span> <span class="keyword">if</span>(root.right==<span class="literal">null</span>){</span><br><span class="line">            tou[<span class="number">0</span>]=Math.max(fuc(root.left)[<span class="number">0</span>],fuc(root.left)[<span class="number">1</span>]);</span><br><span class="line">            tou[<span class="number">1</span>]=root.val+fuc(root.left)[<span class="number">0</span>];</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            tou[<span class="number">0</span>]=Math.max(fuc(root.left)[<span class="number">0</span>],fuc(root.left)[<span class="number">1</span>])+Math.max(fuc(root.right)[<span class="number">0</span>],fuc(root.right)[<span class="number">1</span>]);</span><br><span class="line">            tou[<span class="number">1</span>]=root.val+fuc(root.left)[<span class="number">0</span>]+fuc(root.right)[<span class="number">0</span>];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> tou;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>更改遍历方式</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">rob</span><span class="params">(TreeNode root)</span> {</span><br><span class="line">        <span class="type">int</span>[]tou=fuc(root);</span><br><span class="line">        <span class="keyword">return</span> Math.max(tou[<span class="number">0</span>],tou[<span class="number">1</span>]);</span><br><span class="line">    }</span><br><span class="line">    <span class="type">int</span>[]fuc(TreeNode root){</span><br><span class="line">        <span class="type">int</span>[]tou=<span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">null</span>){</span><br><span class="line">            <span class="keyword">return</span> tou;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span>[]left=fuc(root.left);</span><br><span class="line">        <span class="type">int</span>[]right=fuc(root.right);</span><br><span class="line"></span><br><span class="line">        tou[<span class="number">0</span>]=Math.max(left[<span class="number">0</span>],left[<span class="number">1</span>])+Math.max(right[<span class="number">0</span>],right[<span class="number">1</span>]);</span><br><span class="line">        tou[<span class="number">1</span>]=root.val+left[<span class="number">0</span>]+right[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">return</span> tou;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="gu-piao-xi-lie"><span id="head26"> 股票系列</span></span><a href="#gu-piao-xi-lie" class="header-anchor">#</a></h1><h3><span id="121-mai-mai-gu-piao-de-zui-jia-shi-ji"><span id="head27">🟢121. 买卖股票的最佳时机</span></span><a href="#121-mai-mai-gu-piao-de-zui-jia-shi-ji" class="header-anchor">#</a></h3><blockquote>
+<p>给定一个数组 <code>prices</code> ，它的第 <code>i</code> 个元素 <code>prices[i]</code> 表示一支给定股票第 <code>i</code> 天的价格。</p>
+<p>你只能选择 <strong>某一天</strong> 买入这只股票，并选择在 <strong>未来的某一个不同的日子</strong> 卖出该股票。设计一个算法来计算你所能获取的最大利润。</p>
+<p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 <code>0</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;输入：[7,1,5,3,6,4]</span><br><span class="line">&gt;输出：5</span><br><span class="line">&gt;解释：在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。</span><br><span class="line">    注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;输入：prices = [7,6,4,3,1]</span><br><span class="line">&gt;输出：0</span><br><span class="line">&gt;解释：在这种情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= prices.length &lt;= 105</code></li>
+<li><code>0 &lt;= prices[i] &lt;= 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>动态规划</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span>[] prices)</span> {</span><br><span class="line">        <span class="type">int</span> len=prices.length;</span><br><span class="line">        <span class="type">int</span>[][]dp=<span class="keyword">new</span> <span class="title class_">int</span>[len][<span class="number">2</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>]=prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; len; i++) {</span><br><span class="line">            dp[i][<span class="number">0</span>]=Math.min(prices[i],dp[i-<span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line">            dp[i][<span class="number">1</span>]=Math.max(dp[i-<span class="number">1</span>][<span class="number">1</span>],prices[i]-dp[i-<span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[len-<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>贴一下卡哥的方便学习：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span>[] prices)</span> {</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> prices.length;</span><br><span class="line">        <span class="comment">// dp[i][0]代表第i天持有股票的最大收益</span></span><br><span class="line">        <span class="comment">// dp[i][1]代表第i天不持有股票的最大收益</span></span><br><span class="line">        <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[len][<span class="number">2</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = -prices[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; len; i++) {</span><br><span class="line">            dp[i][<span class="number">0</span>] = Math.max(dp[i - <span class="number">1</span>][<span class="number">0</span>], -prices[i]);</span><br><span class="line">            dp[i][<span class="number">1</span>] = Math.max(dp[i - <span class="number">1</span>][<span class="number">0</span>] + prices[i], dp[i - <span class="number">1</span>][<span class="number">1</span>]);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[len - <span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3><span id="122-mai-mai-gu-piao-de-zui-jia-shi-ji-ii"><span id="head28">🟡122. 买卖股票的最佳时机 II</span></span><a href="#122-mai-mai-gu-piao-de-zui-jia-shi-ji-ii" class="header-anchor">#</a></h3><blockquote>
+<p>给你一个整数数组 <code>prices</code> ，其中 <code>prices[i]</code> 表示某支股票第 <code>i</code> 天的价格。</p>
+<p>在每一天，你可以决定是否购买和/或出售股票。你在任何时候 <strong>最多</strong> 只能持有 <strong>一股</strong> 股票。你也可以先购买，然后在 <strong>同一天</strong> 出售。</p>
+<p>返回 <em>你能获得的 <strong>最大</strong> 利润</em> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：prices = [7,1,5,3,6,4]</span><br><span class="line">输出：7</span><br><span class="line">解释：在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5 - 1 = 4 。</span><br><span class="line">     随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6 - 3 = 3 。</span><br><span class="line">     总利润为 4 + 3 = 7 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：prices = [1,2,3,4,5]</span><br><span class="line">输出：4</span><br><span class="line">解释：在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5 - 1 = 4 。</span><br><span class="line">     总利润为 4 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：prices = [7,6,4,3,1]</span><br><span class="line">输出：0</span><br><span class="line">解释：在这种情况下, 交易无法获得正利润，所以不参与交易可以获得最大利润，最大利润为 0 。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= prices.length &lt;= 3 * 104</code></li>
+<li><code>0 &lt;= prices[i] &lt;= 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>贪心</p>
+<p>数组</p>
+<p>动态规划</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span>[] prices)</span> {</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> prices.length;</span><br><span class="line">        <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[len][<span class="number">2</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] = -prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; len; i++) {</span><br><span class="line">            dp[i][<span class="number">0</span>] = Math.max(dp[i - <span class="number">1</span>][<span class="number">0</span>], dp[i - <span class="number">1</span>][<span class="number">1</span>] + prices[i]);</span><br><span class="line">            dp[i][<span class="number">1</span>] = Math.max(dp[i - <span class="number">1</span>][<span class="number">1</span>], dp[i - <span class="number">1</span>][<span class="number">0</span>] - prices[i]);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[len - <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3><span id="123-mai-mai-gu-piao-de-zui-jia-shi-ji-iii"><span id="head29">🟠123. 买卖股票的最佳时机 III</span></span><a href="#123-mai-mai-gu-piao-de-zui-jia-shi-ji-iii" class="header-anchor">#</a></h3><blockquote>
+<p>给定一个数组，它的第 <code>i</code> 个元素是一支给定的股票在第 <code>i</code> 天的价格。</p>
+<p>设计一个算法来计算你所能获取的最大利润。你最多可以完成 <strong>两笔</strong> 交易。</p>
+<p><strong>注意：</strong>你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：prices = [3,3,5,0,0,3,1,4]</span><br><span class="line">输出：6</span><br><span class="line">解释：在第 4 天（股票价格 = 0）的时候买入，在第 6 天（股票价格 = 3）的时候卖出，这笔交易所能获得利润 = 3-0 = 3 。</span><br><span class="line">     随后，在第 7 天（股票价格 = 1）的时候买入，在第 8 天 （股票价格 = 4）的时候卖出，这笔交易所能获得利润 = 4-1 = 3 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：prices = [1,2,3,4,5]</span><br><span class="line">输出：4</span><br><span class="line">解释：在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。   </span><br><span class="line">     注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。   </span><br><span class="line">     因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：prices = [7,6,4,3,1] </span><br><span class="line">输出：0 </span><br><span class="line">解释：在这个情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：prices = [1]</span><br><span class="line">输出：0</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= prices.length &lt;= 105</code></li>
+<li><code>0 &lt;= prices[i] &lt;= 105</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>动态规划</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### &lt;span id=<span class="string">"head30"</span>&gt;🟠<span class="number">188.</span> 买卖股票的最佳时机 IV&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">&gt; 给你一个整数数组 `prices` 和一个整数 `k` ，其中 `prices[i]` 是某支给定的股票在第 `i` 天的价格。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 设计一个算法来计算你所能获取的最大利润。你最多可以完成 `k` 笔交易。也就是说，你最多可以买 `k` 次，卖 `k` 次。</span><br><span class="line">&gt;</span><br><span class="line">&gt; **注意：**你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>输入：k = 2, prices = [2,4,1]<br>输出：2<br>解释：在第 1 天 (股票价格 = 2) 的时候买入，在第 2 天 (股票价格 = 4) 的时候卖出，这笔交易所能获得利润 = 4-2 = 2 。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>输入：k = 2, prices = [3,2,6,5,0,3]<br>输出：7<br>解释：在第 2 天 (股票价格 = 2) 的时候买入，在第 3 天 (股票价格 = 6) 的时候卖出, 这笔交易所能获得利润 = 6-2 = 4 。<br>     随后，在第 5 天 (股票价格 = 0) 的时候买入，在第 6 天 (股票价格 = 3) 的时候卖出, 这笔交易所能获得利润 = 3-0 = 3 。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**提示：**</span><br><span class="line"></span><br><span class="line">- `1 &lt;= k &lt;= 100`</span><br><span class="line">- `1 &lt;= prices.length &lt;= 1000`</span><br><span class="line">- `0 &lt;= prices[i] &lt;= 1000`</span><br><span class="line"></span><br><span class="line">Related Topics</span><br><span class="line"></span><br><span class="line">数组</span><br><span class="line"></span><br><span class="line">动态规划</span><br><span class="line"></span><br><span class="line">```java</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<h3><span id="309-mai-mai-gu-piao-de-zui-jia-shi-ji-han-leng-dong-qi"><span id="head31">🟡309. 买卖股票的最佳时机含冷冻期</span></span><a href="#309-mai-mai-gu-piao-de-zui-jia-shi-ji-han-leng-dong-qi" class="header-anchor">#</a></h3><blockquote>
+<p>给定一个整数数组 <code>prices</code>，其中第 <code>prices[i]</code> 表示第 <code>*i*</code> 天的股票价格 。</p>
+<p>设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）:</p>
+<ul>
+<li>卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。</li>
+</ul>
+<p><strong>注意：</strong>你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: prices = [1,2,3,0,2]</span><br><span class="line">输出: 3 </span><br><span class="line">解释: 对应的交易状态为: [买入, 卖出, 冷冻期, 买入, 卖出]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: prices = [1]</span><br><span class="line">输出: 0</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= prices.length &lt;= 5000</code></li>
+<li><code>0 &lt;= prices[i] &lt;= 1000</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>动态规划</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### &lt;span id=<span class="string">"head32"</span>&gt;🟡<span class="number">714.</span> 买卖股票的最佳时机含手续费&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">&gt; 给定一个整数数组 `prices`，其中 `prices[i]`表示第 `i` 天的股票价格 ；整数 `fee` 代表了交易股票的手续费用。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 你可以无限次地完成交易，但是你每笔交易都需要付手续费。如果你已经购买了一个股票，在卖出它之前你就不能再继续购买股票了。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 返回获得利润的最大值。</span><br><span class="line">&gt;</span><br><span class="line">&gt; **注意：**这里的一笔交易指买入持有并卖出股票的整个过程，每笔交易你只需要为支付一次手续费。</span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>输入：prices = [1, 3, 2, 8, 4, 9], fee = 2<br>输出：8<br>解释：能够达到的最大利润:<br>在此处买入 prices[0] = 1<br>在此处卖出 prices[3] = 8<br>在此处买入 prices[4] = 4<br>在此处卖出 prices[5] = 9<br>总利润: ((8 - 1) - 2) + ((9 - 4) - 2) = 8</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>输入：prices = [1,3,7,5,10,3], fee = 3<br>输出：6</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**提示：**</span><br><span class="line"></span><br><span class="line">- `1 &lt;= prices.length &lt;= 5 * 104`</span><br><span class="line">- `1 &lt;= prices[i] &lt; 5 * 104`</span><br><span class="line">- `0 &lt;= fee &lt; 5 * 104`</span><br><span class="line"></span><br><span class="line">Related Topics</span><br><span class="line"></span><br><span class="line">贪心</span><br><span class="line"></span><br><span class="line">数组</span><br><span class="line"></span><br><span class="line">动态规划</span><br><span class="line"></span><br><span class="line">```java</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<h1><span id="zi-xu-lie-xi-lie"><span id="head33"> 子序列系列</span></span><a href="#zi-xu-lie-xi-lie" class="header-anchor">#</a></h1><h2><span id="bu-lian-xu-zi-xu-lie"><span id="head34"> 不连续子序列</span></span><a href="#bu-lian-xu-zi-xu-lie" class="header-anchor">#</a></h2><h3><span id="300-zui-chang-di-zeng-zi-xu-lie"><span id="head35">🟡300. 最长递增子序列</span></span><a href="#300-zui-chang-di-zeng-zi-xu-lie" class="header-anchor">#</a></h3><blockquote>
+<p>给你一个整数数组 <code>nums</code> ，找到其中最长严格递增子序列的长度。</p>
+<p><strong>子序列</strong> 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，<code>[3,6,2,7]</code> 是数组 <code>[0,3,1,6,2,2,7]</code> 的子序列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [10,9,2,5,3,7,101,18]</span><br><span class="line">输出：4</span><br><span class="line">解释：最长递增子序列是 [2,3,7,101]，因此长度为 4 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,1,0,3,2,3]</span><br><span class="line">输出：4</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [7,7,7,7,7,7,7]</span><br><span class="line">输出：1</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 2500</code></li>
+<li><code>-104 &lt;= nums[i] &lt;= 104</code></li>
+</ul>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>你能将算法的时间复杂度降低到 <code>O(n log(n))</code> 吗?</li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>二分查找</p>
+<p>动态规划</p>
+</blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
 
 
-<h3><span id="139-dan-ci-chai-fen"><span id="head21">🟡139. 单词拆分</span></span><a href="#139-dan-ci-chai-fen" class="header-anchor">#</a></h3><h1><span id="da-jia-jie-she-xi-lie"><span id="head22"> 打家劫舍系列</span></span><a href="#da-jia-jie-she-xi-lie" class="header-anchor">#</a></h1><h3><span id="198-da-jia-jie-she"><span id="head23">🟡198. 打家劫舍</span></span><a href="#198-da-jia-jie-she" class="header-anchor">#</a></h3><h3><span id="213-da-jia-jie-she-ii"><span id="head24">🟡213. 打家劫舍 II</span></span><a href="#213-da-jia-jie-she-ii" class="header-anchor">#</a></h3><h3><span id="337-da-jia-jie-she-iii"><span id="head25">🟡337. 打家劫舍 III</span></span><a href="#337-da-jia-jie-she-iii" class="header-anchor">#</a></h3><h1><span id="gu-piao-xi-lie"><span id="head26"> 股票系列</span></span><a href="#gu-piao-xi-lie" class="header-anchor">#</a></h1><h3><span id="121-mai-mai-gu-piao-de-zui-jia-shi-ji"><span id="head27">🟢121. 买卖股票的最佳时机</span></span><a href="#121-mai-mai-gu-piao-de-zui-jia-shi-ji" class="header-anchor">#</a></h3><h3><span id="122-mai-mai-gu-piao-de-zui-jia-shi-ji-ii"><span id="head28">🟡122. 买卖股票的最佳时机 II</span></span><a href="#122-mai-mai-gu-piao-de-zui-jia-shi-ji-ii" class="header-anchor">#</a></h3><h3><span id="123-mai-mai-gu-piao-de-zui-jia-shi-ji-iii"><span id="head29">🟠123. 买卖股票的最佳时机 III</span></span><a href="#123-mai-mai-gu-piao-de-zui-jia-shi-ji-iii" class="header-anchor">#</a></h3><h3><span id="188-mai-mai-gu-piao-de-zui-jia-shi-ji-iv"><span id="head30">🟠188. 买卖股票的最佳时机 IV</span></span><a href="#188-mai-mai-gu-piao-de-zui-jia-shi-ji-iv" class="header-anchor">#</a></h3><h3><span id="309-mai-mai-gu-piao-de-zui-jia-shi-ji-han-leng-dong-qi"><span id="head31">🟡309. 买卖股票的最佳时机含冷冻期</span></span><a href="#309-mai-mai-gu-piao-de-zui-jia-shi-ji-han-leng-dong-qi" class="header-anchor">#</a></h3><h3><span id="714-mai-mai-gu-piao-de-zui-jia-shi-ji-han-shou-xu-fei"><span id="head32">🟡714. 买卖股票的最佳时机含手续费</span></span><a href="#714-mai-mai-gu-piao-de-zui-jia-shi-ji-han-shou-xu-fei" class="header-anchor">#</a></h3><h1><span id="zi-xu-lie-xi-lie"><span id="head33"> 子序列系列</span></span><a href="#zi-xu-lie-xi-lie" class="header-anchor">#</a></h1><h2><span id="bu-lian-xu-zi-xu-lie"><span id="head34"> 不连续子序列</span></span><a href="#bu-lian-xu-zi-xu-lie" class="header-anchor">#</a></h2><h3><span id="300-zui-chang-di-zeng-zi-xu-lie"><span id="head35">🟡300. 最长递增子序列</span></span><a href="#300-zui-chang-di-zeng-zi-xu-lie" class="header-anchor">#</a></h3><h3><span id="1143-zui-chang-gong-gong-zi-xu-lie"><span id="head36">🟡1143. 最长公共子序列</span></span><a href="#1143-zui-chang-gong-gong-zi-xu-lie" class="header-anchor">#</a></h3><h3><span id="1035-bu-xiang-jiao-de-xian"><span id="head37">🟡1035. 不相交的线</span></span><a href="#1035-bu-xiang-jiao-de-xian" class="header-anchor">#</a></h3><h2><span id="lian-xu-zi-xu-lie"><span id="head38"> 连续子序列</span></span><a href="#lian-xu-zi-xu-lie" class="header-anchor">#</a></h2><h3><span id="674-zui-chang-lian-xu-di-zeng-xu-lie"><span id="head39">🟢674. 最长连续递增序列</span></span><a href="#674-zui-chang-lian-xu-di-zeng-xu-lie" class="header-anchor">#</a></h3><h3><span id="718-zui-chang-chong-fu-zi-shu-zu"><span id="head40">🟡718. 最长重复子数组</span></span><a href="#718-zui-chang-chong-fu-zi-shu-zu" class="header-anchor">#</a></h3><h3><span id="53-zui-da-zi-shu-zu-he"><span id="head41">🟡53. 最大子数组和</span></span><a href="#53-zui-da-zi-shu-zu-he" class="header-anchor">#</a></h3><h2><span id="bian-ji-ju-chi"><span id="head42"> 编辑距离</span></span><a href="#bian-ji-ju-chi" class="header-anchor">#</a></h2><h3><span id="392-pan-duan-zi-xu-lie"><span id="head43">🟢392. 判断子序列</span></span><a href="#392-pan-duan-zi-xu-lie" class="header-anchor">#</a></h3><h3><span id="115-bu-tong-de-zi-xu-lie"><span id="head44">🟠115. 不同的子序列</span></span><a href="#115-bu-tong-de-zi-xu-lie" class="header-anchor">#</a></h3><h3><span id="583-liang-ge-zi-fu-chuan-de-shan-chu-cao-zuo"><span id="head45">🟡583. 两个字符串的删除操作</span></span><a href="#583-liang-ge-zi-fu-chuan-de-shan-chu-cao-zuo" class="header-anchor">#</a></h3><h3><span id="72-bian-ji-ju-chi"><span id="head46">🟠72. 编辑距离</span></span><a href="#72-bian-ji-ju-chi" class="header-anchor">#</a></h3><h2><span id="hui-wen"><span id="head47"> 回文</span></span><a href="#hui-wen" class="header-anchor">#</a></h2><h3><span id="647-hui-wen-zi-chuan"><span id="head48">🟡647. 回文子串</span></span><a href="#647-hui-wen-zi-chuan" class="header-anchor">#</a></h3><h3><span id="516-zui-chang-hui-wen-zi-xu-lie"><span id="head49">🟡516. 最长回文子序列</span></span><a href="#516-zui-chang-hui-wen-zi-xu-lie" class="header-anchor">#</a></h3>
+<h3><span id="1143-zui-chang-gong-gong-zi-xu-lie"><span id="head36">🟡1143. 最长公共子序列</span></span><a href="#1143-zui-chang-gong-gong-zi-xu-lie" class="header-anchor">#</a></h3><blockquote>
+<p>给定两个字符串 <code>text1</code> 和 <code>text2</code>，返回这两个字符串的最长 <strong>公共子序列</strong> 的长度。如果不存在 <strong>公共子序列</strong> ，返回 <code>0</code> 。</p>
+<p>一个字符串的 <strong>子序列</strong> 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。</p>
+<ul>
+<li>例如，<code>"ace"</code> 是 <code>"abcde"</code> 的子序列，但 <code>"aec"</code> 不是 <code>"abcde"</code> 的子序列。</li>
+</ul>
+<p>两个字符串的 <strong>公共子序列</strong> 是这两个字符串所共同拥有的子序列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：text1 = "abcde", text2 = "ace" </span><br><span class="line">输出：3  </span><br><span class="line">解释：最长公共子序列是 "ace" ，它的长度为 3 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：text1 = "abc", text2 = "abc"</span><br><span class="line">输出：3</span><br><span class="line">解释：最长公共子序列是 "abc" ，它的长度为 3 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：text1 = "abc", text2 = "def"</span><br><span class="line">输出：0</span><br><span class="line">解释：两个字符串没有公共子序列，返回 0 。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= text1.length, text2.length &lt;= 1000</code></li>
+<li><code>text1</code> 和 <code>text2</code> 仅由小写英文字符组成。</li>
+</ul>
+<p>Related Topics</p>
+<p>字符串</p>
+<p>动态规划</p>
+</blockquote>
+<pre><code class="java">
+### &lt;span id="head37"&gt;🟡1035. 不相交的线&lt;/span&gt;
+
+## &lt;span id="head38"&gt; 连续子序列&lt;/span&gt;
+
+### &lt;span id="head39"&gt;🟢674. 最长连续递增序列&lt;/span&gt;
+
+### &lt;span id="head40"&gt;🟡718. 最长重复子数组&lt;/span&gt;
+
+### &lt;span id="head41"&gt;🟡53. 最大子数组和&lt;/span&gt;
+
+## &lt;span id="head42"&gt; 编辑距离&lt;/span&gt;
+
+### &lt;span id="head43"&gt;🟢392. 判断子序列&lt;/span&gt;
+
+### &lt;span id="head44"&gt;🟠115. 不同的子序列&lt;/span&gt;
+
+### &lt;span id="head45"&gt;🟡583. 两个字符串的删除操作&lt;/span&gt;
+
+### &lt;span id="head46"&gt;🟠72. 编辑距离&lt;/span&gt;
+
+## &lt;span id="head47"&gt; 回文&lt;/span&gt;
+
+### &lt;span id="head48"&gt;🟡647. 回文子串&lt;/span&gt;
+
+### &lt;span id="head49"&gt;🟡516. 最长回文子序列&lt;/span&gt;
+</code></pre>
+
         </div>
 
 
