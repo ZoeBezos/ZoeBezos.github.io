@@ -431,7 +431,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">720</a>                         
+                            <a href="">1.7k</a>                         
                         </span>
                         
                     
@@ -440,7 +440,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">3min</a>                         
+                            <a href="">7min</a>                         
                         </span>
                         
                     
@@ -453,25 +453,30 @@
             <table>
 <thead>
 <tr>
-<th><a href="#head1">🟢100162. 最大频率元素计数</a></th>
-<th></th>
-<th></th>
+<th>题号</th>
+<th>标签</th>
+<th>作答情况</th>
 </tr>
 </thead>
 <tbody><tr>
+<td><a href="#head1">🟢100162. 最大频率元素计数</a></td>
+<td>数组 哈希表</td>
+<td>14min</td>
+</tr>
+<tr>
 <td><a href="#head2">🟡100165. 找出数组中的美丽下标 I</a></td>
-<td></td>
-<td></td>
+<td>KMP 字符哈希</td>
+<td>没作答</td>
 </tr>
 <tr>
 <td><a href="#head3">🟡100160. 价值和小于等于 K 的最大数字</a></td>
 <td></td>
-<td></td>
+<td>没作答</td>
 </tr>
 <tr>
 <td><a href="#head4">🟠100207. 找出数组中的美丽下标 II</a></td>
 <td></td>
-<td></td>
+<td>没作答</td>
 </tr>
 </tbody></table>
 <h1><span id="100162-zui-da-pin-lu-yuan-su-ji-shu"><span id="head1"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-elements-with-maximum-frequency/">🟢100162. 最大频率元素计数</a></span></span><a href="#100162-zui-da-pin-lu-yuan-su-ji-shu" class="header-anchor">#</a></h1><blockquote>
@@ -493,9 +498,66 @@
 <p>通过的代码如下，但是我疑惑的是被注释掉的地方为什么没有按照我的想法解决问题呢？</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxFrequencyElements</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">         HashMap&lt;Integer,Integer&gt;hm=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="type">int</span> max_cnt=<span class="number">0</span>,res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line"><span class="comment">//            hm.put(nums[i],hm.getOrDefault(hm.get(nums[i]),0)+1);</span></span><br><span class="line">            <span class="keyword">if</span>(hm.containsKey(nums[i])){</span><br><span class="line">                hm.put(nums[i],hm.get(nums[i])+<span class="number">1</span> );</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                hm.put(nums[i],<span class="number">1</span>);</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(hm.get(nums[i])&gt;max_cnt){</span><br><span class="line">                max_cnt=hm.get(nums[i]);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(hm.get(nums[i])==max_cnt){</span><br><span class="line">                res++;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
+<p>用了chatgpt查到实际上是逻辑出现了错误🙃</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxFrequencyElements</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        HashMap&lt;Integer,Integer&gt;map=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="type">int</span> max_cnt=<span class="number">0</span>,res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) {</span><br><span class="line">            map.put(num, map.getOrDefault(num, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (map.get(num) &gt; max_cnt) {</span><br><span class="line">                max_cnt = map.get(num);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(map.get(nums[i])==max_cnt){</span><br><span class="line">                res++;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
+<h1><span id="100165-zhao-chu-shu-zu-zhong-de-mei-li-xia-biao-i"><span id="head2"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-beautiful-indices-in-the-given-array-i/">🟡100165. 找出数组中的美丽下标 I</a></span></span><a href="#100165-zhao-chu-shu-zu-zhong-de-mei-li-xia-biao-i" class="header-anchor">#</a></h1><blockquote>
+<p>给你一个下标从 <strong>0</strong> 开始的字符串 <code>s</code> 、字符串 <code>a</code> 、字符串 <code>b</code> 和一个整数 <code>k</code> 。</p>
+<p>如果下标 <code>i</code> 满足以下条件，则认为它是一个 <strong>美丽下标</strong>：</p>
+<ul>
+<li><p><code>0 &lt;= i &lt;= s.length - a.length</code></p>
+</li>
+<li><p><code>s[i..(i + a.length - 1)] == a</code></p>
+</li>
+<li><p>存在下标<code>i</code>,<code>j</code></p>
+<p>使得：</p>
+<ul>
+<li><code>0 &lt;= j &lt;= s.length - b.length</code></li>
+<li><code>s[j..(j + b.length - 1)] == b</code></li>
+<li><code>|j - i| &lt;= k</code></li>
+</ul>
+</li>
+</ul>
+<p>以数组形式按 <strong>从小到大排序</strong> 返回美丽下标。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "isawsquirrelnearmysquirrelhouseohmy", a = "my", b = "squirrel", k = 15</span><br><span class="line">输出：[16,33]</span><br><span class="line">解释：存在 2 个美丽下标：[16,33]。</span><br><span class="line">- 下标 16 是美丽下标，因为 s[16..17] == "my" ，且存在下标 4 ，满足 s[4..11] == "squirrel" 且 |16 - 4| &lt;= 15 。</span><br><span class="line">- 下标 33 是美丽下标，因为 s[33..34] == "my" ，且存在下标 18 ，满足 s[18..25] == "squirrel" 且 |33 - 18| &lt;= 15 。</span><br><span class="line">因此返回 [16,33] 作为结果。</span><br></pre></td></tr></tbody></table></figure>
 
-<h1><span id="100165-zhao-chu-shu-zu-zhong-de-mei-li-xia-biao-i"><span id="head2"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-beautiful-indices-in-the-given-array-i/">🟡100165. 找出数组中的美丽下标 I</a></span></span><a href="#100165-zhao-chu-shu-zu-zhong-de-mei-li-xia-biao-i" class="header-anchor">#</a></h1><h1><span id="100160-jie-zhi-he-xiao-yu-deng-yu-k-de-zui-da-shu-zi"><span id="head3"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k/">🟡100160. 价值和小于等于 K 的最大数字</a></span></span><a href="#100160-jie-zhi-he-xiao-yu-deng-yu-k-de-zui-da-shu-zi" class="header-anchor">#</a></h1><h1><span id="100207-zhao-chu-shu-zu-zhong-de-mei-li-xia-biao-ii"><span id="head4"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-beautiful-indices-in-the-given-array-ii/">🟠100207. 找出数组中的美丽下标 II</a></span></span><a href="#100207-zhao-chu-shu-zu-zhong-de-mei-li-xia-biao-ii" class="header-anchor">#</a></h1><blockquote>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "abcd", a = "a", b = "a", k = 4</span><br><span class="line">输出：[0]</span><br><span class="line">解释：存在 1 个美丽下标：[0]。</span><br><span class="line">- 下标 0 是美丽下标，因为 s[0..0] == "a" ，且存在下标 0 ，满足 s[0..0] == "a" 且 |0 - 0| &lt;= 4 。</span><br><span class="line">因此返回 [0] 作为结果。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= k &lt;= s.length &lt;= 105</code></li>
+<li><code>1 &lt;= a.length, b.length &lt;= 10</code></li>
+<li><code>s</code>、<code>a</code>、和 <code>b</code> 只包含小写英文字母。</li>
+</ul>
+</blockquote>
+<p>第一思路，写的超时了：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">beautifulIndices</span><span class="params">(String s, String a, String b, <span class="type">int</span> k)</span> {</span><br><span class="line">        <span class="type">int</span> len_s=s.length(),len_a=a.length(),len_b=b.length();</span><br><span class="line">        List&lt;Integer&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= len_s-len_a; i++) {</span><br><span class="line">            <span class="keyword">if</span>(s.substring(i,i+len_a).equals(a)){</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= len_s-len_b; j++) {</span><br><span class="line">                    <span class="keyword">if</span>(s.substring(j,j+len_b).equals(b)&amp;&amp;Math.abs(j-i)&lt;=k){</span><br><span class="line">                        res.add(i);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>是一个不错的契机实战一下KMP算法：</p>
+<h1><span id="100160-jie-zhi-he-xiao-yu-deng-yu-k-de-zui-da-shu-zi"><span id="head3"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k/">🟡100160. 价值和小于等于 K 的最大数字</a></span></span><a href="#100160-jie-zhi-he-xiao-yu-deng-yu-k-de-zui-da-shu-zi" class="header-anchor">#</a></h1><blockquote>
+<p>给你一个整数 <code>k</code> 和一个整数 <code>x</code> 。</p>
+<p>令 <code>s</code> 为整数 <code>num</code> 的下标从 <strong>1</strong> 开始的二进制表示。我们说一个整数 <code>num</code> 的 <strong>价值</strong> 是满足 <code>i % x == 0</code> 且 <code>s[i]</code> 是 <strong>设置位</strong> 的 <code>i</code> 的数目。</p>
+<p>请你返回 <strong>最大</strong> 整数 <code>num</code> ，满足从 <code>1</code> 到 <code>num</code> 的所有整数的 <strong>价值</strong> 和小于等于 <code>k</code> 。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>一个整数二进制表示下 <strong>设置位</strong> 是值为 <code>1</code> 的数位。</li>
+<li>一个整数的二进制表示下标从右到左编号，比方说如果 <code>s == 11100</code> ，那么 <code>s[4] == 1</code> 且 <code>s[2] == 0</code> 。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：k = 9, x = 1</span><br><span class="line">输出：6</span><br><span class="line">解释：数字 1 ，2 ，3 ，4 ，5 和 6 二进制表示分别为 "1" ，"10" ，"11" ，"100" ，"101" 和 "110" 。</span><br><span class="line">由于 x 等于 1 ，每个数字的价值分别为所有设置位的数目。</span><br><span class="line">这些数字的所有设置位数目总数是 9 ，所以前 6 个数字的价值和为 9 。</span><br><span class="line">所以答案为 6 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：k = 7, x = 2</span><br><span class="line">输出：9</span><br><span class="line">解释：由于 x 等于 2 ，我们检查每个数字的偶数位。</span><br><span class="line">2 和 3 在二进制表示下的第二个数位为设置位，所以它们的价值和为 2 。</span><br><span class="line">6 和 7 在二进制表示下的第二个数位为设置位，所以它们的价值和为 2 。</span><br><span class="line">8 和 9 在二进制表示下的第四个数位为设置位但第二个数位不是设置位，所以它们的价值和为 2 。</span><br><span class="line">数字 1 ，4 和 5 在二进制下偶数位都不是设置位，所以它们的价值和为 0 。</span><br><span class="line">10 在二进制表示下的第二个数位和第四个数位都是设置位，所以它的价值为 2 。</span><br><span class="line">前 9 个数字的价值和为 6 。</span><br><span class="line">前 10 个数字的价值和为 8，超过了 k = 7 ，所以答案为 9 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= k &lt;= 1015</code></li>
+<li><code>1 &lt;= x &lt;= 8</code></li>
+</ul>
+</blockquote>
+<h1><span id="100207-zhao-chu-shu-zu-zhong-de-mei-li-xia-biao-ii"><span id="head4"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-beautiful-indices-in-the-given-array-ii/">🟠100207. 找出数组中的美丽下标 II</a></span></span><a href="#100207-zhao-chu-shu-zu-zhong-de-mei-li-xia-biao-ii" class="header-anchor">#</a></h1><blockquote>
 <p>给你一个下标从 <strong>0</strong> 开始的字符串 <code>s</code> 、字符串 <code>a</code> 、字符串 <code>b</code> 和一个整数 <code>k</code> 。</p>
 <p>如果下标 <code>i</code> 满足以下条件，则认为它是一个 <strong>美丽下标</strong> ：</p>
 <ul>
@@ -503,7 +565,7 @@
 </li>
 <li><p><code>s[i..(i + a.length - 1)] == a</code></p>
 </li>
-<li><p>存在下标 i,j</p>
+<li><p>存在下标<code> i</code>,<code>j</code></p>
 <p> 使得：</p>
 <ul>
 <li><code>0 &lt;= j &lt;= s.length - b.length</code></li>
@@ -526,8 +588,6 @@
 <li><code>s</code>、<code>a</code>、和 <code>b</code> 只包含小写英文字母。</li>
 </ul>
 </blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-
 
         </div>
 
