@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2023/12/24/23-12-24-algorithm-OD/</loc>
+    <lastmod>2024-01-14</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/01/23-9-1-algorithm-array/</loc>
+    <lastmod>2024-01-14</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2024/01/14/24-1-14-lccontest380/</loc>
     <lastmod>2024-01-14</lastmod>
   </url>
@@ -15,10 +23,6 @@
   <url>
     <loc>https://zoebezos.github.io/2023/09/04/23-9-4-algorithm-strings/</loc>
     <lastmod>2024-01-14</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/12/24/23-12-24-algorithm-OD/</loc>
-    <lastmod>2024-01-11</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2023/09/10/23-9-10-algorithm-dp/</loc>
@@ -74,10 +78,6 @@
   </url>
   <url>
     <loc>https://zoebezos.github.io/2023/09/05/23-9-5-algorithm-twopointers/</loc>
-    <lastmod>2023-11-27</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/01/23-9-1-algorithm-array/</loc>
     <lastmod>2023-11-27</lastmod>
   </url>
   <url>
