@@ -408,6 +408,7 @@
         return target;
     }
 </script>
+
     
 
     
@@ -519,7 +520,7 @@
 <td>链表</td>
 </tr>
 </tbody></table>
-<h1><span id="203-yi-chu-lian-biao-yuan-su"><span id="head2"> 🟢203. 移除链表元素</span></span><a href="#203-yi-chu-lian-biao-yuan-su" class="header-anchor">#</a></h1><blockquote>
+<h1><span id="203-yi-chu-lian-biao-yuan-su"><span id="head2"> 🟢203. 移除链表元素</span></span></h1><blockquote>
 <p>给你一个链表的头节点 <code>head</code> 和一个整数 <code>val</code> ，请你删除链表中所有满足 <code>Node.val == val</code> 的节点，并返回 <strong>新的头节点</strong> 。</p>
 <p><strong>示例 1：</strong></p>
 <p><img src="https://assets.leetcode.com/uploads/2021/03/06/removelinked-list.jpg" alt="img"></p>
@@ -547,7 +548,7 @@
 
 
 
-<h1><span id="707-she-ji-lian-biao"><span id="head3"> 🟡707.设计链表</span></span><a href="#707-she-ji-lian-biao" class="header-anchor">#</a></h1><blockquote>
+<h1><span id="707-she-ji-lian-biao"><span id="head3"> 🟡707.设计链表</span></span></h1><blockquote>
 <p>你可以选择使用单链表或者双链表，设计并实现自己的链表。</p>
 <p>单链表中的节点应该具备两个属性：<code>val</code> 和 <code>next</code> 。<code>val</code> 是当前节点的值，<code>next</code> 是指向下一个节点的指针/引用。</p>
 <p>如果是双向链表，则还需要属性 <code>prev</code> 以指示链表中的上一个节点。假设链表中的所有节点下标从 <strong>0</strong> 开始。</p>
@@ -579,7 +580,7 @@
 
 
 
-<h1><span id="206-fan-zhuan-lian-biao"><span id="head4"> 🟢206.反转链表</span></span><a href="#206-fan-zhuan-lian-biao" class="header-anchor">#</a></h1><blockquote>
+<h1><span id="206-fan-zhuan-lian-biao"><span id="head4"> 🟢206.反转链表</span></span></h1><blockquote>
 <p>给你单链表的头节点 <code>head</code> ，请你反转链表，并返回反转后的链表。</p>
 <p><strong>示例 1：</strong></p>
 <p><img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg" alt="img"></p>
@@ -607,7 +608,7 @@
 <p>自己一开始一口气了又臭又长的,妥妥超时:</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">reverseList</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="comment">//没有虚拟节点,仅有一个指针</span></span><br><span class="line">        <span class="keyword">if</span>(head==<span class="literal">null</span>){</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        }</span><br><span class="line">        Stack&lt;Integer&gt; s=<span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        ListNode p=head;</span><br><span class="line">        <span class="keyword">while</span>(p!=<span class="literal">null</span>){</span><br><span class="line">            s.push(p.val);</span><br><span class="line">            p=p.next;</span><br><span class="line">        }</span><br><span class="line">        ListNode res;</span><br><span class="line">        ListNode node=<span class="keyword">new</span> <span class="title class_">ListNode</span>(s.pop());</span><br><span class="line">        ListNode cur=node;</span><br><span class="line">        <span class="keyword">while</span>(!s.empty()){</span><br><span class="line">            ListNode newnode=<span class="keyword">new</span> <span class="title class_">ListNode</span>(s.pop());</span><br><span class="line">            cur.next=newnode;</span><br><span class="line">            cur=cur.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h1><span id="24-liang-liang-jiao-huan-lian-biao-zhong-de-jie-dian"><span id="head5"> 🟡24. 两两交换链表中的节点</span></span><a href="#24-liang-liang-jiao-huan-lian-biao-zhong-de-jie-dian" class="header-anchor">#</a></h1><blockquote>
+<h1><span id="24-liang-liang-jiao-huan-lian-biao-zhong-de-jie-dian"><span id="head5"> 🟡24. 两两交换链表中的节点</span></span></h1><blockquote>
 <p>给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。</p>
 <p><strong>示例 1：</strong></p>
 <p><img src="https://assets.leetcode.com/uploads/2020/10/03/swap_ex1.jpg" alt="img"></p>
@@ -634,7 +635,7 @@
 
 
 
-<h1><span id="19-shan-chu-lian-biao-de-dao-shu-di-n-ge-jie-dian"><span id="head6">🟡19. 删除链表的倒数第 N 个结点</span></span><a href="#19-shan-chu-lian-biao-de-dao-shu-di-n-ge-jie-dian" class="header-anchor">#</a></h1><blockquote>
+<h1><span id="19-shan-chu-lian-biao-de-dao-shu-di-n-ge-jie-dian"><span id="head6">🟡19. 删除链表的倒数第 N 个结点</span></span></h1><blockquote>
 <p>给你一个链表，删除链表的倒数第 <code>n</code> 个结点，并且返回链表的头结点。</p>
 <p><strong>示例 1：</strong></p>
 <p><img src="https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg" alt="img"></p>
@@ -664,7 +665,7 @@
 
 
 
-<h1><span id="160-lian-biao-xiang-jiao"><span id="head7">🟢160.链表相交</span></span><a href="#160-lian-biao-xiang-jiao" class="header-anchor">#</a></h1><blockquote>
+<h1><span id="160-lian-biao-xiang-jiao"><span id="head7">🟢160.链表相交</span></span></h1><blockquote>
 <p>给你两个单链表的头节点 <code>headA</code> 和 <code>headB</code> ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 <code>null</code> 。</p>
 <p>图示两个链表在节点 <code>c1</code> 开始相交<strong>：</strong></p>
 <p><a target="_blank" rel="noopener" href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png" alt="img"></a></p>
@@ -715,7 +716,7 @@
 </blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> {</span><br><span class="line">        Stack&lt;ListNode&gt; a=<span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        Stack&lt;ListNode&gt; b=<span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        ListNode pa=headA,pb=headB,res=headA;</span><br><span class="line">        <span class="type">int</span> flag=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(pa!=<span class="literal">null</span>){</span><br><span class="line">            a.push(pa);</span><br><span class="line">            pa=pa.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span>(pb!=<span class="literal">null</span>){</span><br><span class="line">            b.push(pb);</span><br><span class="line">            pb=pb.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(!a.empty()&amp;&amp;!b.empty()){</span><br><span class="line">            ListNode ap=a.pop(),bp=b.pop();</span><br><span class="line">            <span class="keyword">if</span>(ap!=<span class="literal">null</span>&amp;&amp;ap==bp){</span><br><span class="line">                cnt++;</span><br><span class="line">                res=ap;</span><br><span class="line">                flag=<span class="number">1</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(flag==<span class="number">1</span>){</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h1><span id="142-huan-xing-lian-biao-ii"><span id="head8">🟡142.环形链表II</span></span><a href="#142-huan-xing-lian-biao-ii" class="header-anchor">#</a></h1><blockquote>
+<h1><span id="142-huan-xing-lian-biao-ii"><span id="head8">🟡142.环形链表II</span></span></h1><blockquote>
 <p>给定一个链表的头节点 <code>head</code> ，返回链表开始入环的第一个节点。 <em>如果链表无环，则返回 <code>null</code>。</em></p>
 <p>如果链表中有某个节点，可以通过连续跟踪 <code>next</code> 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 <code>pos</code> 来表示链表尾连接到链表中的位置（<strong>索引从 0 开始</strong>）。如果 <code>pos</code> 是 <code>-1</code>，则在该链表中没有环。<strong>注意：<code>pos</code> 不作为参数进行传递</strong>，仅仅是为了标识链表的实际情况。</p>
 <p><strong>不允许修改</strong> 链表。</p>

@@ -1036,6 +1036,23 @@ header label {
   margin: 0;
   padding-top: 0;
 }
+.tags-algorithm {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.tags-algorithm .tags-item {
+  border: 1px solid #ccc;
+  padding: 5px 15px;
+  border-radius: 20px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+.tags-algorithm .tags-item .nums {
+  margin-left: 5px;
+  color: #2d96bd;
+}
 .post-wrap p {
   font-size: 1em;
   margin: 1em 0 1em 0;
@@ -1078,32 +1095,32 @@ header label {
   padding-bottom: 0.3em;
 }
 .post-content h1::before {
-  content: "#";
-  margin-right: 5px;
+content
+  margin-right: 0px;
   color: #004c97;
 }
 .dark-theme .post-content h1::before {
   color: $dark-post-link-color;
 }
 .post-content h2::before {
-  content: "#";
-  margin-right: 5px;
+content
+  margin-right: 0px;
   color: #004c97;
 }
 .dark-theme .post-content h2::before {
   color: $dark-post-link-color;
 }
 .post-content h3::before {
-  content: "|";
-  margin-right: 5px;
+content
+  margin-right: 0px;
   color: #004c97;
 }
 .dark-theme .post-content h3::before {
   color: $dark-post-link-color;
 }
 .post-content h4::before {
-  content: "*";
-  margin-right: 5px;
+content
+  margin-right: 0px;
   color: #004c97;
 }
 .dark-theme .post-content h4::before {
