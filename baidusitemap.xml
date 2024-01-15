@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2023/11/26/23-11-26-836-rectangle-overlap/</loc>
+    <lastmod>2024-01-15</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/12/24-1-12-2085-count-common-words-with-one-occurrence/</loc>
+    <lastmod>2024-01-15</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/14/24-1-14-83-remove-duplicates-from-sorted-list/</loc>
+    <lastmod>2024-01-15</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/15/24-1-15-82-remove-duplicates-from-sorted-list-ii/</loc>
+    <lastmod>2024-01-15</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/01/23-9-1-algorithm-array/</loc>
+    <lastmod>2024-01-15</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2024/01/14/24-1-14-lccontest380/</loc>
     <lastmod>2024-01-15</lastmod>
   </url>
@@ -13,27 +33,7 @@
     <lastmod>2024-01-15</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2024/01/15/24-1-15-82-remove-duplicates-from-sorted-list-ii/</loc>
-    <lastmod>2024-01-15</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/14/24-1-14-83-remove-duplicates-from-sorted-list/</loc>
-    <lastmod>2024-01-14</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2023/12/24/23-12-24-algorithm-OD/</loc>
-    <lastmod>2024-01-14</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/01/23-9-1-algorithm-array/</loc>
-    <lastmod>2024-01-14</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/11/26/23-11-26-836-rectangle-overlap/</loc>
-    <lastmod>2024-01-14</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/12/24-1-12-2085-count-common-words-with-one-occurrence/</loc>
     <lastmod>2024-01-14</lastmod>
   </url>
   <url>
