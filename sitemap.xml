@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zoebezos.github.io/2024/01/17/24-1-17-2744-find-maximum-number-of-string-pairs/</loc>
+    
+    <lastmod>2024-01-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/2023/12/24/23-12-24-algorithm-OD/</loc>
     
     <lastmod>2024-01-15</lastmod>
@@ -307,6 +316,13 @@
   </url>
   
   <url>
+    <loc>https://zoebezos.github.io/tags/algorithm-linkedlist/</loc>
+    <lastmod>2024-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/tags/algorithm-array/</loc>
     <lastmod>2024-01-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -335,7 +351,7 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/tags/algorithm-linkedlist/</loc>
+    <loc>https://zoebezos.github.io/tags/algorithm-simulation/</loc>
     <lastmod>2024-01-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
