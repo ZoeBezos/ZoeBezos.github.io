@@ -652,7 +652,7 @@
 <td></td>
 <td>23</td>
 <td align="center">✅</td>
-<td align="left"><a href="#head29">🟠123. 买卖股票的最佳时机 III</a></td>
+<td align="left"><a href="#head29">🔴123. 买卖股票的最佳时机 III</a></td>
 <td>dp</td>
 </tr>
 <tr>
@@ -660,7 +660,7 @@
 <td></td>
 <td>24</td>
 <td align="center">✅</td>
-<td align="left"><a href="#head30">🟠188. 买卖股票的最佳时机 IV</a></td>
+<td align="left"><a href="#head30">🔴188. 买卖股票的最佳时机 IV</a></td>
 <td>dp</td>
 </tr>
 <tr>
@@ -740,7 +740,7 @@
 <td></td>
 <td>34</td>
 <td align="center"></td>
-<td align="left"><a href="#head44">🟠115. 不同的子序列</a></td>
+<td align="left"><a href="#head44">🔴115. 不同的子序列</a></td>
 <td></td>
 </tr>
 <tr>
@@ -756,7 +756,7 @@
 <td></td>
 <td>36</td>
 <td align="center"></td>
-<td align="left"><a href="#head46">🟠72. 编辑距离</a></td>
+<td align="left"><a href="#head46">🔴72. 编辑距离</a></td>
 <td></td>
 </tr>
 <tr>
@@ -1381,7 +1381,7 @@
 
 
 
-<h3><span id="123-mai-mai-gu-piao-de-zui-jia-shi-ji-iii"><span id="head29">🟠123. 买卖股票的最佳时机 III</span></span></h3><blockquote>
+<h3><span id="123-mai-mai-gu-piao-de-zui-jia-shi-ji-iii"><span id="head29">🔴123. 买卖股票的最佳时机 III</span></span></h3><blockquote>
 <p>给定一个数组，它的第 <code>i</code> 个元素是一支给定的股票在第 <code>i</code> 天的价格。</p>
 <p>设计一个算法来计算你所能获取的最大利润。你最多可以完成 <strong>两笔</strong> 交易。</p>
 <p><strong>注意：</strong>你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
@@ -1412,7 +1412,7 @@
 
 
 
-<h3><span id="188-mai-mai-gu-piao-de-zui-jia-shi-ji-iv"><span id="head30">🟠188. 买卖股票的最佳时机 IV</span></span></h3><blockquote>
+<h3><span id="188-mai-mai-gu-piao-de-zui-jia-shi-ji-iv"><span id="head30">🔴188. 买卖股票的最佳时机 IV</span></span></h3><blockquote>
 <p>给你一个整数数组 <code>prices</code> 和一个整数 <code>k</code> ，其中 <code>prices[i]</code> 是某支给定的股票在第 <code>i</code> 天的价格。</p>
 <p>设计一个算法来计算你所能获取的最大利润。你最多可以完成 <code>k</code> 笔交易。也就是说，你最多可以买 <code>k</code> 次，卖 <code>k</code> 次。</p>
 <p><strong>注意：</strong>你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
@@ -1690,7 +1690,7 @@
 </blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isSubsequence</span><span class="params">(String s, String t)</span> {</span><br><span class="line">        <span class="type">int</span> m=s.length(),n=t.length();</span><br><span class="line">        <span class="type">int</span>[][]dp=<span class="keyword">new</span> <span class="title class_">int</span>[m+<span class="number">1</span>][n+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= m ; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= n; j++) {</span><br><span class="line">                <span class="keyword">if</span>(s.charAt(i-<span class="number">1</span>)==t.charAt(j-<span class="number">1</span>)){</span><br><span class="line">                    dp[i][j]=dp[i-<span class="number">1</span>][j-<span class="number">1</span>]+<span class="number">1</span>;</span><br><span class="line">                }<span class="keyword">else</span>{</span><br><span class="line">                    dp[i][j]=Math.max(dp[i-<span class="number">1</span>][j],dp[i][j-<span class="number">1</span>]);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[m][n]==m;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h3><span id="115-bu-tong-de-zi-xu-lie"><span id="head44">🟠115. 不同的子序列</span></span></h3><blockquote>
+<h3><span id="115-bu-tong-de-zi-xu-lie"><span id="head44">🔴115. 不同的子序列</span></span></h3><blockquote>
 <p>给你两个字符串 <code>s</code> 和 <code>t</code> ，统计并返回在 <code>s</code> 的 <strong>子序列</strong> 中 <code>t</code> 出现的个数，结果需要对 109 + 7 取模。</p>
 <p><strong>示例 1：</strong></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "rabbbit", t = "rabbit"</span><br><span class="line">输出：3</span><br><span class="line">解释：</span><br><span class="line">如下所示, 有 3 种可以从 s 中得到 "rabbit" 的方案。</span><br></pre></td></tr></tbody></table></figure>
@@ -1716,7 +1716,7 @@
 <p>输入：word1 = “leetcode”, word2 = “etco”<br>输出：4</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**提示：**</span><br><span class="line"></span><br><span class="line">- `1 &lt;= word1.length, word2.length &lt;= 500`</span><br><span class="line">- `word1` 和 `word2` 只包含小写英文字母</span><br><span class="line"></span><br><span class="line">Related Topics</span><br><span class="line"></span><br><span class="line">字符串</span><br><span class="line"></span><br><span class="line">动态规划</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">class Solution {</span><br><span class="line">   public int minDistance(String word1, String word2) {</span><br><span class="line">       int m=word1.length(),n=word2.length();</span><br><span class="line">       int[][]dp=new int[m+1][n+1];</span><br><span class="line">       for (int i = 1; i &lt;= m; i++) {</span><br><span class="line">           for (int j = 1; j &lt;= n; j++) {</span><br><span class="line">               if(word1.charAt(i-1)==word2.charAt(j-1)){</span><br><span class="line">                   dp[i][j]=dp[i-1][j-1]+1;</span><br><span class="line">               }else{</span><br><span class="line">                   dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);</span><br><span class="line">               }</span><br><span class="line">           }</span><br><span class="line">       }</span><br><span class="line">       return m+n-2*dp[m][n];</span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 </blockquote>
-<h3><span id="72-bian-ji-ju-chi"><span id="head46">🟠72. 编辑距离</span></span></h3><blockquote>
+<h3><span id="72-bian-ji-ju-chi"><span id="head46">🔴72. 编辑距离</span></span></h3><blockquote>
 <p>给你两个单词 <code>word1</code> 和 <code>word2</code>， <em>请返回将 <code>word1</code> 转换成 <code>word2</code> 所使用的最少操作数</em> 。</p>
 <p>你可以对一个单词进行如下三种操作：</p>
 <ul>

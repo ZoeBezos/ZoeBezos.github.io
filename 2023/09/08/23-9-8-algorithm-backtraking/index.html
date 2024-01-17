@@ -558,21 +558,21 @@
 <td align="center"><a href="#head17"> 棋盘问题</a></td>
 <td>12</td>
 <td align="center">✅</td>
-<td align="left"><a href="#head18">🟠51. N 皇后</a></td>
+<td align="left"><a href="#head18">🔴51. N 皇后</a></td>
 <td>回溯</td>
 </tr>
 <tr>
 <td align="center"></td>
 <td>13</td>
 <td align="center">✅</td>
-<td align="left"><a href="#head19">🟠37. 解数独</a></td>
+<td align="left"><a href="#head19">🔴37. 解数独</a></td>
 <td>二维回溯</td>
 </tr>
 <tr>
 <td align="center"><a href="#head20"> 其他</a></td>
 <td>14</td>
 <td align="center"></td>
-<td align="left"><a href="#head21">🟠332. 重新安排行程</a></td>
+<td align="left"><a href="#head21">🔴332. 重新安排行程</a></td>
 <td></td>
 </tr>
 </tbody></table>
@@ -881,7 +881,7 @@
 </blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt;path=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    Set&lt;String&gt;set=<span class="keyword">new</span> <span class="title class_">TreeSet</span>&lt;&gt;();</span><br><span class="line">    <span class="type">boolean</span>[] used;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">permuteUnique</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        <span class="keyword">if</span>(len==<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        }</span><br><span class="line">        used=<span class="keyword">new</span> <span class="title class_">boolean</span>[len];</span><br><span class="line">        backtraking(nums);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">backtraking</span><span class="params">(<span class="type">int</span>[]nums)</span>{</span><br><span class="line">        <span class="keyword">if</span>(path.size()==nums.length&amp;&amp;!set.contains(path.toString())){</span><br><span class="line">            res.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(path));</span><br><span class="line">            set.add(path.toString());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(used[i]){</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            path.add(nums[i]);</span><br><span class="line">            used[i]=<span class="literal">true</span>;</span><br><span class="line">            backtraking(nums);</span><br><span class="line">            path.removeLast();</span><br><span class="line">            used[i]=<span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h1><span id="qi-pan-wen-ti"><span id="head17"> 棋盘问题</span></span></h1><h2><span id="51-n-huang-hou"><span id="head18">🟠51. N 皇后</span></span></h2><blockquote>
+<h1><span id="qi-pan-wen-ti"><span id="head17"> 棋盘问题</span></span></h1><h2><span id="51-n-huang-hou"><span id="head18">🔴51. N 皇后</span></span></h2><blockquote>
 <p>按照国际象棋的规则，皇后可以攻击与之处在同一行或同一列或同一斜线上的棋子。</p>
 <p><strong>n 皇后问题</strong> 研究的是如何将 <code>n</code> 个皇后放置在 <code>n×n</code> 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
 <p>给你一个整数 <code>n</code> ，返回所有不同的 <strong>n 皇后问题</strong> 的解决方案。</p>
@@ -907,7 +907,7 @@
 
 
 
-<h2><span id="37-jie-shu-du"><span id="head19">🟠37. 解数独</span></span></h2><blockquote>
+<h2><span id="37-jie-shu-du"><span id="head19">🔴37. 解数独</span></span></h2><blockquote>
 <p>编写一个程序，通过填充空格来解决数独问题。</p>
 <p>数独的解法需 <strong>遵循如下规则</strong>：</p>
 <ol>
@@ -938,7 +938,7 @@
 
 
 
-<h1><span id="qi-ta"><span id="head20"> 其他</span></span></h1><h2><span id="332-chong-xin-an-pai-xing-cheng"><span id="head21">🟠332. 重新安排行程</span></span></h2><blockquote>
+<h1><span id="qi-ta"><span id="head20"> 其他</span></span></h1><h2><span id="332-chong-xin-an-pai-xing-cheng"><span id="head21">🔴332. 重新安排行程</span></span></h2><blockquote>
 <p>给你一份航线列表 <code>tickets</code> ，其中 <code>tickets[i] = [fromi, toi]</code> 表示飞机出发和降落的机场地点。请你对该行程进行重新规划排序。</p>
 <p>所有这些机票都属于一个从 <code>JFK</code>（肯尼迪国际机场）出发的先生，所以该行程必须从 <code>JFK</code> 开始。如果存在多种有效的行程，请你按字典排序返回最小的行程组合。</p>
 <ul>
