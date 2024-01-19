@@ -15,7 +15,7 @@
 
 
 
-<title>Category: thoughts | ZOE&#39;s site</title>
+<title>🟢788. split strings by separator | ZOE&#39;s site</title>
 
 
 
@@ -341,41 +341,188 @@
     }
 </script>
             <div class="main">
-                
-
-
+                <div class="container">
     
-<div class="container">
-    <div class="post-wrap categories">
-        <h2 class="post-title">-&nbsp;blog&nbsp;·&nbsp;thoughts-</h2>
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
     </div>
-    <div class="post-wrap archive">
-    
-    
-        
-
-        
-            <h3>2023</h3>
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/11/22/23-11-22-suibi/">🔒should I get a cat?</a>
-            <span class="archive-item-date">November 22, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/06/21/23-11-21-thoughts-software-development/">🔒Software Development</a>
-            <span class="archive-item-date">June 21, 2023</span>
-        </article>
-    
-    
-</div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
 </div>
 
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">🟢788. split strings by separator</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 20, 2024&nbsp;&nbsp;2:47:49</a>
+                        </span>
+                    
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">1.4k</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">5min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1><span id="ti-mu-miao-shu">题目描述</span></h1><blockquote>
+<p>给你一个字符串数组 <code>words</code> 和一个字符 <code>separator</code> ，请你按 <code>separator</code> 拆分 <code>words</code> 中的每个字符串。</p>
+<p>返回一个由拆分后的新字符串组成的字符串数组，<strong>不包括空字符串</strong> 。</p>
+<p><strong>注意</strong></p>
+<ul>
+<li><code>separator</code> 用于决定拆分发生的位置，但它不包含在结果字符串中。</li>
+<li>拆分可能形成两个以上的字符串。</li>
+<li>结果字符串必须保持初始相同的先后顺序。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入：words = ["one.two.three","four.five","six"], separator = "."</span><br><span class="line">输出：["one","two","three","four","five","six"]</span><br><span class="line">解释：在本示例中，我们进行下述拆分：</span><br><span class="line"></span><br><span class="line">"one.two.three" 拆分为 "one", "two", "three"</span><br><span class="line">"four.five" 拆分为 "four", "five"</span><br><span class="line">"six" 拆分为 "six" </span><br><span class="line"></span><br><span class="line">因此，结果数组为 ["one","two","three","four","five","six"] 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：words = ["$easy$","$problem$"], separator = "$"</span><br><span class="line">输出：["easy","problem"]</span><br><span class="line">解释：在本示例中，我们进行下述拆分：</span><br><span class="line"></span><br><span class="line">"$easy$" 拆分为 "easy"（不包括空字符串）</span><br><span class="line">"$problem$" 拆分为 "problem"（不包括空字符串）</span><br><span class="line"></span><br><span class="line">因此，结果数组为 ["easy","problem"] 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：words = ["|||"], separator = "|"</span><br><span class="line">输出：[]</span><br><span class="line">解释：在本示例中，"|||" 的拆分结果将只包含一些空字符串，所以我们返回一个空数组 [] 。 </span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= words.length &lt;= 100</code></li>
+<li><code>1 &lt;= words[i].length &lt;= 20</code></li>
+<li><code>words[i]</code> 中的字符要么是小写英文字母，要么就是字符串 <code>".,|$#@"</code> 中的字符（不包括引号）</li>
+<li><code>separator</code> 是字符串 <code>".,|$#@"</code> 中的某个字符（不包括引号）</li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>字符串</p>
+</blockquote>
+<h1><span id="dai-ma">代码</span></h1><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; <span class="title function_">splitWordsBySeparator</span><span class="params">(List&lt;String&gt; words, <span class="type">char</span> separator)</span> {</span><br><span class="line">        List&lt;String&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">        String pat;</span><br><span class="line">        <span class="keyword">if</span>(separator==<span class="string">'.'</span>||separator==<span class="string">'$'</span>||separator==<span class="string">'|'</span>){</span><br><span class="line">            pat=<span class="string">"\\"</span>+separator;</span><br><span class="line">        }<span class="keyword">else</span> {</span><br><span class="line">            pat=String.valueOf(separator);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (String word : words) {</span><br><span class="line">            String[] splited = word.split(pat);</span><br><span class="line">            <span class="keyword">for</span> (String str: splited) {</span><br><span class="line">                <span class="keyword">if</span>(!str.isEmpty()){</span><br><span class="line">                    res.add(str);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<p>以为上来直接秒了，结果发现String.split()函数中涉及的正则表达式，之前不熟悉</p>
+<blockquote>
+<h3><span id="1-fen-bie-dai-biao-shi-me">1.  ‘.’、’$’、’|’分别代表什么</span></h3><p>在正则表达式中，点号（<code>.</code>）、美元符号（<code>$</code>）和竖线（<code>|</code>）都有特殊的含义。</p>
+<ul>
+<li><code>.</code>（点号）：在正则表达式中，点号表示匹配任意单个字符，除了换行符。例如，正则表达式<code>a.b</code>可以匹配”acb”、“abb”、”a1b”等。</li>
+<li><code>$</code>（美元符号）：美元符号用于匹配字符串的结尾。例如，正则表达式<code>abc$</code>用于匹配以”abc”结尾的字符串。</li>
+<li><code>|</code>（竖线）：竖线用于表示选择操作，意味着”或”的关系。例如，正则表达式<code>a|b</code>表示匹配字符”a”或字符”b”。它可以用于多个模式的选择。</li>
+</ul>
+<p>需要注意的是，这些字符在正则表达式中具有特殊的意义，如果你想要匹配它们本身而不是其特殊含义，需要进行转义，即在字符前加上反斜杠（<code>\.</code>, <code>\$</code>, <code>\|</code>）。</p>
+<h3><span id="2-huan-you-qi-ta-lei-si-zi-fu-ma">2.还有其它类似字符吗</span></h3><p>除了<code>.</code>、<code>$</code>和<code>|</code>之外，还有许多其他在正则表达式中具有特殊含义的字符。下面列出了一些常用的特殊字符：</p>
+<ul>
+<li><code>*</code>：表示前一个字符出现零次或多次。例如，正则表达式<code>ab*c</code>可以匹配”ac”、“abc”、”abbc”等。</li>
+<li><code>+</code>：表示前一个字符出现一次或多次。例如，正则表达式<code>ab+c</code>可以匹配”abc”、“abbc”、”abbbc”等。</li>
+<li><code>?</code>：表示前一个字符出现零次或一次。例如，正则表达式<code>ab?c</code>可以匹配”ac”、“abc”。</li>
+<li><code>[]</code>：方括号用于创建一个字符类，表示匹配其中的任意一个字符。例如，正则表达式<code>[aeiou]</code>表示匹配任意一个元音字母。</li>
+<li><code>^</code>：在字符类的开头使用，表示取反操作或匹配字符串的开头。例如，正则表达式<code>[^0-9]</code>表示匹配任意一个非数字字符；而正则表达式<code>^abc</code>表示匹配以”abc”开头的字符串。</li>
+<li><code>()</code>：用于创建一个捕获组，可以对其中的内容进行分组和引用。例如，正则表达式<code>(ab)+</code>表示匹配一个或多个”ab”。</li>
+</ul>
+<p>这些特殊字符在正则表达式中常用于表示不同的模式和操作。如果你需要特别匹配这些字符本身，也需要使用反斜杠进行转义，例如<code>\*</code>、<code>\+</code>、<code>\?</code>、<code>\[</code>等。</p>
+<h3><span id="3-zheng-ze-biao-da-shi-huan-you-shi-me-xu-yao-zhu-yi-de-ma">3.正则表达式还有什么需要注意的吗</span></h3><ol>
+<li>特殊字符的转义：一些字符在正则表达式中具有特殊意义，比如<code>.</code>、<code>$</code>、<code>|</code>等。如果你想要匹配这些字符本身而不是其特殊意义，需要在其前面加上反斜杠进行转义，例如<code>\.</code>、<code>\$</code>、<code>\|</code>。</li>
+<li>字符类：方括号<code>[]</code>用于表示一个字符类，可以匹配其中任意一个字符。在字符类中的某些字符也具有特殊意义，比如<code>-</code>用于表示一个范围，比如<code>[a-z]</code>表示从小写字母a到z的任意一个字符。如果想要匹配字符类中的特殊字符本身，同样需要进行转义。</li>
+<li>量词：量词用于指定一个模式出现的次数，比如<code>*</code>表示出现零次或多次，<code>+</code>表示出现一次或多次，<code>?</code>表示出现零次或一次。默认情况下，量词是贪婪的，即会尽量多地匹配字符。如果想要量词变为非贪婪模式，可以在量词后面加上<code>?</code>，例如<code>*?</code>、<code>+?</code>、<code>??</code>。</li>
+<li>捕获组：括号<code>()</code>用于创建一个捕获组，可以通过编号引用捕获的内容。捕获组的编号从1开始，可以使用<code>\1</code>、<code>\2</code>等进行引用。</li>
+<li>边界匹配：<code>^</code>表示匹配字符串的开头，<code>$</code>表示匹配字符串的结尾。如果想要匹配整个字符串，可以在正则表达式的两端加上这两个边界符。</li>
+<li>负向匹配：<code>[^]</code>表示匹配任意不在括号中的字符。</li>
+</ol>
+</blockquote>
+
+        </div>
+
+
+
+    </article>
+</div>
 
             </div>
             <footer id="footer" class="footer">
