@@ -2,6 +2,114 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zoebezos.github.io/2024/01/18/24-1-18-java-collection/</loc>
+    
+    <lastmod>2024-01-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/10/23-9-10-algorithm-dp/</loc>
+    
+    <lastmod>2024-01-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/11/23-9-11-algorithm-monotonestack/</loc>
+    
+    <lastmod>2024-01-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/09/23-9-9-algorithm-greedy/</loc>
+    
+    <lastmod>2024-01-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/08/23-9-8-algorithm-backtraking/</loc>
+    
+    <lastmod>2024-01-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/07/23-9-7-algorithm-bitree/</loc>
+    
+    <lastmod>2024-01-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/06/23-9-6-algorithm-stack&queue/</loc>
+    
+    <lastmod>2024-01-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/05/23-9-5-algorithm-twopointers/</loc>
+    
+    <lastmod>2024-01-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/04/23-9-4-algorithm-strings/</loc>
+    
+    <lastmod>2024-01-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/03/23-9-3-algorithm-hashing/</loc>
+    
+    <lastmod>2024-01-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/02/23-9-2-algorithm-linkedlist/</loc>
+    
+    <lastmod>2024-01-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/01/23-9-1-algorithm-array/</loc>
+    
+    <lastmod>2024-01-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/2024/01/17/24-1-17-2744-find-maximum-number-of-string-pairs/</loc>
     
     <lastmod>2024-01-19</lastmod>
@@ -57,15 +165,6 @@
   
   <url>
     <loc>https://zoebezos.github.io/category/index.html</loc>
-    
-    <lastmod>2024-01-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/18/24-1-18-java-collection/</loc>
     
     <lastmod>2024-01-19</lastmod>
     
@@ -155,15 +254,6 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/2023/09/04/23-9-4-algorithm-strings/</loc>
-    
-    <lastmod>2024-01-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://zoebezos.github.io/2023/12/24/23-12-24-algorithm-OD/</loc>
     
     <lastmod>2024-01-17</lastmod>
@@ -174,96 +264,6 @@
   
   <url>
     <loc>https://zoebezos.github.io/2023/11/26/23-11-26-algorithm-summary/</loc>
-    
-    <lastmod>2024-01-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/11/23-9-11-algorithm-monotonestack/</loc>
-    
-    <lastmod>2024-01-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/10/23-9-10-algorithm-dp/</loc>
-    
-    <lastmod>2024-01-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/09/23-9-9-algorithm-greedy/</loc>
-    
-    <lastmod>2024-01-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/08/23-9-8-algorithm-backtraking/</loc>
-    
-    <lastmod>2024-01-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/07/23-9-7-algorithm-bitree/</loc>
-    
-    <lastmod>2024-01-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/06/23-9-6-algorithm-stack&queue/</loc>
-    
-    <lastmod>2024-01-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/05/23-9-5-algorithm-twopointers/</loc>
-    
-    <lastmod>2024-01-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/03/23-9-3-algorithm-hashing/</loc>
-    
-    <lastmod>2024-01-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/02/23-9-2-algorithm-linkedlist/</loc>
-    
-    <lastmod>2024-01-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/01/23-9-1-algorithm-array/</loc>
     
     <lastmod>2024-01-17</lastmod>
     
@@ -346,7 +346,7 @@
 
   <url>
     <loc>https://zoebezos.github.io/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -354,84 +354,84 @@
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-geometry/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-math/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/reading-notes/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/resume/</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/tags/algorithm-linked-list/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-array/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-hash-table/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-string/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-counting/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/tags/algorithm-linked-list/</loc>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/contest/</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/tags/algorithm-simulation/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-two-pointers/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/tags/algorithm-simulation/</loc>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -440,49 +440,49 @@
   
   <url>
     <loc>https://zoebezos.github.io/categories/algorithm-training/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/categories/reading-notes/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/categories/CS-basics/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/categories/Java/</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/categories/system-design/</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/categories/tools/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zoebezos.github.io/categories/database/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/categories/tools/</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/categories/system-design/</loc>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
