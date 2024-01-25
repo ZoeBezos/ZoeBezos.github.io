@@ -344,6 +344,72 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
 
     
     <article class="post-wrap">
@@ -375,7 +441,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">0</a>                         
+                            <a href="">100</a>                         
                         </span>
                         
                     
@@ -394,7 +460,7 @@
         </header>
 
         <div class="post-content">
-            
+            <h1><span id="shu-zu-zi-fu-chuan">数组/字符串</span></h1><h1><span id="shuang-zhi-zhen">双指针</span></h1><h1><span id="hua-dong-chuang-kou">滑动窗口</span></h1><h1><span id="qian-zhui-he">前缀和</span></h1><h1><span id="ha-xi-biao-ha-xi-ji-he">哈希表/哈希集合</span></h1><h1><span id="zhan">栈</span></h1><h1><span id="dui-lie">队列</span></h1><h1><span id="lian-biao">链表</span></h1><h1><span id="er-cha-shu-shen-du-you-xian-sou-suo">二叉树-深度优先搜索</span></h1><h1><span id="er-cha-shu-shen-du-you-xian-bian-li">二叉树-深度优先遍历</span></h1><h1><span id="er-cha-sou-suo-shu">二叉搜索树</span></h1><h1><span id="tu-shen-du-you-xian-sou-suo">图-深度优先搜索</span></h1><h1><span id="tu-guang-du-you-xian-sou-suo">图-广度优先搜索</span></h1><h1><span id="dui-you-xian-dui-lie">堆/优先队列</span></h1><h1><span id="er-fen-cha-zhao">二分查找</span></h1><h1><span id="hui-su">回溯</span></h1><h1><span id="dong-tai-gui-hua-yi-wei">动态规划-一维</span></h1><h1><span id="dong-tai-gui-hua-duo-wei">动态规划-多维</span></h1><h1><span id="wei-yun-suan">位运算</span></h1><h1><span id="qian-zhui-shu">前缀树</span></h1><h1><span id="qu-jian-ji-he">区间集合</span></h1><h1><span id="dan-diao-zhan">单调栈</span></h1>
         </div>
 
 
