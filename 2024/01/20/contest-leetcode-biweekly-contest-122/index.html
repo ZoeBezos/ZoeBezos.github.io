@@ -15,7 +15,7 @@
 
 
 
-<title>🔸122th LeetCode Biweekly Contest (/) | ZOE&#39;s site</title>
+<title>🔸122th LeetCode Biweekly Contest (1489/3547) | ZOE&#39;s site</title>
 
 
 
@@ -344,11 +344,77 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">🔸122th LeetCode Biweekly Contest (/)</h1>
+            <h1 class="post-title">🔸122th LeetCode Biweekly Contest (1489/3547)</h1>
             
                 <div class="post-meta">
                     
@@ -366,7 +432,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">0</a>                         
+                            <a href="">2.5k</a>                         
                         </span>
                         
                     
@@ -375,7 +441,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">1min</a>                         
+                            <a href="">10min</a>                         
                         </span>
                         
                     
@@ -385,7 +451,147 @@
         </header>
 
         <div class="post-content">
-            
+            <table>
+<thead>
+<tr>
+<th>题号</th>
+<th>标签</th>
+<th>作答情况</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="#head1">🟢将数组分成最小总代价的子数组 I</a></td>
+<td>小模拟</td>
+<td>23min</td>
+</tr>
+<tr>
+<td><a href="#head2">🟡3011. 判断一个数组是否可以变为有序</a></td>
+<td>位数+冒泡排序</td>
+<td>80min🪲3</td>
+</tr>
+<tr>
+<td><a href="#head3"> 🟡通过操作使数组长度最小</a></td>
+<td></td>
+<td>未作答</td>
+</tr>
+<tr>
+<td><a href="#head4">🔴将数组分成最小总代价的子数组 II</a></td>
+<td></td>
+<td>未作答</td>
+</tr>
+</tbody></table>
+<h1><span id="jiang-shu-zu-fen-cheng-zui-xiao-zong-dai-jie-de-zi-shu-zu-i"><span id="head1">🟢将数组分成最小总代价的子数组 I</span></span></h1><blockquote>
+<p>给你一个长度为 <code>n</code> 的整数数组 <code>nums</code> 。</p>
+<p>一个数组的 <strong>代价</strong> 是它的 <strong>第一个</strong> 元素。比方说，<code>[1,2,3]</code> 的代价是 <code>1</code> ，<code>[3,4,1]</code> 的代价是 <code>3</code> 。</p>
+<p>你需要将 <code>nums</code> 分成 <code>3</code> 个 <strong>连续且没有交集</strong> 的子数组。</p>
+<p>请你返回这些子数组的 <strong>最小</strong> 代价 <strong>总和</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3,12]</span><br><span class="line">输出：6</span><br><span class="line">解释：最佳分割成 3 个子数组的方案是：[1] ，[2] 和 [3,12] ，总代价为 1 + 2 + 3 = 6 。</span><br><span class="line">其他得到 3 个子数组的方案是：</span><br><span class="line">- [1] ，[2,3] 和 [12] ，总代价是 1 + 2 + 12 = 15 。</span><br><span class="line">- [1,2] ，[3] 和 [12] ，总代价是 1 + 3 + 12 = 16 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,4,3]</span><br><span class="line">输出：12</span><br><span class="line">解释：最佳分割成 3 个子数组的方案是：[5] ，[4] 和 [3] ，总代价为 5 + 4 + 3 = 12 。</span><br><span class="line">12 是所有分割方案里的最小总代价。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [10,3,1,1]</span><br><span class="line">输出：12</span><br><span class="line">解释：最佳分割成 3 个子数组的方案是：[10,3] ，[1] 和 [1] ，总代价为 10 + 1 + 1 = 12 。</span><br><span class="line">12 是所有分割方案里的最小总代价。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><p><code>3 &lt;= n &lt;= 50</code></p>
+</li>
+<li><p><code>1 &lt;= nums[i] &lt;= 50</code></p>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minimumCost</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> min1_index=<span class="number">0</span>,min1=Integer.MAX_VALUE,min2_index=<span class="number">0</span>,min2=Integer.MAX_VALUE,min3_index=<span class="number">0</span>,min3=Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&lt;min1){</span><br><span class="line">                min1=nums[i];</span><br><span class="line">                min1_index=i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        res+=min1;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&lt;min2&amp;&amp;i!=min1_index){</span><br><span class="line">                min2=nums[i];</span><br><span class="line">                min2_index=i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        res+=min2;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&lt;min3&amp;&amp;i!=min1_index&amp;&amp;i!=min2_index){</span><br><span class="line">                min3=nums[i];</span><br><span class="line">                min3_index=i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(min1_index!=<span class="number">0</span>&amp;&amp;min2_index!=<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">return</span> res+nums[<span class="number">0</span>];</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            <span class="keyword">return</span> res+min3;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<h1><span id="3011-pan-duan-yi-ge-shu-zu-shi-fou-ke-yi-bian-wei-you-xu"><span id="head2">🟡3011. 判断一个数组是否可以变为有序</span></span></h1><blockquote>
+<p>给你一个下标从 <strong>0</strong> 开始且全是 <strong>正</strong> 整数的数组 <code>nums</code> 。</p>
+<p>一次 <strong>操作</strong> 中，如果两个 <strong>相邻</strong> 元素在二进制下数位为 <strong>1</strong> 的数目 <strong>相同</strong> ，那么你可以将这两个元素交换。你可以执行这个操作 <strong>任意次</strong> （<strong>也可以 0 次</strong>）。</p>
+<p>如果你可以使数组变有序，请你返回 <code>true</code> ，否则返回 <code>false</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [8,4,2,30,15]</span><br><span class="line">输出：true</span><br><span class="line">解释：我们先观察每个元素的二进制表示。 2 ，4 和 8 分别都只有一个数位为 1 ，分别为 "10" ，"100" 和 "1000" 。15 和 30 分别有 4 个数位为 1 ："1111" 和 "11110" 。</span><br><span class="line">我们可以通过 4 个操作使数组有序：</span><br><span class="line">- 交换 nums[0] 和 nums[1] 。8 和 4 分别只有 1 个数位为 1 。数组变为 [4,8,2,30,15] 。</span><br><span class="line">- 交换 nums[1] 和 nums[2] 。8 和 2 分别只有 1 个数位为 1 。数组变为 [4,2,8,30,15] 。</span><br><span class="line">- 交换 nums[0] 和 nums[1] 。4 和 2 分别只有 1 个数位为 1 。数组变为 [2,4,8,30,15] 。</span><br><span class="line">- 交换 nums[3] 和 nums[4] 。30 和 15 分别有 4 个数位为 1 ，数组变为 [2,4,8,15,30] 。</span><br><span class="line">数组变成有序的，所以我们返回 true 。</span><br><span class="line">注意我们还可以通过其他的操作序列使数组变得有序。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3,4,5]</span><br><span class="line">输出：true</span><br><span class="line">解释：数组已经是有序的，所以我们返回 true 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,16,8,4,2]</span><br><span class="line">输出：false</span><br><span class="line">解释：无法通过操作使数组变为有序。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 100</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 28</code></li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">     <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">canSortArray</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; nums.length; i++) {</span><br><span class="line">           <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; nums.length-i; j++) {</span><br><span class="line">                <span class="type">int</span> bite1=Integer.bitCount(nums[j]);</span><br><span class="line">                <span class="type">int</span> bite2=Integer.bitCount(nums[j+<span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">if</span>(bite1==bite2&amp;&amp;nums[j]&gt;nums[j+<span class="number">1</span>]){</span><br><span class="line">                    <span class="type">int</span> temp=nums[j];</span><br><span class="line">                    nums[j]=nums[j+<span class="number">1</span>];</span><br><span class="line">                    nums[j+<span class="number">1</span>]=temp;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&lt;nums[i-<span class="number">1</span>]){</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>时间复杂度：O(n^2)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<p>小小改进了一下，减少了循环次数</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">     <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">canSortArray</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; nums.length-i; j++){</span><br><span class="line">                <span class="type">int</span> bite1=Integer.bitCount(nums[j]);</span><br><span class="line">                <span class="type">int</span> bite2=Integer.bitCount(nums[j+<span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">if</span>(bite1==bite2&amp;&amp;nums[j]&gt;nums[j+<span class="number">1</span>]){</span><br><span class="line">                    <span class="type">int</span> temp=nums[j];</span><br><span class="line">                    nums[j]=nums[j+<span class="number">1</span>];</span><br><span class="line">                    nums[j+<span class="number">1</span>]=temp;</span><br><span class="line">                }<span class="keyword">else</span> <span class="keyword">if</span>(nums[j]&gt;nums[j+<span class="number">1</span>]){</span><br><span class="line">					<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>两个可以复习的点：</p>
+<p>1.Integer.bitCount(num)函数：num转化为二进制后1的个数</p>
+<p>2.冒泡排序的两层循环：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; nums.length; i++) {<span class="comment">//循环次数为len-1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; nums.length-i; j++) {<span class="comment">//j:0~len-i-1</span></span><br><span class="line">        swap(arr[j],arr[j+<span class="number">1</span>]);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="tong-guo-cao-zuo-shi-shu-zu-chang-du-zui-xiao"><span id="head3"> 🟡通过操作使数组长度最小</span></span></h1><blockquote>
+<p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> ，它只包含 <strong>正</strong> 整数。</p>
+<p>你的任务是通过进行以下操作 <strong>任意次</strong> （可以是 0 次） <strong>最小化</strong> <code>nums</code> 的长度：</p>
+<ul>
+<li>在 <code>nums</code> 中选择 <strong>两个不同</strong> 的下标 <code>i</code> 和 <code>j</code> ，满足 <code>nums[i] &gt; 0</code> 且 <code>nums[j] &gt; 0</code> 。</li>
+<li>将结果 <code>nums[i] % nums[j]</code> 插入 <code>nums</code> 的结尾。</li>
+<li>将 <code>nums</code> 中下标为 <code>i</code> 和 <code>j</code> 的元素删除。</li>
+</ul>
+<p>请你返回一个整数，它表示进行任意次操作以后 <code>nums</code> 的 <strong>最小长度</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,4,3,1]</span><br><span class="line">输出：1</span><br><span class="line">解释：使数组长度最小的一种方法是：</span><br><span class="line">操作 1 ：选择下标 2 和 1 ，插入 nums[2] % nums[1] 到数组末尾，得到 [1,4,3,1,3] ，然后删除下标为 2 和 1 的元素。</span><br><span class="line">nums 变为 [1,1,3] 。</span><br><span class="line">操作 2 ：选择下标 1 和 2 ，插入 nums[1] % nums[2] 到数组末尾，得到 [1,1,3,1] ，然后删除下标为 1 和 2 的元素。</span><br><span class="line">nums 变为 [1,1] 。</span><br><span class="line">操作 3 ：选择下标 1 和 0 ，插入 nums[1] % nums[0] 到数组末尾，得到 [1,1,0] ，然后删除下标为 1 和 0 的元素。</span><br><span class="line">nums 变为 [0] 。</span><br><span class="line">nums 的长度无法进一步减小，所以答案为 1 。</span><br><span class="line">1 是可以得到的最小长度。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,5,5,10,5]</span><br><span class="line">输出：2</span><br><span class="line">解释：使数组长度最小的一种方法是：</span><br><span class="line">操作 1 ：选择下标 0 和 3 ，插入 nums[0] % nums[3] 到数组末尾，得到 [5,5,5,10,5,5] ，然后删除下标为 0 和 3 的元素。</span><br><span class="line">nums 变为 [5,5,5,5] 。</span><br><span class="line">操作 2 ：选择下标 2 和 3 ，插入 nums[2] % nums[3] 到数组末尾，得到 [5,5,5,5,0] ，然后删除下标为 2 和 3 的元素。</span><br><span class="line">nums 变为 [5,5,0] 。</span><br><span class="line">操作 3 ：选择下标 0 和 1 ，插入 nums[0] % nums[1] 到数组末尾，得到 [5,5,0,0] ，然后删除下标为 0 和 1 的元素。</span><br><span class="line">nums 变为 [0,0] 。</span><br><span class="line">nums 的长度无法进一步减小，所以答案为 2 。</span><br><span class="line">2 是可以得到的最小长度。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,3,4]</span><br><span class="line">输出：1</span><br><span class="line">解释：使数组长度最小的一种方法是：</span><br><span class="line">操作 1 ：选择下标 1 和 2 ，插入 nums[1] % nums[2] 到数组末尾，得到 [2,3,4,3] ，然后删除下标为 1 和 2 的元素。</span><br><span class="line">nums 变为 [2,3] 。</span><br><span class="line">操作 2 ：选择下标 1 和 0 ，插入 nums[1] % nums[0] 到数组末尾，得到 [2,3,1] ，然后删除下标为 1 和 0 的元素。</span><br><span class="line">nums 变为 [1] 。</span><br><span class="line">nums 的长度无法进一步减小，所以答案为 1 。</span><br><span class="line">1 是可以得到的最小长度。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 105</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 109</code></li>
+</ul>
+</blockquote>
+<h1><span id="jiang-shu-zu-fen-cheng-zui-xiao-zong-dai-jie-de-zi-shu-zu-ii"><span id="head4">🔴将数组分成最小总代价的子数组 II</span></span></h1><blockquote>
+<p>给你一个下标从 <strong>0</strong> 开始长度为 <code>n</code> 的整数数组 <code>nums</code> 和两个 <strong>正</strong> 整数 <code>k</code> 和 <code>dist</code> 。</p>
+<p>一个数组的 <strong>代价</strong> 是数组中的 <strong>第一个</strong> 元素。比方说，<code>[1,2,3]</code> 的代价为 <code>1</code> ，<code>[3,4,1]</code> 的代价为 <code>3</code> 。</p>
+<p>你需要将 <code>nums</code> 分割成 <code>k</code> 个 <strong>连续且互不相交</strong> 的子数组，满足 <strong>第二</strong> 个子数组与第 <code>k</code> 个子数组中第一个元素的下标距离 <strong>不超过</strong> <code>dist</code> 。换句话说，如果你将 <code>nums</code> 分割成子数组 <code>nums[0..(i1 - 1)], nums[i1..(i2 - 1)], ..., nums[ik-1..(n - 1)]</code> ，那么它需要满足 <code>ik-1 - i1 &lt;= dist</code> 。</p>
+<p>请你返回这些子数组的 <strong>最小</strong> 总代价。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,3,2,6,4,2], k = 3, dist = 3</span><br><span class="line">输出：5</span><br><span class="line">解释：将数组分割成 3 个子数组的最优方案是：[1,3] ，[2,6,4] 和 [2] 。这是一个合法分割，因为 ik-1 - i1 等于 5 - 2 = 3 ，等于 dist 。总代价为 nums[0] + nums[2] + nums[5] ，也就是 1 + 2 + 2 = 5 。</span><br><span class="line">5 是分割成 3 个子数组的最小总代价。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [10,1,2,2,2,1], k = 4, dist = 3</span><br><span class="line">输出：15</span><br><span class="line">解释：将数组分割成 4 个子数组的最优方案是：[10] ，[1] ，[2] 和 [2,2,1] 。这是一个合法分割，因为 ik-1 - i1 等于 3 - 1 = 2 ，小于 dist 。总代价为 nums[0] + nums[1] + nums[2] + nums[3] ，也就是 10 + 1 + 2 + 2 = 15 。</span><br><span class="line">分割 [10] ，[1] ，[2,2,2] 和 [1] 不是一个合法分割，因为 ik-1 和 i1 的差为 5 - 1 = 4 ，大于 dist 。</span><br><span class="line">15 是分割成 4 个子数组的最小总代价。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [10,8,18,9], k = 3, dist = 1</span><br><span class="line">输出：36</span><br><span class="line">解释：将数组分割成 4 个子数组的最优方案是：[10] ，[8] 和 [18,9] 。这是一个合法分割，因为 ik-1 - i1 等于 2 - 1 = 1 ，等于 dist 。总代价为 nums[0] + nums[1] + nums[2] ，也就是 10 + 8 + 18 = 36 。</span><br><span class="line">分割 [10] ，[8,18] 和 [9] 不是一个合法分割，因为 ik-1 和 i1 的差为 3 - 1 = 2 ，大于 dist 。</span><br><span class="line">36 是分割成 3 个子数组的最小总代价。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>3 &lt;= n &lt;= 105</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 109</code></li>
+<li><code>3 &lt;= k &lt;= n</code></li>
+<li><code>k - 2 &lt;= dist &lt;= n - 2</code></li>
+</ul>
+</blockquote>
+
         </div>
 
 

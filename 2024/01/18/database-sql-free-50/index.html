@@ -460,7 +460,56 @@
         </header>
 
         <div class="post-content">
-            <h1><span id="cha-xun">查询</span></h1><h2><span id="1757-ke-hui-shou-qie-di-zhi-de-chan-pin">🟢1757. 可回收且低脂的产品</span></h2><blockquote>
+            <table>
+<thead>
+<tr>
+<th>分类</th>
+<th>题目</th>
+<th>完成</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="#head1"> 查询</a></td>
+<td><a href="#head2">🟢1757. 可回收且低脂的产品</a></td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head3">🟢584. 寻找用户推荐人</a></td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head4">🟢595. 大的国家</a></td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head5">🟢1148. 文章浏览 I</a></td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head6">🟢1683. 无效的推文</a></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><a href="#head7"> 连接</a></td>
+<td><a href="#head8"> 🟢1378.使用唯一标识码替换员工ID2</a></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1><span id="cha-xun"><span id="head1"> 查询</span></span></h1><h2><span id="1757-ke-hui-shou-qie-di-zhi-de-chan-pin"><span id="head2">🟢1757. 可回收且低脂的产品</span></span></h2><blockquote>
 <p>表：<code>Products</code></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">+-------------+---------+</span><br><span class="line">| Column Name | Type    |</span><br><span class="line">+-------------+---------+</span><br><span class="line">| product_id  | int     |</span><br><span class="line">| low_fats    | enum    |</span><br><span class="line">| recyclable  | enum    |</span><br><span class="line">+-------------+---------+</span><br><span class="line">product_id 是该表的主键（具有唯一值的列）。</span><br><span class="line">low_fats 是枚举类型，取值为以下两种 ('Y', 'N')，其中 'Y' 表示该产品是低脂产品，'N' 表示不是低脂产品。</span><br><span class="line">recyclable 是枚举类型，取值为以下两种 ('Y', 'N')，其中 'Y' 表示该产品可回收，而 'N' 表示不可回收。</span><br></pre></td></tr></tbody></table></figure>
 
@@ -472,7 +521,7 @@
 </blockquote>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select product_id </span><br><span class="line">from products </span><br><span class="line">where low_fats='Y' and recyclable='Y'</span><br></pre></td></tr></tbody></table></figure>
 
-<h2><span id="584-xun-zhao-yong-hu-tui-jian-ren">🟢584. 寻找用户推荐人</span></h2><blockquote>
+<h2><span id="584-xun-zhao-yong-hu-tui-jian-ren"><span id="head3">🟢584. 寻找用户推荐人</span></span></h2><blockquote>
 <p>表: <code>Customer</code></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+-------------+---------+</span><br><span class="line">| Column Name | Type    |</span><br><span class="line">+-------------+---------+</span><br><span class="line">| id          | int     |</span><br><span class="line">| name        | varchar |</span><br><span class="line">| referee_id  | int     |</span><br><span class="line">+-------------+---------+</span><br><span class="line">在 SQL 中，id 是该表的主键列。</span><br><span class="line">该表的每一行表示一个客户的 id、姓名以及推荐他们的客户的 id。</span><br></pre></td></tr></tbody></table></figure>
 
@@ -484,7 +533,7 @@
 </blockquote>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select name </span><br><span class="line">from customer </span><br><span class="line">where referee_id!=2 or referee_id is null</span><br></pre></td></tr></tbody></table></figure>
 
-<h2><span id="595-da-de-guo-jia">🟢595. 大的国家</span></h2><blockquote>
+<h2><span id="595-da-de-guo-jia"><span id="head4">🟢595. 大的国家</span></span></h2><blockquote>
 <p><code>World</code> 表：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+-------------+---------+</span><br><span class="line">| Column Name | Type    |</span><br><span class="line">+-------------+---------+</span><br><span class="line">| name        | varchar |</span><br><span class="line">| continent   | varchar |</span><br><span class="line">| area        | int     |</span><br><span class="line">| population  | int     |</span><br><span class="line">| gdp         | bigint  |</span><br><span class="line">+-------------+---------+</span><br><span class="line">name 是该表的主键（具有唯一值的列）。</span><br><span class="line">这张表的每一行提供：国家名称、所属大陆、面积、人口和 GDP 值。</span><br></pre></td></tr></tbody></table></figure>
 
@@ -503,7 +552,7 @@
 
 
 
-<h2><span id="1148-wen-zhang-liu-lan-i">🟢1148. 文章浏览 I</span></h2><blockquote>
+<h2><span id="1148-wen-zhang-liu-lan-i"><span id="head5">🟢1148. 文章浏览 I</span></span></h2><blockquote>
 <p><code>Views</code> 表：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+---------------+---------+</span><br><span class="line">| Column Name   | Type    |</span><br><span class="line">+---------------+---------+</span><br><span class="line">| article_id    | int     |</span><br><span class="line">| author_id     | int     |</span><br><span class="line">| viewer_id     | int     |</span><br><span class="line">| view_date     | date    |</span><br><span class="line">+---------------+---------+</span><br><span class="line">此表可能会存在重复行。（换句话说，在 SQL 中这个表没有主键）</span><br><span class="line">此表的每一行都表示某人在某天浏览了某位作者的某篇文章。</span><br><span class="line">请注意，同一人的 author_id 和 viewer_id 是相同的。</span><br></pre></td></tr></tbody></table></figure>
 
@@ -515,7 +564,7 @@
 </blockquote>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select  distinct author_id as 'id'</span><br><span class="line">from views</span><br><span class="line">where viewer_id=author_id</span><br><span class="line">order by author_id</span><br></pre></td></tr></tbody></table></figure>
 
-<h2><span id="1683-wu-xiao-de-tui-wen">🟢1683. 无效的推文</span></h2><blockquote>
+<h2><span id="1683-wu-xiao-de-tui-wen"><span id="head6">🟢1683. 无效的推文</span></span></h2><blockquote>
 <p>表：<code>Tweets</code></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+----------------+---------+</span><br><span class="line">| Column Name    | Type    |</span><br><span class="line">+----------------+---------+</span><br><span class="line">| tweet_id       | int     |</span><br><span class="line">| content        | varchar |</span><br><span class="line">+----------------+---------+</span><br><span class="line">在 SQL 中，tweet_id 是这个表的主键。</span><br><span class="line">这个表包含某社交媒体 App 中所有的推文。</span><br></pre></td></tr></tbody></table></figure>
 
@@ -527,7 +576,7 @@
 </blockquote>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select tweet_id</span><br><span class="line">from tweets</span><br><span class="line">where  length(content)&gt;15</span><br></pre></td></tr></tbody></table></figure>
 
-<h1><span id="lian-jie">连接</span></h1><h2><span id="1378-shi-yong-wei-yi-biao-shi-ma-ti-huan-yuan-gong-id2">🟢1378.使用唯一标识码替换员工ID2</span></h2><blockquote>
+<h1><span id="lian-jie"><span id="head7"> 连接</span></span></h1><h2><span id="1378-shi-yong-wei-yi-biao-shi-ma-ti-huan-yuan-gong-id2"><span id="head8"> 🟢1378.使用唯一标识码替换员工ID2</span></span></h2><blockquote>
 <p><code>Employees</code> 表：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+---------------+---------+</span><br><span class="line">| Column Name   | Type    |</span><br><span class="line">+---------------+---------+</span><br><span class="line">| id            | int     |</span><br><span class="line">| name          | varchar |</span><br><span class="line">+---------------+---------+</span><br><span class="line">在 SQL 中，id 是这张表的主键。</span><br><span class="line">这张表的每一行分别代表了某公司其中一位员工的名字和 ID 。</span><br></pre></td></tr></tbody></table></figure>
 

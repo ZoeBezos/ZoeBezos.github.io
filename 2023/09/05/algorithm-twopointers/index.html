@@ -431,7 +431,7 @@
                         <span class="post-category">                        
                             Category:                        
                                                     
-                            <a href="/categories/algorithm-training/">algorithm training</a>
+                            <a href="/categories/algorithm-learning/">algorithm learning</a>
                             
                         </span>
 
@@ -722,7 +722,8 @@
 </blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">pathEncryption</span><span class="params">(String path)</span> {</span><br><span class="line">        <span class="keyword">return</span> path.replace(<span class="string">'.'</span>,<span class="string">' '</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-
+<p>还是用双指针(单指针)做一下：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">pathEncryption</span><span class="params">(String path)</span> {</span><br><span class="line">        <span class="type">char</span>[]chars=path.toCharArray();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; path.length(); i++) {</span><br><span class="line">            <span class="keyword">if</span>(chars[i]==<span class="string">'.'</span>){</span><br><span class="line">                chars[i]=<span class="string">' '</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> String.copyValueOf(chars);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h1><span id="151-fan-zhuan-zi-fu-chuan-zhong-de-dan-ci"><span id="head9">🟡151. 反转字符串中的单词</span></span></h1><blockquote>
 <p>给你一个字符串 <code>s</code> ，请你反转字符串中 <strong>单词</strong> 的顺序。</p>

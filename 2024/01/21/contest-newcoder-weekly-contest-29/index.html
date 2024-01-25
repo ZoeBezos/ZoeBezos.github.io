@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zoe">
+
+
+    <meta name="subtitle" content="liberté">
+
+
+
+
+<title>🔹29th NewCoder Weekly Contest (1249/2252) | ZOE&#39;s site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+    <script src="/js/jquery-3.7.0.min.js"></script>
+    
+    <script src="/js/mathjax2.7.5.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<!-- 搜索的部分 -->
+
+
+
+    <script>
+    // function searchToggle() {
+    //     const width = $(document.body).width()
+    //     if(width > 479) {
+    //         return;
+    //     }
+    //     const search = $('.search');
+    //     const searchForm = $('.form-search')
+
+    //     if(!search.hasClass("mobile-search")) {
+    //         search.addClass("mobile-search");
+    //     } else {
+    //         search.removeClass("mobile-search");
+    //     } 
+    // }
+
+    function searchToggle() {
+        const width = $(document.body).width()
+        if(width > 479) {
+            return;
+        }
+        const search = $('.search');
+        const searchForm = $('.form-search');
+        const menuToggle = $('.menu-toggle');
+        const title = $('.navbar-header-title ');
+
+        if(!search.hasClass("mobile-search")) {
+            search.addClass("mobile-search");
+            menuToggle.addClass("open-search")
+            title.addClass("mobile-title-hidden")
+        } else {
+            search.removeClass("mobile-search");
+            menuToggle.removeClass("open-search")
+            // title.css({visibility: 'visible'})
+            title.removeClass("mobile-title-hidden")
+        } 
+    }
+
+
+
+    function search(searchInputEl, formEl, flag) {
+        const path = "/" + "search.json"; // 可以在public 下查看这个search.json
+        $(formEl).submit(function(e){
+            e.preventDefault();
+            let target = null
+            if(searchInputEl == null) {
+                const screenWidth = $(document.body).width();
+                target = screenWidth > 479 ? $('#pc-search-input') : $('#mobile-search-input');
+                console.log(target);
+            } else {
+                target = $(searchInputEl)
+            }
+
+            if(!flag && target.val() === '') {
+                return ;
+            }
+
+            $("#u-search").fadeIn(500, function() {
+                $("body > .wrapper").addClass("modal-active");
+
+                $.ajax({
+                    url: path,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        $input = target.val();
+                        $(".form-input").val($input);
+                        const loadingBar = $('.search-loading-bar') 
+                        loadingBar.css({
+                            width:'100%',
+                            display: 'block'
+                        });
+                    },
+                    success: function( datas ) {
+                        console.log(datas);
+                        const $resultPanel = $(".modal-body")[0];
+                        let str = `<ul class="modal-results">`;
+                        var keywords = $(".form-input").val().trim().toLowerCase().split(/[\s\-]+/);
+                        $resultPanel.innerHTML = "";
+                        let hasResult = false
+                        let text = `<div class="no-result">找不到与关键词相关的内容....</div>`;
+
+                        if ($(".form-input").val().trim().length <= 0) {
+                            // 没有结果
+                            $resultPanel.innerHTML = text;
+                            return;
+                        }
+                        datas.forEach(function (data, index) {
+                            var isMatch = true;
+                            if (!data.title || data.title.trim() === '') {
+                                data.title = "Untitled";
+                            }
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content && data.content.trim().replace(/<[^>]+>/g, "").toLowerCase() || '';
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty contents
+                            if (data_content !== '') {
+                                keywords.forEach(function (keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        hasResult = true
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            } else {
+                                isMatch = false;
+                            }
+                            // show search results
+                            if (isMatch) {
+                                str += `<li class='result-item'><a href='${data_url}' class='result-item-detail'> <span class="title">${data_title}</span>`;
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 200 characters
+                                    var start = first_occur - 40;
+                                    var end = first_occur + 160;
+
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+
+                                    if (start == 0) {
+                                        end = 200;
+                                    }
+
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+
+                                    var match_content = content.substring(start, end);
+
+                                    // highlight all keywords
+                                    keywords.forEach(function (keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, `<em class="search-keyword">${keyword}</em>`);
+                                    });
+
+                                    str += `<span class="content"> ${match_content} ...</span></a>`;
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        if(hasResult) {
+                            $resultPanel.innerHTML = str;
+                        } else {
+                            $resultPanel.innerHTML = text;
+                        }
+
+                    },
+                    complete: function() {
+                        setTimeout(() => {
+                                const loadingBar = $('.search-loading-bar') 
+                                loadingBar.css({
+                                    width:'0%',
+                                    display: 'none'
+                                });
+                        }, 300)
+                    }
+                });
+            })
+
+        });
+    }
+
+    $(document).ready(function() {
+        $('.modal-close').click(function () { 
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+
+        $('.modal-overlay').click(function() {
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+        search(null, ".form-search", false)
+        search("#u-search-modal-form .form-input", ".u-search-modal-form", true)
+    })
+</script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                // pagebody.classList.add('dark-theme');
+                // mobile
+                // document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <!-- <div class="navbar-header header-logo"><a href="/">ZOE&#39;s site</a></div> -->
+            <div class="navbar-header header-logo"><a href="/"><i class="iconfont icon-zhuye" style="font-size: 1em;"></i>ZOE&#39;s site</a></div>
+            <div class="menu navbar-right">
+                <!-- 这里表示的是pc端搜索框 -->
+                
+                
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="pc-search-input"/>
+        </form>
+    </div>
+
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <!-- <label for="switch_default" class="toggleBtn"></label> -->
+            </div>
+        </div>
+    </nav>
+    
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ZOE&#39;s site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="navbar-mobile-right">
+                    
+                    
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="mobile-search-input"/>
+        </form>
+    </div>
+
+                    <!-- <div class="menu-toggle" onclick="mobileBtn()">&#9776; menu</div> -->
+                </div>
+    
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">🔹29th NewCoder Weekly Contest (1249/2252)</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 21, 2024&nbsp;&nbsp;21:33:26</a>
+                        </span>
+                    
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">1.5k</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">6min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <table>
+<thead>
+<tr>
+<th align="center">题号</th>
+<th align="center">标题</th>
+<th>标签</th>
+<th align="center">我的状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><a href="#head1">A</a></td>
+<td align="center"><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/73422/A">小红大战小紫</a></td>
+<td>-</td>
+<td align="center">通过</td>
+</tr>
+<tr>
+<td align="center"><a href="#head2">B</a></td>
+<td align="center"><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/73422/B">小红的白日梦</a></td>
+<td>-</td>
+<td align="center">通过</td>
+</tr>
+<tr>
+<td align="center"><a href="#head3">C</a></td>
+<td align="center"><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/73422/C">小红的小小红</a></td>
+<td>字符串</td>
+<td align="center">通过</td>
+</tr>
+<tr>
+<td align="center"><a href="#head4">D</a></td>
+<td align="center"><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/73422/D">小红的中位数</a></td>
+<td></td>
+<td align="center">未通过</td>
+</tr>
+<tr>
+<td align="center">E</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/73422/E">小红构造数组</a></td>
+<td></td>
+<td align="center">未通过</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/73422/F">小红又战小紫</a></td>
+<td></td>
+<td align="center">未通过</td>
+</tr>
+</tbody></table>
+<h1><span id="a-xiao-hong-da-zhan-xiao-zi"><span id="head1">A 小红大战小紫</span></span></h1><blockquote>
+<p>链接：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/73422/B">https://ac.nowcoder.com/acm/contest/73422/B</a><br>来源：牛客网题目描述                    </p>
+<h2><span id="ti-mu-miao-shu">题目描述:</span></h2><p>小红正在和小紫对战，给定两个人的胜场数量，请你判断最终是谁获胜了。</p>
+<h2><span id="shu-ru-miao-shu">输入描述:</span></h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;两个正整数a,ba,ba,b，用空格隔开。aaa代表小红的胜场，bbb代表小紫的胜场。</span><br><span class="line">1≤a,b≤1091\leq a,b \leq 10^91≤a,b≤109</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shu-chu-miao-shu">输出描述:</span></h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;如果小红获胜了，请输出"kou"。如果小紫获胜了，请输出"yukari"。如果最终平局，请输出"draw"。</span><br></pre></td></tr></tbody></table></figure>
+
+<p>​                            示例1                        </p>
+<h2><span id="shu-ru">输入</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;3 1</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shu-chu">输出</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;kou</span><br></pre></td></tr></tbody></table></figure>
+
+<p>​                            示例2                        </p>
+<h2><span id="shu-ru">输入</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;114514 114514</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shu-chu">输出</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;draw</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">        Scanner in=<span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in) ;</span><br><span class="line">        <span class="type">int</span> num1=in.nextInt();</span><br><span class="line">        <span class="type">int</span> num2=in.nextInt();</span><br><span class="line">        <span class="keyword">if</span>(num1&lt;num2){</span><br><span class="line">            System.out.println(<span class="string">"yukari"</span>);</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (num1&gt;num2) {</span><br><span class="line">            System.out.println(<span class="string">"kou"</span>);</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            System.out.println(<span class="string">"draw"</span>);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>时间复杂度：O(1)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<h1><span id="b-xiao-hong-de-bai-ri-meng-nbsp"><span id="head2">B 小红的白日梦&nbsp;</span></span></h1><blockquote>
+<p>链接：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/73422/B">https://ac.nowcoder.com/acm/contest/73422/B</a><br>来源：牛客网</p>
+<h2><span id="ti-mu-miao-shu">题目描述</span></h2><p>小红经常会做梦，但她比较喜欢做白日梦。<br> 已知小红白天做梦可以获得 2 点幸福度，晚上做梦可以获得 1 点幸福度。现在给定小红每天中午和晚上睡觉的做梦情况。她可以每天将晚上的梦提前移到白天来做，请问小红总共最多可以获得多少幸福度？<br> 注：只有当白天没做梦且晚上做梦的时候才可以移动梦境。</p>
+<h2><span id="shu-ru-miao-shu">输入描述:</span></h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第一行输入一个正整数nnn，代表总天数。</span><br><span class="line">第二行输入一个长度为nnn的、仅由'Y'和'N'组成字符串，代表每天中午的做梦情况。</span><br><span class="line">第二行输入一个长度为nnn的、仅由'Y'和'N'组成字符串，代表每天晚上的做梦情况。</span><br><span class="line">'Y'代表做梦了，'N'代表没做梦。</span><br><span class="line">1≤n≤1051\leq n \leq 10^51≤n≤105</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shu-chu-miao-shu">输出描述:</span></h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个整数，代表最多的幸福度。</span><br></pre></td></tr></tbody></table></figure>
+
+<p>​                            示例1                        </p>
+<h2><span id="shu-ru">输入</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">NNNN</span><br><span class="line">NNNN</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shu-chu">输出</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shuo-ming">说明</span></h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">小红一个梦都没做，最终幸福度为 0。</span><br></pre></td></tr></tbody></table></figure>
+
+<p>​                            示例2                        </p>
+<h2><span id="shu-ru">输入</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">YYN</span><br><span class="line">NYY</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shu-chu">输出</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shuo-ming">说明</span></h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">第一天小红中午做梦了，晚上没做梦，获得了 2 幸福度。</span><br><span class="line">第二天小红白天和晚上都做梦了，获得了 3 幸福度。</span><br><span class="line">第三天小红将晚上的梦提前到白天来做，获得了 2 幸福度。</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">        Scanner in=<span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in) ;</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> n=in.nextInt();</span><br><span class="line">        String day=in.next();</span><br><span class="line">        String night=in.next();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) {</span><br><span class="line">            <span class="keyword">if</span>(day.charAt(i)==<span class="string">'Y'</span>&amp;&amp;night.charAt(i)==<span class="string">'Y'</span>){</span><br><span class="line">                res+=<span class="number">3</span>;</span><br><span class="line">            } <span class="keyword">else</span> <span class="keyword">if</span> (day.charAt(i)==<span class="string">'Y'</span>||night.charAt(i)==<span class="string">'Y'</span>) {</span><br><span class="line">                res+=<span class="number">2</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        System.out.println(res);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<h1><span id="c-xiao-hong-de-xiao-xiao-hong"><span id="head3">C 小红的小小红</span></span></h1><blockquote>
+<p>链接：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/73422/C">https://ac.nowcoder.com/acm/contest/73422/C</a><br>来源：牛客网</p>
+<h2><span id="ti-mu-miao-shu">题目描述</span></h2><p>小红拿到了一个字符串，其中一定包含连续子串”xiao”，和连续子串”hong”。<br> 请你将字符串重排，使得该字符串包含”xiaohong”的连续子串。</p>
+<h2><span id="shu-ru-miao-shu">输入描述:</span></h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入一个仅包含小写字母的字符串，长度不超过10^5</span><br><span class="line">保证字符串一定包含"xiao"子串和"hong"子串。</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shu-chu-miao-shu">输出描述:</span></h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">重排后的字符串。有多解时输出任意即可。</span><br></pre></td></tr></tbody></table></figure>
+
+<p>​                            示例1                        </p>
+<h2><span id="shu-ru">输入</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">honghongxiao</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shu-chu">输出</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xiaohonghong</span><br></pre></td></tr></tbody></table></figure>
+
+<p>​                            示例2                        </p>
+<h2><span id="shu-ru">输入</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xaohonghonxiao</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shu-chu">输出</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xaoxiaohonghon</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">        Scanner in=<span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        String string=in.next();</span><br><span class="line">        List&lt;Integer&gt;list1=kmp(string,<span class="string">"xiao"</span>);</span><br><span class="line">        List&lt;Integer&gt;list2=kmp(string,<span class="string">"hong"</span>);</span><br><span class="line">        <span class="keyword">if</span>(list1.isEmpty()||list2.isEmpty()){</span><br><span class="line">            System.out.println(string);</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> min_num=Math.min(list1.size(),list2.size());</span><br><span class="line">        StringBuilder sb=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        StringBuilder str=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>(string);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; min_num; i++) {</span><br><span class="line">            sb.append(<span class="string">"xiaohong"</span>);</span><br><span class="line">            <span class="type">int</span> index_xiao=kmp(str.toString(),<span class="string">"xiao"</span>).get(<span class="number">0</span>);</span><br><span class="line">            <span class="type">int</span> index_hong=kmp(str.toString(),<span class="string">"hong"</span>).get(<span class="number">0</span>);</span><br><span class="line">            str.delete(index_xiao,index_xiao+<span class="number">4</span>);</span><br><span class="line">            str.delete(index_hong,index_hong+<span class="number">4</span>);</span><br><span class="line">        }</span><br><span class="line">        sb.append(str);</span><br><span class="line">        System.out.println(sb);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">static</span> List&lt;Integer&gt; <span class="title function_">kmp</span><span class="params">(String text, String pattern)</span> {</span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> pattern.length();</span><br><span class="line">        <span class="type">int</span>[] next = <span class="keyword">new</span> <span class="title class_">int</span>[len];</span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; len; i++) {</span><br><span class="line">            <span class="type">char</span> <span class="variable">ch</span> <span class="operator">=</span> pattern.charAt(i);</span><br><span class="line">            <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; pattern.charAt(j) != ch) {</span><br><span class="line">                j = next[j - <span class="number">1</span>];</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span> (pattern.charAt(j) == ch) {</span><br><span class="line">                j++;</span><br><span class="line">            }</span><br><span class="line">            next[i] = j;</span><br><span class="line">        }</span><br><span class="line">        j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; text.length(); i++) {</span><br><span class="line">            <span class="type">char</span> <span class="variable">ch</span> <span class="operator">=</span> text.charAt(i);</span><br><span class="line">            <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; pattern.charAt(j) != ch) {</span><br><span class="line">                j = next[j - <span class="number">1</span>];</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span> (pattern.charAt(j) == ch) {</span><br><span class="line">                j++;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span> (j == len) {</span><br><span class="line">                res.add(i - len + <span class="number">1</span>);</span><br><span class="line">                j = next[j - <span class="number">1</span>];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>发现读错题了，没有说是多个字符匹配……</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">String</span> <span class="variable">string</span> <span class="operator">=</span> in.nextLine();</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> <span class="variable">xiao</span> <span class="operator">=</span> string.indexOf(<span class="string">"xiao"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> hong= string.lastIndexOf(<span class="string">"hong"</span>);</span><br><span class="line"></span><br><span class="line">        StringBuilder res= <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将"xiao"子串和"hong"子串之间的部分放在新字符串的开头</span></span><br><span class="line">        res.append(<span class="string">"xiaohong"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 删除原字符串中的"xiao"子串和"hong"子串</span></span><br><span class="line">        string = string.replaceFirst(<span class="string">"xiao"</span>, <span class="string">""</span>).replaceFirst(<span class="string">"hong"</span>, <span class="string">""</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将剩余的原字符串依次添加到新字符串的末尾</span></span><br><span class="line">        res.append(string);</span><br><span class="line">        System.out.println(res);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>之前没用过的函数：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String.indexOf()</span><br><span class="line"></span><br><span class="line">String.lastIndexOf()</span><br><span class="line"></span><br><span class="line">String.replaceFirst()</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="d-xiao-hong-de-zhong-wei-shu"><span id="head4">D 小红的中位数</span></span></h1><blockquote>
+<p>链接：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/73422/D">https://ac.nowcoder.com/acm/contest/73422/D</a><br>来源：牛客网</p>
+<h2><span id="ti-mu-miao-shu">题目描述</span></h2><p>小红拿到了一个数组：a1,a2,…,an。她定义 f(i) 为，删除第i个元素后，数组的中位数。现在小红想让你求出f(1),f(2)…f(n)的值，你能帮帮她吗？</p>
+<h2><span id="shu-ru-miao-shu">输入描述:</span></h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">第一行输入一个正整数nnn，代表数组的大小。</span><br><span class="line">第二行输入n个正整数ai，代表数组的元素。</span><br><span class="line">2≤n≤10^5</span><br><span class="line">1≤ai≤10^9</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shu-chu-miao-shu">输出描述:</span></h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输出n行，每行输出一个浮点数，第iii行代表f(i)的值。保留一位小数。</span><br></pre></td></tr></tbody></table></figure>
+
+<p>​                            示例1                        </p>
+<h2><span id="shu-ru">输入</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">2 5 8 1</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shu-chu">输出</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">5.0</span><br><span class="line">2.0</span><br><span class="line">2.0</span><br><span class="line">5.0</span><br></pre></td></tr></tbody></table></figure>
+
+<p>​                            示例2                        </p>
+<h2><span id="shu-ru">输入</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">1 2 3</span><br></pre></td></tr></tbody></table></figure>
+
+<h2><span id="shu-chu">输出</span></h2><p><a href="javascript:void(0);">复制</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2.5</span><br><span class="line">2.0</span><br><span class="line">1.5</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+        </div>
+
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        
+            <script src='https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js'></script>
+            <script>
+                if (window.mermaid) {
+                    mermaid.initialize({
+                        startOnLoad: true,
+                        theme: 'neural',
+                    });
+                }
+            </script>
+        
+        <span>© zoe | <a href="https://hexo.io" target="_blank"></a>  <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank"></a>
+              
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<span class="site-uv">
+
+👤
+
+ <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+
+</span>&nbsp;
+
+
+
+
+
+<span class="site-pv">
+
+ | 👁️
+
+ <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+
+</span>
+
+
+  
+               
+        </span>
+    </div>
+</footer>
+
+    </div>
+
+    <!-- 搜索功能 -->
+    <!-- Chic/layout.ejs -->
+    <div id="u-search">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="container">
+                    <form id="u-search-modal-form" class="u-search-modal-form">
+                        <button type="submit" class="form-submit-btn">
+                            <img src="/image/search.png" class="search-btn-img" />
+                        </button>
+                        <input placeholder="搜索文章。。。" class="form-input" onchange="inputChange(event)" id="modal-form-input">
+                    </form>
+                    <a class="modal-close">x</a>
+                </div>
+                <div class="search-loading">
+                    <div class="search-loading-bar"></div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- <ul class="modal-results">
+                    <li class="result-item">
+                        <a class="result-item-detail">
+                            <span class="title">页面配置</span>
+                            <span class="content">
+                                网址，例如： front-matter---layout: postdate: <b mark></b>
+                                7-07-05title: [转]如何搭建基于Hexo的独立博客categories: [Dev, Hexo]tags: - Hexoauthor: name: xaoxuu avatar: https://cdn.jsdelivr.......
+                            </span>
+                        </a>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+        <div class="modal-overlay"></div>
+    </div>
+
+
+</body>
+
+
+
+</html>
+
+
