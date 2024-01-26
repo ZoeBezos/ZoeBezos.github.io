@@ -344,6 +344,72 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
 
     
     <article class="post-wrap">
@@ -375,7 +441,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">0</a>                         
+                            <a href="">224</a>                         
                         </span>
                         
                     
@@ -394,7 +460,101 @@
         </header>
 
         <div class="post-content">
-            
+            <table>
+<thead>
+<tr>
+<th>编号</th>
+<th>是否完成</th>
+<th>题号</th>
+<th>标签</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td></td>
+<td><a href="#head1">🟡797. 所有可能的路径</a></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+<td><a href="#head2">🟡200. 岛屿数量</a></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td></td>
+<td><a href="#head3">🟡695. 岛屿的最大面积</a></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td></td>
+<td><a href="#head4">🟡1020. 飞地的数量</a></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td></td>
+<td><a href="#head5">🟡1254. 统计封闭岛屿的数目</a></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td></td>
+<td><a href="#head6">🟡130. 被围绕的区域</a></td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td></td>
+<td><a href="#head7">🟡417. 太平洋大西洋水流问题</a></td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td></td>
+<td><a href="#head8">🔴827.最大人工岛</a></td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td></td>
+<td><a href="#head9">🔴127. 单词接龙</a></td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td></td>
+<td><a href="#head10">🟡841. 钥匙和房间</a></td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td></td>
+<td><a href="#head11">🟢463. 岛屿的周长</a></td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td></td>
+<td><a href="#head12">🟢1971. 寻找图中是否存在路径</a></td>
+<td></td>
+</tr>
+<tr>
+<td>13</td>
+<td></td>
+<td><a href="#head13"> 🟡684.冗余连接</a></td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td></td>
+<td><a href="#head14"> 🔴685.冗余连接II</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1><span id="797-suo-you-ke-neng-de-lu-jing"><span id="head1">🟡797. 所有可能的路径</span></span></h1><h1><span id="200-dao-yu-shu-liang"><span id="head2">🟡200. 岛屿数量</span></span></h1><h1><span id="695-dao-yu-de-zui-da-mian-ji"><span id="head3">🟡695. 岛屿的最大面积</span></span></h1><h1><span id="1020-fei-di-de-shu-liang"><span id="head4">🟡1020. 飞地的数量</span></span></h1><h1><span id="1254-tong-ji-feng-bi-dao-yu-de-shu-mu"><span id="head5">🟡1254. 统计封闭岛屿的数目</span></span></h1><h1><span id="130-bei-wei-rao-de-qu-yu"><span id="head6">🟡130. 被围绕的区域</span></span></h1><h1><span id="417-tai-ping-yang-da-xi-yang-shui-liu-wen-ti"><span id="head7">🟡417. 太平洋大西洋水流问题</span></span></h1><h1><span id="827-zui-da-ren-gong-dao"><span id="head8"> 🔴827.最大人工岛</span></span></h1><h1><span id="127-dan-ci-jie-long"><span id="head9">🔴127. 单词接龙</span></span></h1><h1><span id="841-yao-chi-he-fang-jian"><span id="head10">🟡841. 钥匙和房间</span></span></h1><h1><span id="463-dao-yu-de-zhou-chang"><span id="head11">🟢463. 岛屿的周长</span></span></h1><h1><span id="1971-xun-zhao-tu-zhong-shi-fou-cun-zai-lu-jing"><span id="head12">🟢1971. 寻找图中是否存在路径</span></span></h1><h1><span id="684-rong-yu-lian-jie"><span id="head13"> 🟡684.冗余连接</span></span></h1><h1><span id="685-rong-yu-lian-jie-ii"><span id="head14"> 🔴685.冗余连接II</span></span></h1>
         </div>
 
 
