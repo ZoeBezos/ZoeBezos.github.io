@@ -2,7 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://zoebezos.github.io/2024/01/18/java-collection/</loc>
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2024-01-26</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/18/tools-git/</loc>
+    <lastmod>2024-01-26</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/18/database-sql-free-50/</loc>
@@ -110,10 +114,6 @@
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/20/java-new-features/</loc>
-    <lastmod>2024-01-22</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/18/tools-git/</loc>
     <lastmod>2024-01-22</lastmod>
   </url>
   <url>
