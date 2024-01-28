@@ -289,6 +289,8 @@
                 
                 <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
                 
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
                 <input id="switch_default" type="checkbox" class="switch_default">
                 <!-- <label for="switch_default" class="toggleBtn"></label> -->
             </div>
@@ -321,6 +323,8 @@
             <div class="menu" id="mobile-menu">
                 
                 <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
                 
             </div>
         </div>
@@ -441,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">2.9k</a>                         
+                            <a href="">4.7k</a>                         
                         </span>
                         
                     
@@ -450,7 +454,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">12min</a>                         
+                            <a href="">21min</a>                         
                         </span>
                         
                     
@@ -488,12 +492,6 @@
 <td align="left">双指针</td>
 </tr>
 <tr>
-<td>4</td>
-<td align="center"></td>
-<td><a href="#head4">🟢844. 比较含退格的字符串</a></td>
-<td align="left"></td>
-</tr>
-<tr>
 <td>5</td>
 <td align="center">✅</td>
 <td><a href="#head5">🟢977. 有序数组的平方</a></td>
@@ -519,39 +517,39 @@
 </tr>
 <tr>
 <td>9</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td><a href="#head9">🟢206. 反转链表</a></td>
-<td align="left"></td>
+<td align="left">三个指针</td>
 </tr>
 <tr>
 <td>10</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td><a href="#head10">🟡19. 删除链表的倒数第 N 个结点</a></td>
-<td align="left"></td>
+<td align="left">快慢指针</td>
 </tr>
 <tr>
 <td>11</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td><a href="#head11">🟢面试题 02.07. 链表相交</a></td>
-<td align="left"></td>
+<td align="left">双指针</td>
 </tr>
 <tr>
 <td>12</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td><a href="#head12">🟡142. 环形链表</a></td>
-<td align="left"></td>
+<td align="left">快慢指针</td>
 </tr>
 <tr>
 <td>13</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td><a href="#head13">🟡15. 三数之和</a></td>
-<td align="left"></td>
+<td align="left">三个指针</td>
 </tr>
 <tr>
 <td>14</td>
-<td align="center"></td>
+<td align="center">✅</td>
 <td><a href="#head14">🟡18. 四数之和</a></td>
-<td align="left"></td>
+<td align="left">四个指针</td>
 </tr>
 </tbody></table>
 <h1><span id="27-yi-chu-yuan-su"><span id="head1"> 🟢27. 移除元素</span></span></h1><blockquote>
@@ -645,44 +643,33 @@
 </blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">moveZeroes</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">       <span class="keyword">if</span>(len==<span class="number">1</span>){</span><br><span class="line">           <span class="keyword">return</span> ;</span><br><span class="line">       }</span><br><span class="line">       <span class="type">int</span> i=<span class="number">0</span>,j=<span class="number">1</span>;</span><br><span class="line">       <span class="keyword">while</span>(j&lt;len){</span><br><span class="line">           <span class="keyword">while</span>(i&lt;len&amp;&amp;nums[i]!=<span class="number">0</span>){</span><br><span class="line">               i++;</span><br><span class="line">           }</span><br><span class="line">           j=i+<span class="number">1</span>;</span><br><span class="line">           <span class="keyword">while</span>(j&lt;len&amp;&amp;nums[j]==<span class="number">0</span>){</span><br><span class="line">               j++;</span><br><span class="line">           }</span><br><span class="line">           <span class="keyword">if</span>(j&gt;=len||i+<span class="number">1</span>&gt;=len){</span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">           }</span><br><span class="line">           <span class="type">int</span> temp=nums[i];</span><br><span class="line">           nums[i]=nums[j];</span><br><span class="line">           nums[j]=temp;</span><br><span class="line">           i++;</span><br><span class="line">           j++;</span><br><span class="line">           <span class="keyword">if</span>(j&gt;=len){</span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">           }</span><br><span class="line">       }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-
-
-<h1><span id="844-bi-jiao-han-tui-ge-de-zi-fu-chuan"><span id="head5">🟢844. 比较含退格的字符串</span></span></h1><blockquote>
-<p>给定 <code>s</code> 和 <code>t</code> 两个字符串，当它们分别被输入到空白的文本编辑器后，如果两者相等，返回 <code>true</code> 。<code>#</code> 代表退格字符。</p>
-<p><strong>注意：</strong>如果对空文本输入退格字符，文本继续为空。</p>
+<h1><span id="977-you-xu-shu-zu-de-ping-fang"><span id="head6">🟢977. 有序数组的平方</span></span></h1><blockquote>
+<p>给你一个按 <strong>非递减顺序</strong> 排序的整数数组 <code>nums</code>，返回 <strong>每个数字的平方</strong> 组成的新数组，要求也按 <strong>非递减顺序</strong> 排序。</p>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "ab#c", t = "ad#c"</span><br><span class="line">输出：true</span><br><span class="line">解释：s 和 t 都会变成 "ac"。</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-4,-1,0,3,10]</span><br><span class="line">输出：[0,1,9,16,100]</span><br><span class="line">解释：平方后，数组变为 [16,1,0,9,100]</span><br><span class="line">排序后，数组变为 [0,1,9,16,100]</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "ab##", t = "c#d#"</span><br><span class="line">输出：true</span><br><span class="line">解释：s 和 t 都会变成 ""。</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "a#c", t = "b"</span><br><span class="line">输出：false</span><br><span class="line">解释：s 会变成 "c"，但 t 仍然是 "b"。</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-7,-3,2,3,11]</span><br><span class="line">输出：[4,9,9,49,121]</span><br></pre></td></tr></tbody></table></figure>
 
 
 
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>1 &lt;= s.length, t.length &lt;= 200</code></li>
-<li><code>s</code> 和 <code>t</code> 只含有小写字母以及字符 <code>'#'</code></li>
+<li><code>1 &lt;= nums.length &lt;= 104</code></li>
+<li><code>-104 &lt;= nums[i] &lt;= 104</code></li>
+<li><code>nums</code> 已按 <strong>非递减顺序</strong> 排序</li>
 </ul>
 <p><strong>进阶：</strong></p>
 <ul>
-<li>你可以用 <code>O(n)</code> 的时间复杂度和 <code>O(1)</code> 的空间复杂度解决该问题吗？</li>
+<li>请你设计时间复杂度为 <code>O(n)</code> 的算法解决本问题</li>
 </ul>
 <p>Related Topics</p>
-<p>栈</p>
+<p>数组</p>
 <p>双指针</p>
-<p>字符串</p>
-<p>模拟</p>
+<p>排序</p>
 </blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># &lt;span id=<span class="string">"head6"</span>&gt;🟢<span class="number">977.</span> 有序数组的平方&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">&gt; 给你一个按 **非递减顺序** 排序的整数数组 `nums`，返回 **每个数字的平方** 组成的新数组，要求也按 **非递减顺序** 排序。</span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>输入：nums = [-4,-1,0,3,10]<br>输出：[0,1,9,16,100]<br>解释：平方后，数组变为 [16,1,0,9,100]<br>排序后，数组变为 [0,1,9,16,100]</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>输入：nums = [-7,-3,2,3,11]<br>输出：[4,9,9,49,121]</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**提示：**</span><br><span class="line"></span><br><span class="line">- `1 &lt;= nums.length &lt;= 104`</span><br><span class="line">- `-104 &lt;= nums[i] &lt;= 104`</span><br><span class="line">- `nums` 已按 **非递减顺序** 排序</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**进阶：**</span><br><span class="line"></span><br><span class="line">- 请你设计时间复杂度为 `O(n)` 的算法解决本问题</span><br><span class="line"></span><br><span class="line">Related Topics</span><br><span class="line"></span><br><span class="line">数组</span><br><span class="line"></span><br><span class="line">双指针</span><br><span class="line"></span><br><span class="line">排序</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">class Solution {</span><br><span class="line">   public int[] sortedSquares(int[] nums) {</span><br><span class="line">       int len= nums.length;</span><br><span class="line">       int i=0,j=len-1,index=j;</span><br><span class="line">       int[]res=new int[len];</span><br><span class="line">       while(index&gt;=0&amp;&amp;i&lt;=j){</span><br><span class="line">           if(nums[i]*nums[i]&gt;nums[j]*nums[j]){</span><br><span class="line">               res[index--]=nums[i]*nums[i++];</span><br><span class="line">           }else{</span><br><span class="line">               res[index--]=nums[j]*nums[j--];</span><br><span class="line">           }</span><br><span class="line">       }</span><br><span class="line">       return res;</span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortedSquares(<span class="type">int</span>[] nums) {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        <span class="type">int</span> i=<span class="number">0</span>,j=len-<span class="number">1</span>,index=j;</span><br><span class="line">        <span class="type">int</span>[]res=<span class="keyword">new</span> <span class="title class_">int</span>[len];</span><br><span class="line">        <span class="keyword">while</span>(index&gt;=<span class="number">0</span>&amp;&amp;i&lt;=j){</span><br><span class="line">            <span class="keyword">if</span>(nums[i]*nums[i]&gt;nums[j]*nums[j]){</span><br><span class="line">                res[index--]=nums[i]*nums[i++];</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                res[index--]=nums[j]*nums[j--];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <h1><span id="344-fan-zhuan-zi-fu-chuan"><span id="head7">🟢344. 反转字符串</span></span></h1><blockquote>
 <p>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 <code>s</code> 的形式给出。</p>
 <p>不要给另外的数组分配额外的空间，你必须**<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地</a>修改输入数组**、使用 O(1) 的额外空间解决这一问题。</p>
@@ -755,15 +742,39 @@
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">reverseWords</span><span class="params">(String s)</span> {</span><br><span class="line">        String[]strings=s.split(<span class="string">"[ ]+"</span>);</span><br><span class="line">        StringBuilder sb=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> strings.length-<span class="number">1</span>; i &gt;=<span class="number">0</span> ; i--) {</span><br><span class="line">            sb.append(strings[i]+<span class="string">" "</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> sb.toString().trim();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>还是用双指针做一下：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># &lt;span id=<span class="string">"head10"</span>&gt;🟢<span class="number">206.</span> 反转链表&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">&gt; 给你单链表的头节点 `head` ，请你反转链表，并返回反转后的链表。</span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br><span class="line">&gt; ![img](https:<span class="comment">//assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg)</span></span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>输入：head = [1,2,3,4,5]<br>输出：[5,4,3,2,1]</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br><span class="line">![img](https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg)</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>输入：head = [1,2]<br>输出：[2,1]</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 3：**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>输入：head = []<br>输出：[]</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**提示：**</span><br><span class="line"></span><br><span class="line">- 链表中节点的数目范围是 `[0, 5000]`</span><br><span class="line">- `-5000 &lt;= Node.val &lt;= 5000`</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**进阶：**链表可以选用迭代或递归方式完成反转。你能否用两种方法解决这道题？</span><br><span class="line"></span><br><span class="line">Related Topics</span><br><span class="line"></span><br><span class="line">递归</span><br><span class="line"></span><br><span class="line">链表</span><br><span class="line"></span><br><span class="line">```java</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">reverseWords</span><span class="params">(String s)</span> {</span><br><span class="line">        <span class="type">int</span> len=s.length();</span><br><span class="line">        <span class="keyword">if</span>(len==<span class="number">1</span>&amp;&amp;s.charAt(<span class="number">0</span>)==<span class="string">' '</span>){</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        }<span class="keyword">else</span> <span class="keyword">if</span>(len==<span class="number">1</span>){</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        }</span><br><span class="line">        String string=removespace(s);</span><br><span class="line">        len=string.length();</span><br><span class="line">        string=reverse(string,<span class="number">0</span>,string.length()-<span class="number">1</span>);</span><br><span class="line">        <span class="type">int</span> i=<span class="number">0</span>,j=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;len){</span><br><span class="line">            <span class="keyword">while</span>(j&lt;len&amp;&amp;string.charAt(j)!=<span class="string">' '</span>){</span><br><span class="line">                j++;<span class="comment">// j指向空格</span></span><br><span class="line">            }</span><br><span class="line">            string=reverse(string,i,j-<span class="number">1</span>);</span><br><span class="line">            i=j+<span class="number">1</span>;</span><br><span class="line">            j=i;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> string;</span><br><span class="line">    }</span><br><span class="line">    String <span class="title function_">removespace</span><span class="params">(String str)</span>{</span><br><span class="line">        <span class="type">int</span> len=str.length();</span><br><span class="line">        StringBuilder sb=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="type">int</span> i=<span class="number">0</span>,j=len-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(str.charAt(i)==<span class="string">' '</span>){</span><br><span class="line">            i++;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span>(str.charAt(j)==<span class="string">' '</span>){</span><br><span class="line">            j--;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span>(i&lt;=j){</span><br><span class="line">            <span class="keyword">if</span>(str.charAt(i)!=<span class="string">' '</span>||str.charAt(i-<span class="number">1</span>)!=<span class="string">' '</span>){</span><br><span class="line">                sb.append(str.charAt(i));</span><br><span class="line">            }</span><br><span class="line">            i++;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    }</span><br><span class="line">    String <span class="title function_">reverse</span><span class="params">(String str,<span class="type">int</span> i,<span class="type">int</span> j)</span>{</span><br><span class="line">        StringBuilder sb=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>(str);</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j){</span><br><span class="line">            <span class="type">char</span> temp=sb.charAt(i);</span><br><span class="line">            sb.setCharAt(i,sb.charAt(j));</span><br><span class="line">            sb.setCharAt(j,temp);</span><br><span class="line">            i++;</span><br><span class="line">            j--;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="206-fan-zhuan-lian-biao"><span id="head10">🟢206. 反转链表</span></span></h1><blockquote>
+<p>给你单链表的头节点 <code>head</code> ，请你反转链表，并返回反转后的链表。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5]</span><br><span class="line">输出：[5,4,3,2,1]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2]</span><br><span class="line">输出：[2,1]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点的数目范围是 <code>[0, 5000]</code></li>
+<li><code>-5000 &lt;= Node.val &lt;= 5000</code></li>
+</ul>
+<p><strong>进阶：</strong>链表可以选用迭代或递归方式完成反转。你能否用两种方法解决这道题？</p>
+<p>Related Topics</p>
+<p>递归</p>
+<p>链表</p>
 </blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">reverseList</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        ListNode last=<span class="literal">null</span>,cur=head,temp=cur;</span><br><span class="line">        <span class="keyword">while</span>(cur!=<span class="literal">null</span>){</span><br><span class="line">            temp=cur.next;</span><br><span class="line">            cur.next=last;</span><br><span class="line">            last=cur;</span><br><span class="line">            cur=temp;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> last;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
 <h1><span id="19-shan-chu-lian-biao-de-dao-shu-di-n-ge-jie-dian"><span id="head11">🟡19. 删除链表的倒数第 N 个结点</span></span></h1><blockquote>
 <p>给你一个链表，删除链表的倒数第 <code>n</code> 个结点，并且返回链表的头结点。</p>
 <p><strong>示例 1：</strong></p>
@@ -790,11 +801,138 @@
 <p>链表</p>
 <p>双指针</p>
 </blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">removeNthFromEnd</span><span class="params">(ListNode head, <span class="type">int</span> n)</span> {</span><br><span class="line">        <span class="keyword">if</span>(n&lt;=<span class="number">0</span>||head.next==<span class="literal">null</span>&amp;&amp;n==<span class="number">1</span>){</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        }</span><br><span class="line">        ListNode fast=head,slow=head;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) {</span><br><span class="line">            fast=fast.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(fast==<span class="literal">null</span>){</span><br><span class="line">            <span class="keyword">return</span> head.next;</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            fast=fast.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span>(fast!=<span class="literal">null</span>){</span><br><span class="line">            fast=fast.next;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">        }</span><br><span class="line">        slow.next=slow.next.next;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
 
-<h1><span id="mian-shi-ti-02-07-lian-biao-xiang-jiao"><span id="head12">🟢面试题 02.07. 链表相交</span></span></h1><h1><span id="142-huan-xing-lian-biao-ii"><span id="head13">🟡142. 环形链表 II</span></span></h1><h1><span id="15-san-shu-zhi-he"><span id="head14">🟡15. 三数之和</span></span></h1><h1><span id="18-si-shu-zhi-he"><span id="head15">🟡18. 四数之和</span></span></h1>
+<h1><span id="mian-shi-ti-02-07-lian-biao-xiang-jiao"><span id="head12">🟢面试题 02.07. 链表相交</span></span></h1><blockquote>
+<p>给你两个单链表的头节点 <code>headA</code> 和 <code>headB</code> ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 <code>null</code> 。</p>
+<p>图示两个链表在节点 <code>c1</code> 开始相交<strong>：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png" alt="img"></a></p>
+<p>题目数据 <strong>保证</strong> 整个链式结构中不存在环。</p>
+<p><strong>注意</strong>，函数返回结果后，链表必须 <strong>保持其原始结构</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2018/12/13/160_example_1.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_1.png" alt="img"></a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3</span><br><span class="line">输出：Intersected at '8'</span><br><span class="line">解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。</span><br><span class="line">从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。</span><br><span class="line">在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2018/12/13/160_example_2.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_2.png" alt="img"></a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1</span><br><span class="line">输出：Intersected at '2'</span><br><span class="line">解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。</span><br><span class="line">从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。</span><br><span class="line">在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2018/12/13/160_example_3.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_3.png" alt="img"></a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2</span><br><span class="line">输出：null</span><br><span class="line">解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。</span><br><span class="line">由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。</span><br><span class="line">这两个链表不相交，因此返回 null 。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>listA</code> 中节点数目为 <code>m</code></li>
+<li><code>listB</code> 中节点数目为 <code>n</code></li>
+<li><code>0 &lt;= m, n &lt;= 3 * 104</code></li>
+<li><code>1 &lt;= Node.val &lt;= 105</code></li>
+<li><code>0 &lt;= skipA &lt;= m</code></li>
+<li><code>0 &lt;= skipB &lt;= n</code></li>
+<li>如果 <code>listA</code> 和 <code>listB</code> 没有交点，<code>intersectVal</code> 为 <code>0</code></li>
+<li>如果 <code>listA</code> 和 <code>listB</code> 有交点，<code>intersectVal == listA[skipA + 1] == listB[skipB + 1]</code></li>
+</ul>
+<p><strong>进阶：</strong>你能否设计一个时间复杂度 <code>O(n)</code> 、仅用 <code>O(1)</code> 内存的解决方案？</p>
+<p>Related Topics</p>
+<p>哈希表</p>
+<p>链表</p>
+<p>双指针</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> {</span><br><span class="line">        <span class="keyword">if</span>(headA==<span class="literal">null</span>||headB==<span class="literal">null</span>){</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> lenA=<span class="number">1</span>,lenB=<span class="number">1</span>;</span><br><span class="line">        ListNode ptr=headA;</span><br><span class="line">        <span class="keyword">while</span>(ptr!=<span class="literal">null</span>){</span><br><span class="line">            lenA++;</span><br><span class="line">            ptr=ptr.next;</span><br><span class="line">        }</span><br><span class="line">        ptr=headB;</span><br><span class="line">        <span class="keyword">while</span>(ptr!=<span class="literal">null</span>){</span><br><span class="line">            lenB++;</span><br><span class="line">            ptr=ptr.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> i=lenA-Math.min(lenA,lenB);</span><br><span class="line">        <span class="type">int</span> j=lenB-Math.min(lenA,lenB);</span><br><span class="line">        <span class="keyword">for</span> (; Math.min(i,j) &lt; Math.min(lenA,lenB); i++,j++) {</span><br><span class="line">            <span class="keyword">if</span>(get(headA,i)==<span class="literal">null</span>){</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(get(headA,i).equals(get(headB,j))){</span><br><span class="line">                <span class="keyword">return</span> get(headA,i);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    }</span><br><span class="line">    ListNode <span class="title function_">get</span><span class="params">(ListNode head,<span class="type">int</span> n)</span>{</span><br><span class="line">        ListNode ptr=head;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) {</span><br><span class="line">            ptr=ptr.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> ptr;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h1><span id="142-huan-xing-lian-biao-ii"><span id="head13">🟡142. 环形链表 II</span></span></h1><blockquote>
+<p>给定一个链表的头节点 <code>head</code> ，返回链表开始入环的第一个节点。 <em>如果链表无环，则返回 <code>null</code>。</em></p>
+<p>如果链表中有某个节点，可以通过连续跟踪 <code>next</code> 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 <code>pos</code> 来表示链表尾连接到链表中的位置（<strong>索引从 0 开始</strong>）。如果 <code>pos</code> 是 <code>-1</code>，则在该链表中没有环。<strong>注意：<code>pos</code> 不作为参数进行传递</strong>，仅仅是为了标识链表的实际情况。</p>
+<p><strong>不允许修改</strong> 链表。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [3,2,0,-4], pos = 1</span><br><span class="line">输出：返回索引为 1 的链表节点</span><br><span class="line">解释：链表中有一个环，其尾部连接到第二个节点。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test2.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2], pos = 0</span><br><span class="line">输出：返回索引为 0 的链表节点</span><br><span class="line">解释：链表中有一个环，其尾部连接到第一个节点。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test3.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1], pos = -1</span><br><span class="line">输出：返回 null</span><br><span class="line">解释：链表中没有环。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点的数目范围在范围 <code>[0, 104]</code> 内</li>
+<li><code>-105 &lt;= Node.val &lt;= 105</code></li>
+<li><code>pos</code> 的值为 <code>-1</code> 或者链表中的一个有效索引</li>
+</ul>
+<p><strong>进阶：</strong>你是否可以使用 <code>O(1)</code> 空间解决此题？</p>
+<p>Related Topics</p>
+<p>哈希表</p>
+<p>链表</p>
+<p>双指针</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">detectCycle</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">slow</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">fast</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="keyword">while</span> (fast != <span class="literal">null</span> &amp;&amp; fast.next != <span class="literal">null</span>) {</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            <span class="keyword">if</span> (slow == fast) {<span class="comment">// 有环</span></span><br><span class="line">                <span class="type">ListNode</span> <span class="variable">index1</span> <span class="operator">=</span> fast;</span><br><span class="line">                <span class="type">ListNode</span> <span class="variable">index2</span> <span class="operator">=</span> head;</span><br><span class="line">                <span class="comment">// 两个指针，从头结点和相遇结点，各走一步，直到相遇，相遇点即为环入口</span></span><br><span class="line">                <span class="keyword">while</span> (index1 != index2) {</span><br><span class="line">                    index1 = index1.next;</span><br><span class="line">                    index2 = index2.next;</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">return</span> index1;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h1><span id="15-san-shu-zhi-he"><span id="head14">🟡15. 三数之和</span></span></h1><blockquote>
+<p>给你一个整数数组 <code>nums</code> ，判断是否存在三元组 <code>[nums[i], nums[j], nums[k]]</code> 满足 <code>i != j</code>、<code>i != k</code> 且 <code>j != k</code> ，同时还满足 <code>nums[i] + nums[j] + nums[k] == 0</code> 。请</p>
+<p>你返回所有和为 <code>0</code> 且不重复的三元组。</p>
+<p><strong>注意：</strong>答案中不可以包含重复的三元组。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br><span class="line">解释：</span><br><span class="line">nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0 。</span><br><span class="line">nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0 。</span><br><span class="line">nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。</span><br><span class="line">不同的三元组是 [-1,0,1] 和 [-1,-1,2] 。</span><br><span class="line">注意，输出的顺序和三元组的顺序并不重要。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,1,1]</span><br><span class="line">输出：[]</span><br><span class="line">解释：唯一可能的三元组和不为 0 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,0,0]</span><br><span class="line">输出：[[0,0,0]]</span><br><span class="line">解释：唯一可能的三元组和为 0 。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>3 &lt;= nums.length &lt;= 3000</code></li>
+<li><code>-105 &lt;= nums[i] &lt;= 105</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>双指针</p>
+<p>排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">threeSum</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&gt;<span class="number">0</span>){</span><br><span class="line">                <span class="keyword">return</span> res;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(i&gt;<span class="number">0</span>&amp;&amp;nums[i]==nums[i-<span class="number">1</span>]){</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="type">int</span> left=i+<span class="number">1</span>,right=len-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(left&lt;right){</span><br><span class="line">                <span class="type">int</span> sum=nums[i]+nums[left]+nums[right];</span><br><span class="line">                <span class="keyword">if</span>(sum==<span class="number">0</span>){</span><br><span class="line">                    res.add(Arrays.asList(nums[i],nums[left],nums[right]));</span><br><span class="line">                    <span class="keyword">while</span> (right &gt; left &amp;&amp; nums[right] == nums[right - <span class="number">1</span>]) right--;</span><br><span class="line">                    <span class="keyword">while</span> (right &gt; left &amp;&amp; nums[left] == nums[left + <span class="number">1</span>]) left++;</span><br><span class="line">                    right--;</span><br><span class="line">                    left++;</span><br><span class="line">                } <span class="keyword">else</span> <span class="keyword">if</span> (sum&lt;<span class="number">0</span>) {</span><br><span class="line">                    left++;</span><br><span class="line">                }<span class="keyword">else</span>{</span><br><span class="line">                    right--;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h1><span id="18-si-shu-zhi-he"><span id="head15">🟡18. 四数之和</span></span></h1><blockquote>
+<p>给你一个由 <code>n</code> 个整数组成的数组 <code>nums</code> ，和一个目标值 <code>target</code> 。请你找出并返回满足下述全部条件且<strong>不重复</strong>的四元组 <code>[nums[a], nums[b], nums[c], nums[d]]</code> （若两个四元组元素一一对应，则认为两个四元组重复）：</p>
+<ul>
+<li><code>0 &lt;= a, b, c, d &lt; n</code></li>
+<li><code>a</code>、<code>b</code>、<code>c</code> 和 <code>d</code> <strong>互不相同</strong></li>
+<li><code>nums[a] + nums[b] + nums[c] + nums[d] == target</code></li>
+</ul>
+<p>你可以按 <strong>任意顺序</strong> 返回答案 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,0,-1,0,-2,2], target = 0</span><br><span class="line">输出：[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,2,2,2,2], target = 8</span><br><span class="line">输出：[[2,2,2,2]]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 200</code></li>
+<li><code>-109 &lt;= nums[i] &lt;= 109</code></li>
+<li><code>-109 &lt;= target &lt;= 109</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>双指针</p>
+<p>排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">fourSum</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&gt;<span class="number">0</span>&amp;&amp;nums[i]&gt;target){</span><br><span class="line">                <span class="keyword">return</span> res;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">while</span>(i&gt;<span class="number">0</span>&amp;&amp;i&lt;len&amp;&amp;nums[i]==nums[i-<span class="number">1</span>]){</span><br><span class="line">                i++;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i+<span class="number">1</span>; j &lt; len; j++) {</span><br><span class="line">                <span class="keyword">while</span>(j&gt;i+<span class="number">1</span>&amp;&amp;j&lt;len&amp;&amp;nums[j]==nums[j-<span class="number">1</span>]){</span><br><span class="line">                    j++;</span><br><span class="line">                }</span><br><span class="line">                <span class="type">int</span> left=j+<span class="number">1</span>;</span><br><span class="line">                <span class="type">int</span> right=len-<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span>(left&lt;right){</span><br><span class="line">                    <span class="type">long</span> sum=(<span class="type">long</span>)nums[i]+nums[j]+nums[left]+nums[right];</span><br><span class="line">                    <span class="keyword">if</span>(sum&lt;target){</span><br><span class="line">                        left++;</span><br><span class="line">                    } <span class="keyword">else</span> <span class="keyword">if</span> (sum&gt;target) {</span><br><span class="line">                        right--;</span><br><span class="line">                    }<span class="keyword">else</span>{</span><br><span class="line">                        res.add(Arrays.asList(nums[i],nums[j],nums[left],nums[right]));</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">while</span>(left&lt;right&amp;&amp;nums[left]==nums[left+<span class="number">1</span>]){</span><br><span class="line">                            left++;</span><br><span class="line">                        }</span><br><span class="line">                        <span class="keyword">while</span>(left&lt;right&amp;&amp;nums[right]==nums[right-<span class="number">1</span>]){</span><br><span class="line">                            right--;</span><br><span class="line">                        }</span><br><span class="line">                        left++;</span><br><span class="line">                        right--;</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
         </div>
 
 

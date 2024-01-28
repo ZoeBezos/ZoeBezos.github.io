@@ -15,7 +15,7 @@
 
 
 
-<title>🟡2865.beautiful towers i | ZOE&#39;s site</title>
+<title>LinkedHashMap⭐ | ZOE&#39;s site</title>
 
 
 
@@ -289,6 +289,8 @@
                 
                 <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
                 
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
                 <input id="switch_default" type="checkbox" class="switch_default">
                 <!-- <label for="switch_default" class="toggleBtn"></label> -->
             </div>
@@ -322,6 +324,8 @@
                 
                 <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
                 
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
             </div>
         </div>
     </nav>
@@ -344,77 +348,11 @@
                 <div class="container">
     
     
-        <div class="post-toc">
-    <div class="tocbot-list">
-    </div>
-    <div class="tocbot-list-menu">
-        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-    </div>
-</div>
-
-<script>
-    var tocbot_timer;
-    var DEPTH_MAX = 6; // 为 6 时展开所有
-    var tocbot_default_config = {
-        tocSelector: '.tocbot-list',
-        contentSelector: '.post-content',
-        headingSelector: 'h1, h2, h3, h4, h5',
-        orderedList: false,
-        scrollSmooth: true,
-        onClick: extend_click,
-    };
-
-    function extend_click() {
-        clearTimeout(tocbot_timer);
-        tocbot_timer = setTimeout(function() {
-            tocbot.refresh(obj_merge(tocbot_default_config, {
-                hasInnerContainers: true
-            }));
-        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
-    }
-
-    document.ready(function() {
-        tocbot.init(obj_merge(tocbot_default_config, {
-            collapseDepth: 1
-        }));
-    });
-
-    function expand_toc() {
-        var b = document.querySelector('.tocbot-toc-expand');
-        var expanded = b.getAttribute('data-expanded');
-        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
-        tocbot.refresh(obj_merge(tocbot_default_config, {
-            collapseDepth: expanded ? 1 : DEPTH_MAX
-        }));
-        b.innerText = expanded ? 'Expand all' : 'Collapse all';
-    }
-
-    function go_top() {
-        window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-    function obj_merge(target, source) {
-        for (var item in source) {
-            if (source.hasOwnProperty(item)) {
-                target[item] = source[item];
-            }
-        }
-        return target;
-    }
-</script>
-
-    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">🟡2865.beautiful towers i</h1>
+            <h1 class="post-title">LinkedHashMap⭐</h1>
             
                 <div class="post-meta">
                     
@@ -423,16 +361,25 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">January 24, 2024&nbsp;&nbsp;0:38:01</a>
+                        Date: <a href="#">January 27, 2024&nbsp;&nbsp;17:12:49</a>
                         </span>
                     
+                    
+
+                        <span class="post-category">                        
+                            Category:                        
+                                                    
+                            <a href="/categories/Java-Collection/">Java Collection</a>
+                            
+                        </span>
+
                     
 
                     
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">453</a>                         
+                            <a href="">0</a>                         
                         </span>
                         
                     
@@ -451,41 +398,7 @@
         </header>
 
         <div class="post-content">
-            <h1><span id="ti-mu-miao-shu">题目描述</span></h1><blockquote>
-<p>给你一个长度为 <code>n</code> 下标从 <strong>0</strong> 开始的整数数组 <code>maxHeights</code> 。</p>
-<p>你的任务是在坐标轴上建 <code>n</code> 座塔。第 <code>i</code> 座塔的下标为 <code>i</code> ，高度为 <code>heights[i]</code> 。</p>
-<p>如果以下条件满足，我们称这些塔是 <strong>美丽</strong> 的：</p>
-<ol>
-<li><code>1 &lt;= heights[i] &lt;= maxHeights[i]</code></li>
-<li><code>heights</code> 是一个 <strong>山脉</strong> 数组。</li>
-</ol>
-<p>如果存在下标 <code>i</code> 满足以下条件，那么我们称数组 <code>heights</code> 是一个 <strong>山脉</strong> 数组：</p>
-<ul>
-<li>对于所有 <code>0 &lt; j &lt;= i</code> ，都有 <code>heights[j - 1] &lt;= heights[j]</code></li>
-<li>对于所有 <code>i &lt;= k &lt; n - 1</code> ，都有 <code>heights[k + 1] &lt;= heights[k]</code></li>
-</ul>
-<p>请你返回满足 <strong>美丽塔</strong> 要求的方案中，<strong>高度和的最大值</strong> 。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：maxHeights = [5,3,4,1,1]</span><br><span class="line">输出：13</span><br><span class="line">解释：和最大的美丽塔方案为 heights = [5,3,3,1,1] ，这是一个美丽塔方案，因为：</span><br><span class="line">- 1 &lt;= heights[i] &lt;= maxHeights[i]  </span><br><span class="line">- heights 是个山脉数组，峰值在 i = 0 处。</span><br><span class="line">13 是所有美丽塔方案中的最大高度和。</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：maxHeights = [6,5,3,9,2,7]</span><br><span class="line">输出：22</span><br><span class="line">解释： 和最大的美丽塔方案为 heights = [3,3,3,9,2,2] ，这是一个美丽塔方案，因为：</span><br><span class="line">- 1 &lt;= heights[i] &lt;= maxHeights[i]</span><br><span class="line">- heights 是个山脉数组，峰值在 i = 3 处。</span><br><span class="line">22 是所有美丽塔方案中的最大高度和。</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：maxHeights = [3,2,5,5,2,3]</span><br><span class="line">输出：18</span><br><span class="line">解释：和最大的美丽塔方案为 heights = [2,2,5,5,2,2] ，这是一个美丽塔方案，因为：</span><br><span class="line">- 1 &lt;= heights[i] &lt;= maxHeights[i]</span><br><span class="line">- heights 是个山脉数组，最大值在 i = 2 处。</span><br><span class="line">注意，在这个方案中，i = 3 也是一个峰值。</span><br><span class="line">18 是所有美丽塔方案中的最大高度和。</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= n == maxHeights &lt;= 103</code></li>
-<li><code>1 &lt;= maxHeights[i] &lt;= 109</code></li>
-</ul>
-<p>Related Topics</p>
-<p>栈</p>
-<p>数组</p>
-<p>单调栈</p>
-</blockquote>
+            <p><img src="/2024/01/27/java-collection-linkedhashmap/image-20240127192740571.png" alt="image-20240127192740571"></p>
 
         </div>
 

@@ -1,8 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2024/01/28/coding-402-remove-k-digits/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/12/24/problem-set-OD/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/28/coding-316-remove-duplicate-letters/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/25/algorithm-graph/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/21/contest-newcoder-weekly-contest-29/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/14/contest-newcoder-weekly-contest-28/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/21/contest-leetcode-weekly-contest-381/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/14/contest-leetcode-weekly-contest-380/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/20/contest-leetcode-biweekly-contest-122/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/28/contest-leetcode-weekly-contest-382/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/03/algorithm-hashing/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/05/algorithm-twopointers/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-linkedlist/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2024/01/18/java-collection/</loc>
-    <lastmod>2024-01-26</lastmod>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-delayqueue/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-concurrenthashmap/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-arrayblockingqueue/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-copyonwritearraylist/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-hashtable/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-hashset/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-linkedhashset/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-linkedhashmap/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-hashmap/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-treemap/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-vector/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-treeset/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-priorityqueue/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-arraydeque/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-stack/</loc>
+    <lastmod>2024-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/27/java-collection-arraylist/</loc>
+    <lastmod>2024-01-27</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/18/tools-git/</loc>
@@ -14,10 +130,6 @@
   </url>
   <url>
     <loc>https://zoebezos.github.io/2023/09/08/algorithm-backtraking/</loc>
-    <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/25/algorithm-graph/</loc>
     <lastmod>2024-01-25</lastmod>
   </url>
   <url>
@@ -41,10 +153,6 @@
     <lastmod>2024-01-25</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/09/05/algorithm-twopointers/</loc>
-    <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2024/01/25/problem-set-top-interview-150/</loc>
     <lastmod>2024-01-25</lastmod>
   </url>
@@ -62,10 +170,6 @@
   </url>
   <url>
     <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
-    <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/03/algorithm-hashing/</loc>
     <lastmod>2024-01-25</lastmod>
   </url>
   <url>
@@ -89,20 +193,8 @@
     <lastmod>2024-01-25</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/12/24/problem-set-0D/</loc>
-    <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2024/01/25/coding-2859-sum-of-values-at-indices-with-k-set-bits/</loc>
     <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/24/coding-2865-beautiful-towers-i/</loc>
-    <lastmod>2024-01-23</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/21/contest-leetcode-weekly-contest-381/</loc>
-    <lastmod>2024-01-23</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/23/coding-2765-longest-alternating-subarray/</loc>
@@ -117,16 +209,8 @@
     <lastmod>2024-01-22</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2024/01/21/contest-newcoder-weekly-contest-29/</loc>
-    <lastmod>2024-01-22</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2024/01/22/coding-670-maximum-swap/</loc>
     <lastmod>2024-01-22</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/14/contest-leetcode-weekly-contest-380/</loc>
-    <lastmod>2024-01-21</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/12/coding-2085-count-common-words-with-one-occurrence/</loc>
@@ -134,10 +218,6 @@
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/17/coding-2744-find-maximum-number-of-string-pairs/</loc>
-    <lastmod>2024-01-21</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/20/contest-leetcode-biweekly-contest-122/</loc>
     <lastmod>2024-01-21</lastmod>
   </url>
   <url>
@@ -187,9 +267,5 @@
   <url>
     <loc>https://zoebezos.github.io/2023/12/30/reading-notes-yigemoshengnvrendelaixin/</loc>
     <lastmod>2024-01-18</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/14/contest-newcoder-weekly-contest-28/</loc>
-    <lastmod>2024-01-17</lastmod>
   </url>
 </urlset> 
