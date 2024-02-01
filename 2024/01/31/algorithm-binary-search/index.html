@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zoe">
+
+
+    <meta name="subtitle" content="liberté">
+
+
+
+
+<title>Binary Search | ZOE&#39;s site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+    <script src="/js/jquery-3.7.0.min.js"></script>
+    
+    <script src="/js/mathjax2.7.5.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<!-- 搜索的部分 -->
+
+
+
+    <script>
+    // function searchToggle() {
+    //     const width = $(document.body).width()
+    //     if(width > 479) {
+    //         return;
+    //     }
+    //     const search = $('.search');
+    //     const searchForm = $('.form-search')
+
+    //     if(!search.hasClass("mobile-search")) {
+    //         search.addClass("mobile-search");
+    //     } else {
+    //         search.removeClass("mobile-search");
+    //     } 
+    // }
+
+    function searchToggle() {
+        const width = $(document.body).width()
+        if(width > 479) {
+            return;
+        }
+        const search = $('.search');
+        const searchForm = $('.form-search');
+        const menuToggle = $('.menu-toggle');
+        const title = $('.navbar-header-title ');
+
+        if(!search.hasClass("mobile-search")) {
+            search.addClass("mobile-search");
+            menuToggle.addClass("open-search")
+            title.addClass("mobile-title-hidden")
+        } else {
+            search.removeClass("mobile-search");
+            menuToggle.removeClass("open-search")
+            // title.css({visibility: 'visible'})
+            title.removeClass("mobile-title-hidden")
+        } 
+    }
+
+
+
+    function search(searchInputEl, formEl, flag) {
+        const path = "/" + "search.json"; // 可以在public 下查看这个search.json
+        $(formEl).submit(function(e){
+            e.preventDefault();
+            let target = null
+            if(searchInputEl == null) {
+                const screenWidth = $(document.body).width();
+                target = screenWidth > 479 ? $('#pc-search-input') : $('#mobile-search-input');
+                console.log(target);
+            } else {
+                target = $(searchInputEl)
+            }
+
+            if(!flag && target.val() === '') {
+                return ;
+            }
+
+            $("#u-search").fadeIn(500, function() {
+                $("body > .wrapper").addClass("modal-active");
+
+                $.ajax({
+                    url: path,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        $input = target.val();
+                        $(".form-input").val($input);
+                        const loadingBar = $('.search-loading-bar') 
+                        loadingBar.css({
+                            width:'100%',
+                            display: 'block'
+                        });
+                    },
+                    success: function( datas ) {
+                        console.log(datas);
+                        const $resultPanel = $(".modal-body")[0];
+                        let str = `<ul class="modal-results">`;
+                        var keywords = $(".form-input").val().trim().toLowerCase().split(/[\s\-]+/);
+                        $resultPanel.innerHTML = "";
+                        let hasResult = false
+                        let text = `<div class="no-result">找不到与关键词相关的内容....</div>`;
+
+                        if ($(".form-input").val().trim().length <= 0) {
+                            // 没有结果
+                            $resultPanel.innerHTML = text;
+                            return;
+                        }
+                        datas.forEach(function (data, index) {
+                            var isMatch = true;
+                            if (!data.title || data.title.trim() === '') {
+                                data.title = "Untitled";
+                            }
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content && data.content.trim().replace(/<[^>]+>/g, "").toLowerCase() || '';
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty contents
+                            if (data_content !== '') {
+                                keywords.forEach(function (keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        hasResult = true
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            } else {
+                                isMatch = false;
+                            }
+                            // show search results
+                            if (isMatch) {
+                                str += `<li class='result-item'><a href='${data_url}' class='result-item-detail'> <span class="title">${data_title}</span>`;
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 200 characters
+                                    var start = first_occur - 40;
+                                    var end = first_occur + 160;
+
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+
+                                    if (start == 0) {
+                                        end = 200;
+                                    }
+
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+
+                                    var match_content = content.substring(start, end);
+
+                                    // highlight all keywords
+                                    keywords.forEach(function (keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, `<em class="search-keyword">${keyword}</em>`);
+                                    });
+
+                                    str += `<span class="content"> ${match_content} ...</span></a>`;
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        if(hasResult) {
+                            $resultPanel.innerHTML = str;
+                        } else {
+                            $resultPanel.innerHTML = text;
+                        }
+
+                    },
+                    complete: function() {
+                        setTimeout(() => {
+                                const loadingBar = $('.search-loading-bar') 
+                                loadingBar.css({
+                                    width:'0%',
+                                    display: 'none'
+                                });
+                        }, 300)
+                    }
+                });
+            })
+
+        });
+    }
+
+    $(document).ready(function() {
+        $('.modal-close').click(function () { 
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+
+        $('.modal-overlay').click(function() {
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+        search(null, ".form-search", false)
+        search("#u-search-modal-form .form-input", ".u-search-modal-form", true)
+    })
+</script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                // pagebody.classList.add('dark-theme');
+                // mobile
+                // document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <!-- <div class="navbar-header header-logo"><a href="/">ZOE&#39;s site</a></div> -->
+            <div class="navbar-header header-logo"><a href="/"><i class="iconfont icon-zhuye" style="font-size: 1em;"></i>ZOE&#39;s site</a></div>
+            <div class="menu navbar-right">
+                <!-- 这里表示的是pc端搜索框 -->
+                
+                
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="pc-search-input"/>
+        </form>
+    </div>
+
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <!-- <label for="switch_default" class="toggleBtn"></label> -->
+            </div>
+        </div>
+    </nav>
+    
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ZOE&#39;s site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="navbar-mobile-right">
+                    
+                    
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="mobile-search-input"/>
+        </form>
+    </div>
+
+                    <!-- <div class="menu-toggle" onclick="mobileBtn()">&#9776; menu</div> -->
+                </div>
+    
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Binary Search</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 31, 2024&nbsp;&nbsp;15:47:27</a>
+                        </span>
+                    
+                    
+
+                        <span class="post-category">                        
+                            Category:                        
+                                                    
+                            <a href="/categories/algorithm-learning/">algorithm learning</a>
+                            
+                        </span>
+
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">477</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">1min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <table>
+<thead>
+<tr>
+<th>类型</th>
+<th>编号</th>
+<th>题号</th>
+<th>完成</th>
+<th>标签</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="#head1"> 普通二分查找</a></td>
+<td>1</td>
+<td><a href="#head2">🟢704. 二分查找 </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>2</td>
+<td><a href="#head3">🟢69. x 的平方根 </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>3</td>
+<td><a href="#head4">🟢35. 搜索插入位置 </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>4</td>
+<td><a href="#head5">🟡153. 寻找旋转排序数组中的最小值 </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>5</td>
+<td><a href="#head6">🟢367. 有效的完全平方数 </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>6</td>
+<td><a href="#head7">🟡50. Pow(x, n) </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>7</td>
+<td><a href="#head8"> 🟢278. 第一个错误的版本</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>8</td>
+<td><a href="#head9"> 🔴4. 寻找两个正序数组的中位数</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>9</td>
+<td><a href="#head10">🟡 167. 两数之和 II - 输入有序数组 </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>10</td>
+<td><a href="#head11">🟢744. 寻找比目标字母大的最小字母 </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>11</td>
+<td><a href="#head12">🟡162. 寻找峰值</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="#head13"> 查找区间</a></td>
+<td>12</td>
+<td><a href="#head14">🟡34. 在排序数组中查找元素的第一个和最后一个位置 </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>13</td>
+<td><a href="#head15">🟡658. 找到 K 个最接近的元素 </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>14</td>
+<td><a href="#head16"> 🟢278. 第一个错误的版本 </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>15</td>
+<td><a href="#head17">🟡74. 搜索二维矩阵</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="#head18"> 旋转排列数组</a></td>
+<td>16</td>
+<td><a href="#head19">🟡33. 搜索旋转排序数组 </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>17</td>
+<td><a href="#head20">🟡81. 搜索旋转排序数组 II </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>18</td>
+<td><a href="#head21">🟡240. 搜索二维矩阵 II </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>19</td>
+<td><a href="#head22">🟡48. 旋转图像</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>20</td>
+<td><a href="#head23">🟢448. 找到所有数组中消失的数字 </a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>21</td>
+<td><a href="#head24">🔴154. 寻找旋转排序数组中的最小值 II</a></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1><span id="pu-tong-er-fen-cha-zhao"><span id="head1"> 普通二分查找</span></span></h1><h2><span id="704-er-fen-cha-zhao"><span id="head2">🟢704. 二分查找 </span></span></h2><h2><span id="69-x-de-ping-fang-gen"><span id="head3">🟢69. x 的平方根 </span></span></h2><h2><span id="35-sou-suo-cha-ru-wei-zhi"><span id="head4">🟢35. 搜索插入位置 </span></span></h2><h2><span id="153-xun-zhao-xuan-zhuan-pai-xu-shu-zu-zhong-de-zui-xiao-zhi"><span id="head5">🟡153. 寻找旋转排序数组中的最小值 </span></span></h2><h2><span id="367-you-xiao-de-wan-quan-ping-fang-shu"><span id="head6">🟢367. 有效的完全平方数 </span></span></h2><h2><span id="50-pow-x-n"><span id="head7">🟡50. Pow(x, n) </span></span></h2><h2><span id="278-di-yi-ge-cuo-wu-de-ban-ben"><span id="head8"> 🟢278. 第一个错误的版本</span></span></h2><h2><span id="4-xun-zhao-liang-ge-zheng-xu-shu-zu-de-zhong-wei-shu"><span id="head9"> 🔴4. 寻找两个正序数组的中位数</span></span></h2><h2><span id="167-liang-shu-zhi-he-ii-shu-ru-you-xu-shu-zu"><span id="head10">🟡 167. 两数之和 II - 输入有序数组 </span></span></h2><h2><span id="744-xun-zhao-bi-mu-biao-zi-mu-da-de-zui-xiao-zi-mu"><span id="head11">🟢744. 寻找比目标字母大的最小字母 </span></span></h2><h2><span id="162-xun-zhao-feng-zhi"><span id="head12">🟡162. 寻找峰值</span></span></h2><h1><span id="cha-zhao-qu-jian"><span id="head13"> 查找区间</span></span></h1><h2><span id="34-zai-pai-xu-shu-zu-zhong-cha-zhao-yuan-su-de-di-yi-ge-he-zui-hou-yi-ge-wei-zhi"><span id="head14">🟡34. 在排序数组中查找元素的第一个和最后一个位置 </span></span></h2><h2><span id="658-zhao-dao-k-ge-zui-jie-jin-de-yuan-su"><span id="head15">🟡658. 找到 K 个最接近的元素 </span></span></h2><h2><span id="278-di-yi-ge-cuo-wu-de-ban-ben"><span id="head16"> 🟢278. 第一个错误的版本 </span></span></h2><h2><span id="74-sou-suo-er-wei-ju-zhen"><span id="head17">🟡74. 搜索二维矩阵</span></span></h2><h1><span id="xuan-zhuan-pai-lie-shu-zu"><span id="head18"> 旋转排列数组</span></span></h1><h2><span id="33-sou-suo-xuan-zhuan-pai-xu-shu-zu"><span id="head19">🟡33. 搜索旋转排序数组 </span></span></h2><h2><span id="81-sou-suo-xuan-zhuan-pai-xu-shu-zu-ii"><span id="head20">🟡81. 搜索旋转排序数组 II </span></span></h2><h2><span id="240-sou-suo-er-wei-ju-zhen-ii"><span id="head21">🟡240. 搜索二维矩阵 II </span></span></h2><h2><span id="48-xuan-zhuan-tu-xiang"><span id="head22">🟡48. 旋转图像</span></span></h2><h2><span id="448-zhao-dao-suo-you-shu-zu-zhong-xiao-shi-de-shu-zi"><span id="head23">🟢448. 找到所有数组中消失的数字 </span></span></h2><h2><span id="154-xun-zhao-xuan-zhuan-pai-xu-shu-zu-zhong-de-zui-xiao-zhi-ii"><span id="head24">🔴154. 寻找旋转排序数组中的最小值 II</span></span></h2>
+        </div>
+
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        
+            <script src='https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js'></script>
+            <script>
+                if (window.mermaid) {
+                    mermaid.initialize({
+                        startOnLoad: true,
+                        theme: 'neural',
+                    });
+                }
+            </script>
+        
+        <span>© zoe | <a href="https://hexo.io" target="_blank"></a>  <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank"></a>
+              
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<span class="site-uv">
+
+👤
+
+ <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+
+</span>&nbsp;
+
+
+
+
+
+<span class="site-pv">
+
+ | 👁️
+
+ <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+
+</span>
+
+
+  
+               
+        </span>
+    </div>
+</footer>
+
+    </div>
+
+    <!-- 搜索功能 -->
+    <!-- Chic/layout.ejs -->
+    <div id="u-search">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="container">
+                    <form id="u-search-modal-form" class="u-search-modal-form">
+                        <button type="submit" class="form-submit-btn">
+                            <img src="/image/search.png" class="search-btn-img" />
+                        </button>
+                        <input placeholder="搜索文章。。。" class="form-input" onchange="inputChange(event)" id="modal-form-input">
+                    </form>
+                    <a class="modal-close">x</a>
+                </div>
+                <div class="search-loading">
+                    <div class="search-loading-bar"></div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- <ul class="modal-results">
+                    <li class="result-item">
+                        <a class="result-item-detail">
+                            <span class="title">页面配置</span>
+                            <span class="content">
+                                网址，例如： front-matter---layout: postdate: <b mark></b>
+                                7-07-05title: [转]如何搭建基于Hexo的独立博客categories: [Dev, Hexo]tags: - Hexoauthor: name: xaoxuu avatar: https://cdn.jsdelivr.......
+                            </span>
+                        </a>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+        <div class="modal-overlay"></div>
+    </div>
+
+
+</body>
+
+
+
+</html>
+
+

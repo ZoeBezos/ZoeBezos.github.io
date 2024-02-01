@@ -1,19 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2024/01/25/algorithm-graph/</loc>
+    <lastmod>2024-02-01</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/10/algorithm-dp/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/07/algorithm-tree-and-bitree/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/04/algorithm-strings/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/09/algorithm-greedy/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/06/algorithm-stack&queue/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/03/algorithm-hashing/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/01/algorithm-array/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/05/algorithm-twopointers/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-sliding-windows/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-binary-search/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-divide-and-conquer/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-bit-manipulation/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-prefix-sum/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-sorting/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-recursion/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-number-and-bits/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/11/algorithm-monotonic-stack/</loc>
+    <lastmod>2024-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/12/24/problem-set-OD/</loc>
+    <lastmod>2024-01-30</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/coding-2670-find-the-distinct-difference-array/</loc>
+    <lastmod>2024-01-30</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/20/contest-leetcode-biweekly-contest-122/</loc>
+    <lastmod>2024-01-30</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/18/cs-basics-network/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2024/01/28/coding-402-remove-k-digits/</loc>
     <lastmod>2024-01-28</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/12/24/problem-set-OD/</loc>
-    <lastmod>2024-01-28</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2024/01/28/coding-316-remove-duplicate-letters/</loc>
-    <lastmod>2024-01-28</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/25/algorithm-graph/</loc>
     <lastmod>2024-01-28</lastmod>
   </url>
   <url>
@@ -33,20 +117,8 @@
     <lastmod>2024-01-28</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2024/01/20/contest-leetcode-biweekly-contest-122/</loc>
-    <lastmod>2024-01-28</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2024/01/28/contest-leetcode-weekly-contest-382/</loc>
     <lastmod>2024-01-28</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/03/algorithm-hashing/</loc>
-    <lastmod>2024-01-27</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/05/algorithm-twopointers/</loc>
-    <lastmod>2024-01-27</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/27/java-collection-linkedlist/</loc>
@@ -157,38 +229,6 @@
     <lastmod>2024-01-25</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/09/04/algorithm-strings/</loc>
-    <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/06/algorithm-stack&queue/</loc>
-    <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/11/algorithm-monotonestack/</loc>
-    <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
-    <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/09/algorithm-greedy/</loc>
-    <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/10/algorithm-dp/</loc>
-    <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/07/algorithm-bitree/</loc>
-    <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/01/algorithm-array/</loc>
-    <lastmod>2024-01-25</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2024/01/25/problem-set-top-100/</loc>
     <lastmod>2024-01-25</lastmod>
   </url>
@@ -199,10 +239,6 @@
   <url>
     <loc>https://zoebezos.github.io/2024/01/23/coding-2765-longest-alternating-subarray/</loc>
     <lastmod>2024-01-23</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/18/cs-basics-network/</loc>
-    <lastmod>2024-01-22</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/20/java-new-features/</loc>
