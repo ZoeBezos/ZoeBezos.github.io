@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-sorting/</loc>
+    <lastmod>2024-02-02</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/01/algorithm-array/</loc>
+    <lastmod>2024-02-01</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2024/01/25/algorithm-graph/</loc>
+    <lastmod>2024-02-01</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-bit-manipulation/</loc>
+    <lastmod>2024-02-01</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/12/24/problem-set-OD/</loc>
+    <lastmod>2024-02-01</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
     <lastmod>2024-02-01</lastmod>
   </url>
   <url>
@@ -29,14 +49,6 @@
     <lastmod>2024-01-31</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
-    <lastmod>2024-01-31</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/01/algorithm-array/</loc>
-    <lastmod>2024-01-31</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2023/09/05/algorithm-twopointers/</loc>
     <lastmod>2024-01-31</lastmod>
   </url>
@@ -53,15 +65,7 @@
     <lastmod>2024-01-31</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2024/01/31/algorithm-bit-manipulation/</loc>
-    <lastmod>2024-01-31</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2024/01/31/algorithm-prefix-sum/</loc>
-    <lastmod>2024-01-31</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/31/algorithm-sorting/</loc>
     <lastmod>2024-01-31</lastmod>
   </url>
   <url>
@@ -75,10 +79,6 @@
   <url>
     <loc>https://zoebezos.github.io/2023/09/11/algorithm-monotonic-stack/</loc>
     <lastmod>2024-01-31</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/12/24/problem-set-OD/</loc>
-    <lastmod>2024-01-30</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/31/coding-2670-find-the-distinct-difference-array/</loc>
