@@ -15,7 +15,7 @@
 
 
 
-<title>🔸122th LeetCode Biweekly Contest (1489/3547) | ZOE&#39;s site</title>
+<title>🔸122th LeetCode Biweekly Contest | ZOE&#39;s site</title>
 
 
 
@@ -418,7 +418,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">🔸122th LeetCode Biweekly Contest (1489/3547)</h1>
+            <h1 class="post-title">🔸122th LeetCode Biweekly Contest</h1>
             
                 <div class="post-meta">
                     
@@ -445,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">10min</a>                         
+                            <a href="">11min</a>                         
                         </span>
                         
                     
@@ -458,25 +458,30 @@
             <table>
 <thead>
 <tr>
-<th>题号</th>
-<th>标签</th>
+<th></th>
+<th>problem</th>
+<th>tag</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><a href="#head1">🟢将数组分成最小总代价的子数组 I</a></td>
-<td>小模拟</td>
+<td>✅</td>
+<td><a href="#head1">🟢</a>将数组分成最小总代价的子数组 I</td>
+<td>sorting array enum</td>
 </tr>
 <tr>
-<td><a href="#head2">🟡3011. 判断一个数组是否可以变为有序</a></td>
-<td>位数+冒泡排序</td>
+<td>✅</td>
+<td><a href="#head2">🟡 </a>判断一个数组是否可以变为有序</td>
+<td>sorting array bit-munipulation</td>
 </tr>
 <tr>
-<td><a href="#head3"> 🟡通过操作使数组长度最小</a></td>
 <td></td>
+<td><a href="#head3"> 🟡</a>通过操作使数组长度最小</td>
+<td>greedy array math number-theory</td>
 </tr>
 <tr>
-<td><a href="#head4">🔴将数组分成最小总代价的子数组 II</a></td>
 <td></td>
+<td><a href="#head4">🔴</a>将数组分成最小总代价的子数组 II</td>
+<td>array hash-table sliding-window heap-priority-queue</td>
 </tr>
 </tbody></table>
 <h1><span id="jiang-shu-zu-fen-cheng-zui-xiao-zong-dai-jie-de-zi-shu-zu-i"><span id="head1">🟢将数组分成最小总代价的子数组 I</span></span></h1><blockquote>
@@ -506,10 +511,17 @@
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minimumCost</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> min1_index=<span class="number">0</span>,min1=Integer.MAX_VALUE,min2_index=<span class="number">0</span>,min2=Integer.MAX_VALUE,min3_index=<span class="number">0</span>,min3=Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&lt;min1){</span><br><span class="line">                min1=nums[i];</span><br><span class="line">                min1_index=i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        res+=min1;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&lt;min2&amp;&amp;i!=min1_index){</span><br><span class="line">                min2=nums[i];</span><br><span class="line">                min2_index=i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        res+=min2;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&lt;min3&amp;&amp;i!=min1_index&amp;&amp;i!=min2_index){</span><br><span class="line">                min3=nums[i];</span><br><span class="line">                min3_index=i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(min1_index!=<span class="number">0</span>&amp;&amp;min2_index!=<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">return</span> res+nums[<span class="number">0</span>];</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            <span class="keyword">return</span> res+min3;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>时间复杂度：O(n)</li>
-<li>空间复杂度：O(1)</li>
+<li>time：<em>O(n)</em></li>
+<li>space：<em>O(1)</em></li>
 </ul>
-<h1><span id="3011-pan-duan-yi-ge-shu-zu-shi-fou-ke-yi-bian-wei-you-xu"><span id="head2">🟡3011. 判断一个数组是否可以变为有序</span></span></h1><blockquote>
+<p>看到一位佬写的题解，感觉自己写的好恶心😅</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minimumCost</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        Arrays.sort(nums, <span class="number">1</span>, nums.length);</span><br><span class="line">        <span class="keyword">return</span> nums[<span class="number">0</span>] + nums[<span class="number">1</span>] + nums[<span class="number">2</span>];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(nlogn)</em></li>
+<li>space:<em>O(1)</em></li>
+</ul>
+<h1><span id="pan-duan-yi-ge-shu-zu-shi-fou-ke-yi-bian-wei-you-xu"><span id="head2">🟡判断一个数组是否可以变为有序</span></span></h1><blockquote>
 <p>给你一个下标从 <strong>0</strong> 开始且全是 <strong>正</strong> 整数的数组 <code>nums</code> 。</p>
 <p>一次 <strong>操作</strong> 中，如果两个 <strong>相邻</strong> 元素在二进制下数位为 <strong>1</strong> 的数目 <strong>相同</strong> ，那么你可以将这两个元素交换。你可以执行这个操作 <strong>任意次</strong> （<strong>也可以 0 次</strong>）。</p>
 <p>如果你可以使数组变有序，请你返回 <code>true</code> ，否则返回 <code>false</code> 。</p>
@@ -531,8 +543,8 @@
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">     <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">canSortArray</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; nums.length; i++) {</span><br><span class="line">           <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; nums.length-i; j++) {</span><br><span class="line">                <span class="type">int</span> bite1=Integer.bitCount(nums[j]);</span><br><span class="line">                <span class="type">int</span> bite2=Integer.bitCount(nums[j+<span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">if</span>(bite1==bite2&amp;&amp;nums[j]&gt;nums[j+<span class="number">1</span>]){</span><br><span class="line">                    <span class="type">int</span> temp=nums[j];</span><br><span class="line">                    nums[j]=nums[j+<span class="number">1</span>];</span><br><span class="line">                    nums[j+<span class="number">1</span>]=temp;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&lt;nums[i-<span class="number">1</span>]){</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>时间复杂度：O(n^2)</li>
-<li>空间复杂度：O(1)</li>
+<li>time：<em>O(n^2^)</em></li>
+<li>space：<em>O(1)</em></li>
 </ul>
 <p>小小改进了一下，减少了循环次数</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">     <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">canSortArray</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; nums.length-i; j++){</span><br><span class="line">                <span class="type">int</span> bite1=Integer.bitCount(nums[j]);</span><br><span class="line">                <span class="type">int</span> bite2=Integer.bitCount(nums[j+<span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">if</span>(bite1==bite2&amp;&amp;nums[j]&gt;nums[j+<span class="number">1</span>]){</span><br><span class="line">                    <span class="type">int</span> temp=nums[j];</span><br><span class="line">                    nums[j]=nums[j+<span class="number">1</span>];</span><br><span class="line">                    nums[j+<span class="number">1</span>]=temp;</span><br><span class="line">                }<span class="keyword">else</span> <span class="keyword">if</span>(nums[j]&gt;nums[j+<span class="number">1</span>]){</span><br><span class="line">					<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
@@ -590,6 +602,8 @@
 <li><code>k - 2 &lt;= dist &lt;= n - 2</code></li>
 </ul>
 </blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
 
         </div>
 

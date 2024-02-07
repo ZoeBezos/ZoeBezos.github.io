@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zoe">
+
+
+    <meta name="subtitle" content="liberté">
+
+
+
+
+<title>🔸123th LeetCode Biweekly Contest | ZOE&#39;s site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+    <script src="/js/jquery-3.7.0.min.js"></script>
+    
+    <script src="/js/mathjax2.7.5.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<!-- 搜索的部分 -->
+
+
+
+    <script>
+    // function searchToggle() {
+    //     const width = $(document.body).width()
+    //     if(width > 479) {
+    //         return;
+    //     }
+    //     const search = $('.search');
+    //     const searchForm = $('.form-search')
+
+    //     if(!search.hasClass("mobile-search")) {
+    //         search.addClass("mobile-search");
+    //     } else {
+    //         search.removeClass("mobile-search");
+    //     } 
+    // }
+
+    function searchToggle() {
+        const width = $(document.body).width()
+        if(width > 479) {
+            return;
+        }
+        const search = $('.search');
+        const searchForm = $('.form-search');
+        const menuToggle = $('.menu-toggle');
+        const title = $('.navbar-header-title ');
+
+        if(!search.hasClass("mobile-search")) {
+            search.addClass("mobile-search");
+            menuToggle.addClass("open-search")
+            title.addClass("mobile-title-hidden")
+        } else {
+            search.removeClass("mobile-search");
+            menuToggle.removeClass("open-search")
+            // title.css({visibility: 'visible'})
+            title.removeClass("mobile-title-hidden")
+        } 
+    }
+
+
+
+    function search(searchInputEl, formEl, flag) {
+        const path = "/" + "search.json"; // 可以在public 下查看这个search.json
+        $(formEl).submit(function(e){
+            e.preventDefault();
+            let target = null
+            if(searchInputEl == null) {
+                const screenWidth = $(document.body).width();
+                target = screenWidth > 479 ? $('#pc-search-input') : $('#mobile-search-input');
+                console.log(target);
+            } else {
+                target = $(searchInputEl)
+            }
+
+            if(!flag && target.val() === '') {
+                return ;
+            }
+
+            $("#u-search").fadeIn(500, function() {
+                $("body > .wrapper").addClass("modal-active");
+
+                $.ajax({
+                    url: path,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        $input = target.val();
+                        $(".form-input").val($input);
+                        const loadingBar = $('.search-loading-bar') 
+                        loadingBar.css({
+                            width:'100%',
+                            display: 'block'
+                        });
+                    },
+                    success: function( datas ) {
+                        console.log(datas);
+                        const $resultPanel = $(".modal-body")[0];
+                        let str = `<ul class="modal-results">`;
+                        var keywords = $(".form-input").val().trim().toLowerCase().split(/[\s\-]+/);
+                        $resultPanel.innerHTML = "";
+                        let hasResult = false
+                        let text = `<div class="no-result">找不到与关键词相关的内容....</div>`;
+
+                        if ($(".form-input").val().trim().length <= 0) {
+                            // 没有结果
+                            $resultPanel.innerHTML = text;
+                            return;
+                        }
+                        datas.forEach(function (data, index) {
+                            var isMatch = true;
+                            if (!data.title || data.title.trim() === '') {
+                                data.title = "Untitled";
+                            }
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content && data.content.trim().replace(/<[^>]+>/g, "").toLowerCase() || '';
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty contents
+                            if (data_content !== '') {
+                                keywords.forEach(function (keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        hasResult = true
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            } else {
+                                isMatch = false;
+                            }
+                            // show search results
+                            if (isMatch) {
+                                str += `<li class='result-item'><a href='${data_url}' class='result-item-detail'> <span class="title">${data_title}</span>`;
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 200 characters
+                                    var start = first_occur - 40;
+                                    var end = first_occur + 160;
+
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+
+                                    if (start == 0) {
+                                        end = 200;
+                                    }
+
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+
+                                    var match_content = content.substring(start, end);
+
+                                    // highlight all keywords
+                                    keywords.forEach(function (keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, `<em class="search-keyword">${keyword}</em>`);
+                                    });
+
+                                    str += `<span class="content"> ${match_content} ...</span></a>`;
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        if(hasResult) {
+                            $resultPanel.innerHTML = str;
+                        } else {
+                            $resultPanel.innerHTML = text;
+                        }
+
+                    },
+                    complete: function() {
+                        setTimeout(() => {
+                                const loadingBar = $('.search-loading-bar') 
+                                loadingBar.css({
+                                    width:'0%',
+                                    display: 'none'
+                                });
+                        }, 300)
+                    }
+                });
+            })
+
+        });
+    }
+
+    $(document).ready(function() {
+        $('.modal-close').click(function () { 
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+
+        $('.modal-overlay').click(function() {
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+        search(null, ".form-search", false)
+        search("#u-search-modal-form .form-input", ".u-search-modal-form", true)
+    })
+</script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                // pagebody.classList.add('dark-theme');
+                // mobile
+                // document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <!-- <div class="navbar-header header-logo"><a href="/">ZOE&#39;s site</a></div> -->
+            <div class="navbar-header header-logo"><a href="/"><i class="iconfont icon-zhuye" style="font-size: 1em;"></i>ZOE&#39;s site</a></div>
+            <div class="menu navbar-right">
+                <!-- 这里表示的是pc端搜索框 -->
+                
+                
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="pc-search-input"/>
+        </form>
+    </div>
+
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <!-- <label for="switch_default" class="toggleBtn"></label> -->
+            </div>
+        </div>
+    </nav>
+    
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ZOE&#39;s site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="navbar-mobile-right">
+                    
+                    
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="mobile-search-input"/>
+        </form>
+    </div>
+
+                    <!-- <div class="menu-toggle" onclick="mobileBtn()">&#9776; menu</div> -->
+                </div>
+    
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">🔸123th LeetCode Biweekly Contest</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 3, 2024&nbsp;&nbsp;23:44:51</a>
+                        </span>
+                    
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">2.3k</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">9min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <table>
+<thead>
+<tr>
+<th></th>
+<th>problem</th>
+<th>tag</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✅</td>
+<td><a href="#head1">🟢</a>三角形类型 II</td>
+<td>math</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head2">🟡</a>人员站位的方案数 I</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head3">🟡</a>最大好子数组和</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head4">🔴</a>人员站位的方案数 II</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1><span id="san-jiao-xing-lei-xing-ii"><span id="head1">🟢三角形类型 II</span></span></h1><blockquote>
+<p>给你一个下标从 <strong>0</strong> 开始长度为 <code>3</code> 的整数数组 <code>nums</code> ，需要用它们来构造三角形。</p>
+<ul>
+<li>如果一个三角形的所有边长度相等，那么这个三角形称为 <strong>equilateral</strong> 。</li>
+<li>如果一个三角形恰好有两条边长度相等，那么这个三角形称为 <strong>isosceles</strong> 。</li>
+<li>如果一个三角形三条边的长度互不相同，那么这个三角形称为 <strong>scalene</strong> 。</li>
+</ul>
+<p>如果这个数组无法构成一个三角形，请你返回字符串 <code>"none"</code> ，否则返回一个字符串表示这个三角形的类型。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,3,3]</span><br><span class="line">输出："equilateral"</span><br><span class="line">解释：由于三条边长度相等，所以可以构成一个等边三角形，返回 "equilateral" 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,4,5]</span><br><span class="line">输出："scalene"</span><br><span class="line">解释：</span><br><span class="line">nums[0] + nums[1] = 3 + 4 = 7 ，大于 nums[2] = 5 。</span><br><span class="line">nums[0] + nums[2] = 3 + 5 = 8 ，大于 nums[1] = 4 。</span><br><span class="line">nums[1] + nums[2] = 4 + 5 = 9 ，大于 nums[0] = 3 。</span><br><span class="line">由于任意两边纸盒都大于第三边，所以可以构成一个三角形。</span><br><span class="line">因为三条边的长度互不相等，所以返回 "scalene" 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>nums.length == 3</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 100</code></li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">triangleType</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">if</span>(nums[<span class="number">0</span>]+nums[<span class="number">1</span>]&lt;=nums[<span class="number">2</span>]){</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"none"</span>;</span><br><span class="line">        }<span class="keyword">else</span> <span class="keyword">if</span>(nums[<span class="number">0</span>]==nums[<span class="number">1</span>]&amp;&amp;nums[<span class="number">1</span>]==nums[<span class="number">2</span>]){</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"equilateral"</span>;</span><br><span class="line">        }<span class="keyword">else</span> <span class="keyword">if</span>(nums[<span class="number">0</span>]==nums[<span class="number">1</span>]||nums[<span class="number">1</span>]==nums[<span class="number">2</span>]){</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"isosceles"</span>;</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"scalene"</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time：<em>O(1)</em></li>
+<li>space：<em>O(1)</em></li>
+</ul>
+<h1><span id="ren-yuan-zhan-wei-de-fang-an-shu-i"><span id="head2">🟡人员站位的方案数 I</span></span></h1><blockquote>
+<p>给你一个 <code>n x 2</code> 的二维数组 <code>points</code> ，它表示二维平面上的一些点坐标，其中 <code>points[i] = [xi, yi]</code> 。</p>
+<p>我们定义 x 轴的正方向为 <strong>右</strong> （<strong>x 轴递增的方向</strong>），x 轴的负方向为 <strong>左</strong> （<strong>x 轴递减的方向</strong>）。类似的，我们定义 y 轴的正方向为 <strong>上</strong> （<strong>y 轴递增的方向</strong>），y 轴的负方向为 <strong>下</strong> （<strong>y 轴递减的方向</strong>）。</p>
+<p>你需要安排这 <code>n</code> 个人的站位，这 <code>n</code> 个人中包括 liupengsay 和小羊肖恩 。你需要确保每个点处 <strong>恰好</strong> 有 <strong>一个</strong> 人。同时，liupengsay 想跟小羊肖恩单独玩耍，所以 liupengsay 会以 liupengsay 的坐标为 <strong>左上角</strong> ，小羊肖恩的坐标为 <strong>右下角</strong> 建立一个矩形的围栏（<strong>注意</strong>，围栏可能 <strong>不</strong> 包含任何区域，也就是说围栏可能是一条线段）。如果围栏的 <strong>内部</strong> 或者 <strong>边缘</strong> 上有任何其他人，liupengsay 都会难过。</p>
+<p>请你在确保 liupengsay <strong>不会</strong> 难过的前提下，返回 liupengsay 和小羊肖恩可以选择的 <strong>点对</strong> 数目。</p>
+<p><strong>注意</strong>，liupengsay 建立的围栏必须确保 liupengsay 的位置是矩形的左上角，小羊肖恩的位置是矩形的右下角。比方说，以 <code>(1, 1)</code> ，<code>(1, 3)</code> ，<code>(3, 1)</code> 和 <code>(3, 3)</code> 为矩形的四个角，给定下图的两个输入，liupengsay 都不能建立围栏，原因如下：</p>
+<ul>
+<li>图一中，liupengsay 在 <code>(3, 3)</code> 且小羊肖恩在 <code>(1, 1)</code> ，liupengsay 的位置不是左上角且小羊肖恩的位置不是右下角。</li>
+<li>图二中，liupengsay 在 <code>(1, 3)</code> 且小羊肖恩在 <code>(1, 1)</code> ，小羊肖恩的位置不是在围栏的右下角。</li>
+</ul>
+<p><img src="https://assets.leetcode.com/uploads/2024/01/04/example0alicebob-1.png" alt="img"></p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2024/01/04/example1alicebob.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：points = [[1,1],[2,2],[3,3]]</span><br><span class="line">输出：0</span><br><span class="line">解释：没有办法可以让 liupengsay 的围栏以 liupengsay 的位置为左上角且小羊肖恩的位置为右下角。所以我们返回 0 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://pic.leetcode.cn/1706880313-YelabI-example2.jpeg"><img src="https://pic.leetcode.cn/1706880313-YelabI-example2.jpeg" alt="img"></a></strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：points = [[6,2],[4,4],[2,6]]</span><br><span class="line">输出：2</span><br><span class="line">解释：总共有 2 种方案安排 liupengsay 和小羊肖恩的位置，使得 liupengsay 不会难过：</span><br><span class="line">- liupengsay 站在 (4, 4) ，小羊肖恩站在 (6, 2) 。</span><br><span class="line">- liupengsay 站在 (2, 6) ，小羊肖恩站在 (4, 4) 。</span><br><span class="line">不能安排 liupengsay 站在 (2, 6) 且小羊肖恩站在 (6, 2) ，因为站在 (4, 4) 的人处于围栏内。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://pic.leetcode.cn/1706880311-mtPGYC-example3.jpeg"><img src="https://pic.leetcode.cn/1706880311-mtPGYC-example3.jpeg" alt="img"></a></strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：points = [[3,1],[1,3],[1,1]]</span><br><span class="line">输出：2</span><br><span class="line">解释：总共有 2 种方案安排 liupengsay 和小羊肖恩的位置，使得 liupengsay 不会难过：</span><br><span class="line">- liupengsay 站在 (1, 1) ，小羊肖恩站在 (3, 1) 。</span><br><span class="line">- liupengsay 站在 (1, 3) ，小羊肖恩站在 (1, 1) 。</span><br><span class="line">不能安排 liupengsay 站在 (1, 3) 且小羊肖恩站在 (3, 1) ，因为站在 (1, 1) 的人处于围栏内。</span><br><span class="line">注意围栏是可以不包含任何面积的，上图中第一和第二个围栏都是合法的。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= n &lt;= 50</code></li>
+<li><code>points[i].length == 2</code></li>
+<li><code>0 &lt;= points[i][0], points[i][1] &lt;= 50</code></li>
+<li><code>points[i]</code> 点对两两不同。</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># &lt;span id=<span class="string">"head3"</span>&gt;🟡最大好子数组和&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">&gt; 给你一个长度为 `n` 的数组 `nums` 和一个 **正** 整数 `k` 。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 如果 `nums` 的一个子数组中，第一个元素和最后一个元素 **差的绝对值恰好** 为 `k` ，我们称这个子数组为 **好** 的。换句话说，如果子数组 `nums[i..j]` 满足 `|nums[i] - nums[j]| == k` ，那么它是一个好子数组。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 请你返回 `nums` 中 **好** 子数组的 **最大** 和，如果没有好子数组，返回 `<span class="number">0</span>` 。</span><br><span class="line">&gt;</span><br><span class="line">&gt;  </span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>输入：nums = [1,2,3,4,5,6], k = 1<br>输出：11<br>解释：好子数组中第一个元素和最后一个元素的差的绝对值必须为 1 。好子数组有 [1,2] ，[2,3] ，[3,4] ，[4,5] 和 [5,6] 。最大子数组和为 11 ，对应的子数组为 [5,6] 。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>输入：nums = [-1,3,2,4,5], k = 3<br>输出：11<br>解释：好子数组中第一个元素和最后一个元素的差的绝对值必须为 3 。好子数组有 [-1,3,2] 和 [2,4,5] 。最大子数组和为 11 ，对应的子数组为 [2,4,5] 。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 3：**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>输入：nums = [-1,-2,-3,-4], k = 2<br>输出：-6<br>解释：好子数组中第一个元素和最后一个元素的差的绝对值必须为 2 。好子数组有 [-1,-2,-3] 和 [-2,-3,-4] 。最大子数组和为 -6 ，对应的子数组为 [-1,-2,-3] 。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">**提示：**</span><br><span class="line"></span><br><span class="line">- `2 &lt;= nums.length &lt;= 105`</span><br><span class="line">- `-109 &lt;= nums[i] &lt;= 109`</span><br><span class="line">- `1 &lt;= k &lt;= 109`</span><br><span class="line"></span><br><span class="line"># &lt;span id="head4"&gt;🔴 人员站位的方案数 II&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">给你一个 `n x 2` 的二维数组 `points` ，它表示二维平面上的一些点坐标，其中 `points[i] = [xi, yi]` 。</span><br><span class="line"></span><br><span class="line">我们定义 x 轴的正方向为 **右** （**x 轴递增的方向**），x 轴的负方向为 **左** （**x 轴递减的方向**）。类似的，我们定义 y 轴的正方向为 **上** （**y 轴递增的方向**），y 轴的负方向为 **下** （**y 轴递减的方向**）。</span><br><span class="line"></span><br><span class="line">你需要安排这 `n` 个人的站位，这 `n` 个人中包括 liupengsay 和小羊肖恩 。你需要确保每个点处 **恰好** 有 **一个** 人。同时，liupengsay 想跟小羊肖恩单独玩耍，所以 liupengsay 会以 liupengsay 的坐标为 **左上角** ，小羊肖恩的坐标为 **右下角** 建立一个矩形的围栏（**注意**，围栏可能 **不** 包含任何区域，也就是说围栏可能是一条线段）。如果围栏的 **内部** 或者 **边缘** 上有任何其他人，liupengsay 都会难过。</span><br><span class="line"></span><br><span class="line">请你在确保 liupengsay **不会** 难过的前提下，返回 liupengsay 和小羊肖恩可以选择的 **点对** 数目。</span><br><span class="line"></span><br><span class="line">**注意**，liupengsay 建立的围栏必须确保 liupengsay 的位置是矩形的左上角，小羊肖恩的位置是矩形的右下角。比方说，以 `(1, 1)` ，`(1, 3)` ，`(3, 1)` 和 `(3, 3)` 为矩形的四个角，给定下图的两个输入，liupengsay 都不能建立围栏，原因如下：</span><br><span class="line"></span><br><span class="line">- 图一中，liupengsay 在 `(3, 3)` 且小羊肖恩在 `(1, 1)` ，liupengsay 的位置不是左上角且小羊肖恩的位置不是右下角。</span><br><span class="line">- 图二中，liupengsay 在 `(1, 3)` 且小羊肖恩在 `(1, 1)` ，小羊肖恩的位置不是在围栏的右下角。</span><br><span class="line"></span><br><span class="line">![img](https://assets.leetcode.com/uploads/2024/01/04/example0alicebob-1.png)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">**示例 1：**</span><br><span class="line"></span><br><span class="line">![img](https://assets.leetcode.com/uploads/2024/01/04/example1alicebob.png)</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>输入：points = [[1,1],[2,2],[3,3]]<br>输出：0<br>解释：没有办法可以让 liupengsay 的围栏以 liupengsay 的位置为左上角且小羊肖恩的位置为右下角。所以我们返回 0 。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br><span class="line">**[![img](https://pic.leetcode.cn/1706880313-YelabI-example2.jpeg)](https://pic.leetcode.cn/1706880313-YelabI-example2.jpeg)**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>输入：points = [[6,2],[4,4],[2,6]]<br>输出：2<br>解释：总共有 2 种方案安排 liupengsay 和小羊肖恩的位置，使得 liupengsay 不会难过：</p>
+<ul>
+<li>liupengsay 站在 (4, 4) ，小羊肖恩站在 (6, 2) 。</li>
+<li>liupengsay 站在 (2, 6) ，小羊肖恩站在 (4, 4) 。<br>不能安排 liupengsay 站在 (2, 6) 且小羊肖恩站在 (6, 2) ，因为站在 (4, 4) 的人处于围栏内。<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 3：**</span><br><span class="line"></span><br><span class="line">**[![img](https://pic.leetcode.cn/1706880311-mtPGYC-example3.jpeg)](https://pic.leetcode.cn/1706880311-mtPGYC-example3.jpeg)**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+输入：points = [[3,1],[1,3],[1,1]]<br>输出：2<br>解释：总共有 2 种方案安排 liupengsay 和小羊肖恩的位置，使得 liupengsay 不会难过：</li>
+<li>liupengsay 站在 (1, 1) ，小羊肖恩站在 (3, 1) 。</li>
+<li>liupengsay 站在 (1, 3) ，小羊肖恩站在 (1, 1) 。<br>不能安排 liupengsay 站在 (1, 3) 且小羊肖恩站在 (3, 1) ，因为站在 (1, 1) 的人处于围栏内。<br>注意围栏是可以不包含任何面积的，上图中第一和第二个围栏都是合法的。<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">**提示：**</span><br><span class="line"></span><br><span class="line">- `2 &lt;= n &lt;= 1000`</span><br><span class="line">- `points[i].length == 2`</span><br><span class="line">- `-109 &lt;= points[i][0], points[i][1] &lt;= 109`</span><br><span class="line">- `points[i]` 点对两两不同。</span><br><span class="line"></span><br><span class="line">```java</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+</blockquote>
+
+        </div>
+
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        
+            <script src='https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js'></script>
+            <script>
+                if (window.mermaid) {
+                    mermaid.initialize({
+                        startOnLoad: true,
+                        theme: 'neural',
+                    });
+                }
+            </script>
+        
+        <span>© zoe | <a href="https://hexo.io" target="_blank"></a>  <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank"></a>
+              
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<span class="site-uv">
+
+👤
+
+ <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+
+</span>&nbsp;
+
+
+
+
+
+<span class="site-pv">
+
+ | 👁️
+
+ <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+
+</span>
+
+
+  
+               
+        </span>
+    </div>
+</footer>
+
+    </div>
+
+    <!-- 搜索功能 -->
+    <!-- Chic/layout.ejs -->
+    <div id="u-search">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="container">
+                    <form id="u-search-modal-form" class="u-search-modal-form">
+                        <button type="submit" class="form-submit-btn">
+                            <img src="/image/search.png" class="search-btn-img" />
+                        </button>
+                        <input placeholder="搜索文章。。。" class="form-input" onchange="inputChange(event)" id="modal-form-input">
+                    </form>
+                    <a class="modal-close">x</a>
+                </div>
+                <div class="search-loading">
+                    <div class="search-loading-bar"></div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- <ul class="modal-results">
+                    <li class="result-item">
+                        <a class="result-item-detail">
+                            <span class="title">页面配置</span>
+                            <span class="content">
+                                网址，例如： front-matter---layout: postdate: <b mark></b>
+                                7-07-05title: [转]如何搭建基于Hexo的独立博客categories: [Dev, Hexo]tags: - Hexoauthor: name: xaoxuu avatar: https://cdn.jsdelivr.......
+                            </span>
+                        </a>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+        <div class="modal-overlay"></div>
+    </div>
+
+
+</body>
+
+
+
+</html>
+
+

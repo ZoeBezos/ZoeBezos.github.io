@@ -15,7 +15,7 @@
 
 
 
-<title>🟢 2085. count common words with one occurrence | ZOE&#39;s site</title>
+<title>🟢2085. count common words with one occurrence | ZOE&#39;s site</title>
 
 
 
@@ -418,7 +418,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">🟢 2085. count common words with one occurrence</h1>
+            <h1 class="post-title">🟢2085. count common words with one occurrence</h1>
             
                 <div class="post-meta">
                     
@@ -436,7 +436,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">417</a>                         
+                            <a href="">409</a>                         
                         </span>
                         
                     
@@ -483,14 +483,10 @@
 <h1><span id="dai-ma">代码</span></h1><p>使用两个哈希表</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">countWords</span><span class="params">(String[] words1, String[] words2)</span> {</span><br><span class="line">        HashMap&lt;String,Integer&gt;hashMap1=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        HashMap&lt;String,Integer&gt;hashMap2=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; words1.length; i++) {</span><br><span class="line">            hashMap1.put(words1[i],hashMap1.getOrDefault(words1[i],<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; words2.length; i++) {</span><br><span class="line">            hashMap2.put(words2[i],hashMap2.getOrDefault(words2[i],<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; words2.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(hashMap1.containsKey(words2[i])&amp;&amp;hashMap1.get(words2[i])==<span class="number">1</span>&amp;&amp;hashMap2.get(words2[i])==<span class="number">1</span>){</span><br><span class="line">                cnt++;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<blockquote>
 <ul>
-<li><p>时间复杂度：O(n+m)</p>
-</li>
-<li><p>空间复杂度：O(n+m)</p>
-</li>
+<li>time:<em>O(n+m)</em></li>
+<li>space:<em>O(n+m)</em></li>
 </ul>
-</blockquote>
 
         </div>
 

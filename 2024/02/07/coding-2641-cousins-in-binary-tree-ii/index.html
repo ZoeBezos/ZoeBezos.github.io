@@ -15,7 +15,7 @@
 
 
 
-<title>🔸382th LeetCode Weekly Contest | ZOE&#39;s site</title>
+<title>🟡2641. cousins in binary tree ii | ZOE&#39;s site</title>
 
 
 
@@ -418,7 +418,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">🔸382th LeetCode Weekly Contest</h1>
+            <h1 class="post-title">🟡2641. cousins in binary tree ii</h1>
             
                 <div class="post-meta">
                     
@@ -427,7 +427,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">January 28, 2024&nbsp;&nbsp;15:15:51</a>
+                        Date: <a href="#">February 7, 2024&nbsp;&nbsp;14:23:47</a>
                         </span>
                     
                     
@@ -436,7 +436,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">957</a>                         
+                            <a href="">428</a>                         
                         </span>
                         
                     
@@ -445,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">3min</a>                         
+                            <a href="">1min</a>                         
                         </span>
                         
                     
@@ -455,65 +455,34 @@
         </header>
 
         <div class="post-content">
-            <h1><span id="an-jian-bian-geng-de-ci-shu">按键变更的次数</span></h1><blockquote>
-<p>给你一个下标从 <strong>0</strong> 开始的字符串 <code>s</code> ，该字符串由用户输入。按键变更的定义是：使用与上次使用的按键不同的键。例如 <code>s = "ab"</code> 表示按键变更一次，而 <code>s = "bBBb"</code> 不存在按键变更。</p>
-<p>返回用户输入过程中按键变更的次数。</p>
-<p><strong>注意：</strong><code>shift</code> 或 <code>caps lock</code> 等修饰键不计入按键变更，也就是说，如果用户先输入字母 <code>'a'</code> 然后输入字母 <code>'A'</code> ，不算作按键变更。</p>
+            <h1><span id="ti-mu-miao-shu">题目描述</span></h1><blockquote>
+<p>给你一棵二叉树的根 <code>root</code> ，请你将每个节点的值替换成该节点的所有 <strong>堂兄弟节点值的和</strong> 。</p>
+<p>如果两个节点在树中有相同的深度且它们的父节点不同，那么它们互为 <strong>堂兄弟</strong> 。</p>
+<p>请你返回修改值之后，树的根 <code>root</code> 。</p>
+<p><strong>注意</strong>，一个节点的深度指的是从树根节点到这个节点经过的边数。</p>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "aAbBcC"</span><br><span class="line">输出：2</span><br><span class="line">解释： </span><br><span class="line">从 s[0] = 'a' 到 s[1] = 'A'，不存在按键变更，因为不计入 caps lock 或 shift 。</span><br><span class="line">从 s[1] = 'A' 到 s[2] = 'b'，按键变更。</span><br><span class="line">从 s[2] = 'b' 到 s[3] = 'B'，不存在按键变更，因为不计入 caps lock 或 shift 。</span><br><span class="line">从 s[3] = 'B' 到 s[4] = 'c'，按键变更。</span><br><span class="line">从 s[4] = 'c' 到 s[5] = 'C'，不存在按键变更，因为不计入 caps lock 或 shift 。</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://assets.leetcode.com/uploads/2023/01/11/example11.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [5,4,9,1,10,null,7]</span><br><span class="line">输出：[0,0,0,7,7,null,11]</span><br><span class="line">解释：上图展示了初始的二叉树和修改每个节点的值之后的二叉树。</span><br><span class="line">- 值为 5 的节点没有堂兄弟，所以值修改为 0 。</span><br><span class="line">- 值为 4 的节点没有堂兄弟，所以值修改为 0 。</span><br><span class="line">- 值为 9 的节点没有堂兄弟，所以值修改为 0 。</span><br><span class="line">- 值为 1 的节点有一个堂兄弟，值为 7 ，所以值修改为 7 。</span><br><span class="line">- 值为 10 的节点有一个堂兄弟，值为 7 ，所以值修改为 7 。</span><br><span class="line">- 值为 7 的节点有两个堂兄弟，值分别为 1 和 10 ，所以值修改为 11 。</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "AaAaAaaA"</span><br><span class="line">输出：0</span><br><span class="line">解释： 不存在按键变更，因为这个过程中只按下字母 'a' 和 'A' ，不需要进行按键变更。</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://assets.leetcode.com/uploads/2023/01/11/diagram33.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [3,1,2]</span><br><span class="line">输出：[0,0,0]</span><br><span class="line">解释：上图展示了初始的二叉树和修改每个节点的值之后的二叉树。</span><br><span class="line">- 值为 3 的节点没有堂兄弟，所以值修改为 0 。</span><br><span class="line">- 值为 1 的节点没有堂兄弟，所以值修改为 0 。</span><br><span class="line">- 值为 2 的节点没有堂兄弟，所以值修改为 0 。</span><br></pre></td></tr></tbody></table></figure>
+
+
 
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>1 &lt;= s.length &lt;= 100</code></li>
-<li><code>s</code> 仅由英文大写字母和小写字母组成。</li>
+<li>树中节点数目的范围是 <code>[1, 105]</code> 。</li>
+<li><code>1 &lt;= Node.val &lt;= 104</code></li>
 </ul>
+<p>Related Topics</p>
+<p>树</p>
+<p>深度优先搜索</p>
+<p>广度优先搜索</p>
+<p>哈希表</p>
+<p>二叉树</p>
 </blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">countKeyChanges</span><span class="params">(String s)</span> {</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">        s=s.toLowerCase();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; s.length(); i++) {</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i)!=s.charAt(i-<span class="number">1</span>)){</span><br><span class="line">                res++;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span>  res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<h1><span id="alice-he-bob-wan-xian-hua-you-xi">Alice 和 Bob 玩鲜花游戏</span></h1><blockquote>
-<p>Alice 和 Bob 在一个长满鲜花的环形草地玩一个回合制游戏。环形的草地上有一些鲜花，Alice 到 Bob 之间顺时针有 <code>x</code> 朵鲜花，逆时针有 <code>y</code> 朵鲜花。</p>
-<p>游戏过程如下：</p>
-<ol>
-<li>Alice 先行动。</li>
-<li>每一次行动中，当前玩家必须选择顺时针或者逆时针，然后在这个方向上摘一朵鲜花。</li>
-<li>一次行动结束后，如果所有鲜花都被摘完了，那么 <strong>当前</strong> 玩家抓住对手并赢得游戏的胜利。</li>
-</ol>
-<p>给你两个整数 <code>n</code> 和 <code>m</code> ，你的任务是求出满足以下条件的所有 <code>(x, y)</code> 对：</p>
-<ul>
-<li>按照上述规则，Alice 必须赢得游戏。</li>
-<li>Alice 顺时针方向上的鲜花数目 <code>x</code> 必须在区间 <code>[1,n]</code> 之间。</li>
-<li>Alice 逆时针方向上的鲜花数目 <code>y</code> 必须在区间 <code>[1,m]</code> 之间。</li>
-</ul>
-<p>请你返回满足题目描述的数对 <code>(x, y)</code> 的数目。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3, m = 2</span><br><span class="line">输出：3</span><br><span class="line">解释：以下数对满足题目要求：(1,2) ，(3,2) ，(2,1) 。</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 1, m = 1</span><br><span class="line">输出：0</span><br><span class="line">解释：没有数对满足题目要求。</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= n, m &lt;= 105</code></li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">#  子集中元素的最大数量</span><br><span class="line"></span><br><span class="line">&gt; 给你一个 **正整数** 数组 `nums` 。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 你需要从数组中选出一个满足下述条件的</span><br><span class="line">&gt;</span><br><span class="line">&gt; 子集</span><br><span class="line">&gt;</span><br><span class="line">&gt; ：</span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; - 你可以将选中的元素放置在一个下标从 **<span class="number">0</span>** 开始的数组中，并使其遵循以下模式：`[x, x2, x4, ..., xk/<span class="number">2</span>, xk, xk/<span class="number">2</span>, ..., x4, x2, x]`（**注意**，`k` 可以是任何 **非负** 的 <span class="number">2</span> 的幂）。例如，`[<span class="number">2</span>, <span class="number">4</span>, <span class="number">16</span>, <span class="number">4</span>, <span class="number">2</span>]` 和 `[<span class="number">3</span>, <span class="number">9</span>, <span class="number">3</span>]` 都符合这一模式，而 `[<span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">2</span>]` 则不符合。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 返回满足这些条件的子集中，元素数量的 **最大值** *。*</span><br><span class="line">&gt;</span><br><span class="line">&gt;  </span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>输入：nums = [5,4,1,2,2]<br>输出：3<br>解释：选择子集 {4,2,2} ，将其放在数组 [2,4,2] 中，它遵循该模式，且 22 == 4 。因此答案是 3 。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>输入：nums = [1,3,2,4]<br>输出：1<br>解释：选择子集 {1}，将其放在数组 [1] 中，它遵循该模式。因此答案是 1 。注意我们也可以选择子集 {2} 、{4} 或 {3} ，可能存在多个子集都能得到相同的答案。</p>
-<pre><code>
- 
-
-**提示：**
-
-- `2 &lt;= nums.length &lt;= 105`
-- `1 &lt;= nums[i] &lt;= 109`
-</code></pre>
-</blockquote>
-
+<h1><span id="jie-da">解答</span></h1>
         </div>
 
 

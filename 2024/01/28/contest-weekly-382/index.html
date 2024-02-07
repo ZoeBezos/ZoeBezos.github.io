@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zoe">
+
+
+    <meta name="subtitle" content="liberté">
+
+
+
+
+<title>🔹382th LeetCode Weekly Contest | ZOE&#39;s site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+    <script src="/js/jquery-3.7.0.min.js"></script>
+    
+    <script src="/js/mathjax2.7.5.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<!-- 搜索的部分 -->
+
+
+
+    <script>
+    // function searchToggle() {
+    //     const width = $(document.body).width()
+    //     if(width > 479) {
+    //         return;
+    //     }
+    //     const search = $('.search');
+    //     const searchForm = $('.form-search')
+
+    //     if(!search.hasClass("mobile-search")) {
+    //         search.addClass("mobile-search");
+    //     } else {
+    //         search.removeClass("mobile-search");
+    //     } 
+    // }
+
+    function searchToggle() {
+        const width = $(document.body).width()
+        if(width > 479) {
+            return;
+        }
+        const search = $('.search');
+        const searchForm = $('.form-search');
+        const menuToggle = $('.menu-toggle');
+        const title = $('.navbar-header-title ');
+
+        if(!search.hasClass("mobile-search")) {
+            search.addClass("mobile-search");
+            menuToggle.addClass("open-search")
+            title.addClass("mobile-title-hidden")
+        } else {
+            search.removeClass("mobile-search");
+            menuToggle.removeClass("open-search")
+            // title.css({visibility: 'visible'})
+            title.removeClass("mobile-title-hidden")
+        } 
+    }
+
+
+
+    function search(searchInputEl, formEl, flag) {
+        const path = "/" + "search.json"; // 可以在public 下查看这个search.json
+        $(formEl).submit(function(e){
+            e.preventDefault();
+            let target = null
+            if(searchInputEl == null) {
+                const screenWidth = $(document.body).width();
+                target = screenWidth > 479 ? $('#pc-search-input') : $('#mobile-search-input');
+                console.log(target);
+            } else {
+                target = $(searchInputEl)
+            }
+
+            if(!flag && target.val() === '') {
+                return ;
+            }
+
+            $("#u-search").fadeIn(500, function() {
+                $("body > .wrapper").addClass("modal-active");
+
+                $.ajax({
+                    url: path,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        $input = target.val();
+                        $(".form-input").val($input);
+                        const loadingBar = $('.search-loading-bar') 
+                        loadingBar.css({
+                            width:'100%',
+                            display: 'block'
+                        });
+                    },
+                    success: function( datas ) {
+                        console.log(datas);
+                        const $resultPanel = $(".modal-body")[0];
+                        let str = `<ul class="modal-results">`;
+                        var keywords = $(".form-input").val().trim().toLowerCase().split(/[\s\-]+/);
+                        $resultPanel.innerHTML = "";
+                        let hasResult = false
+                        let text = `<div class="no-result">找不到与关键词相关的内容....</div>`;
+
+                        if ($(".form-input").val().trim().length <= 0) {
+                            // 没有结果
+                            $resultPanel.innerHTML = text;
+                            return;
+                        }
+                        datas.forEach(function (data, index) {
+                            var isMatch = true;
+                            if (!data.title || data.title.trim() === '') {
+                                data.title = "Untitled";
+                            }
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content && data.content.trim().replace(/<[^>]+>/g, "").toLowerCase() || '';
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty contents
+                            if (data_content !== '') {
+                                keywords.forEach(function (keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        hasResult = true
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            } else {
+                                isMatch = false;
+                            }
+                            // show search results
+                            if (isMatch) {
+                                str += `<li class='result-item'><a href='${data_url}' class='result-item-detail'> <span class="title">${data_title}</span>`;
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 200 characters
+                                    var start = first_occur - 40;
+                                    var end = first_occur + 160;
+
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+
+                                    if (start == 0) {
+                                        end = 200;
+                                    }
+
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+
+                                    var match_content = content.substring(start, end);
+
+                                    // highlight all keywords
+                                    keywords.forEach(function (keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, `<em class="search-keyword">${keyword}</em>`);
+                                    });
+
+                                    str += `<span class="content"> ${match_content} ...</span></a>`;
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        if(hasResult) {
+                            $resultPanel.innerHTML = str;
+                        } else {
+                            $resultPanel.innerHTML = text;
+                        }
+
+                    },
+                    complete: function() {
+                        setTimeout(() => {
+                                const loadingBar = $('.search-loading-bar') 
+                                loadingBar.css({
+                                    width:'0%',
+                                    display: 'none'
+                                });
+                        }, 300)
+                    }
+                });
+            })
+
+        });
+    }
+
+    $(document).ready(function() {
+        $('.modal-close').click(function () { 
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+
+        $('.modal-overlay').click(function() {
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+        search(null, ".form-search", false)
+        search("#u-search-modal-form .form-input", ".u-search-modal-form", true)
+    })
+</script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                // pagebody.classList.add('dark-theme');
+                // mobile
+                // document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <!-- <div class="navbar-header header-logo"><a href="/">ZOE&#39;s site</a></div> -->
+            <div class="navbar-header header-logo"><a href="/"><i class="iconfont icon-zhuye" style="font-size: 1em;"></i>ZOE&#39;s site</a></div>
+            <div class="menu navbar-right">
+                <!-- 这里表示的是pc端搜索框 -->
+                
+                
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="pc-search-input"/>
+        </form>
+    </div>
+
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <!-- <label for="switch_default" class="toggleBtn"></label> -->
+            </div>
+        </div>
+    </nav>
+    
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ZOE&#39;s site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="navbar-mobile-right">
+                    
+                    
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="mobile-search-input"/>
+        </form>
+    </div>
+
+                    <!-- <div class="menu-toggle" onclick="mobileBtn()">&#9776; menu</div> -->
+                </div>
+    
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">🔹382th LeetCode Weekly Contest</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 28, 2024&nbsp;&nbsp;15:15:51</a>
+                        </span>
+                    
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">1.5k</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">6min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <table>
+<thead>
+<tr>
+<th></th>
+<th>problem</th>
+<th>tag</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✅</td>
+<td><a href="#head1">🟢</a>按键变更的次数</td>
+<td>string</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head2">🟡</a>子集中元素的最大数量</td>
+<td>string array enum</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head3">🟡</a>Alice 和 Bob 玩鲜花游戏</td>
+<td>math</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head4">🔴</a>给定操作次数内使剩余元素的或值最小</td>
+<td>array greedy bit-manipulation</td>
+</tr>
+</tbody></table>
+<h1><span id="an-jian-bian-geng-de-ci-shu"><span id="head1">🟢</span>按键变更的次数</span></h1><blockquote>
+<p>给你一个下标从 <strong>0</strong> 开始的字符串 <code>s</code> ，该字符串由用户输入。按键变更的定义是：使用与上次使用的按键不同的键。例如 <code>s = "ab"</code> 表示按键变更一次，而 <code>s = "bBBb"</code> 不存在按键变更。</p>
+<p>返回用户输入过程中按键变更的次数。</p>
+<p><strong>注意：</strong><code>shift</code> 或 <code>caps lock</code> 等修饰键不计入按键变更，也就是说，如果用户先输入字母 <code>'a'</code> 然后输入字母 <code>'A'</code> ，不算作按键变更。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "aAbBcC"</span><br><span class="line">输出：2</span><br><span class="line">解释： </span><br><span class="line">从 s[0] = 'a' 到 s[1] = 'A'，不存在按键变更，因为不计入 caps lock 或 shift 。</span><br><span class="line">从 s[1] = 'A' 到 s[2] = 'b'，按键变更。</span><br><span class="line">从 s[2] = 'b' 到 s[3] = 'B'，不存在按键变更，因为不计入 caps lock 或 shift 。</span><br><span class="line">从 s[3] = 'B' 到 s[4] = 'c'，按键变更。</span><br><span class="line">从 s[4] = 'c' 到 s[5] = 'C'，不存在按键变更，因为不计入 caps lock 或 shift 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = "AaAaAaaA"</span><br><span class="line">输出：0</span><br><span class="line">解释： 不存在按键变更，因为这个过程中只按下字母 'a' 和 'A' ，不需要进行按键变更。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 100</code></li>
+<li><code>s</code> 仅由英文大写字母和小写字母组成。</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">countKeyChanges</span><span class="params">(String s)</span> {</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">        s=s.toLowerCase();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; s.length(); i++) {</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i)!=s.charAt(i-<span class="number">1</span>)){</span><br><span class="line">                res++;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span>  res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="zi-ji-zhong-yuan-su-de-zui-da-shu-liang"><span id="head1">🟡</span>子集中元素的最大数量</span></h1><blockquote>
+<p>给你一个 <strong>正整数</strong> 数组 <code>nums</code> 。</p>
+<p>你需要从数组中选出一个满足下述条件的</p>
+<p>子集</p>
+<p>：</p>
+<ul>
+<li>你可以将选中的元素放置在一个下标从 <strong>0</strong> 开始的数组中，并使其遵循以下模式：<code>[x, x2, x4, ..., xk/2, xk, xk/2, ..., x4, x2, x]</code>（<strong>注意</strong>，<code>k</code> 可以是任何 <strong>非负</strong> 的 2 的幂）。例如，<code>[2, 4, 16, 4, 2]</code> 和 <code>[3, 9, 3]</code> 都符合这一模式，而 <code>[2, 4, 8, 4, 2]</code> 则不符合。</li>
+</ul>
+<p>返回满足这些条件的子集中，元素数量的 <strong>最大值</strong> <em>。</em></p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,4,1,2,2]</span><br><span class="line">输出：3</span><br><span class="line">解释：选择子集 {4,2,2} ，将其放在数组 [2,4,2] 中，它遵循该模式，且 22 == 4 。因此答案是 3 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,3,2,4]</span><br><span class="line">输出：1</span><br><span class="line">解释：选择子集 {1}，将其放在数组 [1] 中，它遵循该模式。因此答案是 1 。注意我们也可以选择子集 {2} 、{4} 或 {3} ，可能存在多个子集都能得到相同的答案。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= nums.length &lt;= 105</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 109</code></li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># &lt;span id=<span class="string">"head1"</span>&gt;🟡&lt;/span&gt;Alice 和 Bob 玩鲜花游戏</span><br><span class="line"></span><br><span class="line">&gt; Alice 和 Bob 在一个长满鲜花的环形草地玩一个回合制游戏。环形的草地上有一些鲜花，Alice 到 Bob 之间顺时针有 `x` 朵鲜花，逆时针有 `y` 朵鲜花。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 游戏过程如下：</span><br><span class="line">&gt;</span><br><span class="line">&gt; <span class="number">1.</span> Alice 先行动。</span><br><span class="line">&gt; <span class="number">2.</span> 每一次行动中，当前玩家必须选择顺时针或者逆时针，然后在这个方向上摘一朵鲜花。</span><br><span class="line">&gt; <span class="number">3.</span> 一次行动结束后，如果所有鲜花都被摘完了，那么 **当前** 玩家抓住对手并赢得游戏的胜利。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 给你两个整数 `n` 和 `m` ，你的任务是求出满足以下条件的所有 `(x, y)` 对：</span><br><span class="line">&gt;</span><br><span class="line">&gt; - 按照上述规则，Alice 必须赢得游戏。</span><br><span class="line">&gt; - Alice 顺时针方向上的鲜花数目 `x` 必须在区间 `[<span class="number">1</span>,n]` 之间。</span><br><span class="line">&gt; - Alice 逆时针方向上的鲜花数目 `y` 必须在区间 `[<span class="number">1</span>,m]` 之间。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 请你返回满足题目描述的数对 `(x, y)` 的数目。</span><br><span class="line">&gt;</span><br><span class="line">&gt;  </span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>输入：n = 3, m = 2<br>输出：3<br>解释：以下数对满足题目要求：(1,2) ，(3,2) ，(2,1) 。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>输入：n = 1, m = 1<br>输出：0<br>解释：没有数对满足题目要求。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">**提示：**</span><br><span class="line"></span><br><span class="line">- `1 &lt;= n, m &lt;= 105`</span><br><span class="line"></span><br><span class="line">```java</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<h1><span id="gei-ding-cao-zuo-ci-shu-nei-shi-sheng-yu-yuan-su-de-huo-zhi-zui-xiao"><span id="head1">🔴</span>给定操作次数内使剩余元素的或值最小</span></h1><blockquote>
+<p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 和一个整数 <code>k</code> 。</p>
+<p>一次操作中，你可以选择 <code>nums</code> 中满足 <code>0 &lt;= i &lt; nums.length - 1</code> 的一个下标 <code>i</code> ，并将 <code>nums[i]</code> 和 <code>nums[i + 1]</code> 替换为数字 <code>nums[i] &amp; nums[i + 1]</code> ，其中 <code>&amp;</code> 表示按位 <code>AND</code> 操作。</p>
+<p>请你返回 <strong>至多</strong> <code>k</code> 次操作以内，使 <code>nums</code> 中所有剩余元素按位 <code>OR</code> 结果的 <strong>最小值</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,5,3,2,7], k = 2</span><br><span class="line">输出：3</span><br><span class="line">解释：执行以下操作：</span><br><span class="line">1. 将 nums[0] 和 nums[1] 替换为 (nums[0] &amp; nums[1]) ，得到 nums 为 [1,3,2,7] 。</span><br><span class="line">2. 将 nums[2] 和 nums[3] 替换为 (nums[2] &amp; nums[3]) ，得到 nums 为 [1,3,2] 。</span><br><span class="line">最终数组的按位或值为 3 。</span><br><span class="line">3 是 k 次操作以内，可以得到的剩余元素的最小按位或值。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [7,3,15,14,2,8], k = 4</span><br><span class="line">输出：2</span><br><span class="line">解释：执行以下操作：</span><br><span class="line">1. 将 nums[0] 和 nums[1] 替换为 (nums[0] &amp; nums[1]) ，得到 nums 为 [3,15,14,2,8] 。</span><br><span class="line">2. 将 nums[0] 和 nums[1] 替换为 (nums[0] &amp; nums[1]) ，得到 nums 为 [3,14,2,8] 。</span><br><span class="line">3. 将 nums[0] 和 nums[1] 替换为 (nums[0] &amp; nums[1]) ，得到 nums 为 [2,2,8] 。</span><br><span class="line">4. 将 nums[1] 和 nums[2] 替换为 (nums[1] &amp; nums[2]) ，得到 nums 为 [2,0] 。</span><br><span class="line">最终数组的按位或值为 2 。</span><br><span class="line">2 是 k 次操作以内，可以得到的剩余元素的最小按位或值。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [10,7,10,3,9,14,9,4], k = 1</span><br><span class="line">输出：15</span><br><span class="line">解释：不执行任何操作，nums 的按位或值为 15 。</span><br><span class="line">15 是 k 次操作以内，可以得到的剩余元素的最小按位或值。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 105</code></li>
+<li><code>0 &lt;= nums[i] &lt; 230</code></li>
+<li><code>0 &lt;= k &lt; nums.length</code></li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+        </div>
+
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        
+            <script src='https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js'></script>
+            <script>
+                if (window.mermaid) {
+                    mermaid.initialize({
+                        startOnLoad: true,
+                        theme: 'neural',
+                    });
+                }
+            </script>
+        
+        <span>© zoe | <a href="https://hexo.io" target="_blank"></a>  <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank"></a>
+              
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<span class="site-uv">
+
+👤
+
+ <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+
+</span>&nbsp;
+
+
+
+
+
+<span class="site-pv">
+
+ | 👁️
+
+ <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+
+</span>
+
+
+  
+               
+        </span>
+    </div>
+</footer>
+
+    </div>
+
+    <!-- 搜索功能 -->
+    <!-- Chic/layout.ejs -->
+    <div id="u-search">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="container">
+                    <form id="u-search-modal-form" class="u-search-modal-form">
+                        <button type="submit" class="form-submit-btn">
+                            <img src="/image/search.png" class="search-btn-img" />
+                        </button>
+                        <input placeholder="搜索文章。。。" class="form-input" onchange="inputChange(event)" id="modal-form-input">
+                    </form>
+                    <a class="modal-close">x</a>
+                </div>
+                <div class="search-loading">
+                    <div class="search-loading-bar"></div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- <ul class="modal-results">
+                    <li class="result-item">
+                        <a class="result-item-detail">
+                            <span class="title">页面配置</span>
+                            <span class="content">
+                                网址，例如： front-matter---layout: postdate: <b mark></b>
+                                7-07-05title: [转]如何搭建基于Hexo的独立博客categories: [Dev, Hexo]tags: - Hexoauthor: name: xaoxuu avatar: https://cdn.jsdelivr.......
+                            </span>
+                        </a>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+        <div class="modal-overlay"></div>
+    </div>
+
+
+</body>
+
+
+
+</html>
+
+

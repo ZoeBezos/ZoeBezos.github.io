@@ -436,7 +436,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">203</a>                         
+                            <a href="">195</a>                         
                         </span>
                         
                     
@@ -472,8 +472,8 @@
 <h1><span id="jie-da">解答</span></h1><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">removeDuplicateLetters</span><span class="params">(String s)</span> {</span><br><span class="line">        Stack&lt;Character&gt;stack=<span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; s.length(); i++) {</span><br><span class="line">            <span class="type">char</span> ch=s.charAt(i);</span><br><span class="line">            <span class="keyword">if</span>(stack.contains(ch)){</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">while</span>(!stack.isEmpty()&amp;&amp;stack.peek()&gt;ch&amp;&amp;s.indexOf(stack.peek(),i)!=-<span class="number">1</span>){</span><br><span class="line">                stack.pop();</span><br><span class="line">            }</span><br><span class="line">            stack.push(ch);</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> size= stack.size();</span><br><span class="line">        <span class="type">char</span>[]res=<span class="keyword">new</span> <span class="title class_">char</span>[size];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++) {</span><br><span class="line">            res[i]=stack.get(i);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> String.copyValueOf(res);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>时间复杂度：O(n)</li>
-<li>空间复杂度：O(n)</li>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(n)</em></li>
 </ul>
 
         </div>

@@ -436,7 +436,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">302</a>                         
+                            <a href="">308</a>                         
                         </span>
                         
                     
@@ -480,6 +480,10 @@
 </blockquote>
 <h1><span id="jie-da">解答</span></h1><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sumIndicesWithKSetBits</span><span class="params">(List&lt;Integer&gt; nums, <span class="type">int</span> k)</span> {</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.size(); i++) {</span><br><span class="line">            <span class="type">int</span> t=Integer.bitCount(i);</span><br><span class="line">            <span class="keyword">if</span>(t==k){</span><br><span class="line">                res+=nums.get(i);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(1)</em></li>
+</ul>
 
         </div>
 

@@ -445,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">4.3k</a>                         
+                            <a href="">5.9k</a>                         
                         </span>
                         
                     
@@ -454,7 +454,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">20min</a>                         
+                            <a href="">28min</a>                         
                         </span>
                         
                     
@@ -464,7 +464,7 @@
         </header>
 
         <div class="post-content">
-            <h1><span id="pai-xu-suan-fa">排序算法</span></h1><table>
+            <h1><span id="shi-da-nei-bu-pai-xu-suan-fa"><span id="head1"> 十大内部排序算法</span></span></h1><table>
 <thead>
 <tr>
 <th>排序算法</th>
@@ -478,37 +478,37 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>冒泡排序(Bubble sort)</td>
+<td><a href="#head2"> 冒泡排序(Bubble sort)</a></td>
 <td>数组</td>
 <td>O(n)</td>
-<td>O(n^2)</td>
-<td>O(n^2)</td>
+<td>O(n^2^)</td>
+<td>O(n^2^)</td>
 <td>O(1)</td>
 <td>In-place</td>
 <td>稳定</td>
 </tr>
 <tr>
-<td>选择排序(Selection sort)</td>
-<td>数组、链表</td>
-<td>O(n^2)</td>
-<td>O(n^2)</td>
-<td>O(n^2)</td>
-<td>O(1)</td>
-<td>In-place</td>
-<td>不稳定</td>
-</tr>
-<tr>
-<td>插入排序(Insertion sort)</td>
+<td><a href="#head4"> 插入排序(Insertion sort)</a></td>
 <td>数组、链表</td>
 <td>O(n)</td>
-<td>O(n^2)</td>
-<td>O(n^2)</td>
+<td>O(n^2^)</td>
+<td>O(n^2^)</td>
 <td>O(1)</td>
 <td>In-place</td>
 <td>稳定</td>
 </tr>
 <tr>
-<td>快速排序(Quick sort)</td>
+<td><a href="#head6"> 选择排序(Selection sort)</a></td>
+<td>数组、链表</td>
+<td>O(n^2^)</td>
+<td>O(n^2^)</td>
+<td>O(n^2^)</td>
+<td>O(1)</td>
+<td>In-place</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td><a href="#head8"> 快速排序(Quick sort)</a></td>
 <td>数组</td>
 <td>O(n log n)</td>
 <td>O(n log n)</td>
@@ -518,7 +518,7 @@
 <td>不稳定</td>
 </tr>
 <tr>
-<td>堆排序(Heap sort)</td>
+<td><a href="#head10"> 堆排序(Heap sort)</a></td>
 <td>数组</td>
 <td>O(n log n)</td>
 <td>O(n log n)</td>
@@ -528,17 +528,17 @@
 <td>不稳定</td>
 </tr>
 <tr>
-<td>希尔排序(Shell sort)</td>
+<td><a href="#head17"> 希尔排序(Shell sort)</a></td>
 <td>数组</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>O(n log n)</td>
+<td>O(n^2^)</td>
+<td>O(n log n)</td>
+<td>O(1)</td>
+<td>In-place</td>
+<td>不稳定</td>
 </tr>
 <tr>
-<td>归并排序(Merge sort)</td>
+<td><a href="#head19"> 归并排序(Merge sort)</a></td>
 <td>数组、链表</td>
 <td>O(n log n)</td>
 <td>O(n log n)</td>
@@ -548,112 +548,151 @@
 <td>稳定</td>
 </tr>
 <tr>
-<td>计数排序(Counting sort)</td>
+<td><a href="#head23"> 计数排序(Counting sort)</a></td>
 <td>数组、链表</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>O(n+k)</td>
+<td>O(n+k)</td>
+<td>O(n+k)</td>
+<td>O(k)</td>
+<td>Out-place</td>
+<td>稳定</td>
 </tr>
 <tr>
-<td>桶排序(Bucket sort)</td>
+<td><a href="#head26"> 桶排序(Bucket sort)</a></td>
 <td>数组、链表</td>
 <td>O(n+k)</td>
 <td>O(n+k)</td>
-<td>O(n^2)</td>
+<td>O(n^2^)</td>
 <td>O(n+k)</td>
 <td>Out-place</td>
 <td>稳定</td>
 </tr>
 <tr>
-<td>基数排序(Radix sort)</td>
+<td><a href="#head29"> 基数排序(Radix sort)</a></td>
 <td>数组、链表</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>O(n×k)</td>
+<td>O(n×k)</td>
+<td>O(n×k)</td>
+<td>O(n+k)</td>
+<td>Out-place</td>
+<td>稳定</td>
 </tr>
 </tbody></table>
-<p>[toc]</p>
+<p>*注：</p>
+<p>①n为数组长度或链表节点数，k为等待排序元素的最大位数</p>
+<p>②归并排序中内部使用到插入排序</p>
+<p>③基数排序中内部使用到计数排序或者桶排序</p>
+<p>④基数排序需要经过处理才可以对负数元素排序</p>
 <table>
 <thead>
 <tr>
-<th>类型</th>
-<th>编号</th>
-<th>题号</th>
-<th>完成</th>
-<th>标签</th>
+<th>平均时间复杂度</th>
+<th>排序算法</th>
+<th>题目</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><a href="#head1"> 冒泡排序</a></td>
-<td>1</td>
-<td><a href="#head2">🟢283. 移动零</a></td>
-<td>✅</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#head3"> 选择排序</a></td>
-<td>2</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#head5"> 插入排序</a></td>
-<td>3</td>
-<td><a href="#head6">🟡147. 对链表进行插入排序</a></td>
-<td>✅</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#head7"> 快速排序</a></td>
-<td>4</td>
-<td><a href="#head8">🟡912. 排序数组</a></td>
-<td>✅</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#head9"> 归并排序</a></td>
-<td>5</td>
-<td><a href="#head10">🔴23. 合并 K 个升序链表</a></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#head11"> 堆排序</a></td>
-<td>6</td>
-<td><a href="#head12">🟡347. 前 K 个高频元素</a></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#head13"> 桶排序</a></td>
-<td>7</td>
-<td><a href="#head14">🟡1648. 销售价值减少的颜色球 </a></td>
-<td></td>
-<td></td>
+<td>O(n^2^)</td>
+<td><a href="#head2"> 冒泡排序(Bubble sort)</a></td>
+<td><a href="#head3">🟢283. 移动零</a></td>
 </tr>
 <tr>
 <td></td>
-<td>8</td>
-<td><a href="#head15">🔴220. 存在重复元素 III</a></td>
-<td></td>
-<td></td>
+<td><a href="#head4"> 插入排序(Insertion sort)</a></td>
+<td><a href="#head5">🟡147. 对链表进行插入排序</a></td>
 </tr>
 <tr>
-<td><a href="#head16"> 计数排序</a></td>
-<td>9</td>
-<td><a href="#head17">🟡75. 颜色分类</a></td>
+<td></td>
+<td><a href="#head6"> 选择排序(Selection sort)</a></td>
+<td><a href="#head7">🟡LCR 159. 库存管理 III</a></td>
+</tr>
+<tr>
+<td>O(nlog n)</td>
+<td><a href="#head8"> 快速排序(Quick sort)</a></td>
+<td><a href="#head9">🟡912. 排序数组</a></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head10"> 堆排序(Heap sort)</a></td>
+<td><a href="#head11">🟡912. 排序数组</a></td>
+</tr>
+<tr>
 <td></td>
 <td></td>
+<td><a href="#head12">🟡215. 数组中的第K个最大元素</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><a href="#head13">🟡面试题 17.14. 最小K个数</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><a href="#head14">🟡347. 前 K 个高频元素</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><a href="#head15">🟡692. 前K个高频单词</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><a href="#head16">🔴23. 合并 K 个升序链表</a></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head17"> 希尔排序(Shell sort)</a></td>
+<td><a href="#head18">🟡912. 排序数组</a></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head19"> 归并排序(Merge sort)</a></td>
+<td><a href="#head20">🟡912. 排序数组</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><a href="#head21">🟡148. 排序链表</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><a href="#head22">🔴23. 合并 K 个升序链表</a></td>
+</tr>
+<tr>
+<td>O(n)</td>
+<td><a href="#head23"> 计数排序(Counting sort)</a></td>
+<td><a href="#head24">🟡912. 排序数组</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><a href="#head25">🟡75. 颜色分类</a></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head26"> 桶排序(Bucket sort)</a></td>
+<td><a href="#head27">🟡912. 排序数组</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><a href="#head28">🟡148. 排序链表</a></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head29"> 基数排序(Radix sort)</a></td>
+<td><a href="#head30">🟡912. 排序数组</a></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#head31"> 特别排序</a></td>
+<td><a href="#head32">🟡179. 最大数</a></td>
 </tr>
 </tbody></table>
-<h1><span id="mou-pao-pai-xu"><span id="head1"> 冒泡排序</span></span></h1><h2><span id="283-yi-dong-ling"><span id="head2">🟢283. 移动零</span></span></h2><blockquote>
+<h1><span id="mou-pao-pai-xu"><span id="head2"> 冒泡排序</span></span></h1><h2><span id="283-yi-dong-ling"><span id="head3">🟢283. 移动零</span></span></h2><blockquote>
 <p>给定一个数组 <code>nums</code>，编写一个函数将所有 <code>0</code> 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
 <p><strong>请注意</strong> ，必须在不复制数组的情况下原地对数组进行操作。</p>
 <p><strong>示例 1:</strong></p>
@@ -678,32 +717,7 @@
 
 
 
-<h1><span id="xuan-ze-pai-xu"><span id="head3"> 选择排序</span></span></h1><h2><span id="lcr-159-ku-cun-guan-li-iii"><span id="head4">🟡LCR 159. 库存管理 III</span></span></h2><blockquote>
-<p>仓库管理员以数组 <code>stock</code> 形式记录商品库存表，其中 <code>stock[i]</code> 表示对应商品库存余量。请返回库存余量最少的 <code>cnt</code> 个商品余量，返回 <strong>顺序不限</strong>。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：stock = [2,5,7,4], cnt = 1</span><br><span class="line">输出：[2]</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：stock = [0,2,3,6], cnt = 2</span><br><span class="line">输出：[0,2] 或 [2,0]</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>0 &lt;= cnt &lt;= stock.length &lt;= 10000 0 &lt;= stock[i] &lt;= 10000</code></li>
-</ul>
-<p>Related Topics</p>
-<p>数组</p>
-<p>分治</p>
-<p>快速选择</p>
-<p>排序</p>
-<p>堆（优先队列）</p>
-</blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] inventoryManagement(<span class="type">int</span>[] stock, <span class="type">int</span> cnt) {</span><br><span class="line">        <span class="type">int</span> len=stock.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i+<span class="number">1</span>; j &lt; len; j++) {</span><br><span class="line">                <span class="keyword">if</span>(stock[j]&lt;stock[i]){</span><br><span class="line">                    <span class="type">int</span> temp=stock[i];</span><br><span class="line">                    stock[i]=stock[j];</span><br><span class="line">                    stock[j]=temp;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span>[]res=<span class="keyword">new</span> <span class="title class_">int</span>[cnt];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; cnt; i++) {</span><br><span class="line">            res[i]=stock[i];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h1><span id="cha-ru-pai-xu"><span id="head5"> 插入排序</span></span></h1><h2><span id="147-dui-lian-biao-jin-xing-cha-ru-pai-xu"><span id="head6">🟡147. 对链表进行插入排序</span></span></h2><blockquote>
+<h1><span id="cha-ru-pai-xu"><span id="head4"> 插入排序</span></span></h1><h2><span id="147-dui-lian-biao-jin-xing-cha-ru-pai-xu"><span id="head5">🟡147. 对链表进行插入排序</span></span></h2><blockquote>
 <p>给定单个链表的头 <code>head</code> ，使用 <strong>插入排序</strong> 对链表进行排序，并返回 <em>排序后链表的头</em> 。</p>
 <p><strong>插入排序</strong> 算法的步骤:</p>
 <ol>
@@ -737,7 +751,30 @@
 
 
 
-<h1><span id="kuai-su-pai-xu"><span id="head7"> 快速排序</span></span></h1><h2><span id="912-pai-xu-shu-zu"><span id="head8">🟡912. 排序数组</span></span></h2><blockquote>
+<h1><span id="xuan-ze-pai-xu"><span id="head6"> 选择排序</span></span></h1><h2><span id="lcr-159-ku-cun-guan-li-iii"><span id="head7">🟡LCR 159. 库存管理 III</span></span></h2><blockquote>
+<p>仓库管理员以数组 <code>stock</code> 形式记录商品库存表，其中 <code>stock[i]</code> 表示对应商品库存余量。请返回库存余量最少的 <code>cnt</code> 个商品余量，返回 <strong>顺序不限</strong>。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：stock = [2,5,7,4], cnt = 1</span><br><span class="line">输出：[2]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：stock = [0,2,3,6], cnt = 2</span><br><span class="line">输出：[0,2] 或 [2,0]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= cnt &lt;= stock.length &lt;= 10000 0 &lt;= stock[i] &lt;= 10000</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>快速选择</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] inventoryManagement(<span class="type">int</span>[] stock, <span class="type">int</span> cnt) {</span><br><span class="line">        <span class="type">int</span> len=stock.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i+<span class="number">1</span>; j &lt; len; j++) {</span><br><span class="line">                <span class="keyword">if</span>(stock[j]&lt;stock[i]){</span><br><span class="line">                    <span class="type">int</span> temp=stock[i];</span><br><span class="line">                    stock[i]=stock[j];</span><br><span class="line">                    stock[j]=temp;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span>[]res=<span class="keyword">new</span> <span class="title class_">int</span>[cnt];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; cnt; i++) {</span><br><span class="line">            res[i]=stock[i];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h1><span id="kuai-su-pai-xu"><span id="head8"> 快速排序</span></span></h1><h2><span id="912-pai-xu-shu-zu"><span id="head9">🟡912. 排序数组</span></span></h2><blockquote>
 <p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
 <p><strong>示例 1：</strong></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
@@ -764,7 +801,36 @@
 </blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[]sortArray(<span class="type">int</span>[]nums){</span><br><span class="line">        <span class="type">int</span> len=nums.length;</span><br><span class="line">        quickSort(nums,<span class="number">0</span>,len-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[]nums,<span class="type">int</span> left,<span class="type">int</span> right)</span>{</span><br><span class="line">        <span class="keyword">if</span>(left&lt;right){</span><br><span class="line">            <span class="type">int</span> i=left;</span><br><span class="line">            <span class="type">int</span> j=right;</span><br><span class="line">            <span class="type">int</span> base=nums[i];</span><br><span class="line">            <span class="keyword">while</span>(i&lt;j){</span><br><span class="line">                <span class="keyword">while</span>(i&lt;j&amp;&amp;nums[j]&gt;base){</span><br><span class="line">                    j--;</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">if</span>(i&lt;j){</span><br><span class="line">                    nums[i++]=nums[j];</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">while</span>(i&lt;j&amp;&amp;nums[i]&lt;base){</span><br><span class="line">                    i++;</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">if</span>(i&lt;j){</span><br><span class="line">                    nums[j--]=nums[i];</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">            nums[i]=base;</span><br><span class="line">            quickSort(nums,left,i-<span class="number">1</span>);</span><br><span class="line">            quickSort(nums,i+<span class="number">1</span>,right);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h1><span id="dui-pai-xu"><span id="head11"> 堆排序</span></span></h1><h2><span id="215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su">🟡215. 数组中的第K个最大元素</span></h2><blockquote>
+<h1><span id="dui-pai-xu"><span id="head10"> 堆排序</span></span></h1><h2><span id="912-pai-xu-shu-zu"><span id="head11">🟡912. 排序数组</span></span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>桶排序</p>
+<p>计数排序</p>
+<p>基数排序</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums) { </span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        Queue&lt;Integer&gt;heap=<span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Integer&gt;() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Integer o1, Integer o2)</span> {</span><br><span class="line">                <span class="keyword">return</span> o1-o2;</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            heap.offer(nums[i]);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            nums[i]=heap.poll();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2><span id="215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su"><span id="head12">🟡215. 数组中的第K个最大元素</span></span></h2><blockquote>
 <p>给定整数数组 <code>nums</code> 和整数 <code>k</code>，请返回数组中第 <code>**k**</code> 个最大的元素。</p>
 <p>请注意，你需要找的是数组排序后的第 <code>k</code> 个最大的元素，而不是第 <code>k</code> 个不同的元素。</p>
 <p>你必须设计并实现时间复杂度为 <code>O(n)</code> 的算法解决此问题。</p>
@@ -792,7 +858,7 @@
 
 
 
-<h2><span id="mian-shi-ti-17-14-zui-xiao-k-ge-shu">🟡面试题 17.14. 最小K个数</span></h2><blockquote>
+<h2><span id="mian-shi-ti-17-14-zui-xiao-k-ge-shu"><span id="head13">🟡面试题 17.14. 最小K个数</span></span></h2><blockquote>
 <p>设计一个算法，找出数组中最小的k个数。以任意顺序返回这k个数均可。</p>
 <p><strong>示例：</strong></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入： arr = [1,3,5,7,2,4,6,8], k = 4</span><br><span class="line">输出： [1,2,3,4]</span><br></pre></td></tr></tbody></table></figure>
@@ -813,7 +879,7 @@
 
 
 
-<h2><span id="347-qian-k-ge-gao-pin-yuan-su"><span id="head12">🟡347. 前 K 个高频元素</span></span></h2><blockquote>
+<h2><span id="347-qian-k-ge-gao-pin-yuan-su"><span id="head14">🟡347. 前 K 个高频元素</span></span></h2><blockquote>
 <p>给你一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，请你返回其中出现频率前 <code>k</code> 高的元素。你可以按 <strong>任意顺序</strong> 返回答案。</p>
 <p><strong>示例 1:</strong></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [1,1,1,2,2,3], k = 2</span><br><span class="line">输出: [1,2]</span><br></pre></td></tr></tbody></table></figure>
@@ -842,7 +908,7 @@
 </blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] topKFrequent(<span class="type">int</span>[] nums, <span class="type">int</span> k) {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        Map&lt;Integer,Integer&gt;map=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            map.put(nums[i],map.getOrDefault(nums[i],<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        Queue&lt;Integer&gt;heap=<span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Integer&gt;() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Integer o1, Integer o2)</span> {</span><br><span class="line">                <span class="keyword">return</span> map.get(o1)-map.get(o2);<span class="comment">//队列先排出最小的</span></span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> key:map.keySet() ) {</span><br><span class="line">            heap.offer(key);</span><br><span class="line">            <span class="keyword">if</span>(heap.size()&gt;k){</span><br><span class="line">                heap.poll();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span>[]res=<span class="keyword">new</span> <span class="title class_">int</span>[k];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; k; i++) {</span><br><span class="line">            res[i]=heap.poll();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h2><span id="692-qian-k-ge-gao-pin-dan-ci">🟡692. 前K个高频单词</span></h2><blockquote>
+<h2><span id="692-qian-k-ge-gao-pin-dan-ci"><span id="head15">🟡692. 前K个高频单词</span></span></h2><blockquote>
 <p>给定一个单词列表 <code>words</code> 和一个整数 <code>k</code> ，返回前 <code>k</code> 个出现次数最多的单词。</p>
 <p>返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率， <strong>按字典顺序</strong> 排序。</p>
 <p><strong>示例 1：</strong></p>
@@ -872,7 +938,7 @@
 </blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; <span class="title function_">topKFrequent</span><span class="params">(String[] words, <span class="type">int</span> k)</span> {</span><br><span class="line">        <span class="type">int</span> len= words.length;</span><br><span class="line">        Map&lt;String,Integer&gt;map=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            map.put(words[i],map.getOrDefault(words[i],<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        System.out.println(map);</span><br><span class="line">        List&lt;String&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Queue&lt;String&gt;heap=<span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;String&gt;() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(String o1, String o2)</span> {</span><br><span class="line">                <span class="keyword">if</span>(map.get(o1)==map.get(o2)){</span><br><span class="line">                    <span class="keyword">return</span> o2.compareTo(o1);<span class="comment">//字典序 大的先排出去</span></span><br><span class="line">                }<span class="keyword">else</span>{</span><br><span class="line">                    <span class="keyword">return</span> map.get(o1)-map.get(o2);<span class="comment">//大小 小的先排出去</span></span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        <span class="keyword">for</span> (String key:map.keySet() ) {</span><br><span class="line">            heap.offer(key);</span><br><span class="line">            <span class="keyword">if</span>(heap.size()&gt;k){</span><br><span class="line">                heap.poll();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span> (!heap.isEmpty()){</span><br><span class="line">            res.add(heap.poll());</span><br><span class="line">        }</span><br><span class="line">        Collections.reverse(res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h2><span id="23-he-bing-k-ge-sheng-xu-lian-biao"><span id="head10">🔴23. 合并 K 个升序链表</span></span></h2><blockquote>
+<h2><span id="23-he-bing-k-ge-sheng-xu-lian-biao"><span id="head16">🔴23. 合并 K 个升序链表</span></span></h2><blockquote>
 <p>给你一个链表数组，每个链表都已经按升序排列。</p>
 <p>请你将所有链表合并到一个升序链表中，返回合并后的链表。</p>
 <p><strong>示例 1：</strong></p>
@@ -905,7 +971,190 @@
 
 
 
-<h1><span id="tong-pai-xu"><span id="head13"> 桶排序</span></span></h1><h2><span id="912-pai-xu-shu-zu"><span id="head8">🟡912. 排序数组</span></span></h2><blockquote>
+<h1><span id="xi-er-pai-xu"><span id="head17"> 希尔排序</span></span></h1><h2><span id="912-pai-xu-shu-zu"><span id="head18">🟡912. 排序数组</span></span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>桶排序</p>
+<p>计数排序</p>
+<p>基数排序</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums){</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">gap</span> <span class="operator">=</span> len / <span class="number">2</span>; gap &gt; <span class="number">0</span>; gap /= <span class="number">2</span>) {</span><br><span class="line">            <span class="comment">// 共gap个组，对每一组都执行直接插入排序</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ;i &lt; gap; i++) {</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + gap; j &lt; len; j += gap) {</span><br><span class="line">                    <span class="comment">// 如果nums[j] &lt; nums[j-gap]，则寻找nums[j]位置，并将后面数据的位置都后移。</span></span><br><span class="line">                    <span class="keyword">if</span> (nums[j] &lt; nums[j - gap]) {</span><br><span class="line">                        <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> nums[j];</span><br><span class="line">                        <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> j - gap;</span><br><span class="line">                        <span class="keyword">while</span> (k &gt;= <span class="number">0</span> &amp;&amp; nums[k] &gt; tmp) {</span><br><span class="line">                            nums[k + gap] = nums[k];</span><br><span class="line">                            k -= gap;</span><br><span class="line">                        }</span><br><span class="line">                        nums[k + gap] = tmp;</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="gui-bing-pai-xu"><span id="head19"> 归并排序</span></span></h1><h2><span id="912-pai-xu-shu-zu"><span id="head20">🟡912. 排序数组</span></span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>桶排序</p>
+<p>计数排序</p>
+<p>基数排序</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums){</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        mergeSort(nums,<span class="number">0</span>,len-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">mergeSort</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> start, <span class="type">int</span> end)</span> {</span><br><span class="line">        <span class="comment">//分治的结束条件</span></span><br><span class="line">        <span class="keyword">if</span> (start &gt;= end) {</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//保证不溢出取start和end的中位数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> start + ((end - start) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//递归排序并且合并</span></span><br><span class="line">        mergeSort(arr, start, mid);</span><br><span class="line">        mergeSort(arr, mid + <span class="number">1</span>, end);</span><br><span class="line">        merge(arr, start, mid, end);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">merge</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> start, <span class="type">int</span> mid, <span class="type">int</span> end)</span> {</span><br><span class="line">        <span class="type">int</span>[] temp = <span class="keyword">new</span> <span class="title class_">int</span>[end - start + <span class="number">1</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">p1</span> <span class="operator">=</span> start;</span><br><span class="line">        <span class="type">int</span> <span class="variable">p2</span> <span class="operator">=</span> mid + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt;= mid &amp;&amp; p2 &lt;= end) {</span><br><span class="line">            <span class="keyword">if</span> (arr[p1] &gt; arr[p2]) {</span><br><span class="line">                temp[p++] = arr[p2++];</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                temp[p++] = arr[p1++];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt;= mid) {</span><br><span class="line">            temp[p++] = arr[p1++];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span> (p2 &lt;= end) {</span><br><span class="line">            temp[p++] = arr[p2++];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; temp.length; i++) {</span><br><span class="line">            arr[i + start] = temp[i];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2><span id="148-pai-xu-lian-biao"><span id="head21">🟡148. 排序链表</span></span></h2><blockquote>
+<p>给你链表的头结点 <code>head</code> ，请将其按 <strong>升序</strong> 排列并返回 <strong>排序后的链表</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [4,2,1,3]</span><br><span class="line">输出：[1,2,3,4]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_2.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [-1,5,3,4,0]</span><br><span class="line">输出：[-1,0,3,4,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点的数目在范围 <code>[0, 5 * 104]</code> 内</li>
+<li><code>-105 &lt;= Node.val &lt;= 105</code></li>
+</ul>
+<p><strong>进阶：</strong>你可以在 <code>O(n log n)</code> 时间复杂度和常数级空间复杂度下，对链表进行排序吗？</p>
+<p>Related Topics</p>
+<p>链表</p>
+<p>双指针</p>
+<p>分治</p>
+<p>排序</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">sortList</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">null</span> || head.next == <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">mid</span> <span class="operator">=</span> getMiddle(head);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">left</span> <span class="operator">=</span> sortList(head);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">right</span> <span class="operator">=</span> sortList(mid);</span><br><span class="line">        <span class="keyword">return</span> merge(left, right);</span><br><span class="line">    }</span><br><span class="line">    ListNode <span class="title function_">getMiddle</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">slow</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">fast</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="keyword">while</span> (fast.next != <span class="literal">null</span> &amp;&amp; fast.next.next != <span class="literal">null</span>) {</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">mid</span> <span class="operator">=</span> slow.next;</span><br><span class="line">        slow.next = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">return</span> mid;</span><br><span class="line">    }</span><br><span class="line">    ListNode <span class="title function_">merge</span><span class="params">(ListNode l1, ListNode l2)</span> {</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">res</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">p</span> <span class="operator">=</span> res;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">null</span> &amp;&amp; l2 != <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">if</span> (l1.val &lt; l2.val) {</span><br><span class="line">                p.next = l1;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                p.next = l2;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            }</span><br><span class="line">            p = p.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (l1 != <span class="literal">null</span>) {</span><br><span class="line">            p.next = l1;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (l2 != <span class="literal">null</span>) {</span><br><span class="line">            p.next = l2;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res.next;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+<h2><span id="23-he-bing-k-ge-sheng-xu-lian-biao"><span id="head22">🔴23. 合并 K 个升序链表</span></span></h2><blockquote>
+<p>给你一个链表数组，每个链表都已经按升序排列。</p>
+<p>请你将所有链表合并到一个升序链表中，返回合并后的链表。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：lists = [[1,4,5],[1,3,4],[2,6]]</span><br><span class="line">输出：[1,1,2,3,4,4,5,6]</span><br><span class="line">解释：链表数组如下：</span><br><span class="line">[</span><br><span class="line">  1-&gt;4-&gt;5,</span><br><span class="line">  1-&gt;3-&gt;4,</span><br><span class="line">  2-&gt;6</span><br><span class="line">]</span><br><span class="line">将它们合并到一个有序链表中得到。</span><br><span class="line">1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：lists = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：lists = [[]]</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>k == lists.length</code></li>
+<li><code>0 &lt;= k &lt;= 10^4</code></li>
+<li><code>0 &lt;= lists[i].length &lt;= 500</code></li>
+<li><code>-10^4 &lt;= lists[i][j] &lt;= 10^4</code></li>
+<li><code>lists[i]</code> 按 <strong>升序</strong> 排列</li>
+<li><code>lists[i].length</code> 的总和不超过 <code>10^4</code></li>
+</ul>
+<p>Related Topics</p>
+<p>链表</p>
+<p>分治</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">mergeKLists</span><span class="params">(ListNode[] lists)</span> {</span><br><span class="line">        <span class="type">int</span> len= lists.length;</span><br><span class="line">        <span class="keyword">if</span>(len==<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> biaryMerge(lists,<span class="number">0</span>,len-<span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line">    ListNode <span class="title function_">biaryMerge</span><span class="params">(ListNode[] lists,<span class="type">int</span> i,<span class="type">int</span> j)</span>{</span><br><span class="line">        <span class="keyword">if</span>(i&gt;j){</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (i==j) {</span><br><span class="line">            <span class="keyword">return</span> lists[i];</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> mid=(i+j)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> merge(biaryMerge(lists,i,mid),biaryMerge(lists,mid+<span class="number">1</span>,j));</span><br><span class="line">    }</span><br><span class="line">    ListNode <span class="title function_">merge</span><span class="params">(ListNode l1, ListNode l2)</span> {</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">res</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">p</span> <span class="operator">=</span> res;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">null</span> &amp;&amp; l2 != <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">if</span> (l1.val &lt; l2.val) {</span><br><span class="line">                p.next = l1;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                p.next = l2;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            }</span><br><span class="line">            p = p.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (l1 != <span class="literal">null</span>) {</span><br><span class="line">            p.next = l1;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (l2 != <span class="literal">null</span>) {</span><br><span class="line">            p.next = l2;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res.next;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="ji-shu-pai-xu"><span id="head23"> 计数排序</span></span></h1><h2><span id="912-pai-xu-shu-zu"><span id="head24">🟡912. 排序数组</span></span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>桶排序</p>
+<p>计数排序</p>
+<p>基数排序</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums) {</span><br><span class="line">        <span class="comment">// 找到数组中的最大值和最小值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> Arrays.stream(nums).min().getAsInt();</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> Arrays.stream(nums).max().getAsInt();</span><br><span class="line">        <span class="comment">// 计算计数数组的长度</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> max - min + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span>[] count = <span class="keyword">new</span> <span class="title class_">int</span>[length];</span><br><span class="line">        <span class="comment">// 统计每个元素的出现次数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) {</span><br><span class="line">            count[num - min]++;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 将计数数组转换为前缀和数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; length; i++) {</span><br><span class="line">            count[i] += count[i - <span class="number">1</span>];</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 创建临时数组存储排序后的结果</span></span><br><span class="line">        <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[nums.length];</span><br><span class="line">        <span class="comment">// 将元素按照计数数组的前缀和分配到临时数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> nums.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) {</span><br><span class="line">            <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> count[nums[i] - min] - <span class="number">1</span>;</span><br><span class="line">            res[index] = nums[i];</span><br><span class="line">            count[nums[i] - min]--;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2><span id="75-yan-se-fen-lei"><span id="head25">🟡75. 颜色分类</span></span></h2><blockquote>
+<p>给定一个包含红色、白色和蓝色、共 <code>n</code> 个元素的数组 <code>nums</code> ，**<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地</a>**对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。</p>
+<p>我们使用整数 <code>0</code>、 <code>1</code> 和 <code>2</code> 分别表示红色、白色和蓝色。</p>
+<p>必须在不使用库内置的 sort 函数的情况下解决这个问题。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,0,2,1,1,0]</span><br><span class="line">输出：[0,0,1,1,2,2]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,0,1]</span><br><span class="line">输出：[0,1,2]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>n == nums.length</code></li>
+<li><code>1 &lt;= n &lt;= 300</code></li>
+<li><code>nums[i]</code> 为 <code>0</code>、<code>1</code> 或 <code>2</code></li>
+</ul>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>你能想出一个仅使用常数空间的一趟扫描算法吗？</li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>双指针</p>
+<p>排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sortColors</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        <span class="type">int</span> num0=<span class="number">0</span>,num1=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            <span class="type">int</span> num=nums[i];</span><br><span class="line">            nums[i]=<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(num&lt;<span class="number">2</span>){</span><br><span class="line">                nums[num1++]=<span class="number">1</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(num&lt;<span class="number">1</span>){</span><br><span class="line">                nums[num0++]=<span class="number">0</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h1><span id="tong-pai-xu"><span id="head26"> 桶排序</span></span></h1><h2><span id="912-pai-xu-shu-zu"><span id="head27">🟡912. 排序数组</span></span></h2><blockquote>
 <p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
 <p><strong>示例 1：</strong></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
@@ -935,38 +1184,7 @@
 <p>小小改良版</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums){</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            min = Math.min(min, nums[i]);</span><br><span class="line">            max = Math.max(max, nums[i]);</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> <span class="variable">range</span> <span class="operator">=</span> max - min + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span>[] bucket = <span class="keyword">new</span> <span class="title class_">int</span>[range];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            bucket[nums[i] - min]++;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; range; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; bucket[i]; j++) {</span><br><span class="line">                nums[index++] = i + min;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-
-
-<h1><span id="gui-bing-pai-xu"><span id="head9"> 归并排序</span></span></h1><h2><span id="912-pai-xu-shu-zu"><span id="head8">🟡912. 排序数组</span></span></h2><blockquote>
-<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
-<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
-</ul>
-<p>Related Topics</p>
-<p>数组</p>
-<p>分治</p>
-<p>桶排序</p>
-<p>计数排序</p>
-<p>基数排序</p>
-<p>排序</p>
-<p>堆（优先队列）</p>
-<p>归并排序</p>
-</blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums){</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        mergeSort(nums,<span class="number">0</span>,len-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">mergeSort</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> start, <span class="type">int</span> end)</span> {</span><br><span class="line">        <span class="comment">//分治的结束条件</span></span><br><span class="line">        <span class="keyword">if</span> (start &gt;= end) {</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//保证不溢出取start和end的中位数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> start + ((end - start) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//递归排序并且合并</span></span><br><span class="line">        mergeSort(arr, start, mid);</span><br><span class="line">        mergeSort(arr, mid + <span class="number">1</span>, end);</span><br><span class="line">        merge(arr, start, mid, end);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">merge</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> start, <span class="type">int</span> mid, <span class="type">int</span> end)</span> {</span><br><span class="line">        <span class="type">int</span>[] temp = <span class="keyword">new</span> <span class="title class_">int</span>[end - start + <span class="number">1</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">p1</span> <span class="operator">=</span> start;</span><br><span class="line">        <span class="type">int</span> <span class="variable">p2</span> <span class="operator">=</span> mid + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt;= mid &amp;&amp; p2 &lt;= end) {</span><br><span class="line">            <span class="keyword">if</span> (arr[p1] &gt; arr[p2]) {</span><br><span class="line">                temp[p++] = arr[p2++];</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                temp[p++] = arr[p1++];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt;= mid) {</span><br><span class="line">            temp[p++] = arr[p1++];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span> (p2 &lt;= end) {</span><br><span class="line">            temp[p++] = arr[p2++];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; temp.length; i++) {</span><br><span class="line">            arr[i + start] = temp[i];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h2><span id="148-pai-xu-lian-biao">🟡148. 排序链表</span></h2><blockquote>
+<h2><span id="148-pai-xu-lian-biao"><span id="head28">🟡148. 排序链表</span></span></h2><blockquote>
 <p>给你链表的头结点 <code>head</code> ，请将其按 <strong>升序</strong> 排列并返回 <strong>排序后的链表</strong> 。</p>
 <p><strong>示例 1：</strong></p>
 <p><img src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg" alt="img"></p>
@@ -994,49 +1212,40 @@
 <p>排序</p>
 <p>归并排序</p>
 </blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">sortList</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">null</span> || head.next == <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">mid</span> <span class="operator">=</span> getMiddle(head);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">left</span> <span class="operator">=</span> sortList(head);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">right</span> <span class="operator">=</span> sortList(mid);</span><br><span class="line">        <span class="keyword">return</span> merge(left, right);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">private</span> ListNode <span class="title function_">getMiddle</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">slow</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">fast</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="keyword">while</span> (fast.next != <span class="literal">null</span> &amp;&amp; fast.next.next != <span class="literal">null</span>) {</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">mid</span> <span class="operator">=</span> slow.next;</span><br><span class="line">        slow.next = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">return</span> mid;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">private</span> ListNode <span class="title function_">merge</span><span class="params">(ListNode l1, ListNode l2)</span> {</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">dummy</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">curr</span> <span class="operator">=</span> dummy;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">null</span> &amp;&amp; l2 != <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">if</span> (l1.val &lt; l2.val) {</span><br><span class="line">                curr.next = l1;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                curr.next = l2;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            }</span><br><span class="line">            curr = curr.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (l1 != <span class="literal">null</span>) {</span><br><span class="line">            curr.next = l1;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (l2 != <span class="literal">null</span>) {</span><br><span class="line">            curr.next = l2;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">sortList</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">null</span> || head.next == <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        }</span><br><span class="line">        ListNode ptr=head;</span><br><span class="line">        <span class="type">int</span> max=head.val;</span><br><span class="line">        <span class="type">int</span> min=head.val;</span><br><span class="line">        <span class="keyword">while</span> (ptr!=<span class="literal">null</span>){</span><br><span class="line">            max=Math.max(max,ptr.val);</span><br><span class="line">            min=Math.min(min,ptr.val);</span><br><span class="line">            ptr=ptr.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> <span class="variable">range</span> <span class="operator">=</span> max - min + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span>[] bucket = <span class="keyword">new</span> <span class="title class_">int</span>[range];</span><br><span class="line">        ptr=head;</span><br><span class="line">        <span class="keyword">while</span> (ptr!=<span class="literal">null</span>){</span><br><span class="line">            bucket[ptr.val - min]++;</span><br><span class="line">            ptr=ptr.next;</span><br><span class="line">        }</span><br><span class="line">        ptr=head;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; range; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; bucket[i]; j++) {</span><br><span class="line">                ptr.val=i+min;</span><br><span class="line">                ptr=ptr.next;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
 
-
-
-<h2><span id="23-he-bing-k-ge-sheng-xu-lian-biao">🔴23. 合并 K 个升序链表</span></h2><blockquote>
-<p>给你一个链表数组，每个链表都已经按升序排列。</p>
-<p>请你将所有链表合并到一个升序链表中，返回合并后的链表。</p>
+<h1><span id="ji-shu-pai-xu"><span id="head29"> 基数排序</span></span></h1><h2><span id="912-pai-xu-shu-zu"><span id="head30">🟡912. 排序数组</span></span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：lists = [[1,4,5],[1,3,4],[2,6]]</span><br><span class="line">输出：[1,1,2,3,4,4,5,6]</span><br><span class="line">解释：链表数组如下：</span><br><span class="line">[</span><br><span class="line">  1-&gt;4-&gt;5,</span><br><span class="line">  1-&gt;3-&gt;4,</span><br><span class="line">  2-&gt;6</span><br><span class="line">]</span><br><span class="line">将它们合并到一个有序链表中得到。</span><br><span class="line">1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：lists = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：lists = [[]]</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
 
 
 
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>k == lists.length</code></li>
-<li><code>0 &lt;= k &lt;= 10^4</code></li>
-<li><code>0 &lt;= lists[i].length &lt;= 500</code></li>
-<li><code>-10^4 &lt;= lists[i][j] &lt;= 10^4</code></li>
-<li><code>lists[i]</code> 按 <strong>升序</strong> 排列</li>
-<li><code>lists[i].length</code> 的总和不超过 <code>10^4</code></li>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
 </ul>
 <p>Related Topics</p>
-<p>链表</p>
+<p>数组</p>
 <p>分治</p>
+<p>桶排序</p>
+<p>计数排序</p>
+<p>基数排序</p>
+<p>排序</p>
 <p>堆（优先队列）</p>
 <p>归并排序</p>
 </blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># &lt;span id=<span class="string">"head16"</span>&gt; 计数排序&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">## &lt;span id=<span class="string">"head17"</span>&gt;🟡<span class="number">75.</span> 颜色分类&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">&gt; 给定一个包含红色、白色和蓝色、共 `n` 个元素的数组 `nums` ，**[原地](https:<span class="comment">//baike.baidu.com/item/原地算法)**对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。</span></span><br><span class="line">&gt;</span><br><span class="line">&gt; 我们使用整数 `<span class="number">0</span>`、 `<span class="number">1</span>` 和 `<span class="number">2</span>` 分别表示红色、白色和蓝色。</span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; 必须在不使用库内置的 sort 函数的情况下解决这个问题。</span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>输入：nums = [2,0,2,1,1,0]<br>输出：[0,0,1,1,2,2]</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>输入：nums = [2,0,1]<br>输出：[0,1,2]</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**提示：**</span><br><span class="line"></span><br><span class="line">- `n == nums.length`</span><br><span class="line">- `1 &lt;= n &lt;= 300`</span><br><span class="line">- `nums[i]` 为 `0`、`1` 或 `2`</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**进阶：**</span><br><span class="line"></span><br><span class="line">- 你能想出一个仅使用常数空间的一趟扫描算法吗？</span><br><span class="line"></span><br><span class="line">Related Topics</span><br><span class="line"></span><br><span class="line">数组</span><br><span class="line"></span><br><span class="line">双指针</span><br><span class="line"></span><br><span class="line">排序</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">class Solution {</span><br><span class="line">   public void sortColors(int[] nums) {</span><br><span class="line">       int len= nums.length;</span><br><span class="line">       int num0=0,num1=0;</span><br><span class="line">       for (int i = 0; i &lt; len; i++) {</span><br><span class="line">           int num=nums[i];</span><br><span class="line">           nums[i]=2;</span><br><span class="line">           if(num&lt;2){</span><br><span class="line">               nums[num1++]=1;</span><br><span class="line">           }</span><br><span class="line">           if(num&lt;1){</span><br><span class="line">               nums[num0++]=0;</span><br><span class="line">           }</span><br><span class="line">       }</span><br><span class="line"></span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-</blockquote>
-<h1><span id="te-bie-pai-xu">特别排序</span></h1><h2><span id="179-zui-da-shu">🟡179. 最大数</span></h2><blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums){</span><br><span class="line">        <span class="comment">// 找到数组中的最小值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> Arrays.stream(nums).min().getAsInt();</span><br><span class="line">        <span class="keyword">if</span>(min&lt;<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">                nums[i]-=min;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 找到数组中的最大值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> Arrays.stream(nums).max().getAsInt();</span><br><span class="line">        <span class="comment">// 计算最大值的位数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">digits</span> <span class="operator">=</span> String.valueOf(max).length();</span><br><span class="line">        <span class="comment">// 进行 digits 轮计数排序</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; digits; i++) {</span><br><span class="line">            nums = countingSort(nums, i);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(min&lt;<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">                nums[i]+=min;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span>[] countingSort(<span class="type">int</span>[] nums, <span class="type">int</span> digit) {</span><br><span class="line">        <span class="comment">// 创建计数数组</span></span><br><span class="line">        <span class="type">int</span>[] count = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>];</span><br><span class="line">        <span class="comment">// 统计每个数字的出现次数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) {</span><br><span class="line">            <span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> (<span class="type">int</span>)(num / Math.pow(<span class="number">10</span>, digit)) % <span class="number">10</span>;</span><br><span class="line">            count[d]++;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 将计数数组转换为前缀和数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; count.length; i++) {</span><br><span class="line">            count[i] += count[i - <span class="number">1</span>];</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 创建临时数组存储排序后的结果</span></span><br><span class="line">        <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[nums.length];</span><br><span class="line">        <span class="comment">// 将元素按照计数数组的前缀和分配到临时数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> nums.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) {</span><br><span class="line">            <span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> (<span class="type">int</span>)(nums[i] / Math.pow(<span class="number">10</span>, digit)) % <span class="number">10</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> count[d] - <span class="number">1</span>;</span><br><span class="line">            res[index] = nums[i];</span><br><span class="line">            count[d]--;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="te-bie-pai-xu"><span id="head31"> 特别排序</span></span></h1><h2><span id="179-zui-da-shu"><span id="head32">🟡179. 最大数</span></span></h2><blockquote>
 <p>给定一组非负整数 <code>nums</code>，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。</p>
 <p><strong>注意：</strong>输出结果可能非常大，所以你需要返回一个字符串而不是整数。</p>
 <p><strong>示例 1：</strong></p>

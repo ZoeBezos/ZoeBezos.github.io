@@ -15,7 +15,7 @@
 
 
 
-<title>🔸381th LeetCode Weekly Contest | ZOE&#39;s site</title>
+<title>🔹381th LeetCode Weekly Contest | ZOE&#39;s site</title>
 
 
 
@@ -418,7 +418,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">🔸381th LeetCode Weekly Contest</h1>
+            <h1 class="post-title">🔹381th LeetCode Weekly Contest</h1>
             
                 <div class="post-meta">
                     
@@ -458,28 +458,33 @@
             <table>
 <thead>
 <tr>
-<th>题号</th>
-<th>标签</th>
+<th></th>
+<th>problem</th>
+<th>tag</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><a href="#head1">🟢3014输入单词需要的最少按键次数 I</a></td>
-<td>找规律</td>
+<td>✅</td>
+<td><a href="#head1">🟢</a>输入单词需要的最少按键次数 I</td>
+<td>array string greedy</td>
 </tr>
 <tr>
-<td><a href="#head2">🟡3016. 输入单词需要的最少按键次数 II</a></td>
-<td>哈希表的排序</td>
+<td>✅</td>
+<td><a href="#head2">🟡 </a>输入单词需要的最少按键次数 II</td>
+<td>greedy hash-table string counting sorting</td>
 </tr>
 <tr>
-<td><a href="#head3">🟡3015. 按距离统计房屋对数目 I</a></td>
 <td></td>
+<td><a href="#head3">🟡</a>按距离统计房屋对数目 I</td>
+<td>BFS graph prefix-sum</td>
 </tr>
 <tr>
-<td><a href="#head4">🔴3017. 按距离统计房屋对数目 II</a></td>
 <td></td>
+<td><a href="#head4">🔴</a>按距离统计房屋对数目 II</td>
+<td>BFS graph prefix-sum</td>
 </tr>
 </tbody></table>
-<h1><span id="3014-shu-ru-dan-ci-xu-yao-de-zui-shao-an-jian-ci-shu-i"><span id="head1"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-pushes-to-type-word-i/">🟢3014输入单词需要的最少按键次数 I</a></span></span></h1><blockquote>
+<h1><span id="shu-ru-dan-ci-xu-yao-de-zui-shao-an-jian-ci-shu-i"><span id="head1">🟢输入单词需要的最少按键次数 I</span></span></h1><blockquote>
 <p>给你一个字符串 <code>word</code>，由 <strong>不同</strong> 小写英文字母组成。</p>
 <p>电话键盘上的按键与 <strong>不同</strong> 小写英文字母集合相映射，可以通过按压按键来组成单词。例如，按键 <code>2</code> 对应 <code>["a","b","c"]</code>，我们需要按一次键来输入 <code>"a"</code>，按两次键来输入 <code>"b"</code>，按三次键来输入 <code>"c"</code><em>。</em></p>
 <p>现在允许你将编号为 <code>2</code> 到 <code>9</code> 的按键重新映射到 <strong>不同</strong> 字母集合。每个按键可以映射到 <strong>任意数量</strong> 的字母，但每个字母 <strong>必须</strong> <strong>恰好</strong> 映射到 <strong>一个</strong> 按键上。你需要找到输入字符串 <code>word</code> 所需的 <strong>最少</strong> 按键次数。</p>
@@ -503,7 +508,7 @@
 </blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minimumPushes</span><span class="params">(String word)</span> {</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; word.length(); i++) {</span><br><span class="line">            res+=i/<span class="number">8</span>+<span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h1><span id="3016-shu-ru-dan-ci-xu-yao-de-zui-shao-an-jian-ci-shu-ii"><span id="head2"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-pushes-to-type-word-ii/">🟡3016. 输入单词需要的最少按键次数 II</a></span></span></h1><blockquote>
+<h1><span id="shu-ru-dan-ci-xu-yao-de-zui-shao-an-jian-ci-shu-ii"><span id="head2">🟡输入单词需要的最少按键次数 II</span></span></h1><blockquote>
 <p>给你一个字符串 <code>word</code>，由 <strong>不同</strong> 小写英文字母组成。</p>
 <p>电话键盘上的按键与 <strong>不同</strong> 小写英文字母集合相映射，可以通过按压按键来组成单词。例如，按键 <code>2</code> 对应 <code>["a","b","c"]</code>，我们需要按一次键来输入 <code>"a"</code>，按两次键来输入 <code>"b"</code>，按三次键来输入 <code>"c"</code><em>。</em></p>
 <p>现在允许你将编号为 <code>2</code> 到 <code>9</code> 的按键重新映射到 <strong>不同</strong> 字母集合。每个按键可以映射到 <strong>任意数量</strong> 的字母，但每个字母 <strong>必须</strong> <strong>恰好</strong> 映射到 <strong>一个</strong> 按键上。你需要找到输入字符串 <code>word</code> 所需的 <strong>最少</strong> 按键次数。</p>
@@ -530,7 +535,7 @@
 </blockquote>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minimumPushes</span><span class="params">(String word)</span> {</span><br><span class="line">        Map&lt;Character,Integer&gt;cnt=<span class="keyword">new</span> <span class="title class_">TreeMap</span>&lt;&gt;();</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; word.length(); i++) {</span><br><span class="line">            <span class="type">char</span> key=word.charAt(i);</span><br><span class="line">            cnt.put(key,cnt.getOrDefault(key,<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        List&lt;Map.Entry&lt;Character,Integer&gt;&gt;list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(cnt.entrySet());</span><br><span class="line">        Collections.sort(list, <span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Map.Entry&lt;Character, Integer&gt;&gt;() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Map.Entry&lt;Character, Integer&gt; o1, Map.Entry&lt;Character, Integer&gt; o2)</span> {</span><br><span class="line">                <span class="keyword">return</span> o2.getValue()-o1.getValue();</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt; list.size();i++) {</span><br><span class="line">            res+=list.get(i).getValue()*(i/<span class="number">8</span>+<span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h1><span id="3015-an-ju-chi-tong-ji-fang-wu-dui-shu-mu-i"><span id="head3"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-the-number-of-houses-at-a-certain-distance-i/">🟡3015. 按距离统计房屋对数目 I</a></span></span></h1><blockquote>
+<h1><span id="an-ju-chi-tong-ji-fang-wu-dui-shu-mu-i"><span id="head3">🟡按距离统计房屋对数目 I</span></span></h1><blockquote>
 <p>给你三个 <strong>正整数</strong> <code>n</code> 、<code>x</code> 和 <code>y</code> 。</p>
 <p>在城市中，存在编号从 <code>1</code> 到 <code>n</code> 的房屋，由 <code>n</code> 条街道相连。对所有 <code>1 &lt;= i &lt; n</code> ，都存在一条街道连接编号为 <code>i</code> 的房屋与编号为 <code>i + 1</code> 的房屋。另存在一条街道连接编号为 <code>x</code> 的房屋与编号为 <code>y</code> 的房屋。</p>
 <p>对于每个 <code>k</code>（<code>1 &lt;= k &lt;= n</code>），你需要找出所有满足要求的 <strong>房屋对</strong> <code>[house1, house2]</code> ，即从 <code>house1</code> 到 <code>house2</code> 需要经过的 <strong>最少</strong> 街道数为 <code>k</code> 。</p>
@@ -554,7 +559,7 @@
 <li><code>1 &lt;= x, y &lt;= n</code></li>
 </ul>
 </blockquote>
-<h1><span id="3017-an-ju-chi-tong-ji-fang-wu-dui-shu-mu-ii"><span id="head4"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-the-number-of-houses-at-a-certain-distance-ii/">🔴3017. 按距离统计房屋对数目 II</a></span></span></h1><blockquote>
+<h1><span id="an-ju-chi-tong-ji-fang-wu-dui-shu-mu-ii"><span id="head4">🔴按距离统计房屋对数目 II</span></span></h1><blockquote>
 <p>给你三个 <strong>正整数</strong> <code>n</code> 、<code>x</code> 和 <code>y</code> 。</p>
 <p>在城市中，存在编号从 <code>1</code> 到 <code>n</code> 的房屋，由 <code>n</code> 条街道相连。对所有 <code>1 &lt;= i &lt; n</code> ，都存在一条街道连接编号为 <code>i</code> 的房屋与编号为 <code>i + 1</code> 的房屋。另存在一条街道连接编号为 <code>x</code> 的房屋与编号为 <code>y</code> 的房屋。</p>
 <p>对于每个 <code>k</code>（<code>1 &lt;= k &lt;= n</code>），你需要找出所有满足要求的 <strong>房屋对</strong> <code>[house1, house2]</code> ，即从 <code>house1</code> 到 <code>house2</code> 需要经过的 <strong>最少</strong> 街道数为 <code>k</code> 。</p>
