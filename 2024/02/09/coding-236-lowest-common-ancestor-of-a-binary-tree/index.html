@@ -15,7 +15,7 @@
 
 
 
-<title>Divide &amp; Conquer | ZOE&#39;s site</title>
+<title>🟡236.lowest common ancestor of a binary tree | ZOE&#39;s site</title>
 
 
 
@@ -418,7 +418,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Divide &amp; Conquer</h1>
+            <h1 class="post-title">🟡236.lowest common ancestor of a binary tree</h1>
             
                 <div class="post-meta">
                     
@@ -427,25 +427,16 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">January 31, 2024&nbsp;&nbsp;16:06:12</a>
+                        Date: <a href="#">February 9, 2024&nbsp;&nbsp;2:06:04</a>
                         </span>
                     
-                    
-
-                        <span class="post-category">                        
-                            Category:                        
-                                                    
-                            <a href="/categories/algorithm-learning/">algorithm learning</a>
-                            
-                        </span>
-
                     
 
                     
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">208</a>                         
+                            <a href="">498</a>                         
                         </span>
                         
                     
@@ -454,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">1min</a>                         
+                            <a href="">2min</a>                         
                         </span>
                         
                     
@@ -464,74 +455,46 @@
         </header>
 
         <div class="post-content">
-            <table>
-<thead>
-<tr>
-<th>类型</th>
-<th>编号</th>
-<th>题号</th>
-<th>完成</th>
-<th>标签</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="#head1"> 分解问题</a></td>
-<td>1</td>
-<td><a href="#head2">🟢169. 多数元素</a></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>2</td>
-<td><a href="#head3">🔴4. 寻找两个正序数组的中位数</a></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>3</td>
-<td><a href="#head4">🟢543. 二叉树的直径</a></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#head5"> 解决子问题</a></td>
-<td>4</td>
-<td><a href="#head6"> 🟢69. x 的平方根</a></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>5</td>
-<td><a href="#head7">🟡53. 最大子数组和</a></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>6</td>
-<td><a href="#head8">🟡34. 在排序数组中查找元素的第一个和最后一个位置</a></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#head9"> 合并结果</a></td>
-<td>7</td>
-<td><a href="#head10">🔴23. 合并 K 个升序链表</a></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>8</td>
-<td><a href="#head11">🟡1277. 统计全为 1 的正方形子矩阵</a></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<h1><span id="fen-jie-wen-ti"><span id="head1"> 分解问题</span></span></h1><h2><span id="169-duo-shu-yuan-su"><span id="head2">🟢169. 多数元素</span></span></h2><h2><span id="4-xun-zhao-liang-ge-zheng-xu-shu-zu-de-zhong-wei-shu"><span id="head3">🔴4. 寻找两个正序数组的中位数</span></span></h2><h2><span id="543-er-cha-shu-de-zhi-jing"><span id="head4">🟢543. 二叉树的直径</span></span></h2><h1><span id="jie-jue-zi-wen-ti"><span id="head5"> 解决子问题</span></span></h1><h2><span id="69-x-de-ping-fang-gen"><span id="head6"> 🟢69. x 的平方根</span></span></h2><h2><span id="53-zui-da-zi-shu-zu-he"><span id="head7">🟡53. 最大子数组和</span></span></h2><h2><span id="34-zai-pai-xu-shu-zu-zhong-cha-zhao-yuan-su-de-di-yi-ge-he-zui-hou-yi-ge-wei-zhi"><span id="head8">🟡34. 在排序数组中查找元素的第一个和最后一个位置</span></span></h2><h1><span id="he-bing-jie-guo"><span id="head9"> 合并结果</span></span></h1><h2><span id="23-he-bing-k-ge-sheng-xu-lian-biao"><span id="head10">🔴23. 合并 K 个升序链表</span></span></h2><h2><span id="1277-tong-ji-quan-wei-1-de-zheng-fang-xing-zi-ju-zhen"><span id="head11">🟡1277. 统计全为 1 的正方形子矩阵</span></span></h2>
+            <h1><span id="ti-mu-miao-shu">题目描述</span></h1><blockquote>
+<p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/8918834?fr=aladdin">百度百科</a>中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（<strong>一个节点也可以是它自己的祖先</strong>）。”</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2018/12/14/binarytree.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1</span><br><span class="line">输出：3</span><br><span class="line">解释：节点 5 和节点 1 的最近公共祖先是节点 3 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2018/12/14/binarytree.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4</span><br><span class="line">输出：5</span><br><span class="line">解释：节点 5 和节点 4 的最近公共祖先是节点 5 。因为根据定义最近公共祖先节点可以为节点本身。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,2], p = 1, q = 2</span><br><span class="line">输出：1</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>树中节点数目在范围 <code>[2, 105]</code> 内。</li>
+<li><code>-109 &lt;= Node.val &lt;= 109</code></li>
+<li>所有 <code>Node.val</code> <code>互不相同</code> 。</li>
+<li><code>p != q</code></li>
+<li><code>p</code> 和 <code>q</code> 均存在于给定的二叉树中。</li>
+</ul>
+</blockquote>
+<h1><span id="jie-da">解答</span></h1><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> LinkedList&lt;TreeNode&gt; l=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">static</span> LinkedList&lt;TreeNode&gt; l1,l2;</span><br><span class="line">    <span class="keyword">static</span> TreeNode <span class="title function_">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> {</span><br><span class="line">        l.add(root);</span><br><span class="line">        backTracking(root,p,<span class="number">0</span>);</span><br><span class="line">        backTracking(root,q,<span class="number">1</span>);</span><br><span class="line">        <span class="type">int</span> index=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(index&lt; l1.size()</span><br><span class="line">                &amp;&amp;index&lt;l2.size()</span><br><span class="line">                &amp;&amp;l1.get(index)==l2.get(index)){</span><br><span class="line">            index++;</span><br><span class="line">        }</span><br><span class="line">        Stack&lt;TreeNode&gt;s=<span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        s.push(root);</span><br><span class="line">        <span class="keyword">while</span>(!s.isEmpty()){</span><br><span class="line">            TreeNode node=s.pop();</span><br><span class="line">            <span class="keyword">if</span>(node==l1.get(index-<span class="number">1</span>)){</span><br><span class="line">                <span class="keyword">return</span> node;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(node.right!=<span class="literal">null</span>){</span><br><span class="line">                s.push(node.right);</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(node.left!=<span class="literal">null</span>){</span><br><span class="line">                s.push(node.left);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">backTracking</span><span class="params">(TreeNode root, TreeNode node,<span class="type">int</span> num)</span>{</span><br><span class="line">        <span class="keyword">if</span>(root==node){</span><br><span class="line">            <span class="keyword">if</span>(num==<span class="number">0</span>){</span><br><span class="line">                l1= (LinkedList) l.clone();</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                l2= (LinkedList) l.clone();</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(root.left!=<span class="literal">null</span>){</span><br><span class="line">            l.add(root.left);</span><br><span class="line">            backTracking(root.left,node,num);</span><br><span class="line">            l.removeLast();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(root.right!=<span class="literal">null</span>){</span><br><span class="line">            l.add(root.right);</span><br><span class="line">            backTracking(root.right,node,num);</span><br><span class="line">            l.removeLast();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(n)</em></p>
+</li>
+<li><p>space:<em>O(n)</em></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> {</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">null</span> || root == p || root == q)</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">left</span> <span class="operator">=</span> lowestCommonAncestor(root.left, p, q);</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">right</span> <span class="operator">=</span> lowestCommonAncestor(root.right, p, q);</span><br><span class="line">        <span class="keyword">if</span> (left != <span class="literal">null</span> &amp;&amp; right != <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        <span class="keyword">return</span> left != <span class="literal">null</span> ? left : right;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(n)</em></p>
+</li>
+<li><p>space:<em>O(n)</em></p>
+</li>
+</ul>
+
         </div>
 
 
