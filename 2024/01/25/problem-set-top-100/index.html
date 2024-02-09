@@ -348,72 +348,6 @@
                 <div class="container">
     
     
-        <div class="post-toc">
-    <div class="tocbot-list">
-    </div>
-    <div class="tocbot-list-menu">
-        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-    </div>
-</div>
-
-<script>
-    var tocbot_timer;
-    var DEPTH_MAX = 6; // 为 6 时展开所有
-    var tocbot_default_config = {
-        tocSelector: '.tocbot-list',
-        contentSelector: '.post-content',
-        headingSelector: 'h1, h2, h3, h4, h5',
-        orderedList: false,
-        scrollSmooth: true,
-        onClick: extend_click,
-    };
-
-    function extend_click() {
-        clearTimeout(tocbot_timer);
-        tocbot_timer = setTimeout(function() {
-            tocbot.refresh(obj_merge(tocbot_default_config, {
-                hasInnerContainers: true
-            }));
-        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
-    }
-
-    document.ready(function() {
-        tocbot.init(obj_merge(tocbot_default_config, {
-            collapseDepth: 1
-        }));
-    });
-
-    function expand_toc() {
-        var b = document.querySelector('.tocbot-toc-expand');
-        var expanded = b.getAttribute('data-expanded');
-        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
-        tocbot.refresh(obj_merge(tocbot_default_config, {
-            collapseDepth: expanded ? 1 : DEPTH_MAX
-        }));
-        b.innerText = expanded ? 'Expand all' : 'Collapse all';
-    }
-
-    function go_top() {
-        window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-    function obj_merge(target, source) {
-        for (var item in source) {
-            if (source.hasOwnProperty(item)) {
-                target[item] = source[item];
-            }
-        }
-        return target;
-    }
-</script>
-
-    
 
     
     <article class="post-wrap">
@@ -445,7 +379,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">48</a>                         
+                            <a href="">17</a>                         
                         </span>
                         
                     
@@ -464,7 +398,18 @@
         </header>
 
         <div class="post-content">
-            <h1><span id="ha-xi">哈希</span></h1><h1><span id="shuang-zhi-zhen">双指针</span></h1><h1><span id="hua-dong-chuang-kou">滑动窗口</span></h1><h1><span id="zi-chuan">子串</span></h1><h1><span id="pu-tong-shu-zu">普通数组</span></h1><h1><span id="ju-zhen">矩阵</span></h1><h1><span id="lian-biao">链表</span></h1><h1><span id="er-cha-shu">二叉树</span></h1><h1><span id="tu-lun">图论</span></h1><h1><span id="hui-su">回溯</span></h1><h1><span id="er-fen-cha-zhao">二分查找</span></h1><h1><span id="zhan">栈</span></h1><h1><span id="dui">堆</span></h1><h1><span id="tan-xin-suan-fa">贪心算法</span></h1><h1><span id="dong-tai-gui-hua">动态规划</span></h1><h1><span id="duo-wei-dong-tai-gui-hua">多维动态规划</span></h1><h1><span id="ji-qiao">技巧</span></h1>
+            <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Sorry, the password you entered is wrong. Please check it and enter it again." data-whm="Sorry, the current article cannot be checked, but you can still take a look at the decrypted content.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="89c5e1bca9be1476fb964f64769b2cb929740d98f6b9c6dca060436675616ec8">9ab8eeb89182dbd47bc9c58c85287dafab1f550aa59fc36539a53cf1c54e13569179b4689faff99a9d2e72d9a09e102c1fbbe80be766d47096c771b197f17507076bd86c8e19be5b05507f9f86ce738714ae780b55dc82387ad89d8271227c8f561daa569155b878ce60a5cbc16bcf4de1e9b2d8a60f506ace846230443bc4bce363ff762d52899b6f45fc44ff42aad8aca5e20bfdbfebb99c2bccfbff0f4ca7db39a814c7495f08601c08f9be8b1d6936f08636fe21aa3f2e72ab218f037a8a329291455f9fa42bc091f53f8f36d8366d01293c6fb8557b6bbd2b048e9b76886a86d6cc4e303038f7583689aec484edfe7621690ecd1eb4e6b3f31fae2b447edc4cc792dcd08ce8fda297d3a8c809e6c011931269912beef34e98a81f0d6aa89c79bb472f8b607b7e05911cc07b04f987c844a7c6b369975e047e95a7f52cc1f0b283de35bd44f8e54396fb29bdac79f7f76b1378e95305903f6c6ad14a6358f556ffa576d929012a20e1d1ebf585e762beda0e60ffe2825dc550288f0168fe5a161930099f60ef747b367b580d5302c4fe76a54641440ba24d3c0c102a378896d0040c525a41088330b456f41373325e1466362ac263c086461905f5739f4bccd406e230360b56d8d9076dd56be3e5b8874d2b69187174f30d145521e565618b2c5edda0b012786a3c2a2490db0bbc526de8b1df286b3c755852f9e85f96c5fde6d79e82a6c778529bc2d55ecb4a98eec66e3f706e8e5b83cd38952946330cfda1d9ce85d18bb88b73fe4da914afac66f57b0107cf7991da3817db37cb6fe0c64cbf4e9cd31e6584df370fa34f0d2ff203e644707e64b13d2d2a9e4cc784458519a769f26fb293b42f4e5c758f7b301295bcf646b0add71da9e5a73d1e9b3cdbd4023a907049f8f4e098a5f76f00a6c4ba7437ac6c098a50e558873ab1940fd1eba3d5278921deb3b8de55e79491408389b47ff0299182fa5bfabea611062d7ca86ff90559b401434b8b965c810f8e929970f9dc57c79f06dd71a5664fed2c782e2081102b9bc137c5be89ceb6b43a1bf0e7daeadaf7e2875b4eddb782f9c77dcf0826a6c37f6575538886dbdec073a36359e429253e1165d81f66b4555d4f0d9aa3ea0d9ed5e111dccd3ca8748d8ae0b2cc4b483e92bdba82003388d81b89b4be69b6dd1c61c4e1e63e61e097b0a634db86541d60d0dfad2f4b24759f86c7cf139c77ebd131847135884bfe5ce9d0542c69a9c43f615a1c6404971ba92e079eed6810106693d7ae60ef13d72c91526315a6b7f9c07e16b9f974b82929ef8160d667adc1e91d487a7b4f8d11f7608842bab6e1a2bff503999a2f032d97a31e5f7cdc98637022ca2fe2380d936ed17d96fc03c9aa7dbb75e246d035228d3bbc9b56ad73f9c0ac2f0fb74548f491a061154555794024b09ea3073b1dd4cde20e</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">The current article is not visible to the public, please enter the password and check it!</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
         </div>
 
 

@@ -348,72 +348,6 @@
                 <div class="container">
     
     
-        <div class="post-toc">
-    <div class="tocbot-list">
-    </div>
-    <div class="tocbot-list-menu">
-        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-    </div>
-</div>
-
-<script>
-    var tocbot_timer;
-    var DEPTH_MAX = 6; // 为 6 时展开所有
-    var tocbot_default_config = {
-        tocSelector: '.tocbot-list',
-        contentSelector: '.post-content',
-        headingSelector: 'h1, h2, h3, h4, h5',
-        orderedList: false,
-        scrollSmooth: true,
-        onClick: extend_click,
-    };
-
-    function extend_click() {
-        clearTimeout(tocbot_timer);
-        tocbot_timer = setTimeout(function() {
-            tocbot.refresh(obj_merge(tocbot_default_config, {
-                hasInnerContainers: true
-            }));
-        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
-    }
-
-    document.ready(function() {
-        tocbot.init(obj_merge(tocbot_default_config, {
-            collapseDepth: 1
-        }));
-    });
-
-    function expand_toc() {
-        var b = document.querySelector('.tocbot-toc-expand');
-        var expanded = b.getAttribute('data-expanded');
-        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
-        tocbot.refresh(obj_merge(tocbot_default_config, {
-            collapseDepth: expanded ? 1 : DEPTH_MAX
-        }));
-        b.innerText = expanded ? 'Expand all' : 'Collapse all';
-    }
-
-    function go_top() {
-        window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-    function obj_merge(target, source) {
-        for (var item in source) {
-            if (source.hasOwnProperty(item)) {
-                target[item] = source[item];
-            }
-        }
-        return target;
-    }
-</script>
-
-    
 
     
     <article class="post-wrap">
@@ -445,7 +379,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">268</a>                         
+                            <a href="">17</a>                         
                         </span>
                         
                     
@@ -464,85 +398,18 @@
         </header>
 
         <div class="post-content">
-            <p><img src="/2024/01/27/java-collection-linkedlist/image-20240127190349455.png" alt="image-20240127190349455"></p>
-<h1><span id="shi-xian-de-jie-kou">实现的接口</span></h1><table>
-<thead>
-<tr>
-<th>接口名</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>List<e></e></td>
-<td>表明它是一个列表，支持添加、删除、查找等操作，并且可以通过下标进行访问</td>
-</tr>
-<tr>
-<td>Deque<e></e></td>
-<td>继承自 <code>Queue</code> 接口，具有双端队列的特性，支持从两端插入和删除元素，方便实现栈和队列等数据结构</td>
-</tr>
-<tr>
-<td>Cloneable</td>
-<td>表明它具有拷贝能力，可以进行深拷贝或浅拷贝操作</td>
-</tr>
-<tr>
-<td>java.io.Serializable</td>
-<td>表明它可以进行序列化操作，也就是可以将对象转换为字节流进行持久化存储或网络传输，非常方便</td>
-</tr>
-</tbody></table>
-<h1><span id="cheng-yuan-bian-liang">成员变量</span></h1><table>
-<thead>
-<tr>
-<th>是否可变(final)</th>
-<th>成员变量名</th>
-<th>变量类型</th>
-<th>含义</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>🔒</td>
-<td>serialVersionUID</td>
-<td>long</td>
-<td>用于序列化版本管理</td>
-<td>8683452581122892189L</td>
-</tr>
-<tr>
-<td>🔒</td>
-<td>DEAFAULT_CAPACITY</td>
-<td>int</td>
-<td>默认初始容量大小</td>
-<td>10</td>
-</tr>
-<tr>
-<td>🔒</td>
-<td>EMPTY_ELEMENTDATA</td>
-<td>Object[]</td>
-<td>空数组（用于空实例）</td>
-<td>{}</td>
-</tr>
-<tr>
-<td>🔒</td>
-<td>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</td>
-<td>Object[]</td>
-<td>用于默认大小空实例的共享空数组实例。    把它从EMPTY_ELEMENTDATA数组中区分出来，以知道在添加第一个元素时容量需要增加多少</td>
-<td>{}</td>
-</tr>
-<tr>
-<td>🔓</td>
-<td>elementData</td>
-<td>Object[]</td>
-<td>保存ArrayList数据的数组</td>
-<td></td>
-</tr>
-<tr>
-<td>🔓</td>
-<td>size</td>
-<td>int</td>
-<td>Array</td>
-<td></td>
-</tr>
-</tbody></table>
-
+            <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Sorry, the password you entered is wrong. Please check it and enter it again." data-whm="Sorry, the current article cannot be checked, but you can still take a look at the decrypted content.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="7bd3edbb58a7cd3ba269d2419cedf2cb84c11960a5218de48303e73e63f93cfe">9ab8eeb89182dbd47bc9c58c85287dafab1f550aa59fc36539a53cf1c54e13569179b4689faff99a9d2e72d9a09e102c1fbbe80be766d47096c771b197f17507076bd86c8e19be5b05507f9f86ce738714ae780b55dc82387ad89d8271227c8f561daa569155b878ce60a5cbc16bcf4de1e9b2d8a60f506ace846230443bc4bce363ff762d52899b6f45fc44ff42aad8aca5e20bfdbfebb99c2bccfbff0f4ca7db39a814c7495f08601c08f9be8b1d6936f08636fe21aa3f2e72ab218f037a8a329291455f9fa42bc091f53f8f36d8366378e0e7b14481264f49f506e9450e44a8c646346c5f672264fe6e6f1dfda6c16992861b4b3232a7114f27b606852e306d11080fbb88239c97d844e764826c6d2b0598552ef10deb44e25d15e85452f3aa49d646deb64818c5b0e55ec1842fbbbf93cff0797e71c5f8f8bb85da2ee7b17ddb11691043e9a3b6e27c96f3e7caa0e97239e3e478b7c74193664ed1fd20b5e9eddd88a9568094bdc785c2fc23f472428d8dba6a7308a0cce52d17fb6e8de22be7a31744cf12e50af4d7d4bd37ca821ca252e5229bf69cd432809b0b97745215a932afd76471ce3eefca985c1712f80e2547c2df8cbea65100ee3d86245a6852f0472eff72a83da0ece70326395f90ceb32852951d86fd4d23636ac7d8cab41ad7679c0e82a58cf3319b38c1ed2afd84b02c811fb1f18e076ce0f170afaa0ae59ffd7714ffd77be15ed74ac2ce4c33940932a37e1732f5980dc7d1fc331867260b49cba72e148883a7e15463a3b0d20b9e477aa525fe5fefae9cb89f5b47fce5e6eb06ec2453243000eb913fb58d756368a7802c5fd6cb72d4562d6f9b550c352d405d2e0ee85ce4e85cd24221e1d26f3c9f8db5956a8527953046af84ba946db033807e9c636551bfeae36f7276c6d6d189fa37d58f881b54cb79f03a3ed6cc9769c4e2a3d272cb282dd68536d2e58023cd589a7c9c392d63706ba79afba0f5712d3b00ce111a9b33fd2fd002a5ebb6ea1573f940e23d6893713c0a0184c89f81df1bc352657431245e3488b681887a7ee18b69a527c6ef168a7be6299cf16c0b633aa051e7204b2e97ffe048dd147430958f0a62aef9536fab931e49e3b3b523f9ec1506c542224778ad33142c1a519e88fdc04b19e68176caaa64e7b9f98d17a3444c11d016d7399cfd39c226387fbbffa2b2d9bff1540d5a339a35a0e78238289b17409a7a2deb53931e4d37d21289e4c81c29b71b63a6b57f0089d7d44994b74571793d9e719b4d3f20b4fc55400c9cfe96a0cd9550a367f2d9e73a80a0d935f60cfaecc9686e0d6f4ea7a30e673a6ed7de5abe6312ba2fee844c315ae89e63d9887d374aadc09cb61ee4dd281aa86dc1e08d03af91030e8653c5a43bcac4a8543e649a3c7467bb167a8aefccadd967d48099a9bf6e5c1718df4be054a8b94d0172b297066a3c240bb88c006485fc46ed827d7444bb54813e8a3acff3b8a730c258f1d2fb0bf7f0649c03975565f4a990ab99ff948689bb32ab12361d2bc1fd6bb767fced02a08df4729bcec21a8221850bd5140d3757e05ea244047e007a8bcd72d6dd79a1a06e800cb11dd976a398939c1ffd84656a77d6c339c62121cad6a224ecf13735b2029f1dce3260168a67850bdaf7ee8d38005246bcff5cfa99e7915d73bd05223958d4f6f6a06914ef2eb7126b3c04a6d00dfed75b690fd93a0c080445342c50a705e7dc6cc7f8be9cdfa3f323c933d564c4e1e3e326150fe9bf7f691cbbab011025f6d81bc2944dedf25912b1bec70c0c0882a0ae1d28c457e8908a8ecdbd3e7fdb6f251f70c8e686a4647c77884851b6dc9a04b430ef0bcde9d7952fbd506764194dcb204cd0fa73b24000fd00914963147a93856033eef081e3e45acd2c2177a3aa567456671b4e8edb6face0872c1b9d01f0b9618f727a7c249aba0c882095b2d4520c6d5aa29fbd39df45633c1a678a026c2e99771e4d097f367eb14e2e3adb09efedfb2c43941f068404c0baac4303c6f87ac8649bf698bd68239a57470b97848f734bd1ed5b88f14ac8800978ac45a0f0b893f85785b85775728b7f20ba98c4cbf2924d15d8797f6401bb4798b9b2bcd8b18b5016110eab205588f224189215301b8fe36d0867b64ef3d5c592d2c4e809298aa744bb8e07ed79a950e378532cdbb2045abaad65dc67c1ff0a76f606e52e05ad47b601fc70928847ecaa12064ce76213458fc7a8a4e37a8e41030d20038070d6bebb51a7818695988d5f6edcffd7cb552ef59af23d9cbd3f7e3d452edcc7d9d38483bea224e5b3d30bb045ce8ac3e48d9e758569453a2ca0c769588ee29903e81337e9292c33115149afba216ef1b75548eb873ab035fe761de0b5b5001397c2e17d1aa350805fe55d647c3d1454561d90e6f9de4e2cd99c07f2227727ed8d87d05a209ddd20fb3f32299c345faa6fd427e86c5680dba936a1cfd2f1e7847a5416b6afa8c45615ab8a2fe0e7497fa2bc0d7070c7fe0bafaf1ad9db2b59e1f83cd7fac2dcb7f31761580049d800f3fca8492536e9c6542929a15b292ac7345b207a1dbe2220b21d7732cc468b7aa45e44c8a0ad6efd8c0a5e9a06204bba37aedd9bc220574acb8b9670c928a7d22897ad8ba3364647838ea8d319cb939c670688da8bc9d4d2bdfd76ed4dc170db3e8ce12a4aacf72963cb06416154240f2b6be94353022811648a56f62fe2b4b5d3baaf45202687623a44018097a64541b43d65b35fd50837743fca7855b4081279400419a41cea0cc1fe6719bbc394bc5886ce34ceef5e677057b27b3f02c3e9ed4ce0c6032b62a8ce42afa2326343d90c27d08e35f2734fd16e742e07bddfd6d08c5a4ff475d66d29c9e102330a2b09b8e2f3c21c5f04b160f220c29af43d43e036451094eccb372d60838cc31393f2b943ba9f8501148b8b41fc731fd93bbf22383e0d85e955789a702158914e263080020f6f44698d2c17d772d109a84873fdf6f0f47236f3b813c0d08ef35aa1c6ce5dc4be19f1f36fd9b6c807d67f6d2d06caa7b8853a19d769d796db79a606a822cdb6dc</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">The current article is not visible to the public, please enter the password and check it!</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
         </div>
 
 

@@ -348,72 +348,6 @@
                 <div class="container">
     
     
-        <div class="post-toc">
-    <div class="tocbot-list">
-    </div>
-    <div class="tocbot-list-menu">
-        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-    </div>
-</div>
-
-<script>
-    var tocbot_timer;
-    var DEPTH_MAX = 6; // 为 6 时展开所有
-    var tocbot_default_config = {
-        tocSelector: '.tocbot-list',
-        contentSelector: '.post-content',
-        headingSelector: 'h1, h2, h3, h4, h5',
-        orderedList: false,
-        scrollSmooth: true,
-        onClick: extend_click,
-    };
-
-    function extend_click() {
-        clearTimeout(tocbot_timer);
-        tocbot_timer = setTimeout(function() {
-            tocbot.refresh(obj_merge(tocbot_default_config, {
-                hasInnerContainers: true
-            }));
-        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
-    }
-
-    document.ready(function() {
-        tocbot.init(obj_merge(tocbot_default_config, {
-            collapseDepth: 1
-        }));
-    });
-
-    function expand_toc() {
-        var b = document.querySelector('.tocbot-toc-expand');
-        var expanded = b.getAttribute('data-expanded');
-        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
-        tocbot.refresh(obj_merge(tocbot_default_config, {
-            collapseDepth: expanded ? 1 : DEPTH_MAX
-        }));
-        b.innerText = expanded ? 'Expand all' : 'Collapse all';
-    }
-
-    function go_top() {
-        window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-    function obj_merge(target, source) {
-        for (var item in source) {
-            if (source.hasOwnProperty(item)) {
-                target[item] = source[item];
-            }
-        }
-        return target;
-    }
-</script>
-
-    
 
     
     <article class="post-wrap">
@@ -445,7 +379,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">38</a>                         
+                            <a href="">17</a>                         
                         </span>
                         
                     
@@ -464,7 +398,18 @@
         </header>
 
         <div class="post-content">
-            <h1><span id="shu-zu-yu-zi-fu-chuan">数组与字符串</span></h1><h1><span id="lian-biao">链表</span></h1><h1><span id="zhan-yu-dui-lie">栈与队列</span></h1><h1><span id="shu-yu-tu">树与图</span></h1><h1><span id="wei-cao-zuo">位操作</span></h1><h1><span id="di-gui-yu-dong-tai-gui-hua">递归与动态规划</span></h1><h1><span id="pai-xu-yu-cha-zhao">排序与查找</span></h1><h1><span id="zhong-deng-nan-ti">中等难题</span></h1><h1><span id="gao-nan-du-ti">高难度题</span></h1>
+            <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Sorry, the password you entered is wrong. Please check it and enter it again." data-whm="Sorry, the current article cannot be checked, but you can still take a look at the decrypted content.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="c780c11405f32e5066230fc548102293a079f17376888415b6ada0968da3d668">9ab8eeb89182dbd47bc9c58c85287dafab1f550aa59fc36539a53cf1c54e13569179b4689faff99a9d2e72d9a09e102c1fbbe80be766d47096c771b197f17507076bd86c8e19be5b05507f9f86ce738714ae780b55dc82387ad89d8271227c8f561daa569155b878ce60a5cbc16bcf4de1e9b2d8a60f506ace846230443bc4bce363ff762d52899b6f45fc44ff42aad8aca5e20bfdbfebb99c2bccfbff0f4ca7db39a814c7495f08601c08f9be8b1d6936f08636fe21aa3f2e72ab218f037a8a329291455f9fa42bc091f53f8f36d8366d01293c6fb8557b6bbd2b048e9b76888eb7b9da6afef15a3223b2063a940f0dbb8141f75774113274b7f9fd4cf968791cea664b3da6af9a8e23c4a81c298e60b1e4414b4e059c7c88362740f5ad7960ba90191927b2157a8001e4dba51eee497e83be58adb644c7411ffa3b4a97d2e09ce02bc2318c85b7a17916ab99c14635fad86dfc353d6c88ecd078cf598e665cf700f2b86a3b3ea3207a2ed198e0d5205b74be3383d24963557a54e22e7c23affd6ab8296590ea2bff07bef34a82ab1b93b7e38c3045189bc99803c3555856d016d678a447b0c99d57307109f70bb9a86ebb4e8a044cac9da1ce1e0cb210e76818959cb53dcb2ed484be250b22e9f22164682f6b885f15baecbf9483cf218222dfed7ff76006ef8097fd7d574ff5095503e90f558fe2c8fc2704311b6c0472c4498eb0f753b96a96159cbf82c0b57baac18f78b7ec98c124834b5ab9a5c2fb1ae689959d02fe0e07efbb9ce6f57102533de43a496e44a3e6170f1973969321552c0746196d4d4bcba8fe42e3ea7e1a2f00d76652b606097058050ac1dad9882f1dba84a7aa1c0ac776d2071a384c04111039e63404ceb814f61bc98dfae7328bc414477a589c86ab93818d3dae307ecc84c1add6bada04d802504c55e84fc14ce2e4c0188901cd52fe7b6ad81b59a11c04fb8ec82bc11b0d97eeb0b7ce16d69c08431a77d788c534d5464bbdc4ada198</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">The current article is not visible to the public, please enter the password and check it!</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
         </div>
 
 
