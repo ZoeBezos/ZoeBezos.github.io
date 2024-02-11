@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2024/02/12/contest-weekly-384/</loc>
+    <lastmod>2024-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/02/04/contest-weekly-383/</loc>
+    <lastmod>2024-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/28/contest-weekly-382/</loc>
+    <lastmod>2024-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/21/contest-weekly-381/</loc>
+    <lastmod>2024-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/14/contest-weekly-380/</loc>
+    <lastmod>2024-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/02/03/contest-biweekly-123/</loc>
+    <lastmod>2024-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/20/contest-biweekly-122/</loc>
+    <lastmod>2024-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/04/algorithm-strings/</loc>
+    <lastmod>2024-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/02/12/coding-145-binary-tree-postorder-traversal/</loc>
+    <lastmod>2024-02-11</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2024/02/11/coding-144-binary-tree-preorder-traversal/</loc>
     <lastmod>2024-02-10</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/02/10/coding-94-binary-tree-inorder-traversal/</loc>
-    <lastmod>2024-02-09</lastmod>
+    <lastmod>2024-02-10</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/18/database-sql-free-50/</loc>
@@ -145,10 +181,6 @@
     <lastmod>2024-02-08</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/09/04/algorithm-strings/</loc>
-    <lastmod>2024-02-08</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2023/09/07/algorithm-tree&bitree/</loc>
     <lastmod>2024-02-08</lastmod>
   </url>
@@ -270,30 +302,6 @@
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/15/coding-82-remove-duplicates-from-sorted-list-ii/</loc>
-    <lastmod>2024-02-04</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/14/contest-weekly-380/</loc>
-    <lastmod>2024-02-04</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/02/03/contest-biweekly-123/</loc>
-    <lastmod>2024-02-04</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/02/04/contest-weekly-383/</loc>
-    <lastmod>2024-02-04</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/28/contest-weekly-382/</loc>
-    <lastmod>2024-02-04</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/21/contest-weekly-381/</loc>
-    <lastmod>2024-02-04</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/20/contest-biweekly-122/</loc>
     <lastmod>2024-02-04</lastmod>
   </url>
   <url>
