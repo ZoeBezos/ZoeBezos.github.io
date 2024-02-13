@@ -467,29 +467,29 @@
 <tbody><tr>
 <td>✅</td>
 <td>2</td>
-<td><a href="#head1">🟢</a>按键变更的次数</td>
+<td>🟢按键变更的次数</td>
 <td>string</td>
 </tr>
 <tr>
 <td></td>
 <td>4</td>
-<td><a href="#head2">🟡</a>子集中元素的最大数量</td>
+<td>🟡子集中元素的最大数量</td>
 <td>string array enum</td>
 </tr>
 <tr>
 <td></td>
 <td>5</td>
-<td><a href="#head3">🟡</a>Alice 和 Bob 玩鲜花游戏</td>
+<td>🟡Alice 和 Bob 玩鲜花游戏</td>
 <td>math</td>
 </tr>
 <tr>
 <td></td>
 <td>8</td>
-<td><a href="#head4">🔴</a>给定操作次数内使剩余元素的或值最小</td>
+<td>🔴给定操作次数内使剩余元素的或值最小</td>
 <td>array greedy bit-manipulation</td>
 </tr>
 </tbody></table>
-<h1><span id="an-jian-bian-geng-de-ci-shu"><span id="head1">🟢</span>按键变更的次数</span></h1><blockquote>
+<h1><span id="an-jian-bian-geng-de-ci-shu">🟢按键变更的次数</span></h1><blockquote>
 <p>给你一个下标从 <strong>0</strong> 开始的字符串 <code>s</code> ，该字符串由用户输入。按键变更的定义是：使用与上次使用的按键不同的键。例如 <code>s = "ab"</code> 表示按键变更一次，而 <code>s = "bBBb"</code> 不存在按键变更。</p>
 <p>返回用户输入过程中按键变更的次数。</p>
 <p><strong>注意：</strong><code>shift</code> 或 <code>caps lock</code> 等修饰键不计入按键变更，也就是说，如果用户先输入字母 <code>'a'</code> 然后输入字母 <code>'A'</code> ，不算作按键变更。</p>
@@ -509,7 +509,7 @@
 
 
 
-<h1><span id="zi-ji-zhong-yuan-su-de-zui-da-shu-liang"><span id="head1">🟡</span>子集中元素的最大数量</span></h1><blockquote>
+<h1><span id="zi-ji-zhong-yuan-su-de-zui-da-shu-liang">🟡子集中元素的最大数量</span></h1><blockquote>
 <p>给你一个 <strong>正整数</strong> 数组 <code>nums</code> 。</p>
 <p>你需要从数组中选出一个满足下述条件的</p>
 <p>子集</p>
@@ -530,14 +530,14 @@
 <li><code>1 &lt;= nums[i] &lt;= 109</code></li>
 </ul>
 </blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># &lt;span id=<span class="string">"head1"</span>&gt;🟡&lt;/span&gt;Alice 和 Bob 玩鲜花游戏</span><br><span class="line"></span><br><span class="line">&gt; Alice 和 Bob 在一个长满鲜花的环形草地玩一个回合制游戏。环形的草地上有一些鲜花，Alice 到 Bob 之间顺时针有 `x` 朵鲜花，逆时针有 `y` 朵鲜花。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 游戏过程如下：</span><br><span class="line">&gt;</span><br><span class="line">&gt; <span class="number">1.</span> Alice 先行动。</span><br><span class="line">&gt; <span class="number">2.</span> 每一次行动中，当前玩家必须选择顺时针或者逆时针，然后在这个方向上摘一朵鲜花。</span><br><span class="line">&gt; <span class="number">3.</span> 一次行动结束后，如果所有鲜花都被摘完了，那么 **当前** 玩家抓住对手并赢得游戏的胜利。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 给你两个整数 `n` 和 `m` ，你的任务是求出满足以下条件的所有 `(x, y)` 对：</span><br><span class="line">&gt;</span><br><span class="line">&gt; - 按照上述规则，Alice 必须赢得游戏。</span><br><span class="line">&gt; - Alice 顺时针方向上的鲜花数目 `x` 必须在区间 `[<span class="number">1</span>,n]` 之间。</span><br><span class="line">&gt; - Alice 逆时针方向上的鲜花数目 `y` 必须在区间 `[<span class="number">1</span>,m]` 之间。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 请你返回满足题目描述的数对 `(x, y)` 的数目。</span><br><span class="line">&gt;</span><br><span class="line">&gt;  </span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 🟡Alice 和 Bob 玩鲜花游戏</span><br><span class="line"></span><br><span class="line">&gt; Alice 和 Bob 在一个长满鲜花的环形草地玩一个回合制游戏。环形的草地上有一些鲜花，Alice 到 Bob 之间顺时针有 `x` 朵鲜花，逆时针有 `y` 朵鲜花。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 游戏过程如下：</span><br><span class="line">&gt;</span><br><span class="line">&gt; <span class="number">1.</span> Alice 先行动。</span><br><span class="line">&gt; <span class="number">2.</span> 每一次行动中，当前玩家必须选择顺时针或者逆时针，然后在这个方向上摘一朵鲜花。</span><br><span class="line">&gt; <span class="number">3.</span> 一次行动结束后，如果所有鲜花都被摘完了，那么 **当前** 玩家抓住对手并赢得游戏的胜利。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 给你两个整数 `n` 和 `m` ，你的任务是求出满足以下条件的所有 `(x, y)` 对：</span><br><span class="line">&gt;</span><br><span class="line">&gt; - 按照上述规则，Alice 必须赢得游戏。</span><br><span class="line">&gt; - Alice 顺时针方向上的鲜花数目 `x` 必须在区间 `[<span class="number">1</span>,n]` 之间。</span><br><span class="line">&gt; - Alice 逆时针方向上的鲜花数目 `y` 必须在区间 `[<span class="number">1</span>,m]` 之间。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 请你返回满足题目描述的数对 `(x, y)` 的数目。</span><br><span class="line">&gt;</span><br><span class="line">&gt;  </span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>输入：n = 3, m = 2<br>输出：3<br>解释：以下数对满足题目要求：(1,2) ，(3,2) ，(2,1) 。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 <p>输入：n = 1, m = 1<br>输出：0<br>解释：没有数对满足题目要求。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">**提示：**</span><br><span class="line"></span><br><span class="line">- `1 &lt;= n, m &lt;= 105`</span><br><span class="line"></span><br><span class="line">```java</span><br></pre></td></tr></tbody></table></figure>
 </blockquote>
-<h1><span id="gei-ding-cao-zuo-ci-shu-nei-shi-sheng-yu-yuan-su-de-huo-zhi-zui-xiao"><span id="head1">🔴</span>给定操作次数内使剩余元素的或值最小</span></h1><blockquote>
+<h1><span id="gei-ding-cao-zuo-ci-shu-nei-shi-sheng-yu-yuan-su-de-huo-zhi-zui-xiao">🔴给定操作次数内使剩余元素的或值最小</span></h1><blockquote>
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 和一个整数 <code>k</code> 。</p>
 <p>一次操作中，你可以选择 <code>nums</code> 中满足 <code>0 &lt;= i &lt; nums.length - 1</code> 的一个下标 <code>i</code> ，并将 <code>nums[i]</code> 和 <code>nums[i + 1]</code> 替换为数字 <code>nums[i] &amp; nums[i + 1]</code> ，其中 <code>&amp;</code> 表示按位 <code>AND</code> 操作。</p>
 <p>请你返回 <strong>至多</strong> <code>k</code> 次操作以内，使 <code>nums</code> 中所有剩余元素按位 <code>OR</code> 结果的 <strong>最小值</strong> 。</p>

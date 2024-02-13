@@ -467,29 +467,29 @@
 <tbody><tr>
 <td>✅</td>
 <td>3</td>
-<td><a href="#head1">🟢</a>将数组分成最小总代价的子数组 I</td>
+<td>🟢将数组分成最小总代价的子数组 I</td>
 <td>sorting array enum</td>
 </tr>
 <tr>
 <td>✅</td>
 <td>4</td>
-<td><a href="#head2">🟡 </a>判断一个数组是否可以变为有序</td>
+<td>🟡判断一个数组是否可以变为有序</td>
 <td>sorting array bit-munipulation</td>
 </tr>
 <tr>
 <td></td>
 <td>5</td>
-<td><a href="#head3"> 🟡</a>通过操作使数组长度最小</td>
+<td>🟡通过操作使数组长度最小</td>
 <td>greedy array math number-theory</td>
 </tr>
 <tr>
 <td></td>
 <td>7</td>
-<td><a href="#head4">🔴</a>将数组分成最小总代价的子数组 II</td>
+<td>🔴将数组分成最小总代价的子数组 II</td>
 <td>array hash-table sliding-window heap-priority-queue</td>
 </tr>
 </tbody></table>
-<h1><span id="jiang-shu-zu-fen-cheng-zui-xiao-zong-dai-jie-de-zi-shu-zu-i"><span id="head1">🟢将数组分成最小总代价的子数组 I</span></span></h1><blockquote>
+<h1><span id="jiang-shu-zu-fen-cheng-zui-xiao-zong-dai-jie-de-zi-shu-zu-i">🟢将数组分成最小总代价的子数组 I</span></h1><blockquote>
 <p>给你一个长度为 <code>n</code> 的整数数组 <code>nums</code> 。</p>
 <p>一个数组的 <strong>代价</strong> 是它的 <strong>第一个</strong> 元素。比方说，<code>[1,2,3]</code> 的代价是 <code>1</code> ，<code>[3,4,1]</code> 的代价是 <code>3</code> 。</p>
 <p>你需要将 <code>nums</code> 分成 <code>3</code> 个 <strong>连续且没有交集</strong> 的子数组。</p>
@@ -526,7 +526,7 @@
 <li>time:<em>O(nlogn)</em></li>
 <li>space:<em>O(1)</em></li>
 </ul>
-<h1><span id="pan-duan-yi-ge-shu-zu-shi-fou-ke-yi-bian-wei-you-xu"><span id="head2">🟡判断一个数组是否可以变为有序</span></span></h1><blockquote>
+<h1><span id="pan-duan-yi-ge-shu-zu-shi-fou-ke-yi-bian-wei-you-xu">🟡判断一个数组是否可以变为有序</span></h1><blockquote>
 <p>给你一个下标从 <strong>0</strong> 开始且全是 <strong>正</strong> 整数的数组 <code>nums</code> 。</p>
 <p>一次 <strong>操作</strong> 中，如果两个 <strong>相邻</strong> 元素在二进制下数位为 <strong>1</strong> 的数目 <strong>相同</strong> ，那么你可以将这两个元素交换。你可以执行这个操作 <strong>任意次</strong> （<strong>也可以 0 次</strong>）。</p>
 <p>如果你可以使数组变有序，请你返回 <code>true</code> ，否则返回 <code>false</code> 。</p>
@@ -561,7 +561,7 @@
 
 
 
-<h1><span id="tong-guo-cao-zuo-shi-shu-zu-chang-du-zui-xiao"><span id="head3"> 🟡通过操作使数组长度最小</span></span></h1><blockquote>
+<h1><span id="tong-guo-cao-zuo-shi-shu-zu-chang-du-zui-xiao">🟡通过操作使数组长度最小</span></h1><blockquote>
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> ，它只包含 <strong>正</strong> 整数。</p>
 <p>你的任务是通过进行以下操作 <strong>任意次</strong> （可以是 0 次） <strong>最小化</strong> <code>nums</code> 的长度：</p>
 <ul>
@@ -585,7 +585,7 @@
 <li><code>1 &lt;= nums[i] &lt;= 109</code></li>
 </ul>
 </blockquote>
-<h1><span id="jiang-shu-zu-fen-cheng-zui-xiao-zong-dai-jie-de-zi-shu-zu-ii"><span id="head4">🔴将数组分成最小总代价的子数组 II</span></span></h1><blockquote>
+<h1><span id="jiang-shu-zu-fen-cheng-zui-xiao-zong-dai-jie-de-zi-shu-zu-ii">🔴将数组分成最小总代价的子数组 II</span></h1><blockquote>
 <p>给你一个下标从 <strong>0</strong> 开始长度为 <code>n</code> 的整数数组 <code>nums</code> 和两个 <strong>正</strong> 整数 <code>k</code> 和 <code>dist</code> 。</p>
 <p>一个数组的 <strong>代价</strong> 是数组中的 <strong>第一个</strong> 元素。比方说，<code>[1,2,3]</code> 的代价为 <code>1</code> ，<code>[3,4,1]</code> 的代价为 <code>3</code> 。</p>
 <p>你需要将 <code>nums</code> 分割成 <code>k</code> 个 <strong>连续且互不相交</strong> 的子数组，满足 <strong>第二</strong> 个子数组与第 <code>k</code> 个子数组中第一个元素的下标距离 <strong>不超过</strong> <code>dist</code> 。换句话说，如果你将 <code>nums</code> 分割成子数组 <code>nums[0..(i1 - 1)], nums[i1..(i2 - 1)], ..., nums[ik-1..(n - 1)]</code> ，那么它需要满足 <code>ik-1 - i1 &lt;= dist</code> 。</p>

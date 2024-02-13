@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2024/02/14/coding-102-binary-tree-level-order-traversal/</loc>
+    <lastmod>2024-02-13</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
+    <lastmod>2024-02-12</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/05/algorithm-twopointers/</loc>
+    <lastmod>2024-02-12</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/15/coding-82-remove-duplicates-from-sorted-list-ii/</loc>
+    <lastmod>2024-02-12</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/14/coding-83-remove-duplicates-from-sorted-list/</loc>
+    <lastmod>2024-02-12</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-binary-search/</loc>
+    <lastmod>2024-02-11</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2024/02/12/contest-weekly-384/</loc>
+    <lastmod>2024-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/02/03/contest-biweekly-123/</loc>
     <lastmod>2024-02-11</lastmod>
   </url>
   <url>
@@ -18,10 +46,6 @@
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/14/contest-weekly-380/</loc>
-    <lastmod>2024-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/02/03/contest-biweekly-123/</loc>
     <lastmod>2024-02-11</lastmod>
   </url>
   <url>
@@ -221,19 +245,7 @@
     <lastmod>2024-02-08</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2024/01/31/algorithm-binary-search/</loc>
-    <lastmod>2024-02-08</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2023/09/09/algorithm-greedy/</loc>
-    <lastmod>2024-02-08</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
-    <lastmod>2024-02-08</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/05/algorithm-twopointers/</loc>
     <lastmod>2024-02-08</lastmod>
   </url>
   <url>
@@ -294,14 +306,6 @@
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/02/04/coding-292-nim-game/</loc>
-    <lastmod>2024-02-04</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/14/coding-83-remove-duplicates-from-sorted-list/</loc>
-    <lastmod>2024-02-04</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/15/coding-82-remove-duplicates-from-sorted-list-ii/</loc>
     <lastmod>2024-02-04</lastmod>
   </url>
   <url>
