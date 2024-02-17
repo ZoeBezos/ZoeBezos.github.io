@@ -445,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">310</a>                         
+                            <a href="">2.8k</a>                         
                         </span>
                         
                     
@@ -454,7 +454,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">1min</a>                         
+                            <a href="">13min</a>                         
                         </span>
                         
                     
@@ -474,13 +474,18 @@
 </thead>
 <tbody><tr>
 <td>一维数组的前缀和</td>
-<td>🟡560. 和为 K 的子数组</td>
+<td>🟢724. 寻找数组的中心下标</td>
+<td>✅</td>
+</tr>
+<tr>
 <td></td>
+<td>🟡560. 和为 K 的子数组</td>
+<td>✅</td>
 </tr>
 <tr>
 <td></td>
 <td>🟡930. 和相同的二元子数组</td>
-<td></td>
+<td>✅</td>
 </tr>
 <tr>
 <td></td>
@@ -490,12 +495,12 @@
 <tr>
 <td></td>
 <td>🟡974. 和可被 K 整除的子数组</td>
-<td></td>
+<td>✅</td>
 </tr>
 <tr>
 <td></td>
 <td>🟡523. 连续的子数组和</td>
-<td></td>
+<td>✅</td>
 </tr>
 <tr>
 <td></td>
@@ -505,12 +510,12 @@
 <tr>
 <td>二维数组的前缀和</td>
 <td>🟢304. 二维区域和检索 - 矩阵不可变</td>
-<td></td>
+<td>✅</td>
 </tr>
 <tr>
 <td></td>
 <td>🟡1314. 矩阵区域和</td>
-<td></td>
+<td>✅</td>
 </tr>
 <tr>
 <td></td>
@@ -538,7 +543,295 @@
 <td></td>
 </tr>
 </tbody></table>
-<h1><span id="yi-wei-shu-zu-de-qian-zhui-he">一维数组的前缀和</span></h1><h2><span id="560-he-wei-k-de-zi-shu-zu">🟡560. 和为 K 的子数组</span></h2><h2><span id="930-he-xiang-tong-de-er-yuan-zi-shu-zu">🟡930. 和相同的二元子数组</span></h2><h2><span id="525-lian-xu-shu-zu">🟡525. 连续数组</span></h2><h2><span id="974-he-ke-bei-k-zheng-chu-de-zi-shu-zu">🟡974. 和可被 K 整除的子数组</span></h2><h2><span id="523-lian-xu-de-zi-shu-zu-he">🟡523. 连续的子数组和</span></h2><h2><span id="1248-tong-ji-you-mei-zi-shu-zu">🟡1248. 统计「优美子数组」</span></h2><h1><span id="er-wei-shu-zu-de-qian-zhui-he">二维数组的前缀和</span></h1><h2><span id="304-er-wei-qu-yu-he-jian-suo-ju-zhen-bu-ke-bian">🟢304. 二维区域和检索 - 矩阵不可变</span></h2><h2><span id="1314-ju-zhen-qu-yu-he">🟡1314. 矩阵区域和</span></h2><h2><span id="1074-yuan-su-he-wei-mu-biao-zhi-de-zi-ju-zhen-shu-liang">🔴1074. 元素和为目标值的子矩阵数量</span></h2><h2><span id="363-ju-xing-qu-yu-bu-chao-guo-k-de-zui-da-shu-zhi-he">🔴363. 矩形区域不超过 K 的最大数值和</span></h2><h1><span id="qian-zhui-he-yu-er-cha-shu">前缀和与二叉树</span></h1><h2><span id="437-lu-jing-zong-he-iii">🟡437. 路径总和 III</span></h2><h2><span id="1022-cong-gen-dao-xie-de-er-jin-zhi-shu-zhi-he">🟢1022. 从根到叶的二进制数之和</span></h2><h2><span id="129-qiu-gen-jie-dian-dao-xie-jie-dian-shu-zi-zhi-he">🟡129. 求根节点到叶节点数字之和</span></h2>
+<h1><span id="yi-wei-shu-zu-de-qian-zhui-he">一维数组的前缀和</span></h1><h2><span id="724-xun-zhao-shu-zu-de-zhong-xin-xia-biao">🟢724. 寻找数组的中心下标</span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code> ，请计算数组的 <strong>中心下标</strong> 。</p>
+<p>数组 <strong>中心下标</strong> 是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。</p>
+<p>如果中心下标位于数组最左端，那么左侧数之和视为 <code>0</code> ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。</p>
+<p>如果数组有多个中心下标，应该返回 <strong>最靠近左边</strong> 的那一个。如果数组不存在中心下标，返回 <code>-1</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1, 7, 3, 6, 5, 6]</span><br><span class="line">输出：3</span><br><span class="line">解释：</span><br><span class="line">中心下标是 3 。</span><br><span class="line">左侧数之和 sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11 ，</span><br><span class="line">右侧数之和 sum = nums[4] + nums[5] = 5 + 6 = 11 ，二者相等。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1, 2, 3]</span><br><span class="line">输出：-1</span><br><span class="line">解释：</span><br><span class="line">数组中不存在满足此条件的中心下标。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2, 1, -1]</span><br><span class="line">输出：0</span><br><span class="line">解释：</span><br><span class="line">中心下标是 0 。</span><br><span class="line">左侧数之和 sum = 0 ，（下标 0 左侧不存在元素），</span><br><span class="line">右侧数之和 sum = nums[1] + nums[2] = 1 + -1 = 0 。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 104</code></li>
+<li><code>-1000 &lt;= nums[i] &lt;= 1000</code></li>
+</ul>
+<p><strong>注意：</strong>本题与主站 1991 题相同：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-middle-index-in-array/">https://leetcode-cn.com/problems/find-the-middle-index-in-array/</a></p>
+<p>Related Topics</p>
+<p>数组</p>
+<p>前缀和</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">pivotIndex</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> <span class="variable">presum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : nums) {</span><br><span class="line">           presum += x;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> <span class="variable">leftsum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; ++i) {</span><br><span class="line">            <span class="keyword">if</span> (leftsum == presum - nums[i] - leftsum) {</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            }</span><br><span class="line">            leftsum += nums[i];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(1)</em></li>
+</ul>
+<h2><span id="560-he-wei-k-de-zi-shu-zu">🟡560. 和为 K 的子数组</span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，请你统计并返回 <em>该数组中和为 <code>k</code> 的子数组的个数</em> 。</p>
+<p>子数组是数组中元素的连续非空序列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,1,1], k = 2</span><br><span class="line">输出：2</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3], k = 3</span><br><span class="line">输出：2</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 2 * 104</code></li>
+<li><code>-1000 &lt;= nums[i] &lt;= 1000</code></li>
+<li><code>-107 &lt;= k &lt;= 107</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>哈希表</p>
+<p>前缀和</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">subarraySum</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> k)</span> {</span><br><span class="line">        HashMap&lt;Integer,Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">preSum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : nums) {</span><br><span class="line">            preSum += x;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(preSum - k)) {</span><br><span class="line">                count += map.get(preSum - k);</span><br><span class="line">            }</span><br><span class="line">            map.put(preSum,map.getOrDefault(preSum,<span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(n)</em></li>
+</ul>
+<h2><span id="930-he-xiang-tong-de-er-yuan-zi-shu-zu">🟡930. 和相同的二元子数组</span></h2><blockquote>
+<p>给你一个二元数组 <code>nums</code> ，和一个整数 <code>goal</code> ，请你统计并返回有多少个和为 <code>goal</code> 的 <strong>非空</strong> 子数组。</p>
+<p><strong>子数组</strong> 是数组的一段连续部分。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,0,1,0,1], goal = 2</span><br><span class="line">输出：4</span><br><span class="line">解释：</span><br><span class="line">有 4 个满足题目要求的子数组：[1,0,1]、[1,0,1,0]、[0,1,0,1]、[1,0,1]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,0,0,0,0], goal = 0</span><br><span class="line">输出：15</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 3 * 104</code></li>
+<li><code>nums[i]</code> 不是 <code>0</code> 就是 <code>1</code></li>
+<li><code>0 &lt;= goal &lt;= nums.length</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>哈希表</p>
+<p>前缀和</p>
+<p>滑动窗口</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numSubarraysWithSum</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> goal)</span> {</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span>[] preSum = <span class="keyword">new</span> <span class="title class_">int</span>[len + <span class="number">1</span>];</span><br><span class="line">        preSum[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            preSum[i + <span class="number">1</span>] = preSum[i] + nums[i];</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>; left &lt; len; left++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> left; right &lt; len; right++) {</span><br><span class="line">                <span class="keyword">if</span> (preSum[right + <span class="number">1</span>] - preSum[left] == goal) {</span><br><span class="line">                    count++;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n^2^)</em></li>
+<li>space:<em>O(n)</em></li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numSubarraysWithSum</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> goal)</span> {</span><br><span class="line">        Map&lt;Integer,Integer&gt;map=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">        <span class="type">int</span> preSum=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x:nums) {</span><br><span class="line">            preSum+=x;</span><br><span class="line">            <span class="keyword">if</span>(map.containsKey(preSum-goal)){</span><br><span class="line">                cnt+=map.get(preSum-goal);</span><br><span class="line">            }</span><br><span class="line">            map.put(preSum,map.getOrDefault(preSum,<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(n)</em></li>
+</ul>
+<h2><span id="525-lian-xu-shu-zu">🟡525. 连续数组</span></h2><blockquote>
+<p>给定一个二进制数组 <code>nums</code> , 找到含有相同数量的 <code>0</code> 和 <code>1</code> 的最长连续子数组，并返回该子数组的长度。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [0,1]</span><br><span class="line">输出: 2</span><br><span class="line">说明: [0, 1] 是具有相同数量 0 和 1 的最长连续子数组。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [0,1,0]</span><br><span class="line">输出: 2</span><br><span class="line">说明: [0, 1] (或 [1, 0]) 是具有相同数量0和1的最长连续子数组。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 105</code></li>
+<li><code>nums[i]</code> 不是 <code>0</code> 就是 <code>1</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>哈希表</p>
+<p>前缀和</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2><span id="974-he-ke-bei-k-zheng-chu-de-zi-shu-zu">🟡974. 和可被 K 整除的子数组</span></h2><blockquote>
+<p>给定一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，返回其中元素之和可被 <code>k</code> 整除的（连续、非空） <strong>子数组</strong> 的数目。</p>
+<p><strong>子数组</strong> 是数组的 <strong>连续</strong> 部分。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [4,5,0,-2,-3,1], k = 5</span><br><span class="line">输出：7</span><br><span class="line">解释：</span><br><span class="line">有 7 个子数组满足其元素之和可被 k = 5 整除：</span><br><span class="line">[4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], [-2, -3]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [5], k = 9</span><br><span class="line">输出: 0</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 3 * 104</code></li>
+<li><code>-104 &lt;= nums[i] &lt;= 104</code></li>
+<li><code>2 &lt;= k &lt;= 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>哈希表</p>
+<p>前缀和</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">subarraysDivByK</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> k)</span> {</span><br><span class="line">        <span class="type">int</span>[] hashtable=<span class="keyword">new</span> <span class="title class_">int</span>[k];</span><br><span class="line">        hashtable[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">preSum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            preSum += nums[i];</span><br><span class="line">            <span class="type">int</span> <span class="variable">key</span> <span class="operator">=</span> (preSum%k+k) % k;</span><br><span class="line">            cnt+=hashtable[key];</span><br><span class="line">            hashtable[key]++;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(n)</em></li>
+</ul>
+<h2><span id="523-lian-xu-de-zi-shu-zu-he">🟡523. 连续的子数组和</span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，编写一个函数来判断该数组是否含有同时满足下述条件的连续子数组：</p>
+<ul>
+<li>子数组大小 <strong>至少为 2</strong> ，且</li>
+<li>子数组元素总和为 <code>k</code> 的倍数。</li>
+</ul>
+<p>如果存在，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+<p>如果存在一个整数 <code>n</code> ，令整数 <code>x</code> 符合 <code>x = n * k</code> ，则称 <code>x</code> 是 <code>k</code> 的一个倍数。<code>0</code> 始终视为 <code>k</code> 的一个倍数。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [23,2,4,6,7], k = 6</span><br><span class="line">输出：true</span><br><span class="line">解释：[2,4] 是一个大小为 2 的子数组，并且和为 6 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [23,2,6,4,7], k = 6</span><br><span class="line">输出：true</span><br><span class="line">解释：[23, 2, 6, 4, 7] 是大小为 5 的子数组，并且和为 42 。 </span><br><span class="line">42 是 6 的倍数，因为 42 = 7 * 6 且 7 是一个整数。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [23,2,6,4,7], k = 13</span><br><span class="line">输出：false</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 105</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 109</code></li>
+<li><code>0 &lt;= sum(nums[i]) &lt;= 231 - 1</code></li>
+<li><code>1 &lt;= k &lt;= 231 - 1</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>哈希表</p>
+<p>数学</p>
+<p>前缀和</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">checkSubarraySum</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> k)</span> {</span><br><span class="line">        HashMap&lt;Integer,Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="number">0</span>,-<span class="number">1</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">preSum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            preSum += nums[i];</span><br><span class="line">            <span class="type">int</span> <span class="variable">key</span> <span class="operator">=</span> preSum % k;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(key)) {</span><br><span class="line">                <span class="keyword">if</span> (i - map.get(key) &gt;= <span class="number">2</span>) {</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            map.put(key,i);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(n)</em></li>
+</ul>
+<h2><span id="1248-tong-ji-you-mei-zi-shu-zu">🟡1248. 统计「优美子数组」</span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code> 和一个整数 <code>k</code>。如果某个连续子数组中恰好有 <code>k</code> 个奇数数字，我们就认为这个子数组是「<strong>优美子数组</strong>」。</p>
+<p>请返回这个数组中 <strong>「优美子数组」</strong> 的数目。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,1,2,1,1], k = 3</span><br><span class="line">输出：2</span><br><span class="line">解释：包含 3 个奇数的子数组是 [1,1,2,1] 和 [1,2,1,1] 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,4,6], k = 1</span><br><span class="line">输出：0</span><br><span class="line">解释：数列中不包含任何奇数，所以不存在优美子数组。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,2,2,1,2,2,1,2,2,2], k = 2</span><br><span class="line">输出：16</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 50000</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 10^5</code></li>
+<li><code>1 &lt;= k &lt;= nums.length</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>哈希表</p>
+<p>数学</p>
+<p>滑动窗口</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numberOfSubarrays</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> k)</span> {</span><br><span class="line">        Map&lt;Integer,Integer&gt;map=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">        <span class="type">int</span> oddCnt=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x:nums) {</span><br><span class="line">            <span class="keyword">if</span>(x%<span class="number">2</span>==<span class="number">1</span>){</span><br><span class="line">                oddCnt++;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(map.containsKey(oddCnt-k)){</span><br><span class="line">                cnt+=map.get(oddCnt-k);</span><br><span class="line">            }</span><br><span class="line">            map.put(oddCnt,map.getOrDefault(oddCnt,<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(n)</em></li>
+</ul>
+<h1><span id="er-wei-shu-zu-de-qian-zhui-he">二维数组的前缀和</span></h1><h2><span id="304-er-wei-qu-yu-he-jian-suo-ju-zhen-bu-ke-bian">🟢304. 二维区域和检索 - 矩阵不可变</span></h2><blockquote>
+<p>给定一个二维矩阵 <code>matrix</code>，以下类型的多个请求：</p>
+<ul>
+<li>计算其子矩形范围内元素的总和，该子矩阵的 <strong>左上角</strong> 为 <code>(row1, col1)</code> ，<strong>右下角</strong> 为 <code>(row2, col2)</code> 。</li>
+</ul>
+<p>实现 <code>NumMatrix</code> 类：</p>
+<ul>
+<li><code>NumMatrix(int[][] matrix)</code> 给定整数矩阵 <code>matrix</code> 进行初始化</li>
+<li><code>int sumRegion(int row1, int col1, int row2, int col2)</code> 返回 <strong>左上角</strong> <code>(row1, col1)</code> 、<strong>右下角</strong> <code>(row2, col2)</code> 所描述的子矩阵的元素 <strong>总和</strong> 。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://pic.leetcode-cn.com/1626332422-wUpUHT-image.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">["NumMatrix","sumRegion","sumRegion","sumRegion"]</span><br><span class="line">[[[[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]],[2,1,4,3],[1,1,2,2],[1,2,2,4]]</span><br><span class="line">输出: </span><br><span class="line">[null, 8, 11, 12]</span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line">NumMatrix numMatrix = new NumMatrix([[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]);</span><br><span class="line">numMatrix.sumRegion(2, 1, 4, 3); // return 8 (红色矩形框的元素总和)</span><br><span class="line">numMatrix.sumRegion(1, 1, 2, 2); // return 11 (绿色矩形框的元素总和)</span><br><span class="line">numMatrix.sumRegion(1, 2, 2, 4); // return 12 (蓝色矩形框的元素总和)</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>m == matrix.length</code></li>
+<li><code>n == matrix[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 200</code></li>
+<li><code>-105 &lt;= matrix[i][j] &lt;= 105</code></li>
+<li><code>0 &lt;= row1 &lt;= row2 &lt; m</code></li>
+<li><code>0 &lt;= col1 &lt;= col2 &lt; n</code></li>
+<li>最多调用 <code>104</code> 次 <code>sumRegion</code> 方法</li>
+</ul>
+<p>Related Topics</p>
+<p>设计</p>
+<p>数组</p>
+<p>矩阵</p>
+<p>前缀和</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumMatrix</span> {</span><br><span class="line">    <span class="type">int</span>[][]preSum;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">NumMatrix</span><span class="params">(<span class="type">int</span>[][] matrix)</span> {</span><br><span class="line">        <span class="type">int</span> n=matrix.length,m=matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="built_in">this</span>.preSum=<span class="keyword">new</span> <span class="title class_">int</span>[n+<span class="number">1</span>][m+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; m; j++) {</span><br><span class="line">                <span class="built_in">this</span>.preSum[i+<span class="number">1</span>][j+<span class="number">1</span>]=<span class="built_in">this</span>.preSum[i + <span class="number">1</span>][j] + <span class="built_in">this</span>.preSum[i][j + <span class="number">1</span>] - <span class="built_in">this</span>.preSum[i][j] + matrix[i][j];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sumRegion</span><span class="params">(<span class="type">int</span> row1, <span class="type">int</span> col1, <span class="type">int</span> row2, <span class="type">int</span> col2)</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.preSum[row2+<span class="number">1</span>][col2+<span class="number">1</span>]+<span class="built_in">this</span>.preSum[row1][col1]-</span><br><span class="line">                <span class="built_in">this</span>.preSum[row1][col2+<span class="number">1</span>]-<span class="built_in">this</span>.preSum[row2+<span class="number">1</span>][col1];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n·m)</em></li>
+<li>space:<em>O(n·m)</em></li>
+</ul>
+<h2><span id="1314-ju-zhen-qu-yu-he">🟡1314. 矩阵区域和</span></h2><blockquote>
+<p>给你一个 <code>m x n</code> 的矩阵 <code>mat</code> 和一个整数 <code>k</code> ，请你返回一个矩阵 <code>answer</code> ，其中每个 <code>answer[i][j]</code> 是所有满足下述条件的元素 <code>mat[r][c]</code> 的和：</p>
+<ul>
+<li><code>i - k &lt;= r &lt;= i + k, </code></li>
+<li><code>j - k &lt;= c &lt;= j + k</code> 且</li>
+<li><code>(r, c)</code> 在矩阵内。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：mat = [[1,2,3],[4,5,6],[7,8,9]], k = 1</span><br><span class="line">输出：[[12,21,16],[27,45,33],[24,39,28]]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：mat = [[1,2,3],[4,5,6],[7,8,9]], k = 2</span><br><span class="line">输出：[[45,45,45],[45,45,45],[45,45,45]]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>m == mat.length</code></li>
+<li><code>n == mat[i].length</code></li>
+<li><code>1 &lt;= m, n, k &lt;= 100</code></li>
+<li><code>1 &lt;= mat[i][j] &lt;= 100</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>矩阵</p>
+<p>前缀和</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[][] matrixBlockSum(<span class="type">int</span>[][] mat, <span class="type">int</span> k) {</span><br><span class="line">        <span class="type">int</span> n=mat.length,m=mat[<span class="number">0</span>].length;</span><br><span class="line">        <span class="type">int</span>[][]preSum=<span class="keyword">new</span> <span class="title class_">int</span>[n+<span class="number">1</span>][m+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; m; j++) {</span><br><span class="line">                preSum[i+<span class="number">1</span>][j+<span class="number">1</span>]=preSum[i + <span class="number">1</span>][j] + preSum[i][j + <span class="number">1</span>] - preSum[i][j] + mat[i][j];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; m; j++) {</span><br><span class="line">                <span class="type">int</span> row1=i-k&lt;<span class="number">0</span>?<span class="number">0</span>:i-k;</span><br><span class="line">                <span class="type">int</span> col1=j-k&lt;<span class="number">0</span>?<span class="number">0</span>:j-k;</span><br><span class="line">                <span class="type">int</span> row2=i+k&gt;=n?n-<span class="number">1</span>:i+k;</span><br><span class="line">                <span class="type">int</span> col2=j+k&gt;=m?m-<span class="number">1</span>:j+k;</span><br><span class="line">                mat[i][j]=preSum[row2+<span class="number">1</span>][col2+<span class="number">1</span>]+preSum[row1][col1]-preSum[row2+<span class="number">1</span>][col1]-preSum[row1][col2+<span class="number">1</span>];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> mat;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n·m)</em></li>
+<li>space:<em>O(n·m)</em></li>
+</ul>
+<h2><span id="1074-yuan-su-he-wei-mu-biao-zhi-de-zi-ju-zhen-shu-liang">🔴1074. 元素和为目标值的子矩阵数量</span></h2><h2><span id="363-ju-xing-qu-yu-bu-chao-guo-k-de-zui-da-shu-zhi-he">🔴363. 矩形区域不超过 K 的最大数值和</span></h2><h1><span id="qian-zhui-he-yu-er-cha-shu">前缀和与二叉树</span></h1><h2><span id="437-lu-jing-zong-he-iii">🟡437. 路径总和 III</span></h2><h2><span id="1022-cong-gen-dao-xie-de-er-jin-zhi-shu-zhi-he">🟢1022. 从根到叶的二进制数之和</span></h2><h2><span id="129-qiu-gen-jie-dian-dao-xie-jie-dian-shu-zi-zhi-he">🟡129. 求根节点到叶节点数字之和</span></h2>
         </div>
 
 

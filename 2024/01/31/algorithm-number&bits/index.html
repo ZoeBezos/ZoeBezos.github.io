@@ -445,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">290</a>                         
+                            <a href="">1.1k</a>                         
                         </span>
                         
                     
@@ -454,7 +454,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">1min</a>                         
+                            <a href="">4min</a>                         
                         </span>
                         
                     
@@ -475,12 +475,12 @@
 <tbody><tr>
 <td>进制转换</td>
 <td>🟢67.二进制求和</td>
-<td></td>
+<td>✅</td>
 </tr>
 <tr>
 <td></td>
 <td>🟢504.七进制数</td>
-<td></td>
+<td>✅</td>
 </tr>
 <tr>
 <td></td>
@@ -573,7 +573,109 @@
 <td></td>
 </tr>
 </tbody></table>
-<h1><span id="jin-zhi-zhuan-huan">进制转换</span></h1><h2><span id="67-er-jin-zhi-qiu-he">🟢67.二进制求和</span></h2><h2><span id="504-qi-jin-zhi-shu">🟢504.七进制数</span></h2><h2><span id="405-shu-zi-zhuan-huan-wei-shi-liu-jin-zhi-shu">🟢405.数字转换为十六进制数</span></h2><h2><span id="476-shu-zi-de-bu-shu">🟢476.数字的补数</span></h2><h2><span id="66-jia-yi">🟢66.加一</span></h2><h2><span id="479-zui-da-hui-wen-shu-cheng-ji">🔴479.最大回文数乘积</span></h2><h2><span id="564-xun-zhao-zui-jin-de-hui-wen-shu">🔴564.寻找最近的回文数</span></h2><h2><span id="7-zheng-shu-fan-zhuan">🟡7.整数反转</span></h2><h2><span id="693-jiao-ti-wei-er-jin-zhi-shu">🟢693. 交替位二进制数</span></h2><h1><span id="shu-zhi-ji-suan">数值计算</span></h1><h2><span id="415-zi-fu-chuan-xiang-jia">🟢415. 字符串相加</span></h2><h2><span id="43-zi-fu-chuan-xiang-cheng">🟡43. 字符串相乘</span></h2><h2><span id="556-xia-yi-ge-geng-da-yuan-su-iii">🟡556. 下一个更大元素 III</span></h2><h2><span id="9-hui-wen-shu">🟢9. 回文数</span></h2><h2><span id="258-ge-wei-xiang-jia">🟢258. 各位相加</span></h2><h2><span id="461-han-ming-ju-chi">🟢461. 汉明距离</span></h2><h2><span id="477-han-ming-ju-chi-zong-he">🟡477. 汉明距离总和</span></h2><h1><span id="shu-xue-wen-ti">数学问题</span></h1><h2><span id="204-ji-shu-zhi-shu">🟡204. 计数质数</span></h2><h2><span id="263-chou-shu">🟢263. 丑数</span></h2><h2><span id="367-you-xiao-de-wan-quan-ping-fang-shu">🟢367. 有效的完全平方数</span></h2><h2><span id="1071-zi-fu-chuan-de-zui-da-gong-yin-zi">🟢1071. 字符串的最大公因子</span></h2>
+<h1><span id="jin-zhi-zhuan-huan">进制转换</span></h1><h2><span id="67-er-jin-zhi-qiu-he">🟢67.二进制求和</span></h2><blockquote>
+<p>给你两个二进制字符串 <code>a</code> 和 <code>b</code> ，以二进制字符串的形式返回它们的和。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入:a = "11", b = "1"</span><br><span class="line">输出："100"</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：a = "1010", b = "1011"</span><br><span class="line">输出："10101"</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= a.length, b.length &lt;= 104</code></li>
+<li><code>a</code> 和 <code>b</code> 仅由字符 <code>'0'</code> 或 <code>'1'</code> 组成</li>
+<li>字符串如果不是 <code>"0"</code> ，就不含前导零</li>
+</ul>
+<p>Related Topics</p>
+<p>位运算</p>
+<p>数学</p>
+<p>字符串</p>
+<p>模拟</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">addBinary</span><span class="params">(String a, String b)</span> {</span><br><span class="line">        <span class="type">int</span> la=a.length(),lb=b.length();</span><br><span class="line">        <span class="type">int</span> cout=<span class="number">0</span>;</span><br><span class="line">        StringBuilder sb=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; Math.max(la,lb); i++) {</span><br><span class="line">            <span class="type">int</span> cur_a=la-<span class="number">1</span>-i&gt;=<span class="number">0</span>?a.charAt(la-<span class="number">1</span>-i)-<span class="string">'0'</span>:<span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> cur_b=lb-<span class="number">1</span>-i&gt;=<span class="number">0</span>?b.charAt(lb-<span class="number">1</span>-i)-<span class="string">'0'</span>:<span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> sum=cur_a+cur_b+cout;</span><br><span class="line">            <span class="keyword">if</span>(sum&lt;=<span class="number">1</span>){</span><br><span class="line">                sb.append(sum);</span><br><span class="line">                cout=<span class="number">0</span>;</span><br><span class="line">            }<span class="keyword">else</span> {</span><br><span class="line">                sb.append(sum-<span class="number">2</span>);</span><br><span class="line">                cout=<span class="number">1</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(cout==<span class="number">1</span>){</span><br><span class="line">            sb.append(<span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> sb.reverse().toString();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(n)</em></li>
+</ul>
+<h2><span id="504-qi-jin-zhi-shu">🟢504.七进制数</span></h2><blockquote>
+<p>给定一个整数 <code>num</code>，将其转化为 <strong>7 进制</strong>，并以字符串形式输出。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: num = 100</span><br><span class="line">输出: "202"</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: num = -7</span><br><span class="line">输出: "-10"</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>-107 &lt;= num &lt;= 107</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数学</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">convertToBase7</span><span class="params">(<span class="type">int</span> num)</span> {</span><br><span class="line">        StringBuilder sb=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="type">boolean</span> nav=<span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(num&lt;<span class="number">0</span>){</span><br><span class="line">            nav=<span class="literal">true</span>;</span><br><span class="line">            num*=-<span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(num==<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"0"</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span> (num&gt;<span class="number">0</span>){</span><br><span class="line">            sb.append(num%<span class="number">7</span>);</span><br><span class="line">            num/=<span class="number">7</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> nav?<span class="string">"-"</span>+sb.reverse().toString():sb.reverse().toString();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(n)</em></li>
+</ul>
+<h2><span id="405-shu-zi-zhuan-huan-wei-shi-liu-jin-zhi-shu">🟢405.数字转换为十六进制数</span></h2><blockquote>
+<p>给定一个整数，编写一个算法将这个数转换为十六进制数。对于负整数，我们通常使用 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%A1%A5%E7%A0%81/6854613?fr=aladdin">补码运算</a> 方法。</p>
+<p><strong>注意:</strong></p>
+<ol>
+<li>十六进制中所有字母(<code>a-f</code>)都必须是小写。</li>
+<li>十六进制字符串中不能包含多余的前导零。如果要转化的数为0，那么以单个字符<code>'0'</code>来表示；对于其他情况，十六进制字符串中的第一个字符将不会是0字符。</li>
+<li>给定的数确保在32位有符号整数范围内。</li>
+<li><strong>不能使用任何由库提供的将数字直接转换或格式化为十六进制的方法。</strong></li>
+</ol>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">26</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">"1a"</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">-1</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">"ffffffff"</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Related Topics</p>
+<p>位运算</p>
+<p>数学</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toHex</span><span class="params">(<span class="type">long</span> num)</span> {</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="number">0</span>) {</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"0"</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(num&lt;<span class="number">0</span>){</span><br><span class="line">            num+=<span class="number">2L</span>*(Integer.MAX_VALUE+<span class="number">1L</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span> (num &gt; <span class="number">0</span>) {</span><br><span class="line">            <span class="keyword">if</span> (num % <span class="number">16</span> &lt; <span class="number">10</span>) {</span><br><span class="line">                sb.append(num % <span class="number">16</span>);</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                sb.append((<span class="type">char</span>) (num % <span class="number">16</span> - <span class="number">10</span> + <span class="string">'a'</span>));</span><br><span class="line">            }</span><br><span class="line">            num/=<span class="number">16</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> sb.reverse().toString();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(log n)</em></li>
+<li>space:<em>O(log n)</em></li>
+</ul>
+<h2><span id="476-shu-zi-de-bu-shu">🟢476.数字的补数</span></h2><blockquote>
+<p>对整数的二进制表示取反（<code>0</code> 变 <code>1</code> ，<code>1</code> 变 <code>0</code>）后，再转换为十进制表示，可以得到这个整数的补数。</p>
+<ul>
+<li>例如，整数 <code>5</code> 的二进制表示是 <code>"101"</code> ，取反后得到 <code>"010"</code> ，再转回十进制表示得到补数 <code>2</code> 。</li>
+</ul>
+<p>给你一个整数 <code>num</code> ，输出它的补数。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：num = 5</span><br><span class="line">输出：2</span><br><span class="line">解释：5 的二进制表示为 101（没有前导零位），其补数为 010。所以你需要输出 2 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：num = 1</span><br><span class="line">输出：0</span><br><span class="line">解释：1 的二进制表示为 1（没有前导零位），其补数为 0。所以你需要输出 0 。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= num &lt; 231</code></li>
+</ul>
+<p><strong>注意：</strong>本题与 1009 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/complement-of-base-10-integer/">https://leetcode-cn.com/problems/complement-of-base-10-integer/</a> 相同</p>
+<p>Related Topics</p>
+<p>位运算</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2><span id="66-jia-yi">🟢66.加一</span></h2><h2><span id="479-zui-da-hui-wen-shu-cheng-ji">🔴479.最大回文数乘积</span></h2><h2><span id="564-xun-zhao-zui-jin-de-hui-wen-shu">🔴564.寻找最近的回文数</span></h2><h2><span id="7-zheng-shu-fan-zhuan">🟡7.整数反转</span></h2><h2><span id="693-jiao-ti-wei-er-jin-zhi-shu">🟢693. 交替位二进制数</span></h2><h1><span id="shu-zhi-ji-suan">数值计算</span></h1><h2><span id="415-zi-fu-chuan-xiang-jia">🟢415. 字符串相加</span></h2><h2><span id="43-zi-fu-chuan-xiang-cheng">🟡43. 字符串相乘</span></h2><h2><span id="556-xia-yi-ge-geng-da-yuan-su-iii">🟡556. 下一个更大元素 III</span></h2><h2><span id="9-hui-wen-shu">🟢9. 回文数</span></h2><h2><span id="258-ge-wei-xiang-jia">🟢258. 各位相加</span></h2><h2><span id="461-han-ming-ju-chi">🟢461. 汉明距离</span></h2><h2><span id="477-han-ming-ju-chi-zong-he">🟡477. 汉明距离总和</span></h2><h1><span id="shu-xue-wen-ti">数学问题</span></h1><h2><span id="204-ji-shu-zhi-shu">🟡204. 计数质数</span></h2><h2><span id="263-chou-shu">🟢263. 丑数</span></h2><h2><span id="367-you-xiao-de-wan-quan-ping-fang-shu">🟢367. 有效的完全平方数</span></h2><h2><span id="1071-zi-fu-chuan-de-zui-da-gong-yin-zi">🟢1071. 字符串的最大公因子</span></h2>
         </div>
 
 
