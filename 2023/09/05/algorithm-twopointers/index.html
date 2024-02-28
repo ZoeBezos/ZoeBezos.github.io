@@ -445,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">4k</a>                         
+                            <a href="">4.7k</a>                         
                         </span>
                         
                     
@@ -454,7 +454,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">18min</a>                         
+                            <a href="">21min</a>                         
                         </span>
                         
                     
@@ -505,7 +505,7 @@
 <tr>
 <td></td>
 <td>🟡18. 四数之和</td>
-<td></td>
+<td>✅</td>
 </tr>
 <tr>
 <td></td>
@@ -840,7 +840,75 @@
 <li>time:<em>O(n)</em></li>
 <li>space:<em>O(1)</em></li>
 </ul>
-<h2><span id="18-si-shu-zhi-he">🟡18. 四数之和</span></h2><h2><span id="167-liang-shu-zhi-he-ii-shu-ru-you-xu-shu-zu">🟡167. 两数之和 II - 输入有序数组</span></h2><h2><span id="88-he-bing-liang-ge-you-xu-shu-zu">🟢88. 合并两个有序数组</span></h2><h2><span id="283-yi-dong-ling">🟢283. 移动零</span></h2><h2><span id="27-yi-chu-yuan-su">🟢 27. 移除元素</span></h2><h2><span id="455-fen-fa-bing-gan">🟢455. 分发饼干</span></h2><h2><span id="561-shu-zu-chai-fen">🟢561. 数组拆分</span></h2><h2><span id="9-hui-wen-shu">🟢9. 回文数</span></h2><h1><span id="kuai-man-zhi-zhen-wen-ti">快慢指针问题</span></h1><h2><span id="876-lian-biao-de-zhong-jian-jie-dian">🟢876. 链表的中间结点</span></h2><h2><span id="206-fan-zhuan-lian-biao">🟢206. 反转链表</span></h2><h2><span id="19-shan-chu-lian-biao-de-dao-shu-di-n-ge-jie-dian">🟡19. 删除链表的倒数第 N 个结点</span></h2><h2><span id="141-huan-xing-lian-biao">🟢141. 环形链表</span></h2><h2><span id="142-huan-xing-lian-biao-ii">🟡142. 环形链表 II</span></h2><h2><span id="21-he-bing-liang-ge-you-xu-lian-biao">🟢21. 合并两个有序链表</span></h2><h2><span id="26-shan-chu-you-xu-shu-zu-zhong-de-chong-fu-xiang">🟢 26. 删除有序数组中的重复项</span></h2><h2><span id="83-shan-chu-pai-xu-lian-biao-zhong-de-chong-fu-yuan-su">🟢83. 删除排序链表中的重复元素</span></h2><h2><span id="82-shan-chu-pai-xu-lian-biao-zhong-de-chong-fu-yuan-su-ii">🟡82. 删除排序链表中的重复元素 II</span></h2><h2><span id="86-fen-ge-lian-biao">🟡86. 分隔链表</span></h2><h2><span id="234-hui-wen-lian-biao">🟢234. 回文链表</span></h2><h1><span id="hua-dong-chuang-kou-wen-ti">滑动窗口问题</span></h1><h2><span id="209-chang-du-zui-xiao-de-zi-shu-zu">🟡209. 长度最小的子数组</span></h2><h2><span id="5-zui-chang-hui-wen-zi-chuan">🟡5. 最长回文子串</span></h2><h2><span id="76-zui-xiao-fu-gai-zi-chuan">🔴76. 最小覆盖子串</span></h2><h2><span id="283-yi-dong-ling">🟢283. 移动零</span></h2><h2><span id="80-shan-chu-you-xu-shu-zu-zhong-de-chong-fu-xiang-ii">🟡80. 删除有序数组中的重复项 II</span></h2><h2><span id="561-shu-zu-chai-fen">🟢561. 数组拆分</span></h2><h2><span id="457-huan-xing-shu-zu-shi-fou-cun-zai-xun-huan">🟡457. 环形数组是否存在循环</span></h2><h2><span id="718-zui-chang-chong-fu-zi-shu-zu">🟡718. 最长重复子数组</span></h2><h1><span id="977-you-xu-shu-zu-de-ping-fang">🟢977. 有序数组的平方</span></h1><blockquote>
+<h2><span id="18-si-shu-zhi-he">🟡18. 四数之和</span></h2><blockquote>
+<p>给你一个由 <code>n</code> 个整数组成的数组 <code>nums</code> ，和一个目标值 <code>target</code> 。请你找出并返回满足下述全部条件且<strong>不重复</strong>的四元组 <code>[nums[a], nums[b], nums[c], nums[d]]</code> （若两个四元组元素一一对应，则认为两个四元组重复）：</p>
+<ul>
+<li><code>0 &lt;= a, b, c, d &lt; n</code></li>
+<li><code>a</code>、<code>b</code>、<code>c</code> 和 <code>d</code> <strong>互不相同</strong></li>
+<li><code>nums[a] + nums[b] + nums[c] + nums[d] == target</code></li>
+</ul>
+<p>你可以按 <strong>任意顺序</strong> 返回答案 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,0,-1,0,-2,2], target = 0</span><br><span class="line">输出：[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,2,2,2,2], target = 8</span><br><span class="line">输出：[[2,2,2,2]]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 200</code></li>
+<li><code>-109 &lt;= nums[i] &lt;= 109</code></li>
+<li><code>-109 &lt;= target &lt;= 109</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>双指针</p>
+<p>排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">fourSum</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> {</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt;res=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len-<span class="number">3</span>; i++) {</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&gt;<span class="number">0</span>&amp;&amp;nums[i]&gt;target){<span class="comment">//剪枝一</span></span><br><span class="line">                <span class="keyword">return</span> res;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">while</span>(i&gt;<span class="number">0</span>&amp;&amp;i&lt;len&amp;&amp;nums[i]==nums[i-<span class="number">1</span>]){<span class="comment">//去重一</span></span><br><span class="line">                i++;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i+<span class="number">1</span>; j &lt; len-<span class="number">2</span>; j++) {</span><br><span class="line">                <span class="keyword">if</span>(nums[i]&gt;<span class="number">0</span>&amp;&amp;nums[i]+nums[j]&gt;target){<span class="comment">//剪枝二</span></span><br><span class="line">                    <span class="keyword">return</span> res;</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">while</span>(j&gt;i+<span class="number">1</span>&amp;&amp;j&lt;len&amp;&amp;nums[j]==nums[j-<span class="number">1</span>]){<span class="comment">//去重二</span></span><br><span class="line">                    j++;</span><br><span class="line">                }</span><br><span class="line">                <span class="type">int</span> left=j+<span class="number">1</span>,right=len-<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span> (left&lt;right){</span><br><span class="line">                    <span class="type">int</span> sum=nums[i]+nums[j]+nums[left]+nums[right];</span><br><span class="line">                    <span class="keyword">if</span>(sum&lt;target){</span><br><span class="line">                        left++;</span><br><span class="line">                    }<span class="keyword">else</span> <span class="keyword">if</span>(sum&gt;target){</span><br><span class="line">                        right--;</span><br><span class="line">                    }<span class="keyword">else</span> {</span><br><span class="line">                        List&lt;Integer&gt;list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">                        list.add(nums[i]);</span><br><span class="line">                        list.add(nums[j]);</span><br><span class="line">                        list.add(nums[left]);</span><br><span class="line">                        list.add(nums[right]);</span><br><span class="line">                        res.add(list);</span><br><span class="line">                        <span class="keyword">while</span>(left&lt;right&amp;&amp;nums[left]==nums[left+<span class="number">1</span>]){<span class="comment">//去重三</span></span><br><span class="line">                            left++;</span><br><span class="line">                        }</span><br><span class="line">                        <span class="keyword">while</span>(left&lt;right&amp;&amp;nums[right]==nums[right-<span class="number">1</span>]){<span class="comment">//去重四</span></span><br><span class="line">                            right--;</span><br><span class="line">                        }</span><br><span class="line">                        left++;</span><br><span class="line">                        right--;</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n^3^)</em></li>
+<li>space:<em>O(n)</em></li>
+</ul>
+<h2><span id="167-liang-shu-zhi-he-ii-shu-ru-you-xu-shu-zu">🟡167. 两数之和 II - 输入有序数组</span></h2><blockquote>
+<p>给你一个下标从 <strong>1</strong> 开始的整数数组 <code>numbers</code> ，该数组已按 <strong>非递减顺序排列</strong> ，请你从数组中找出满足相加之和等于目标数 <code>target</code> 的两个数。如果设这两个数分别是 <code>numbers[index1]</code> 和 <code>numbers[index2]</code> ，则 <code>1 &lt;= index1 &lt; index2 &lt;= numbers.length</code> 。</p>
+<p>以长度为 2 的整数数组 <code>[index1, index2]</code> 的形式返回这两个整数的下标 <code>index1</code> 和 <code>index2</code>。</p>
+<p>你可以假设每个输入 <strong>只对应唯一的答案</strong> ，而且你 <strong>不可以</strong> 重复使用相同的元素。</p>
+<p>你所设计的解决方案必须只使用常量级的额外空间。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：numbers = [2,7,11,15], target = 9</span><br><span class="line">输出：[1,2]</span><br><span class="line">解释：2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。返回 [1, 2] 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：numbers = [2,3,4], target = 6</span><br><span class="line">输出：[1,3]</span><br><span class="line">解释：2 与 4 之和等于目标数 6 。因此 index1 = 1, index2 = 3 。返回 [1, 3] 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：numbers = [-1,0], target = -1</span><br><span class="line">输出：[1,2]</span><br><span class="line">解释：-1 与 0 之和等于目标数 -1 。因此 index1 = 1, index2 = 2 。返回 [1, 2] 。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= numbers.length &lt;= 3 * 104</code></li>
+<li><code>-1000 &lt;= numbers[i] &lt;= 1000</code></li>
+<li><code>numbers</code> 按 <strong>非递减顺序</strong> 排列</li>
+<li><code>-1000 &lt;= target &lt;= 1000</code></li>
+<li><strong>仅存在一个有效答案</strong></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>双指针</p>
+<p>二分查找</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+<h2><span id="88-he-bing-liang-ge-you-xu-shu-zu">🟢88. 合并两个有序数组</span></h2><h2><span id="283-yi-dong-ling">🟢283. 移动零</span></h2><h2><span id="27-yi-chu-yuan-su">🟢 27. 移除元素</span></h2><h2><span id="455-fen-fa-bing-gan">🟢455. 分发饼干</span></h2><h2><span id="561-shu-zu-chai-fen">🟢561. 数组拆分</span></h2><h2><span id="9-hui-wen-shu">🟢9. 回文数</span></h2><h1><span id="kuai-man-zhi-zhen-wen-ti">快慢指针问题</span></h1><h2><span id="876-lian-biao-de-zhong-jian-jie-dian">🟢876. 链表的中间结点</span></h2><h2><span id="206-fan-zhuan-lian-biao">🟢206. 反转链表</span></h2><h2><span id="19-shan-chu-lian-biao-de-dao-shu-di-n-ge-jie-dian">🟡19. 删除链表的倒数第 N 个结点</span></h2><h2><span id="141-huan-xing-lian-biao">🟢141. 环形链表</span></h2><h2><span id="142-huan-xing-lian-biao-ii">🟡142. 环形链表 II</span></h2><h2><span id="21-he-bing-liang-ge-you-xu-lian-biao">🟢21. 合并两个有序链表</span></h2><h2><span id="26-shan-chu-you-xu-shu-zu-zhong-de-chong-fu-xiang">🟢 26. 删除有序数组中的重复项</span></h2><h2><span id="83-shan-chu-pai-xu-lian-biao-zhong-de-chong-fu-yuan-su">🟢83. 删除排序链表中的重复元素</span></h2><h2><span id="82-shan-chu-pai-xu-lian-biao-zhong-de-chong-fu-yuan-su-ii">🟡82. 删除排序链表中的重复元素 II</span></h2><h2><span id="86-fen-ge-lian-biao">🟡86. 分隔链表</span></h2><h2><span id="234-hui-wen-lian-biao">🟢234. 回文链表</span></h2><h1><span id="hua-dong-chuang-kou-wen-ti">滑动窗口问题</span></h1><h2><span id="209-chang-du-zui-xiao-de-zi-shu-zu">🟡209. 长度最小的子数组</span></h2><h2><span id="5-zui-chang-hui-wen-zi-chuan">🟡5. 最长回文子串</span></h2><h2><span id="76-zui-xiao-fu-gai-zi-chuan">🔴76. 最小覆盖子串</span></h2><h2><span id="283-yi-dong-ling">🟢283. 移动零</span></h2><h2><span id="80-shan-chu-you-xu-shu-zu-zhong-de-chong-fu-xiang-ii">🟡80. 删除有序数组中的重复项 II</span></h2><h2><span id="561-shu-zu-chai-fen">🟢561. 数组拆分</span></h2><h2><span id="457-huan-xing-shu-zu-shi-fou-cun-zai-xun-huan">🟡457. 环形数组是否存在循环</span></h2><h2><span id="718-zui-chang-chong-fu-zi-shu-zu">🟡718. 最长重复子数组</span></h2><h1><span id="977-you-xu-shu-zu-de-ping-fang">🟢977. 有序数组的平方</span></h1><blockquote>
 <p>给你一个按 <strong>非递减顺序</strong> 排序的整数数组 <code>nums</code>，返回 <strong>每个数字的平方</strong> 组成的新数组，要求也按 <strong>非递减顺序</strong> 排序。</p>
 <p><strong>示例 1：</strong></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-4,-1,0,3,10]</span><br><span class="line">输出：[0,1,9,16,100]</span><br><span class="line">解释：平方后，数组变为 [16,1,0,9,100]</span><br><span class="line">排序后，数组变为 [0,1,9,16,100]</span><br></pre></td></tr></tbody></table></figure>
