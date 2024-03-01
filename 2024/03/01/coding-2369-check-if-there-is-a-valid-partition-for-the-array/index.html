@@ -15,7 +15,7 @@
 
 
 
-<title>Archives | ZOE&#39;s site</title>
+<title>🟡2369.check if there is a valid partition for the array | ZOE&#39;s site</title>
 
 
 
@@ -345,107 +345,151 @@
     }
 </script>
             <div class="main">
-                <div class="post-wrap archive">
+                <div class="container">
     
     
-        
-
-        
-            <h3>2023</h3>
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/11/26/coding-836-rectangle-overlap/">🟢836. rectangle overlap</a>
-            <span class="archive-item-date">November 26, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/09/11/algorithm-monotonic-stack/">Monotonic Stack</a>
-            <span class="archive-item-date">September 11, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/09/10/algorithm-dp/">Dynamic Programming</a>
-            <span class="archive-item-date">September 10, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/09/09/algorithm-greedy/">Greedy</a>
-            <span class="archive-item-date">September 9, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/09/08/algorithm-backtraking/">Back Traking</a>
-            <span class="archive-item-date">September 8, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/09/07/algorithm-tree&bitree/">Tree &amp; BiTree</a>
-            <span class="archive-item-date">September 7, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/09/06/algorithm-stack&queue/">Stack &amp; Queue</a>
-            <span class="archive-item-date">September 6, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/09/05/algorithm-twopointers/">Two Pointers</a>
-            <span class="archive-item-date">September 5, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/09/04/algorithm-strings/">Strings</a>
-            <span class="archive-item-date">September 4, 2023</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2023/09/03/algorithm-hashing/">Hashing</a>
-            <span class="archive-item-date">September 3, 2023</span>
-        </article>
-    
-    
-    <nav class="pagination">
-        <a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/8/">8</a><a class="page-number" href="/archives/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/archives/page/11/">11</a>
-    </nav>
-
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
 </div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">🟡2369.check if there is a valid partition for the array</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">March 1, 2024&nbsp;&nbsp;16:33:26</a>
+                        </span>
+                    
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">403</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">1min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1><span id="ti-mu-miao-shu">题目描述</span></h1><blockquote>
+<p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> ，你必须将数组划分为一个或多个 <strong>连续</strong> 子数组。</p>
+<p>如果获得的这些子数组中每个都能满足下述条件 <strong>之一</strong> ，则可以称其为数组的一种 <strong>有效</strong> 划分：</p>
+<ol>
+<li>子数组 <strong>恰</strong> 由 <code>2</code> 个相等元素组成，例如，子数组 <code>[2,2]</code> 。</li>
+<li>子数组 <strong>恰</strong> 由 <code>3</code> 个相等元素组成，例如，子数组 <code>[4,4,4]</code> 。</li>
+<li>子数组 <strong>恰</strong> 由 <code>3</code> 个连续递增元素组成，并且相邻元素之间的差值为 <code>1</code> 。例如，子数组 <code>[3,4,5]</code> ，但是子数组 <code>[1,3,5]</code> 不符合要求。</li>
+</ol>
+<p>如果数组 <strong>至少</strong> 存在一种有效划分，返回 <code>true</code> ，否则，返回 <code>false</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [4,4,4,5,6]</span><br><span class="line">输出：true</span><br><span class="line">解释：数组可以划分成子数组 [4,4] 和 [4,5,6] 。</span><br><span class="line">这是一种有效划分，所以返回 true 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,1,1,2]</span><br><span class="line">输出：false</span><br><span class="line">解释：该数组不存在有效划分。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= nums.length &lt;= 105</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 106</code></li>
+</ul>
+</blockquote>
+<h1><span id="jie-da">解答</span></h1><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">validPartition</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        <span class="type">boolean</span>[]dp=<span class="keyword">new</span> <span class="title class_">boolean</span>[len+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>]=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(nums[<span class="number">0</span>]==nums[<span class="number">1</span>]){</span><br><span class="line">            dp[<span class="number">2</span>]=<span class="literal">true</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(len&gt;=<span class="number">3</span>&amp;&amp;(nums[<span class="number">0</span>]==nums[<span class="number">1</span>]&amp;&amp;nums[<span class="number">1</span>]==nums[<span class="number">2</span>]||nums[<span class="number">2</span>]-nums[<span class="number">1</span>]==<span class="number">1</span>&amp;&amp;nums[<span class="number">1</span>]-nums[<span class="number">0</span>]==<span class="number">1</span>)){</span><br><span class="line">            dp[<span class="number">3</span>]=<span class="literal">true</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">4</span>; i &lt;= len; i++) {</span><br><span class="line">            <span class="keyword">if</span>((dp[i-<span class="number">2</span>]&amp;&amp;nums[i-<span class="number">1</span>]==nums[i-<span class="number">2</span>])||(dp[i-<span class="number">3</span>]&amp;&amp;(nums[i-<span class="number">1</span>]==nums[i-<span class="number">2</span>]&amp;&amp;nums[i-<span class="number">2</span>]==nums[i-<span class="number">3</span>]||nums[i-<span class="number">1</span>]-nums[i-<span class="number">2</span>]==<span class="number">1</span>&amp;&amp;nums[i-<span class="number">2</span>]-nums[i-<span class="number">3</span>]==<span class="number">1</span>))){</span><br><span class="line">                dp[i]=<span class="literal">true</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[len];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(n)</em></li>
+</ul>
+
+        </div>
+
+
+
+    </article>
+</div>
+
             </div>
             <footer id="footer" class="footer">
     <div class="copyright">

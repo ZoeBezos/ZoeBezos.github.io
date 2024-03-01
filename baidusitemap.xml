@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2024/03/01/coding-2369-check-if-there-is-a-valid-partition-for-the-array/</loc>
+    <lastmod>2024-03-01</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2024/01/31/algorithm-sliding-windows/</loc>
-    <lastmod>2024-02-28</lastmod>
+    <lastmod>2024-03-01</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/02/27/java-class-math/</loc>
