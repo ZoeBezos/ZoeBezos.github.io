@@ -15,7 +15,7 @@
 
 
 
-<title>Tag: algorithm-Bit Manipulation | ZOE&#39;s site</title>
+<title>🟢232.implement queue using stacks | ZOE&#39;s site</title>
 
 
 
@@ -345,30 +345,164 @@
     }
 </script>
             <div class="main">
-                
+                <div class="container">
     
-<div class="container">
-    <div class="post-wrap tags">
-        
-            <h2 class="post-title">-&nbsp;algorithm&nbsp;·&nbsp;Bit Manipulation-</h2>
-        
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
     </div>
-    <div class="post-wrap archive">
-    
-    
-        
-
-        
-            <h3>2024</h3>
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2024/01/25/coding-2859-sum-of-values-at-indices-with-k-set-bits/">🟢2859. sum of values at indices with k set bits</a>
-            <span class="archive-item-date">January 25, 2024</span>
-        </article>
-    
-    
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
 </div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">🟢232.implement queue using stacks</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">March 4, 2024&nbsp;&nbsp;12:25:26</a>
+                        </span>
+                    
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">465</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">2min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1><span id="ti-mu-miao-shu">题目描述</span></h1><blockquote>
+<p>请你仅使用两个栈实现先入先出队列。队列应当支持一般队列支持的所有操作（<code>push</code>、<code>pop</code>、<code>peek</code>、<code>empty</code>）：</p>
+<p>实现 <code>MyQueue</code> 类：</p>
+<ul>
+<li><code>void push(int x)</code> 将元素 x 推到队列的末尾</li>
+<li><code>int pop()</code> 从队列的开头移除并返回元素</li>
+<li><code>int peek()</code> 返回队列开头的元素</li>
+<li><code>boolean empty()</code> 如果队列为空，返回 <code>true</code> ；否则，返回 <code>false</code></li>
+</ul>
+<p><strong>说明：</strong></p>
+<ul>
+<li>你 <strong>只能</strong> 使用标准的栈操作 —— 也就是只有 <code>push to top</code>, <code>peek/pop from top</code>, <code>size</code>, 和 <code>is empty</code> 操作是合法的。</li>
+<li>你所使用的语言也许不支持栈。你可以使用 list 或者 deque（双端队列）来模拟一个栈，只要是标准的栈操作即可。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">["MyQueue", "push", "push", "peek", "pop", "empty"]</span><br><span class="line">[[], [1], [2], [], [], []]</span><br><span class="line">输出：</span><br><span class="line">[null, null, null, 1, 1, false]</span><br><span class="line"></span><br><span class="line">解释：</span><br><span class="line">MyQueue myQueue = new MyQueue();</span><br><span class="line">myQueue.push(1); // queue is: [1]</span><br><span class="line">myQueue.push(2); // queue is: [1, 2] (leftmost is front of the queue)</span><br><span class="line">myQueue.peek(); // return 1</span><br><span class="line">myQueue.pop(); // return 1, queue is [2]</span><br><span class="line">myQueue.empty(); // return false</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= x &lt;= 9</code></li>
+<li>最多调用 <code>100</code> 次 <code>push</code>、<code>pop</code>、<code>peek</code> 和 <code>empty</code></li>
+<li>假设所有操作都是有效的 （例如，一个空的队列不会调用 <code>pop</code> 或者 <code>peek</code> 操作）</li>
+</ul>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>你能否实现每个操作均摊时间复杂度为 <code>O(1)</code> 的队列？换句话说，执行 <code>n</code> 个操作的总时间复杂度为 <code>O(n)</code> ，即使其中一个操作可能花费较长时间。</li>
+</ul>
+<p>Related Topics</p>
+<p>栈</p>
+<p>设计</p>
+<p>队列</p>
+</blockquote>
+<h1><span id="jie-da">解答</span></h1><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyQueue</span> {</span><br><span class="line">    Stack&lt;Integer&gt;in;</span><br><span class="line">    Stack&lt;Integer&gt;out;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyQueue</span><span class="params">()</span> {</span><br><span class="line">        <span class="built_in">this</span>.in=<span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        <span class="built_in">this</span>.out=<span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">push</span><span class="params">(<span class="type">int</span> x)</span> {</span><br><span class="line">        <span class="built_in">this</span>.in.push(x);</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">pop</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">while</span> (!<span class="built_in">this</span>.in.isEmpty()){</span><br><span class="line">            <span class="built_in">this</span>.out.push(<span class="built_in">this</span>.in.pop());</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> res=<span class="built_in">this</span>.out.pop();</span><br><span class="line">        <span class="keyword">while</span> (!<span class="built_in">this</span>.out.isEmpty()){</span><br><span class="line">            <span class="built_in">this</span>.in.push(<span class="built_in">this</span>.out.pop());</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">peek</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">while</span> (!<span class="built_in">this</span>.in.isEmpty()){</span><br><span class="line">            <span class="built_in">this</span>.out.push(<span class="built_in">this</span>.in.pop());</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> res=<span class="built_in">this</span>.out.peek();</span><br><span class="line">        <span class="keyword">while</span> (!<span class="built_in">this</span>.out.isEmpty()){</span><br><span class="line">            <span class="built_in">this</span>.in.push(<span class="built_in">this</span>.out.pop());</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">empty</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.in.isEmpty();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(n)</em></li>
+</ul>
+
+        </div>
+
+
+
+    </article>
 </div>
 
             </div>
