@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2023/09/06/algorithm-stack&queue/</loc>
+    <lastmod>2024-03-07</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
+    <lastmod>2024-03-07</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2024/03/04/coding-232-implement-queue-using-stacks/</loc>
     <lastmod>2024-03-04</lastmod>
   </url>
@@ -171,10 +179,6 @@
   <url>
     <loc>https://zoebezos.github.io/2024/01/31/algorithm-number&bits/</loc>
     <lastmod>2024-02-22</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
-    <lastmod>2024-02-17</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/31/algorithm-binary-search/</loc>
@@ -358,10 +362,6 @@
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/31/algorithm-sorting/</loc>
-    <lastmod>2024-02-08</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/06/algorithm-stack&queue/</loc>
     <lastmod>2024-02-08</lastmod>
   </url>
   <url>
