@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://zoebezos.github.io/2023/09/06/algorithm-stack&queue/</loc>
-    <lastmod>2024-03-07</lastmod>
+    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
+    <lastmod>2024-03-30</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
+    <loc>https://zoebezos.github.io/2024/03/11/coding-2129-capitalize-the-title/</loc>
+    <lastmod>2024-03-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/06/algorithm-stack&queue/</loc>
     <lastmod>2024-03-07</lastmod>
   </url>
   <url>
