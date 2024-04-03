@@ -436,7 +436,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">308</a>                         
+                            <a href="">303</a>                         
                         </span>
                         
                     
@@ -455,7 +455,7 @@
         </header>
 
         <div class="post-content">
-            <h1><span id="wen-ti-miao-shu">问题描述</span></h1><blockquote>
+            <h1><span id="description">Description</span></h1><blockquote>
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 和一个整数 <code>k</code> 。</p>
 <p>请你用整数形式返回 <code>nums</code> 中的特定元素之 <strong>和</strong> ，这些特定元素满足：其对应下标的二进制表示中恰存在 <code>k</code> 个置位。</p>
 <p>整数的二进制表示中的 1 就是这个整数的 <strong>置位</strong> 。</p>
@@ -478,7 +478,7 @@
 <p>位运算</p>
 <p>数组</p>
 </blockquote>
-<h1><span id="jie-da">解答</span></h1><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sumIndicesWithKSetBits</span><span class="params">(List&lt;Integer&gt; nums, <span class="type">int</span> k)</span> {</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.size(); i++) {</span><br><span class="line">            <span class="type">int</span> t=Integer.bitCount(i);</span><br><span class="line">            <span class="keyword">if</span>(t==k){</span><br><span class="line">                res+=nums.get(i);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1><span id="solution">Solution</span></h1><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sumIndicesWithKSetBits</span><span class="params">(List&lt;Integer&gt; nums, <span class="type">int</span> k)</span> {</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.size(); i++) {</span><br><span class="line">            <span class="type">int</span> t=Integer.bitCount(i);</span><br><span class="line">            <span class="keyword">if</span>(t==k){</span><br><span class="line">                res+=nums.get(i);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>time:<em>O(n)</em></li>
