@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2024/04/05/coding-1026-maximum-difference-between-node-and-ancestor/</loc>
+    <lastmod>2024-04-05</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2024/04/03/coding-1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree/</loc>
     <lastmod>2024-04-03</lastmod>
   </url>
