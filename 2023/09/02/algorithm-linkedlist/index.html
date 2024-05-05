@@ -445,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">7.8k</a>                         
+                            <a href="">7.9k</a>                         
                         </span>
                         
                     
@@ -504,7 +504,7 @@
 </tr>
 <tr>
 <td>链表的遍历</td>
-<td>👿🟡430. 扁平化多级双向链表</td>
+<td>☂️🟡430. 扁平化多级双向链表</td>
 <td>✅</td>
 </tr>
 <tr>
@@ -520,7 +520,7 @@
 <tr>
 <td></td>
 <td>🟡24. 两两交换链表中的节点</td>
-<td></td>
+<td>✅</td>
 </tr>
 <tr>
 <td></td>
@@ -935,15 +935,39 @@
 <p>递归</p>
 <p>链表</p>
 </blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">206.</span> 反转链表 </span><br><span class="line"></span><br><span class="line">&gt;  给你单链表的头节点 `head` ，请你反转链表，并返回反转后的链表。</span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br><span class="line">&gt; ![img](https:<span class="comment">//assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg)</span></span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>输入：head = [1,2,3,4,5]<br>输出：[5,4,3,2,1]</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br><span class="line">![img](https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg)</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>输入：head = [1,2]<br>输出：[2,1]</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 3：**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>输入：head = []<br>输出：[]</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**提示：**</span><br><span class="line"></span><br><span class="line">- 链表中节点的数目范围是 `[0, 5000]`</span><br><span class="line">- `-5000 &lt;= Node.val &lt;= 5000`</span><br><span class="line"></span><br><span class="line">**进阶：**链表可以选用迭代或递归方式完成反转。你能否用两种方法解决这道题？</span><br><span class="line"></span><br><span class="line">Related Topics</span><br><span class="line"></span><br><span class="line">递归</span><br><span class="line"></span><br><span class="line">链表</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">class Solution {</span><br><span class="line">   public ListNode reverseList(ListNode head) {</span><br><span class="line">       ListNode fast=head,slow=fast;</span><br><span class="line">       ListNode res=new ListNode (0);//头插法</span><br><span class="line">       while(fast!=null){</span><br><span class="line">           fast=fast.next;</span><br><span class="line">           slow.next=res.next;</span><br><span class="line">           res.next=slow;</span><br><span class="line">           slow=fast;</span><br><span class="line">       }</span><br><span class="line">       return res.next;</span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">swapPairs</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">null</span> || head.next == <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">dummy</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        dummy.next = head;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">ptr</span> <span class="operator">=</span> dummy;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (head != <span class="literal">null</span> &amp;&amp; head.next != <span class="literal">null</span>) {</span><br><span class="line">            <span class="type">ListNode</span> <span class="variable">p1</span> <span class="operator">=</span> head;</span><br><span class="line">            <span class="type">ListNode</span> <span class="variable">p2</span> <span class="operator">=</span> head.next;</span><br><span class="line"></span><br><span class="line">            ptr.next = p2;</span><br><span class="line">            p1.next = p2.next;</span><br><span class="line">            p2.next = p1;</span><br><span class="line"></span><br><span class="line">            ptr = p1;</span><br><span class="line">            head = p1.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(1)</em></li>
+</ul>
+<h2><span id="206-fan-zhuan-lian-biao">🟢206. 反转链表</span></h2><blockquote>
+<p> 给你单链表的头节点 <code>head</code> ，请你反转链表，并返回反转后的链表。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5]</span><br><span class="line">输出：[5,4,3,2,1]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2]</span><br><span class="line">输出：[2,1]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点的数目范围是 <code>[0, 5000]</code></li>
+<li><code>-5000 &lt;= Node.val &lt;= 5000</code></li>
+</ul>
+<p><strong>进阶：</strong>链表可以选用迭代或递归方式完成反转。你能否用两种方法解决这道题？</p>
+<p>Related Topics</p>
+<p>递归</p>
+<p>链表</p>
 </blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">reverseList</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        ListNode fast=head,slow=fast;</span><br><span class="line">        ListNode res=<span class="keyword">new</span> <span class="title class_">ListNode</span> (<span class="number">0</span>);<span class="comment">//头插法</span></span><br><span class="line">        <span class="keyword">while</span>(fast!=<span class="literal">null</span>){</span><br><span class="line">            fast=fast.next;</span><br><span class="line">            slow.next=res.next;</span><br><span class="line">            res.next=slow;</span><br><span class="line">            slow=fast;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res.next;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <ul>
 <li>time:<em>O(n)</em></li>
 <li>space:<em>O(1)</em></li>
