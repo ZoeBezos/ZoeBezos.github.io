@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2024/05/08/coding-2079-watering-plants/</loc>
+    <lastmod>2024-05-08</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2023/09/05/algorithm-twopointers/</loc>
-    <lastmod>2024-05-05</lastmod>
+    <lastmod>2024-05-07</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2023/09/07/algorithm-tree&bitree/</loc>
