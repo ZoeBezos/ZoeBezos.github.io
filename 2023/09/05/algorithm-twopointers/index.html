@@ -445,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">6.3k</a>                         
+                            <a href="">7.1k</a>                         
                         </span>
                         
                     
@@ -454,7 +454,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">28min</a>                         
+                            <a href="">32min</a>                         
                         </span>
                         
                     
@@ -530,17 +530,17 @@
 <tr>
 <td></td>
 <td>🟢455. 分发饼干</td>
-<td></td>
+<td>✅</td>
 </tr>
 <tr>
 <td></td>
 <td>🟢561. 数组拆分</td>
-<td></td>
+<td>✅</td>
 </tr>
 <tr>
 <td></td>
 <td>🟢9. 回文数</td>
-<td></td>
+<td>✅</td>
 </tr>
 <tr>
 <td>快慢指针问题</td>
@@ -610,11 +610,6 @@
 <tr>
 <td></td>
 <td>🔴76. 最小覆盖子串</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>🟢283. 移动零</td>
 <td></td>
 </tr>
 <tr>
@@ -1029,7 +1024,126 @@
 <p>双指针</p>
 <p>排序</p>
 </blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">561.</span> 数组拆分 </span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">9.</span> 回文数</span><br><span class="line"></span><br><span class="line">#  快慢指针问题</span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">876.</span> 链表的中间结点 </span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">206.</span> 反转链表 </span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">19.</span> 删除链表的倒数第 N 个结点 </span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">141.</span> 环形链表</span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">142.</span> 环形链表 II </span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">21.</span> 合并两个有序链表 </span><br><span class="line"></span><br><span class="line">## 🟢 <span class="number">26.</span> 删除有序数组中的重复项 </span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">83.</span> 删除排序链表中的重复元素</span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">82.</span> 删除排序链表中的重复元素 II </span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">86.</span> 分隔链表 </span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">234.</span> 回文链表</span><br><span class="line"></span><br><span class="line">#  滑动窗口问题</span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">209.</span> 长度最小的子数组 </span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">5.</span> 最长回文子串 </span><br><span class="line"></span><br><span class="line">## 🔴<span class="number">76.</span> 最小覆盖子串</span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">283.</span> 移动零 </span><br><span class="line"></span><br><span class="line">##  🟡<span class="number">80.</span> 删除有序数组中的重复项 II </span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">561.</span> 数组拆分 </span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">457.</span> 环形数组是否存在循环 </span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">718.</span> 最长重复子数组</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 🟢<span class="number">977.</span> 有序数组的平方</span><br><span class="line"></span><br><span class="line">&gt; 给你一个按 **非递减顺序** 排序的整数数组 `nums`，返回 **每个数字的平方** 组成的新数组，要求也按 **非递减顺序** 排序。</span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">findContentChildren</span><span class="params">(<span class="type">int</span>[] g, <span class="type">int</span>[] s)</span> {</span><br><span class="line">        <span class="type">int</span> <span class="variable">cnt</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        Arrays.sort(g);</span><br><span class="line">        Arrays.sort(s);</span><br><span class="line">        <span class="type">int</span> idx=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; g.length; i++) {</span><br><span class="line">            <span class="type">int</span> temp=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (idx&lt;s.length){</span><br><span class="line">                <span class="keyword">if</span>(g[i]&lt;=s[idx]){</span><br><span class="line">                    cnt++;</span><br><span class="line">                    s[idx]=<span class="number">0</span>;</span><br><span class="line">                    temp=idx;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                }</span><br><span class="line">                idx++;</span><br><span class="line">            }</span><br><span class="line">            idx=temp;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n·log n+n·m)</em></li>
+<li>space:<em>O(1)</em></li>
+</ul>
+<h2><span id="561-shu-zu-chai-fen">🟢561. 数组拆分</span></h2><blockquote>
+<p>给定长度为 <code>2n</code> 的整数数组 <code>nums</code> ，你的任务是将这些数分成 <code>n</code> 对, 例如 <code>(a1, b1), (a2, b2), ..., (an, bn)</code> ，使得从 <code>1</code> 到 <code>n</code> 的 <code>min(ai, bi)</code> 总和最大。</p>
+<p>返回该 <strong>最大总和</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,4,3,2]</span><br><span class="line">输出：4</span><br><span class="line">解释：所有可能的分法（忽略元素顺序）为：</span><br><span class="line">1. (1, 4), (2, 3) -&gt; min(1, 4) + min(2, 3) = 1 + 2 = 3</span><br><span class="line">2. (1, 3), (2, 4) -&gt; min(1, 3) + min(2, 4) = 1 + 2 = 3</span><br><span class="line">3. (1, 2), (3, 4) -&gt; min(1, 2) + min(3, 4) = 1 + 3 = 4</span><br><span class="line">所以最大总和为 4</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [6,2,6,5,1,2]</span><br><span class="line">输出：9</span><br><span class="line">解释：最优的分法为 (2, 1), (2, 5), (6, 6). min(2, 1) + min(2, 5) + min(6, 6) = 1 + 2 + 6 = 9</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 104</code></li>
+<li><code>nums.length == 2 * n</code></li>
+<li><code>-104 &lt;= nums[i] &lt;= 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>贪心</p>
+<p>数组</p>
+<p>计数排序</p>
+<p>排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">arrayPairSum</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i+=<span class="number">2</span>) {</span><br><span class="line">            sum+=nums[i];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n·log n)</em></li>
+<li>space:<em>O(1)</em></li>
+</ul>
+<h2><span id="9-hui-wen-shu">🟢9. 回文数</span></h2><blockquote>
+<p>给你一个整数 <code>x</code> ，如果 <code>x</code> 是一个回文整数，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+<p>回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<ul>
+<li>例如，<code>121</code> 是回文，而 <code>123</code> 不是。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 121</span><br><span class="line">输出：true</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：x = -121</span><br><span class="line">输出：false</span><br><span class="line">解释：从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 10</span><br><span class="line">输出：false</span><br><span class="line">解释：从右向左读, 为 01 。因此它不是一个回文数。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>-231 &lt;= x &lt;= 231 - 1</code></li>
+</ul>
+<p><strong>进阶：</strong>你能不将整数转为字符串来解决这个问题吗？</p>
+<p>Related Topics</p>
+<p>数学</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="type">int</span> x)</span> {</span><br><span class="line">        String str=String.valueOf(x);</span><br><span class="line">        <span class="type">int</span> i=<span class="number">0</span>,j=str.length()-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j){</span><br><span class="line">            <span class="keyword">if</span>(str.charAt(i)!=str.charAt(j)){</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">            i++;</span><br><span class="line">            j--;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(1)</em></li>
+</ul>
+<h1><span id="kuai-man-zhi-zhen-wen-ti">快慢指针问题</span></h1><h2><span id="876-lian-biao-de-zhong-jian-jie-dian">🟢876. 链表的中间结点</span></h2><blockquote>
+<p>给你单链表的头结点 <code>head</code> ，请你找出并返回链表的中间结点。</p>
+<p>如果有两个中间结点，则返回第二个中间结点。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/07/23/lc-midlist1.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5]</span><br><span class="line">输出：[3,4,5]</span><br><span class="line">解释：链表只有一个中间结点，值为 3 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/07/23/lc-midlist2.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5,6]</span><br><span class="line">输出：[4,5,6]</span><br><span class="line">解释：该链表有两个中间结点，值分别为 3 和 4 ，返回第二个结点。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表的结点数范围是 <code>[1, 100]</code></li>
+<li><code>1 &lt;= Node.val &lt;= 100</code></li>
+</ul>
+<p>Related Topics</p>
+<p>链表</p>
+<p>双指针</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">middleNode</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">fast</span> <span class="operator">=</span> head, slow = head;</span><br><span class="line">        <span class="keyword">while</span> (fast != <span class="literal">null</span> &amp;&amp; fast.next != <span class="literal">null</span>) {</span><br><span class="line">            fast=fast.next.next;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(1)</em></li>
+</ul>
+<h2><span id="206-fan-zhuan-lian-biao">🟢206. 反转链表</span></h2><blockquote>
+<p>给你单链表的头节点 <code>head</code> ，请你反转链表，并返回反转后的链表。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5]</span><br><span class="line">输出：[5,4,3,2,1]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2]</span><br><span class="line">输出：[2,1]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点的数目范围是 <code>[0, 5000]</code></li>
+<li><code>-5000 &lt;= Node.val &lt;= 5000</code></li>
+</ul>
+<p><strong>进阶：</strong>链表可以选用迭代或递归方式完成反转。你能否用两种方法解决这道题？</p>
+<p>Related Topics</p>
+<p>递归</p>
+<p>链表</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">19.</span> 删除链表的倒数第 N 个结点 </span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">141.</span> 环形链表</span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">142.</span> 环形链表 II </span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">21.</span> 合并两个有序链表 </span><br><span class="line"></span><br><span class="line">## 🟢 <span class="number">26.</span> 删除有序数组中的重复项 </span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">83.</span> 删除排序链表中的重复元素</span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">82.</span> 删除排序链表中的重复元素 II </span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">86.</span> 分隔链表 </span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">234.</span> 回文链表</span><br><span class="line"></span><br><span class="line">#  滑动窗口问题</span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">209.</span> 长度最小的子数组 </span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">5.</span> 最长回文子串 </span><br><span class="line"></span><br><span class="line">## 🔴<span class="number">76.</span> 最小覆盖子串</span><br><span class="line"></span><br><span class="line">##  🟡<span class="number">80.</span> 删除有序数组中的重复项 II </span><br><span class="line"></span><br><span class="line">## 🟢<span class="number">561.</span> 数组拆分 </span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">457.</span> 环形数组是否存在循环 </span><br><span class="line"></span><br><span class="line">## 🟡<span class="number">718.</span> 最长重复子数组</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 🟢<span class="number">977.</span> 有序数组的平方</span><br><span class="line"></span><br><span class="line">&gt; 给你一个按 **非递减顺序** 排序的整数数组 `nums`，返回 **每个数字的平方** 组成的新数组，要求也按 **非递减顺序** 排序。</span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; **示例 <span class="number">1</span>：**</span><br><span class="line">&gt;</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>输入：nums = [-4,-1,0,3,10]<br>输出：[0,1,9,16,100]<br>解释：平方后，数组变为 [16,1,0,9,100]<br>排序后，数组变为 [0,1,9,16,100]</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**示例 2：**</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>

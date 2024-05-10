@@ -15,7 +15,7 @@
 
 
 
-<title>Tag: algorithm-TwoPointers | ZOE&#39;s site</title>
+<title>🟢2960.count tested devices after test operations | ZOE&#39;s site</title>
 
 
 
@@ -345,30 +345,161 @@
     }
 </script>
             <div class="main">
-                
+                <div class="container">
     
-<div class="container">
-    <div class="post-wrap tags">
-        
-            <h2 class="post-title">-&nbsp;algorithm&nbsp;·&nbsp;TwoPointers-</h2>
-        
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
     </div>
-    <div class="post-wrap archive">
-    
-    
-        
-
-        
-            <h3>2024</h3>
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2024/05/09/coding-2105-watering-plants-ii/">🟡2105.watering plants ii</a>
-            <span class="archive-item-date">May 9, 2024</span>
-        </article>
-    
-    
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
 </div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">🟢2960.count tested devices after test operations</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 10, 2024&nbsp;&nbsp;14:37:31</a>
+                        </span>
+                    
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">506</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">2min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1><span id="description">Description</span></h1><blockquote>
+<p>给你一个长度为 <code>n</code> 、下标从 <strong>0</strong> 开始的整数数组 <code>batteryPercentages</code> ，表示 <code>n</code> 个设备的电池百分比。</p>
+<p>你的任务是按照顺序测试每个设备 <code>i</code>，执行以下测试操作：</p>
+<ul>
+<li><p>如果</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">batteryPercentages[i]</span><br></pre></td></tr></tbody></table></figure>
+
+<p>大于</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0</span><br></pre></td></tr></tbody></table></figure>
+
+<p>：</p>
+<ul>
+<li><strong>增加</strong> 已测试设备的计数。</li>
+<li>将下标在 <code>[i + 1, n - 1]</code> 的所有设备的电池百分比减少 <code>1</code>，确保它们的电池百分比 <strong>不会低于</strong> <code>0</code> ，即 <code>batteryPercentages[j] = max(0, batteryPercentages[j] - 1)</code>。</li>
+<li>移动到下一个设备。</li>
+</ul>
+</li>
+<li><p>否则，移动到下一个设备而不执行任何测试。</p>
+</li>
+</ul>
+<p>返回一个整数，表示按顺序执行测试操作后 <strong>已测试设备</strong> 的数量。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入：batteryPercentages = [1,1,2,1,3]</span><br><span class="line">输出：3</span><br><span class="line">解释：按顺序从设备 0 开始执行测试操作：</span><br><span class="line">在设备 0 上，batteryPercentages[0] &gt; 0 ，现在有 1 个已测试设备，batteryPercentages 变为 [1,0,1,0,2] 。</span><br><span class="line">在设备 1 上，batteryPercentages[1] == 0 ，移动到下一个设备而不进行测试。</span><br><span class="line">在设备 2 上，batteryPercentages[2] &gt; 0 ，现在有 2 个已测试设备，batteryPercentages 变为 [1,0,1,0,1] 。</span><br><span class="line">在设备 3 上，batteryPercentages[3] == 0 ，移动到下一个设备而不进行测试。</span><br><span class="line">在设备 4 上，batteryPercentages[4] &gt; 0 ，现在有 3 个已测试设备，batteryPercentages 保持不变。</span><br><span class="line">因此，答案是 3 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：batteryPercentages = [0,1,2]</span><br><span class="line">输出：2</span><br><span class="line">解释：按顺序从设备 0 开始执行测试操作：</span><br><span class="line">在设备 0 上，batteryPercentages[0] == 0 ，移动到下一个设备而不进行测试。</span><br><span class="line">在设备 1 上，batteryPercentages[1] &gt; 0 ，现在有 1 个已测试设备，batteryPercentages 变为 [0,1,1] 。</span><br><span class="line">在设备 2 上，batteryPercentages[2] &gt; 0 ，现在有 2 个已测试设备，batteryPercentages 保持不变。</span><br><span class="line">因此，答案是 2 。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n == batteryPercentages.length &lt;= 100 </code></li>
+<li><code>0 &lt;= batteryPercentages[i] &lt;= 100</code></li>
+</ul>
+</blockquote>
+<h1><span id="solution">Solution</span></h1><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">countTestedDevices</span><span class="params">(<span class="type">int</span>[] batteryPercentages)</span> {</span><br><span class="line">        <span class="type">int</span> cnt=<span class="number">0</span>,len= batteryPercentages.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            <span class="keyword">if</span>(batteryPercentages[i]&gt;<span class="number">0</span>){</span><br><span class="line">                cnt++;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i+<span class="number">1</span>; j &lt; len; j++) {</span><br><span class="line">                    batteryPercentages[j]=Math.max(<span class="number">0</span>,batteryPercentages[j]-<span class="number">1</span>);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n^2^)</em></li>
+<li>space:<em>O(1)</em></li>
+</ul>
+
+        </div>
+
+
+
+    </article>
 </div>
 
             </div>
