@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://zoebezos.github.io/2024/05/10/coding-2960-count-tested-devices-after-test-operations/</loc>
-    <lastmod>2024-05-10</lastmod>
+    <loc>https://zoebezos.github.io/2023/09/01/algorithm-array/</loc>
+    <lastmod>2024-05-12</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2023/09/05/algorithm-twopointers/</loc>
-    <lastmod>2024-05-09</lastmod>
+    <lastmod>2024-05-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/05/11/coding-2391-minimum-amount-of-time-to-collect-garbage/</loc>
+    <lastmod>2024-05-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/05/10/coding-2960-count-tested-devices-after-test-operations/</loc>
+    <lastmod>2024-05-10</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/05/09/coding-2105-watering-plants-ii/</loc>
@@ -26,10 +34,6 @@
   </url>
   <url>
     <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
-    <lastmod>2024-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/01/algorithm-array/</loc>
     <lastmod>2024-04-05</lastmod>
   </url>
   <url>

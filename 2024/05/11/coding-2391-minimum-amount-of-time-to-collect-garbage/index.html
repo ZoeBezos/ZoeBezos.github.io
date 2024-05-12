@@ -15,7 +15,7 @@
 
 
 
-<title>Tag: algorithm-DP | ZOE&#39;s site</title>
+<title>🟡2391.minimum amount of time to collect garbage | ZOE&#39;s site</title>
 
 
 
@@ -345,39 +345,155 @@
     }
 </script>
             <div class="main">
-                
+                <div class="container">
     
-<div class="container">
-    <div class="post-wrap tags">
-        
-            <h2 class="post-title">-&nbsp;algorithm&nbsp;·&nbsp;DP-</h2>
-        
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
     </div>
-    <div class="post-wrap archive">
-    
-    
-        
-
-        
-            <h3>2024</h3>
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2024/05/11/coding-2391-minimum-amount-of-time-to-collect-garbage/">🟡2391.minimum amount of time to collect garbage</a>
-            <span class="archive-item-date">May 11, 2024</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2024/03/01/coding-2369-check-if-there-is-a-valid-partition-for-the-array/">🟡2369.check if there is a valid partition for the array</a>
-            <span class="archive-item-date">March 1, 2024</span>
-        </article>
-    
-    
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
 </div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">🟡2391.minimum amount of time to collect garbage</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 11, 2024&nbsp;&nbsp;20:27:48</a>
+                        </span>
+                    
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">726</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">2min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1><span id="description">Description</span></h1><blockquote>
+<p>给你一个下标从 <strong>0</strong> 开始的字符串数组 <code>garbage</code> ，其中 <code>garbage[i]</code> 表示第 <code>i</code> 个房子的垃圾集合。<code>garbage[i]</code> 只包含字符 <code>'M'</code> ，<code>'P'</code> 和 <code>'G'</code> ，但可能包含多个相同字符，每个字符分别表示一单位的金属、纸和玻璃。垃圾车收拾 <strong>一</strong> 单位的任何一种垃圾都需要花费 <code>1</code> 分钟。</p>
+<p>同时给你一个下标从 <strong>0</strong> 开始的整数数组 <code>travel</code> ，其中 <code>travel[i]</code> 是垃圾车从房子 <code>i</code> 行驶到房子 <code>i + 1</code> 需要的分钟数。</p>
+<p>城市里总共有三辆垃圾车，分别收拾三种垃圾。每辆垃圾车都从房子 <code>0</code> 出发，<strong>按顺序</strong> 到达每一栋房子。但它们 <strong>不是必须</strong> 到达所有的房子。</p>
+<p>任何时刻只有 <strong>一辆</strong> 垃圾车处在使用状态。当一辆垃圾车在行驶或者收拾垃圾的时候，另外两辆车 <strong>不能</strong> 做任何事情。</p>
+<p>请你返回收拾完所有垃圾需要花费的 <strong>最少</strong> 总分钟数。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">输入：garbage = ["G","P","GP","GG"], travel = [2,4,3]</span><br><span class="line">输出：21</span><br><span class="line">解释：</span><br><span class="line">收拾纸的垃圾车：</span><br><span class="line">1. 从房子 0 行驶到房子 1</span><br><span class="line">2. 收拾房子 1 的纸垃圾</span><br><span class="line">3. 从房子 1 行驶到房子 2</span><br><span class="line">4. 收拾房子 2 的纸垃圾</span><br><span class="line">收拾纸的垃圾车总共花费 8 分钟收拾完所有的纸垃圾。</span><br><span class="line">收拾玻璃的垃圾车：</span><br><span class="line">1. 收拾房子 0 的玻璃垃圾</span><br><span class="line">2. 从房子 0 行驶到房子 1</span><br><span class="line">3. 从房子 1 行驶到房子 2</span><br><span class="line">4. 收拾房子 2 的玻璃垃圾</span><br><span class="line">5. 从房子 2 行驶到房子 3</span><br><span class="line">6. 收拾房子 3 的玻璃垃圾</span><br><span class="line">收拾玻璃的垃圾车总共花费 13 分钟收拾完所有的玻璃垃圾。</span><br><span class="line">由于没有金属垃圾，收拾金属的垃圾车不需要花费任何时间。</span><br><span class="line">所以总共花费 8 + 13 = 21 分钟收拾完所有垃圾。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：garbage = ["MMM","PGM","GP"], travel = [3,10]</span><br><span class="line">输出：37</span><br><span class="line">解释：</span><br><span class="line">收拾金属的垃圾车花费 7 分钟收拾完所有的金属垃圾。</span><br><span class="line">收拾纸的垃圾车花费 15 分钟收拾完所有的纸垃圾。</span><br><span class="line">收拾玻璃的垃圾车花费 15 分钟收拾完所有的玻璃垃圾。</span><br><span class="line">总共花费 7 + 15 + 15 = 37 分钟收拾完所有的垃圾。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= garbage.length &lt;= 105</code></li>
+<li><code>garbage[i]</code> 只包含字母 <code>'M'</code> ，<code>'P'</code> 和 <code>'G'</code> 。</li>
+<li><code>1 &lt;= garbage[i].length &lt;= 10</code></li>
+<li><code>travel.length == garbage.length - 1</code></li>
+<li><code>1 &lt;= travel[i] &lt;= 100</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>字符串</p>
+<p>前缀和</p>
+</blockquote>
+<h1><span id="solution">Solution</span></h1><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">garbageCollection</span><span class="params">(String[] garbage, <span class="type">int</span>[] travel)</span> {</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span>[] last = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; garbage.length; i++) {</span><br><span class="line">            sum += garbage[i].length();</span><br><span class="line">            <span class="keyword">if</span> (garbage[i].contains(<span class="string">"M"</span>)) {</span><br><span class="line">                last[<span class="number">0</span>] = i;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span> (garbage[i].contains(<span class="string">"P"</span>)) {</span><br><span class="line">                last[<span class="number">1</span>] = i;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span> (garbage[i].contains(<span class="string">"G"</span>)) {</span><br><span class="line">                last[<span class="number">2</span>] = i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; last.length; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; last[i]; j++) {</span><br><span class="line">                sum += travel[j];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>space:<em>O(1)</em></li>
+</ul>
+
+        </div>
+
+
+
+    </article>
 </div>
 
             </div>
