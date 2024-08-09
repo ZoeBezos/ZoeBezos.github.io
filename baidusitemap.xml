@@ -1,8 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zoebezos.github.io/2024/08/09/coding-3132-find-the-integer-added-to-array-ii/</loc>
+    <lastmod>2024-08-09</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/08/09/coding-3131-find-the-integer-added-to-array-i/</loc>
+    <lastmod>2024-08-09</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/06/algorithm-stack&queue/</loc>
+    <lastmod>2024-08-09</lastmod>
+  </url>
+  <url>
     <loc>https://zoebezos.github.io/2023/09/01/algorithm-array/</loc>
-    <lastmod>2024-07-04</lastmod>
+    <lastmod>2024-08-06</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
+    <lastmod>2024-08-06</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/08/04/coding-572-subtree-of-another-tree/</loc>
+    <lastmod>2024-08-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/08/03/coding-3143-maximum-points-inside-the-square/</loc>
+    <lastmod>2024-08-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/08/02/coding-3128-right-triangles/</loc>
+    <lastmod>2024-08-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/08/01/coding-lcp40-mental-arithmetic-challenge/</loc>
+    <lastmod>2024-08-04</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/31/algorithm-sliding-windows/</loc>
@@ -23,10 +55,6 @@
   <url>
     <loc>https://zoebezos.github.io/2024/05/17/coding-826-most-profit-assigning-work/</loc>
     <lastmod>2024-05-17</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist/</loc>
-    <lastmod>2024-05-16</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/05/16/coding-1953-maximum-number-of-weeks-for-which-you-can-work/</loc>
@@ -215,10 +243,6 @@
   <url>
     <loc>https://zoebezos.github.io/2024/03/11/coding-2129-capitalize-the-title/</loc>
     <lastmod>2024-03-11</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/06/algorithm-stack&queue/</loc>
-    <lastmod>2024-03-07</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/02/27/java-class-math/</loc>
