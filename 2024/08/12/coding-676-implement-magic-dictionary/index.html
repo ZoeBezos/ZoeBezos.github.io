@@ -15,7 +15,7 @@
 
 
 
-<title>Tag: algorithm-DFS | ZOE&#39;s site</title>
+<title>🟡676. implement magic dictionary | ZOE&#39;s site</title>
 
 
 
@@ -345,61 +345,157 @@
     }
 </script>
             <div class="main">
-                
+                <div class="container">
     
-<div class="container">
-    <div class="post-wrap tags">
-        
-            <h2 class="post-title">-&nbsp;algorithm&nbsp;·&nbsp;DFS-</h2>
-        
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
     </div>
-    <div class="post-wrap archive">
-    
-    
-        
-
-        
-            <h3>2024</h3>
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2024/02/09/coding-236-lowest-common-ancestor-of-a-binary-tree/">🟡236.lowest common ancestor of a binary tree</a>
-            <span class="archive-item-date">February 9, 2024</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2024/02/08/coding-993-cousins-in-binary-tree/">🟢993.cousins in binary tree</a>
-            <span class="archive-item-date">February 8, 2024</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2024/02/07/coding-2641-cousins-in-binary-tree-ii/">🟡2641. cousins in binary tree ii</a>
-            <span class="archive-item-date">February 7, 2024</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2024/02/01/coding-590-n-ary-tree-postorder-traversal/">🟢590.n-ary-tree postorder traversal</a>
-            <span class="archive-item-date">February 1, 2024</span>
-        </article>
-    
-    
-    <nav class="pagination">
-        <a class="page-number" href="/tags/algorithm-DFS/">1</a><span class="page-number current">2</span>
-    </nav>
-
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
 </div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">🟡676. implement magic dictionary</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 12, 2024&nbsp;&nbsp;12:08:43</a>
+                        </span>
+                    
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">422</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">1min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1><span id="description">Description</span></h1><blockquote>
+<p> 设计一个使用单词列表进行初始化的数据结构，单词列表中的单词 <strong>互不相同</strong> 。 如果给出一个单词，请判定能否只将这个单词中<strong>一个</strong>字母换成另一个字母，使得所形成的新单词存在于你构建的字典中。</p>
+<p> 实现 <code>MagicDictionary</code> 类：</p>
+<ul>
+<li><code>MagicDictionary()</code> 初始化对象</li>
+<li><code>void buildDict(String[] dictionary)</code> 使用字符串数组 <code>dictionary</code> 设定该数据结构，<code>dictionary</code> 中的字符串互不相同</li>
+<li><code>bool search(String searchWord)</code> 给定一个字符串 <code>searchWord</code> ，判定能否只将字符串中 <strong>一个</strong> 字母换成另一个字母，使得所形成的新字符串能够与字典中的任一字符串匹配。如果可以，返回 <code>true</code> ；否则，返回 <code>false</code> 。</li>
+</ul>
+<p> <strong>示例：</strong></p>
+ <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">输入</span><br><span class="line">["MagicDictionary", "buildDict", "search", "search", "search", "search"]</span><br><span class="line">[[], [["hello", "leetcode"]], ["hello"], ["hhllo"], ["hell"], ["leetcoded"]]</span><br><span class="line">输出</span><br><span class="line">[null, null, false, true, false, false]</span><br><span class="line"></span><br><span class="line">解释</span><br><span class="line">MagicDictionary magicDictionary = new MagicDictionary();</span><br><span class="line">magicDictionary.buildDict(["hello", "leetcode"]);</span><br><span class="line">magicDictionary.search("hello"); // 返回 False</span><br><span class="line">magicDictionary.search("hhllo"); // 将第二个 'h' 替换为 'e' 可以匹配 "hello" ，所以返回 True</span><br><span class="line">magicDictionary.search("hell"); // 返回 False</span><br><span class="line">magicDictionary.search("leetcoded"); // 返回 False</span><br></pre></td></tr></tbody></table></figure>
+
+<p> <strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= dictionary.length &lt;= 100</code></li>
+<li><code>1 &lt;= dictionary[i].length &lt;= 100</code></li>
+<li><code>dictionary[i]</code> 仅由小写英文字母组成</li>
+<li><code>dictionary</code> 中的所有字符串 <strong>互不相同</strong></li>
+<li><code>1 &lt;= searchWord.length &lt;= 100</code></li>
+<li><code>searchWord</code> 仅由小写英文字母组成</li>
+<li><code>buildDict</code> 仅在 <code>search</code> 之前调用一次</li>
+<li>最多调用 <code>100</code> 次 <code>search</code></li>
+</ul>
+<p> Related Topics</p>
+<p> 深度优先搜索</p>
+<p> 设计</p>
+<p> 字典树</p>
+<p> 哈希表</p>
+<p> 字符串</p>
+</blockquote>
+<h1><span id="solution">Solution</span></h1><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MagicDictionary</span> {</span><br><span class="line">    <span class="keyword">private</span> String[] words;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MagicDictionary</span><span class="params">()</span> {</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildDict</span><span class="params">(String[] dictionary)</span> {</span><br><span class="line">        words = dictionary;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">search</span><span class="params">(String searchWord)</span> {</span><br><span class="line">        <span class="keyword">for</span> (String word : words) {</span><br><span class="line">            <span class="keyword">if</span> (word.length() != searchWord.length()) {</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            <span class="type">int</span> <span class="variable">diff</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; word.length(); ++i) {</span><br><span class="line">                <span class="keyword">if</span> (word.charAt(i) != searchWord.charAt(i)) {</span><br><span class="line">                    ++diff;</span><br><span class="line">                    <span class="keyword">if</span> (diff &gt; <span class="number">1</span>) {</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span> (diff == <span class="number">1</span>) {</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n)</em></li>
+<li>sapce:<em>O(n)</em></li>
+</ul>
+
+        </div>
+
+
+
+    </article>
 </div>
 
             </div>
