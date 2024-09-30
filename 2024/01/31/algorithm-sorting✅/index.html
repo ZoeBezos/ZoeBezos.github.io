@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zoe">
+
+
+    <meta name="subtitle" content="liberté">
+
+
+
+
+<title>Sorting | ZOE&#39;s site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+    <script src="/js/jquery-3.7.0.min.js"></script>
+    
+    <script src="/js/mathjax2.7.5.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<!-- 搜索的部分 -->
+
+
+
+    <script>
+    // function searchToggle() {
+    //     const width = $(document.body).width()
+    //     if(width > 479) {
+    //         return;
+    //     }
+    //     const search = $('.search');
+    //     const searchForm = $('.form-search')
+
+    //     if(!search.hasClass("mobile-search")) {
+    //         search.addClass("mobile-search");
+    //     } else {
+    //         search.removeClass("mobile-search");
+    //     } 
+    // }
+
+    function searchToggle() {
+        const width = $(document.body).width()
+        if(width > 479) {
+            return;
+        }
+        const search = $('.search');
+        const searchForm = $('.form-search');
+        const menuToggle = $('.menu-toggle');
+        const title = $('.navbar-header-title ');
+
+        if(!search.hasClass("mobile-search")) {
+            search.addClass("mobile-search");
+            menuToggle.addClass("open-search")
+            title.addClass("mobile-title-hidden")
+        } else {
+            search.removeClass("mobile-search");
+            menuToggle.removeClass("open-search")
+            // title.css({visibility: 'visible'})
+            title.removeClass("mobile-title-hidden")
+        } 
+    }
+
+
+
+    function search(searchInputEl, formEl, flag) {
+        const path = "/" + "search.json"; // 可以在public 下查看这个search.json
+        $(formEl).submit(function(e){
+            e.preventDefault();
+            let target = null
+            if(searchInputEl == null) {
+                const screenWidth = $(document.body).width();
+                target = screenWidth > 479 ? $('#pc-search-input') : $('#mobile-search-input');
+                console.log(target);
+            } else {
+                target = $(searchInputEl)
+            }
+
+            if(!flag && target.val() === '') {
+                return ;
+            }
+
+            $("#u-search").fadeIn(500, function() {
+                $("body > .wrapper").addClass("modal-active");
+
+                $.ajax({
+                    url: path,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        $input = target.val();
+                        $(".form-input").val($input);
+                        const loadingBar = $('.search-loading-bar') 
+                        loadingBar.css({
+                            width:'100%',
+                            display: 'block'
+                        });
+                    },
+                    success: function( datas ) {
+                        console.log(datas);
+                        const $resultPanel = $(".modal-body")[0];
+                        let str = `<ul class="modal-results">`;
+                        var keywords = $(".form-input").val().trim().toLowerCase().split(/[\s\-]+/);
+                        $resultPanel.innerHTML = "";
+                        let hasResult = false
+                        let text = `<div class="no-result">找不到与关键词相关的内容....</div>`;
+
+                        if ($(".form-input").val().trim().length <= 0) {
+                            // 没有结果
+                            $resultPanel.innerHTML = text;
+                            return;
+                        }
+                        datas.forEach(function (data, index) {
+                            var isMatch = true;
+                            if (!data.title || data.title.trim() === '') {
+                                data.title = "Untitled";
+                            }
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content && data.content.trim().replace(/<[^>]+>/g, "").toLowerCase() || '';
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty contents
+                            if (data_content !== '') {
+                                keywords.forEach(function (keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        hasResult = true
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            } else {
+                                isMatch = false;
+                            }
+                            // show search results
+                            if (isMatch) {
+                                str += `<li class='result-item'><a href='${data_url}' class='result-item-detail'> <span class="title">${data_title}</span>`;
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 200 characters
+                                    var start = first_occur - 40;
+                                    var end = first_occur + 160;
+
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+
+                                    if (start == 0) {
+                                        end = 200;
+                                    }
+
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+
+                                    var match_content = content.substring(start, end);
+
+                                    // highlight all keywords
+                                    keywords.forEach(function (keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, `<em class="search-keyword">${keyword}</em>`);
+                                    });
+
+                                    str += `<span class="content"> ${match_content} ...</span></a>`;
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        if(hasResult) {
+                            $resultPanel.innerHTML = str;
+                        } else {
+                            $resultPanel.innerHTML = text;
+                        }
+
+                    },
+                    complete: function() {
+                        setTimeout(() => {
+                                const loadingBar = $('.search-loading-bar') 
+                                loadingBar.css({
+                                    width:'0%',
+                                    display: 'none'
+                                });
+                        }, 300)
+                    }
+                });
+            })
+
+        });
+    }
+
+    $(document).ready(function() {
+        $('.modal-close').click(function () { 
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+
+        $('.modal-overlay').click(function() {
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+        search(null, ".form-search", false)
+        search("#u-search-modal-form .form-input", ".u-search-modal-form", true)
+    })
+</script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                // pagebody.classList.add('dark-theme');
+                // mobile
+                // document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <!-- <div class="navbar-header header-logo"><a href="/">ZOE&#39;s site</a></div> -->
+            <div class="navbar-header header-logo"><a href="/"><i class="iconfont icon-zhuye" style="font-size: 1em;"></i>ZOE&#39;s site</a></div>
+            <div class="menu navbar-right">
+                <!-- 这里表示的是pc端搜索框 -->
+                
+                
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="pc-search-input"/>
+        </form>
+    </div>
+
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <!-- <label for="switch_default" class="toggleBtn"></label> -->
+            </div>
+        </div>
+    </nav>
+    
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ZOE&#39;s site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="navbar-mobile-right">
+                    
+                    
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="mobile-search-input"/>
+        </form>
+    </div>
+
+                    <!-- <div class="menu-toggle" onclick="mobileBtn()">&#9776; menu</div> -->
+                </div>
+    
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Sorting</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 31, 2024&nbsp;&nbsp;16:05:31</a>
+                        </span>
+                    
+                    
+
+                        <span class="post-category">                        
+                            Category:                        
+                                                    
+                            <a href="/categories/algorithm-learning/">algorithm learning</a>
+                            
+                        </span>
+
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">6.2k</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">30min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1><span id="shi-da-nei-bu-pai-xu-suan-fa">十大内部排序算法</span></h1><table>
+<thead>
+<tr>
+<th>排序算法</th>
+<th>适用的数据结构</th>
+<th>最好时间复杂度</th>
+<th>最坏时间复杂度</th>
+<th>平均时间复杂度</th>
+<th>空间复杂度</th>
+<th>排序方式</th>
+<th>稳定性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>冒泡排序(Bubble sort)</td>
+<td>数组</td>
+<td>O(n)</td>
+<td>O(n^2^)</td>
+<td>O(n^2^)</td>
+<td>O(1)</td>
+<td>In-place</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>插入排序(Insertion sort)</td>
+<td>数组、链表</td>
+<td>O(n)</td>
+<td>O(n^2^)</td>
+<td>O(n^2^)</td>
+<td>O(1)</td>
+<td>In-place</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>选择排序(Selection sort)</td>
+<td>数组、链表</td>
+<td>O(n^2^)</td>
+<td>O(n^2^)</td>
+<td>O(n^2^)</td>
+<td>O(1)</td>
+<td>In-place</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>快速排序(Quick sort)</td>
+<td>数组</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>In-place</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>堆排序(Heap sort)</td>
+<td>数组</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(1)</td>
+<td>In-place</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>希尔排序(Shell sort)</td>
+<td>数组</td>
+<td>O(n log n)</td>
+<td>O(n^2^)</td>
+<td>O(n log n)</td>
+<td>O(1)</td>
+<td>In-place</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>归并排序(Merge sort)</td>
+<td>数组、链表</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n)</td>
+<td>Out-place</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>计数排序(Counting sort)</td>
+<td>数组、链表</td>
+<td>O(n+k)</td>
+<td>O(n+k)</td>
+<td>O(n+k)</td>
+<td>O(k)</td>
+<td>Out-place</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>桶排序(Bucket sort)</td>
+<td>数组、链表</td>
+<td>O(n+k)</td>
+<td>O(n+k)</td>
+<td>O(n^2^)</td>
+<td>O(n+k)</td>
+<td>Out-place</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>基数排序(Radix sort)</td>
+<td>数组、链表</td>
+<td>O(n×k)</td>
+<td>O(n×k)</td>
+<td>O(n×k)</td>
+<td>O(n+k)</td>
+<td>Out-place</td>
+<td>稳定</td>
+</tr>
+</tbody></table>
+<p>*注：</p>
+<p>①n为数组长度或链表节点数，k为等待排序元素的最大位数</p>
+<p>②归并排序中内部使用到插入排序</p>
+<p>③基数排序中内部使用到计数排序或者桶排序</p>
+<p>④基数排序需要经过处理才可以对负数元素排序</p>
+<table>
+<thead>
+<tr>
+<th>平均时间复杂度</th>
+<th>排序算法</th>
+<th>题目</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>O(n^2^)</td>
+<td>冒泡排序(Bubble sort)</td>
+<td>🟢283. 移动零</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td>插入排序(Insertion sort)</td>
+<td>🟡147. 对链表进行插入排序</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>🟢LCR 159. 库存管理 III</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td>选择排序(Selection sort)</td>
+<td>🟢LCR 159. 库存管理 III</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>O(nlog n)</td>
+<td>快速排序(Quick sort)</td>
+<td>🟡912. 排序数组</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td>堆排序(Heap sort)</td>
+<td>🟡912. 排序数组</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>🟡215. 数组中的第K个最大元素</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>🟡面试题 17.14. 最小K个数</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>🟡347. 前 K 个高频元素</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>🟡692. 前K个高频单词</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>🔴23. 合并 K 个升序链表</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td>希尔排序(Shell sort)</td>
+<td>🟡912. 排序数组</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>归并排序(Merge sort)</td>
+<td>🟡912. 排序数组</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>🟡148. 排序链表</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>🔴23. 合并 K 个升序链表</td>
+<td></td>
+</tr>
+<tr>
+<td>O(n)</td>
+<td>计数排序(Counting sort)</td>
+<td>🟡912. 排序数组</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>🟡75. 颜色分类</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>桶排序(Bucket sort)</td>
+<td>🟡912. 排序数组</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>🟡148. 排序链表</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>基数排序(Radix sort)</td>
+<td>🟡912. 排序数组</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>特别排序</td>
+<td>🟡179. 最大数</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1><span id="mou-pao-pai-xu">冒泡排序</span></h1><h2><span id="283-yi-dong-ling">🟢283. 移动零</span></h2><blockquote>
+<p>给定一个数组 <code>nums</code>，编写一个函数将所有 <code>0</code> 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
+<p><strong>请注意</strong> ，必须在不复制数组的情况下原地对数组进行操作。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [0,1,0,3,12]</span><br><span class="line">输出: [1,3,12,0,0]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [0]</span><br><span class="line">输出: [0]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示</strong>:</p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 104</code></li>
+<li><code>-231 &lt;= nums[i] &lt;= 231 - 1</code></li>
+</ul>
+<p><strong>进阶：</strong>你能尽量减少完成的操作次数吗？</p>
+<p>Related Topics</p>
+<p>数组</p>
+<p>双指针</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">moveZeroes</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len-<span class="number">1</span>; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; len-i; j++) {</span><br><span class="line">                <span class="keyword">if</span>(nums[j-<span class="number">1</span>]==<span class="number">0</span>){</span><br><span class="line">                    <span class="type">int</span> temp=nums[j];</span><br><span class="line">                    nums[j]=nums[j-<span class="number">1</span>];</span><br><span class="line">                    nums[j-<span class="number">1</span>]=temp;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(n^2^)</em></p>
+</li>
+<li><p>space:<em>O(1)</em></p>
+</li>
+</ul>
+<h1><span id="cha-ru-pai-xu">插入排序</span></h1><h2><span id="147-dui-lian-biao-jin-xing-cha-ru-pai-xu">🟡147. 对链表进行插入排序</span></h2><blockquote>
+<p>给定单个链表的头 <code>head</code> ，使用 <strong>插入排序</strong> 对链表进行排序，并返回 <em>排序后链表的头</em> 。</p>
+<p><strong>插入排序</strong> 算法的步骤:</p>
+<ol>
+<li>插入排序是迭代的，每次只移动一个元素，直到所有元素可以形成一个有序的输出列表。</li>
+<li>每次迭代中，插入排序只从输入数据中移除一个待排序的元素，找到它在序列中适当的位置，并将其插入。</li>
+<li>重复直到所有输入数据插入完为止。</li>
+</ol>
+<p>下面是插入排序算法的一个图形示例。部分排序的列表(黑色)最初只包含列表中的第一个元素。每次迭代时，从输入数据中删除一个元素(红色)，并就地插入已排序的列表中。</p>
+<p>对链表进行插入排序。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif" alt="img"></p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/04/sort1linked-list.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: head = [4,2,1,3]</span><br><span class="line">输出: [1,2,3,4]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/04/sort2linked-list.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: head = [-1,5,3,4,0]</span><br><span class="line">输出: [-1,0,3,4,5]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>列表中的节点数在 <code>[1, 5000]</code>范围内</li>
+<li><code>-5000 &lt;= Node.val &lt;= 5000</code></li>
+</ul>
+<p>Related Topics</p>
+<p>链表</p>
+<p>排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">insertionSortList</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">dummy</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">ptr</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="keyword">while</span> (ptr != <span class="literal">null</span>) {</span><br><span class="line">            <span class="type">ListNode</span> <span class="variable">slow</span> <span class="operator">=</span> dummy;</span><br><span class="line">            <span class="type">ListNode</span> <span class="variable">fast</span> <span class="operator">=</span> slow.next;</span><br><span class="line">            <span class="keyword">while</span> (fast != <span class="literal">null</span> &amp;&amp; fast.val &lt;= ptr.val) {</span><br><span class="line">                slow = fast;</span><br><span class="line">                fast = fast.next;</span><br><span class="line">            }</span><br><span class="line">            <span class="type">ListNode</span> <span class="variable">next</span> <span class="operator">=</span> ptr.next;</span><br><span class="line">            ptr.next = fast;</span><br><span class="line">            slow.next = ptr;</span><br><span class="line">            ptr = next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(n^2^)</em></p>
+</li>
+<li><p>space:<em>O(1)</em></p>
+</li>
+</ul>
+<h2><span id="lcr-159-ku-cun-guan-li-iii">🟡LCR 159. 库存管理 III</span></h2><blockquote>
+<p>仓库管理员以数组 <code>stock</code> 形式记录商品库存表，其中 <code>stock[i]</code> 表示对应商品库存余量。请返回库存余量最少的 <code>cnt</code> 个商品余量，返回 <strong>顺序不限</strong>。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：stock = [2,5,7,4], cnt = 1</span><br><span class="line">输出：[2]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：stock = [0,2,3,6], cnt = 2</span><br><span class="line">输出：[0,2] 或 [2,0]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= cnt &lt;= stock.length &lt;= 10000 0 &lt;= stock[i] &lt;= 10000</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>快速选择</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] inventoryManagement(<span class="type">int</span>[] stock, <span class="type">int</span> cnt) {</span><br><span class="line">        <span class="type">int</span> len=stock.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i+<span class="number">1</span>; j &lt; len; j++) {</span><br><span class="line">                <span class="keyword">if</span>(stock[j]&lt;stock[i]){</span><br><span class="line">                    <span class="type">int</span> temp=stock[i];</span><br><span class="line">                    stock[i]=stock[j];</span><br><span class="line">                    stock[j]=temp;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span>[]res=<span class="keyword">new</span> <span class="title class_">int</span>[cnt];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; cnt; i++) {</span><br><span class="line">            res[i]=stock[i];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(n^3^)</em></p>
+</li>
+<li><p>space:<em>O(1)</em></p>
+</li>
+</ul>
+<h1><span id="xuan-ze-pai-xu">选择排序</span></h1><h2><span id="lcr-159-ku-cun-guan-li-iii">🟡LCR 159. 库存管理 III</span></h2><blockquote>
+<p>仓库管理员以数组 <code>stock</code> 形式记录商品库存表，其中 <code>stock[i]</code> 表示对应商品库存余量。请返回库存余量最少的 <code>cnt</code> 个商品余量，返回 <strong>顺序不限</strong>。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：stock = [2,5,7,4], cnt = 1</span><br><span class="line">输出：[2]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：stock = [0,2,3,6], cnt = 2</span><br><span class="line">输出：[0,2] 或 [2,0]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= cnt &lt;= stock.length &lt;= 10000 0 &lt;= stock[i] &lt;= 10000</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>快速选择</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] inventoryManagement(<span class="type">int</span>[] stock, <span class="type">int</span> cnt) {</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> stock.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; j++) {</span><br><span class="line">                <span class="keyword">if</span> (stock[i] &lt; stock[j]) {</span><br><span class="line">                    <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> stock[i];</span><br><span class="line">                    stock[i] = stock[j];</span><br><span class="line">                    stock[j] = temp;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[cnt];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; cnt; i++) {</span><br><span class="line">            res[i] = stock[i];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(n^2^)</em></p>
+</li>
+<li><p>space:<em>O(1)</em></p>
+</li>
+</ul>
+<h1><span id="kuai-su-pai-xu">快速排序</span></h1><h2><span id="912-pai-xu-shu-zu">🟡912. 排序数组</span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>桶排序</p>
+<p>计数排序</p>
+<p>基数排序</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums) {</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        quickSort(nums, <span class="number">0</span>, len - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> l, <span class="type">int</span> r)</span> {</span><br><span class="line">        <span class="keyword">if</span> (l &gt;= r) {</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> l;</span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> r;</span><br><span class="line">        <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> nums[i];</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j) {</span><br><span class="line">            <span class="keyword">while</span> (i &lt; j &amp;&amp; nums[j] &gt; x) {</span><br><span class="line">                j--;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span> (i &lt; j) {</span><br><span class="line">                nums[i++] = nums[j];</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">while</span> (i &lt; j &amp;&amp; nums[i] &lt; x) {</span><br><span class="line">                i++;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span> (i &lt; j) {</span><br><span class="line">                nums[j--] = nums[i];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        nums[i] = x;</span><br><span class="line">        quickSort(nums, l, i - <span class="number">1</span>);</span><br><span class="line">        quickSort(nums, i + <span class="number">1</span>, r);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(nlogn)</em></p>
+</li>
+<li><p>space:<em>O(1)</em></p>
+</li>
+</ul>
+<h1><span id="dui-pai-xu">堆排序</span></h1><h2><span id="912-pai-xu-shu-zu">🟡912. 排序数组</span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>桶排序</p>
+<p>计数排序</p>
+<p>基数排序</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums) {</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        Queue&lt;Integer&gt; heap = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            heap.offer(nums[i]);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            nums[i] = heap.poll();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(nlogn)</em></p>
+</li>
+<li><p>space:<em>O(n)</em></p>
+</li>
+</ul>
+<h2><span id="215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su">🟡215. 数组中的第K个最大元素</span></h2><blockquote>
+<p>给定整数数组 <code>nums</code> 和整数 <code>k</code>，请返回数组中第 <code>**k**</code> 个最大的元素。</p>
+<p>请注意，你需要找的是数组排序后的第 <code>k</code> 个最大的元素，而不是第 <code>k</code> 个不同的元素。</p>
+<p>你必须设计并实现时间复杂度为 <code>O(n)</code> 的算法解决此问题。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,2,1,5,6,4], k = 2</span><br><span class="line">输出: 5</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,2,3,1,2,4,5,5,6], k = 4</span><br><span class="line">输出: 4</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= k &lt;= nums.length &lt;= 105</code></li>
+<li><code>-104 &lt;= nums[i] &lt;= 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>快速选择</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">findKthLargest</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> k)</span> {</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        Queue&lt;Integer&gt; heap = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Integer&gt;() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Integer o1, Integer o2)</span> {</span><br><span class="line">                <span class="keyword">return</span> o2 - o1;</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            heap.offer(nums[i]);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; k - <span class="number">1</span>; i++) {</span><br><span class="line">            heap.poll();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> heap.poll();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(nlogn)</em></p>
+</li>
+<li><p>space:<em>O(n)</em></p>
+</li>
+</ul>
+<h2><span id="mian-shi-ti-17-14-zui-xiao-k-ge-shu">🟡面试题 17.14. 最小K个数</span></h2><blockquote>
+<p>设计一个算法，找出数组中最小的k个数。以任意顺序返回这k个数均可。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入： arr = [1,3,5,7,2,4,6,8], k = 4</span><br><span class="line">输出： [1,2,3,4]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= len(arr) &lt;= 100000</code></li>
+<li><code>0 &lt;= k &lt;= min(100000, len(arr))</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>快速选择</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] smallestK(<span class="type">int</span>[] arr, <span class="type">int</span> k) {</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> arr.length;</span><br><span class="line">        Queue&lt;Integer&gt; heap = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            heap.offer(arr[i]);</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[k];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; k; i++) {</span><br><span class="line">            res[i] = heap.poll();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(nlogn)</em></p>
+</li>
+<li><p>space:<em>O(n)</em></p>
+</li>
+</ul>
+<h2><span id="347-qian-k-ge-gao-pin-yuan-su">🟡347. 前 K 个高频元素</span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，请你返回其中出现频率前 <code>k</code> 高的元素。你可以按 <strong>任意顺序</strong> 返回答案。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [1,1,1,2,2,3], k = 2</span><br><span class="line">输出: [1,2]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [1], k = 1</span><br><span class="line">输出: [1]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 105</code></li>
+<li><code>k</code> 的取值范围是 <code>[1, 数组中不相同的元素的个数]</code></li>
+<li>题目数据保证答案唯一，换句话说，数组中前 <code>k</code> 个高频元素的集合是唯一的</li>
+</ul>
+<p><strong>进阶：</strong>你所设计算法的时间复杂度 <strong>必须</strong> 优于 <code>O(n log n)</code> ，其中 <code>n</code> 是数组大小。</p>
+<p>Related Topics</p>
+<p>数组</p>
+<p>哈希表</p>
+<p>分治</p>
+<p>桶排序</p>
+<p>计数</p>
+<p>快速选择</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] topKFrequent(<span class="type">int</span>[] nums, <span class="type">int</span> k) {</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            <span class="type">int</span> <span class="variable">key</span> <span class="operator">=</span> nums[i];</span><br><span class="line">            map.put(key, map.getOrDefault(key, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        Queue&lt;Map.Entry&lt;Integer, Integer&gt;&gt; heap = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Map.Entry&lt;Integer, Integer&gt;&gt;() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Map.Entry&lt;Integer, Integer&gt; o1, Map.Entry&lt;Integer, Integer&gt; o2)</span> {</span><br><span class="line">                <span class="keyword">return</span> o2.getValue() - o1.getValue();</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Integer, Integer&gt; entry : map.entrySet()) {</span><br><span class="line">            heap.offer(entry);</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[k];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; k; i++) {</span><br><span class="line">            res[i] = heap.poll().getKey();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(nlogn)</em></p>
+</li>
+<li><p>space:<em>O(n)</em></p>
+</li>
+</ul>
+<h2><span id="692-qian-k-ge-gao-pin-dan-ci">🟡692. 前K个高频单词</span></h2><blockquote>
+<p>给定一个单词列表 <code>words</code> 和一个整数 <code>k</code> ，返回前 <code>k</code> 个出现次数最多的单词。</p>
+<p>返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率， <strong>按字典顺序</strong> 排序。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: words = ["i", "love", "leetcode", "i", "love", "coding"], k = 2</span><br><span class="line">输出: ["i", "love"]</span><br><span class="line">解析: "i" 和 "love" 为出现次数最多的两个单词，均为2次。</span><br><span class="line">    注意，按字母顺序 "i" 在 "love" 之前。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: ["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"], k = 4</span><br><span class="line">输出: ["the", "is", "sunny", "day"]</span><br><span class="line">解析: "the", "is", "sunny" 和 "day" 是出现次数最多的四个单词，</span><br><span class="line">    出现次数依次为 4, 3, 2 和 1 次。</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>1 &lt;= words.length &lt;= 500</code></li>
+<li><code>1 &lt;= words[i] &lt;= 10</code></li>
+<li><code>words[i]</code> 由小写英文字母组成。</li>
+<li><code>k</code> 的取值范围是 <code>[1, **不同** words[i] 的数量]</code></li>
+</ul>
+<p><strong>进阶：</strong>尝试以 <code>O(n log k)</code> 时间复杂度和 <code>O(n)</code> 空间复杂度解决。</p>
+<p>Related Topics</p>
+<p>字典树</p>
+<p>哈希表</p>
+<p>字符串</p>
+<p>桶排序</p>
+<p>计数</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; <span class="title function_">topKFrequent</span><span class="params">(String[] words, <span class="type">int</span> k)</span> {</span><br><span class="line">        Map&lt;String, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; words.length; i++) {</span><br><span class="line">            <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> words[i];</span><br><span class="line">            map.put(key, map.getOrDefault(key, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        Queue&lt;Map.Entry&lt;String, Integer&gt;&gt; heap = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Map.Entry&lt;String, Integer&gt;&gt;() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Map.Entry&lt;String, Integer&gt; o1, Map.Entry&lt;String, Integer&gt; o2)</span> {</span><br><span class="line">                <span class="keyword">if</span> (o1.getValue() != o2.getValue()) {</span><br><span class="line">                    <span class="keyword">return</span> o2.getValue() - o1.getValue();</span><br><span class="line">                } <span class="keyword">else</span> {</span><br><span class="line">                    <span class="keyword">return</span> o1.getKey().compareTo(o2.getKey());</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, Integer&gt; entry : map.entrySet()) {</span><br><span class="line">            heap.offer(entry);</span><br><span class="line">        }</span><br><span class="line">        List&lt;String&gt; res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; k; i++) {</span><br><span class="line">            res.add(heap.poll().getKey());</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(nlogn)</em></p>
+</li>
+<li><p>space:<em>O(n)</em></p>
+</li>
+</ul>
+<h2><span id="23-he-bing-k-ge-sheng-xu-lian-biao">🔴23. 合并 K 个升序链表</span></h2><blockquote>
+<p>给你一个链表数组，每个链表都已经按升序排列。</p>
+<p>请你将所有链表合并到一个升序链表中，返回合并后的链表。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：lists = [[1,4,5],[1,3,4],[2,6]]</span><br><span class="line">输出：[1,1,2,3,4,4,5,6]</span><br><span class="line">解释：链表数组如下：</span><br><span class="line">[</span><br><span class="line">  1-&gt;4-&gt;5,</span><br><span class="line">  1-&gt;3-&gt;4,</span><br><span class="line">  2-&gt;6</span><br><span class="line">]</span><br><span class="line">将它们合并到一个有序链表中得到。</span><br><span class="line">1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：lists = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：lists = [[]]</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>k == lists.length</code></li>
+<li><code>0 &lt;= k &lt;= 10^4</code></li>
+<li><code>0 &lt;= lists[i].length &lt;= 500</code></li>
+<li><code>-10^4 &lt;= lists[i][j] &lt;= 10^4</code></li>
+<li><code>lists[i]</code> 按 <strong>升序</strong> 排列</li>
+<li><code>lists[i].length</code> 的总和不超过 <code>10^4</code></li>
+</ul>
+<p>Related Topics</p>
+<p>链表</p>
+<p>分治</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">mergeKLists</span><span class="params">(ListNode[] lists)</span> {</span><br><span class="line">        Queue&lt;Integer&gt; heap = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; lists.length; i++) {</span><br><span class="line">            <span class="type">ListNode</span> <span class="variable">ptr</span> <span class="operator">=</span> lists[i];</span><br><span class="line">            <span class="keyword">while</span> (ptr != <span class="literal">null</span>) {</span><br><span class="line">                heap.offer(ptr.val);</span><br><span class="line">                ptr = ptr.next;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">dummy</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">ptr</span> <span class="operator">=</span> dummy;</span><br><span class="line">        <span class="keyword">while</span> (!heap.isEmpty()) {</span><br><span class="line">            <span class="type">ListNode</span> <span class="variable">node</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(heap.poll());</span><br><span class="line">            ptr.next = node;</span><br><span class="line">            ptr = ptr.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(nlogn)</em></p>
+</li>
+<li><p>space:<em>O(n)</em></p>
+</li>
+</ul>
+<h1><span id="xi-er-pai-xu">希尔排序</span></h1><h2><span id="912-pai-xu-shu-zu">🟡912. 排序数组</span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>桶排序</p>
+<p>计数排序</p>
+<p>基数排序</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums){</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">gap</span> <span class="operator">=</span> len / <span class="number">2</span>; gap &gt; <span class="number">0</span>; gap /= <span class="number">2</span>) {</span><br><span class="line">            <span class="comment">// 共gap个组，对每一组都执行直接插入排序</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ;i &lt; gap; i++) {</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + gap; j &lt; len; j += gap) {</span><br><span class="line">                    <span class="comment">// 如果nums[j] &lt; nums[j-gap]，则寻找nums[j]位置，并将后面数据的位置都后移。</span></span><br><span class="line">                    <span class="keyword">if</span> (nums[j] &lt; nums[j - gap]) {</span><br><span class="line">                        <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> nums[j];</span><br><span class="line">                        <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> j - gap;</span><br><span class="line">                        <span class="keyword">while</span> (k &gt;= <span class="number">0</span> &amp;&amp; nums[k] &gt; tmp) {</span><br><span class="line">                            nums[k + gap] = nums[k];</span><br><span class="line">                            k -= gap;</span><br><span class="line">                        }</span><br><span class="line">                        nums[k + gap] = tmp;</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(nlogn~O(n^2^))</em></p>
+</li>
+<li><p>space:<em>O(n)</em></p>
+</li>
+</ul>
+<h1><span id="gui-bing-pai-xu">归并排序</span></h1><h2><span id="912-pai-xu-shu-zu">🟡912. 排序数组</span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>桶排序</p>
+<p>计数排序</p>
+<p>基数排序</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums){</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        mergeSort(nums,<span class="number">0</span>,len-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">mergeSort</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> start, <span class="type">int</span> end)</span> {</span><br><span class="line">        <span class="comment">//分治的结束条件</span></span><br><span class="line">        <span class="keyword">if</span> (start &gt;= end) {</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//保证不溢出取start和end的中位数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> start + ((end - start) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//递归排序并且合并</span></span><br><span class="line">        mergeSort(arr, start, mid);</span><br><span class="line">        mergeSort(arr, mid + <span class="number">1</span>, end);</span><br><span class="line">        merge(arr, start, mid, end);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">merge</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> start, <span class="type">int</span> mid, <span class="type">int</span> end)</span> {</span><br><span class="line">        <span class="type">int</span>[] temp = <span class="keyword">new</span> <span class="title class_">int</span>[end - start + <span class="number">1</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">p1</span> <span class="operator">=</span> start;</span><br><span class="line">        <span class="type">int</span> <span class="variable">p2</span> <span class="operator">=</span> mid + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt;= mid &amp;&amp; p2 &lt;= end) {</span><br><span class="line">            <span class="keyword">if</span> (arr[p1] &gt; arr[p2]) {</span><br><span class="line">                temp[p++] = arr[p2++];</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                temp[p++] = arr[p1++];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt;= mid) {</span><br><span class="line">            temp[p++] = arr[p1++];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">while</span> (p2 &lt;= end) {</span><br><span class="line">            temp[p++] = arr[p2++];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; temp.length; i++) {</span><br><span class="line">            arr[i + start] = temp[i];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(nlogn)</em></p>
+</li>
+<li><p>space:<em>O(n)</em></p>
+</li>
+</ul>
+<h2><span id="148-pai-xu-lian-biao">🟡148. 排序链表</span></h2><blockquote>
+<p>给你链表的头结点 <code>head</code> ，请将其按 <strong>升序</strong> 排列并返回 <strong>排序后的链表</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [4,2,1,3]</span><br><span class="line">输出：[1,2,3,4]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_2.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [-1,5,3,4,0]</span><br><span class="line">输出：[-1,0,3,4,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点的数目在范围 <code>[0, 5 * 104]</code> 内</li>
+<li><code>-105 &lt;= Node.val &lt;= 105</code></li>
+</ul>
+<p><strong>进阶：</strong>你可以在 <code>O(n log n)</code> 时间复杂度和常数级空间复杂度下，对链表进行排序吗？</p>
+<p>Related Topics</p>
+<p>链表</p>
+<p>双指针</p>
+<p>分治</p>
+<p>排序</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">sortList</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">null</span> || head.next == <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">mid</span> <span class="operator">=</span> getMiddle(head);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">left</span> <span class="operator">=</span> sortList(head);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">right</span> <span class="operator">=</span> sortList(mid);</span><br><span class="line">        <span class="keyword">return</span> merge(left, right);</span><br><span class="line">    }</span><br><span class="line">    ListNode <span class="title function_">getMiddle</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">slow</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">fast</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="keyword">while</span> (fast.next != <span class="literal">null</span> &amp;&amp; fast.next.next != <span class="literal">null</span>) {</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">mid</span> <span class="operator">=</span> slow.next;</span><br><span class="line">        slow.next = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">return</span> mid;</span><br><span class="line">    }</span><br><span class="line">    ListNode <span class="title function_">merge</span><span class="params">(ListNode l1, ListNode l2)</span> {</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">res</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">p</span> <span class="operator">=</span> res;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">null</span> &amp;&amp; l2 != <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">if</span> (l1.val &lt; l2.val) {</span><br><span class="line">                p.next = l1;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                p.next = l2;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            }</span><br><span class="line">            p = p.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (l1 != <span class="literal">null</span>) {</span><br><span class="line">            p.next = l1;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (l2 != <span class="literal">null</span>) {</span><br><span class="line">            p.next = l2;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res.next;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(nlogn)</em></p>
+</li>
+<li><p>space:<em>O(n)</em></p>
+</li>
+</ul>
+<h2><span id="23-he-bing-k-ge-sheng-xu-lian-biao">🔴23. 合并 K 个升序链表</span></h2><blockquote>
+<p>给你一个链表数组，每个链表都已经按升序排列。</p>
+<p>请你将所有链表合并到一个升序链表中，返回合并后的链表。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：lists = [[1,4,5],[1,3,4],[2,6]]</span><br><span class="line">输出：[1,1,2,3,4,4,5,6]</span><br><span class="line">解释：链表数组如下：</span><br><span class="line">[</span><br><span class="line">  1-&gt;4-&gt;5,</span><br><span class="line">  1-&gt;3-&gt;4,</span><br><span class="line">  2-&gt;6</span><br><span class="line">]</span><br><span class="line">将它们合并到一个有序链表中得到。</span><br><span class="line">1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：lists = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：lists = [[]]</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>k == lists.length</code></li>
+<li><code>0 &lt;= k &lt;= 10^4</code></li>
+<li><code>0 &lt;= lists[i].length &lt;= 500</code></li>
+<li><code>-10^4 &lt;= lists[i][j] &lt;= 10^4</code></li>
+<li><code>lists[i]</code> 按 <strong>升序</strong> 排列</li>
+<li><code>lists[i].length</code> 的总和不超过 <code>10^4</code></li>
+</ul>
+<p>Related Topics</p>
+<p>链表</p>
+<p>分治</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">mergeKLists</span><span class="params">(ListNode[] lists)</span> {</span><br><span class="line">        <span class="type">int</span> len= lists.length;</span><br><span class="line">        <span class="keyword">if</span>(len==<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> biaryMerge(lists,<span class="number">0</span>,len-<span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line">    ListNode <span class="title function_">biaryMerge</span><span class="params">(ListNode[] lists,<span class="type">int</span> i,<span class="type">int</span> j)</span>{</span><br><span class="line">        <span class="keyword">if</span>(i&gt;j){</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (i==j) {</span><br><span class="line">            <span class="keyword">return</span> lists[i];</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> mid=(i+j)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> merge(biaryMerge(lists,i,mid),biaryMerge(lists,mid+<span class="number">1</span>,j));</span><br><span class="line">    }</span><br><span class="line">    ListNode <span class="title function_">merge</span><span class="params">(ListNode l1, ListNode l2)</span> {</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">res</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">p</span> <span class="operator">=</span> res;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">null</span> &amp;&amp; l2 != <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">if</span> (l1.val &lt; l2.val) {</span><br><span class="line">                p.next = l1;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                p.next = l2;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            }</span><br><span class="line">            p = p.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (l1 != <span class="literal">null</span>) {</span><br><span class="line">            p.next = l1;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (l2 != <span class="literal">null</span>) {</span><br><span class="line">            p.next = l2;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res.next;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(nlogk)</em></p>
+</li>
+<li><p>space:<em>O(n + log(k))</em></p>
+</li>
+</ul>
+<h1><span id="ji-shu-pai-xu">计数排序</span></h1><h2><span id="912-pai-xu-shu-zu">🟡912. 排序数组</span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>桶排序</p>
+<p>计数排序</p>
+<p>基数排序</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums) {</span><br><span class="line">        <span class="comment">// 找到数组中的最大值和最小值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> Arrays.stream(nums).min().getAsInt();</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> Arrays.stream(nums).max().getAsInt();</span><br><span class="line">        <span class="comment">// 计算计数数组的长度</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> max - min + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span>[] count = <span class="keyword">new</span> <span class="title class_">int</span>[length];</span><br><span class="line">        <span class="comment">// 统计每个元素的出现次数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) {</span><br><span class="line">            count[num - min]++;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 将计数数组转换为前缀和数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; length; i++) {</span><br><span class="line">            count[i] += count[i - <span class="number">1</span>];</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 创建临时数组存储排序后的结果</span></span><br><span class="line">        <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[nums.length];</span><br><span class="line">        <span class="comment">// 将元素按照计数数组的前缀和分配到临时数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> nums.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) {</span><br><span class="line">            <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> count[nums[i] - min] - <span class="number">1</span>;</span><br><span class="line">            res[index] = nums[i];</span><br><span class="line">            count[nums[i] - min]--;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(n)</em></p>
+</li>
+<li><p>space:<em>O(n)</em></p>
+</li>
+</ul>
+<h2><span id="75-yan-se-fen-lei">🟡75. 颜色分类</span></h2><blockquote>
+<p>给定一个包含红色、白色和蓝色、共 <code>n</code> 个元素的数组 <code>nums</code> ，**<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地</a>**对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。</p>
+<p>我们使用整数 <code>0</code>、 <code>1</code> 和 <code>2</code> 分别表示红色、白色和蓝色。</p>
+<p>必须在不使用库内置的 sort 函数的情况下解决这个问题。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,0,2,1,1,0]</span><br><span class="line">输出：[0,0,1,1,2,2]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,0,1]</span><br><span class="line">输出：[0,1,2]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>n == nums.length</code></li>
+<li><code>1 &lt;= n &lt;= 300</code></li>
+<li><code>nums[i]</code> 为 <code>0</code>、<code>1</code> 或 <code>2</code></li>
+</ul>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>你能想出一个仅使用常数空间的一趟扫描算法吗？</li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>双指针</p>
+<p>排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sortColors</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        <span class="type">int</span> len= nums.length;</span><br><span class="line">        <span class="type">int</span> num0=<span class="number">0</span>,num1=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            <span class="type">int</span> num=nums[i];</span><br><span class="line">            nums[i]=<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(num&lt;<span class="number">2</span>){</span><br><span class="line">                nums[num1++]=<span class="number">1</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(num&lt;<span class="number">1</span>){</span><br><span class="line">                nums[num0++]=<span class="number">0</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(n)</em></p>
+</li>
+<li><p>space:<em>O(1)</em></p>
+</li>
+</ul>
+<h1><span id="tong-pai-xu">桶排序</span></h1><h2><span id="912-pai-xu-shu-zu">🟡912. 排序数组</span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>桶排序</p>
+<p>计数排序</p>
+<p>基数排序</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[]sortArray(<span class="type">int</span>[]nums){</span><br><span class="line">        <span class="type">int</span> len=nums.length;</span><br><span class="line">        <span class="type">int</span> MAX=<span class="number">200000</span>;</span><br><span class="line">        <span class="type">int</span> HALF=<span class="number">50001</span>;</span><br><span class="line">        <span class="type">int</span> min=nums[<span class="number">0</span>]+HALF;</span><br><span class="line">        <span class="type">int</span> max=nums[<span class="number">0</span>]+HALF;</span><br><span class="line">        <span class="type">int</span>[]bucket=<span class="keyword">new</span> <span class="title class_">int</span>[MAX];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            bucket[nums[i]+HALF]++;</span><br><span class="line">            min=Math.min(min,nums[i]+HALF);</span><br><span class="line">            max=Math.max(max,nums[i]+HALF);</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> index=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> min; i &lt;= max; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; bucket[i]; j++) {</span><br><span class="line">                nums[index++]=i-HALF;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(n)</em></p>
+</li>
+<li><p>space:<em>O(1)</em></p>
+</li>
+</ul>
+<p>小小改良版</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums){</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            min = Math.min(min, nums[i]);</span><br><span class="line">            max = Math.max(max, nums[i]);</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> <span class="variable">range</span> <span class="operator">=</span> max - min + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span>[] bucket = <span class="keyword">new</span> <span class="title class_">int</span>[range];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) {</span><br><span class="line">            bucket[nums[i] - min]++;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; range; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; bucket[i]; j++) {</span><br><span class="line">                nums[index++] = i + min;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>time:<em>O(n+range)</em></p>
+</li>
+<li><p>space:<em>O(range)</em></p>
+</li>
+</ul>
+<h2><span id="148-pai-xu-lian-biao">🟡148. 排序链表</span></h2><blockquote>
+<p>给你链表的头结点 <code>head</code> ，请将其按 <strong>升序</strong> 排列并返回 <strong>排序后的链表</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [4,2,1,3]</span><br><span class="line">输出：[1,2,3,4]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_2.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [-1,5,3,4,0]</span><br><span class="line">输出：[-1,0,3,4,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点的数目在范围 <code>[0, 5 * 104]</code> 内</li>
+<li><code>-105 &lt;= Node.val &lt;= 105</code></li>
+</ul>
+<p><strong>进阶：</strong>你可以在 <code>O(n log n)</code> 时间复杂度和常数级空间复杂度下，对链表进行排序吗？</p>
+<p>Related Topics</p>
+<p>链表</p>
+<p>双指针</p>
+<p>分治</p>
+<p>排序</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">sortList</span><span class="params">(ListNode head)</span> {</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">null</span> || head.next == <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        }</span><br><span class="line">        ListNode ptr=head;</span><br><span class="line">        <span class="type">int</span> max=head.val;</span><br><span class="line">        <span class="type">int</span> min=head.val;</span><br><span class="line">        <span class="keyword">while</span> (ptr!=<span class="literal">null</span>){</span><br><span class="line">            max=Math.max(max,ptr.val);</span><br><span class="line">            min=Math.min(min,ptr.val);</span><br><span class="line">            ptr=ptr.next;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> <span class="variable">range</span> <span class="operator">=</span> max - min + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span>[] bucket = <span class="keyword">new</span> <span class="title class_">int</span>[range];</span><br><span class="line">        ptr=head;</span><br><span class="line">        <span class="keyword">while</span> (ptr!=<span class="literal">null</span>){</span><br><span class="line">            bucket[ptr.val - min]++;</span><br><span class="line">            ptr=ptr.next;</span><br><span class="line">        }</span><br><span class="line">        ptr=head;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; range; i++) {</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; bucket[i]; j++) {</span><br><span class="line">                ptr.val=i+min;</span><br><span class="line">                ptr=ptr.next;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n+range)</em></li>
+<li>space:<em>O(range)</em></li>
+</ul>
+<h1><span id="ji-shu-pai-xu">基数排序</span></h1><h2><span id="912-pai-xu-shu-zu">🟡912. 排序数组</span></h2><blockquote>
+<p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,2,3,1]</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,1,1,2,0,0]</span><br><span class="line">输出：[0,0,1,1,2,5]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
+</ul>
+<p>Related Topics</p>
+<p>数组</p>
+<p>分治</p>
+<p>桶排序</p>
+<p>计数排序</p>
+<p>基数排序</p>
+<p>排序</p>
+<p>堆（优先队列）</p>
+<p>归并排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums){</span><br><span class="line">        <span class="comment">// 找到数组中的最小值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> Arrays.stream(nums).min().getAsInt();</span><br><span class="line">        <span class="keyword">if</span>(min&lt;<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">                nums[i]-=min;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 找到数组中的最大值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> Arrays.stream(nums).max().getAsInt();</span><br><span class="line">        <span class="comment">// 计算最大值的位数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">digits</span> <span class="operator">=</span> String.valueOf(max).length();</span><br><span class="line">        <span class="comment">// 进行 digits 轮计数排序</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; digits; i++) {</span><br><span class="line">            nums = countingSort(nums, i);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(min&lt;<span class="number">0</span>){</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">                nums[i]+=min;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span>[] countingSort(<span class="type">int</span>[] nums, <span class="type">int</span> digit) {</span><br><span class="line">        <span class="comment">// 创建计数数组</span></span><br><span class="line">        <span class="type">int</span>[] count = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>];</span><br><span class="line">        <span class="comment">// 统计每个数字的出现次数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) {</span><br><span class="line">            <span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> (<span class="type">int</span>)(num / Math.pow(<span class="number">10</span>, digit)) % <span class="number">10</span>;</span><br><span class="line">            count[d]++;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 将计数数组转换为前缀和数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; count.length; i++) {</span><br><span class="line">            count[i] += count[i - <span class="number">1</span>];</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 创建临时数组存储排序后的结果</span></span><br><span class="line">        <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[nums.length];</span><br><span class="line">        <span class="comment">// 将元素按照计数数组的前缀和分配到临时数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> nums.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) {</span><br><span class="line">            <span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> (<span class="type">int</span>)(nums[i] / Math.pow(<span class="number">10</span>, digit)) % <span class="number">10</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> count[d] - <span class="number">1</span>;</span><br><span class="line">            res[index] = nums[i];</span><br><span class="line">            count[d]--;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:<em>O(n+digits)</em></li>
+<li>space:<em>O(1)</em></li>
+</ul>
+<h1><span id="te-bie-pai-xu">特别排序</span></h1><h2><span id="179-zui-da-shu">🟡179. 最大数</span></h2><blockquote>
+<p>给定一组非负整数 <code>nums</code>，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。</p>
+<p><strong>注意：</strong>输出结果可能非常大，所以你需要返回一个字符串而不是整数。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [10,2]</span><br><span class="line">输出："210"</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,30,34,5,9]</span><br><span class="line">输出："9534330"</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 100</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 109</code></li>
+</ul>
+<p>Related Topics</p>
+<p>贪心</p>
+<p>数组</p>
+<p>字符串</p>
+<p>排序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">largestNumber</span><span class="params">(<span class="type">int</span>[] nums)</span> {</span><br><span class="line">        Comparator&lt;Integer&gt; comparator = <span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Integer&gt;() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Integer o1, Integer o2)</span> {</span><br><span class="line">                <span class="type">String</span> <span class="variable">sa</span> <span class="operator">=</span> String.valueOf(o1);</span><br><span class="line">                <span class="type">String</span> <span class="variable">sb</span> <span class="operator">=</span> String.valueOf(o2);</span><br><span class="line">                <span class="keyword">return</span> (sb + sa).compareTo(sa + sb);</span><br><span class="line">            }</span><br><span class="line">        };</span><br><span class="line">        Integer[] numbers = <span class="keyword">new</span> <span class="title class_">Integer</span>[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) {</span><br><span class="line">            numbers[i] = nums[i];</span><br><span class="line">        }</span><br><span class="line">        Arrays.sort(numbers, comparator);</span><br><span class="line">        StringBuilder sb=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="type">int</span> flag=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; numbers.length; i++) {</span><br><span class="line">            <span class="keyword">if</span>(numbers[i]!=<span class="number">0</span>||flag==<span class="number">1</span>){</span><br><span class="line">                flag=<span class="number">1</span>;</span><br><span class="line">                sb.append(numbers[i]);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(sb.isEmpty()){</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"0"</span>;</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            <span class="keyword">return</span> sb.toString();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>time:*O(n·m·logn)*m为两个数字的位数之和</li>
+<li>space:<em>O(n)</em></li>
+</ul>
+
+        </div>
+
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        
+            <script src='https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js'></script>
+            <script>
+                if (window.mermaid) {
+                    mermaid.initialize({
+                        startOnLoad: true,
+                        theme: 'neural',
+                    });
+                }
+            </script>
+        
+        <span>© zoe | <a href="https://hexo.io" target="_blank"></a>  <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank"></a>
+              
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<span class="site-uv">
+
+👤
+
+ <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+
+</span>&nbsp;
+
+
+
+
+
+<span class="site-pv">
+
+ | 👁️
+
+ <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+
+</span>
+
+
+  
+               
+        </span>
+    </div>
+</footer>
+
+    </div>
+
+    <!-- 搜索功能 -->
+    <!-- Chic/layout.ejs -->
+    <div id="u-search">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="container">
+                    <form id="u-search-modal-form" class="u-search-modal-form">
+                        <button type="submit" class="form-submit-btn">
+                            <img src="/image/search.png" class="search-btn-img" />
+                        </button>
+                        <input placeholder="搜索文章。。。" class="form-input" onchange="inputChange(event)" id="modal-form-input">
+                    </form>
+                    <a class="modal-close">x</a>
+                </div>
+                <div class="search-loading">
+                    <div class="search-loading-bar"></div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- <ul class="modal-results">
+                    <li class="result-item">
+                        <a class="result-item-detail">
+                            <span class="title">页面配置</span>
+                            <span class="content">
+                                网址，例如： front-matter---layout: postdate: <b mark></b>
+                                7-07-05title: [转]如何搭建基于Hexo的独立博客categories: [Dev, Hexo]tags: - Hexoauthor: name: xaoxuu avatar: https://cdn.jsdelivr.......
+                            </span>
+                        </a>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+        <div class="modal-overlay"></div>
+    </div>
+
+
+</body>
+
+
+
+</html>
+
+

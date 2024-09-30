@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zoe">
+
+
+    <meta name="subtitle" content="liberté">
+
+
+
+
+<title>Computer Network | ZOE&#39;s site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+    <script src="/js/jquery-3.7.0.min.js"></script>
+    
+    <script src="/js/mathjax2.7.5.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<!-- 搜索的部分 -->
+
+
+
+    <script>
+    // function searchToggle() {
+    //     const width = $(document.body).width()
+    //     if(width > 479) {
+    //         return;
+    //     }
+    //     const search = $('.search');
+    //     const searchForm = $('.form-search')
+
+    //     if(!search.hasClass("mobile-search")) {
+    //         search.addClass("mobile-search");
+    //     } else {
+    //         search.removeClass("mobile-search");
+    //     } 
+    // }
+
+    function searchToggle() {
+        const width = $(document.body).width()
+        if(width > 479) {
+            return;
+        }
+        const search = $('.search');
+        const searchForm = $('.form-search');
+        const menuToggle = $('.menu-toggle');
+        const title = $('.navbar-header-title ');
+
+        if(!search.hasClass("mobile-search")) {
+            search.addClass("mobile-search");
+            menuToggle.addClass("open-search")
+            title.addClass("mobile-title-hidden")
+        } else {
+            search.removeClass("mobile-search");
+            menuToggle.removeClass("open-search")
+            // title.css({visibility: 'visible'})
+            title.removeClass("mobile-title-hidden")
+        } 
+    }
+
+
+
+    function search(searchInputEl, formEl, flag) {
+        const path = "/" + "search.json"; // 可以在public 下查看这个search.json
+        $(formEl).submit(function(e){
+            e.preventDefault();
+            let target = null
+            if(searchInputEl == null) {
+                const screenWidth = $(document.body).width();
+                target = screenWidth > 479 ? $('#pc-search-input') : $('#mobile-search-input');
+                console.log(target);
+            } else {
+                target = $(searchInputEl)
+            }
+
+            if(!flag && target.val() === '') {
+                return ;
+            }
+
+            $("#u-search").fadeIn(500, function() {
+                $("body > .wrapper").addClass("modal-active");
+
+                $.ajax({
+                    url: path,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        $input = target.val();
+                        $(".form-input").val($input);
+                        const loadingBar = $('.search-loading-bar') 
+                        loadingBar.css({
+                            width:'100%',
+                            display: 'block'
+                        });
+                    },
+                    success: function( datas ) {
+                        console.log(datas);
+                        const $resultPanel = $(".modal-body")[0];
+                        let str = `<ul class="modal-results">`;
+                        var keywords = $(".form-input").val().trim().toLowerCase().split(/[\s\-]+/);
+                        $resultPanel.innerHTML = "";
+                        let hasResult = false
+                        let text = `<div class="no-result">找不到与关键词相关的内容....</div>`;
+
+                        if ($(".form-input").val().trim().length <= 0) {
+                            // 没有结果
+                            $resultPanel.innerHTML = text;
+                            return;
+                        }
+                        datas.forEach(function (data, index) {
+                            var isMatch = true;
+                            if (!data.title || data.title.trim() === '') {
+                                data.title = "Untitled";
+                            }
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content && data.content.trim().replace(/<[^>]+>/g, "").toLowerCase() || '';
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty contents
+                            if (data_content !== '') {
+                                keywords.forEach(function (keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        hasResult = true
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            } else {
+                                isMatch = false;
+                            }
+                            // show search results
+                            if (isMatch) {
+                                str += `<li class='result-item'><a href='${data_url}' class='result-item-detail'> <span class="title">${data_title}</span>`;
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 200 characters
+                                    var start = first_occur - 40;
+                                    var end = first_occur + 160;
+
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+
+                                    if (start == 0) {
+                                        end = 200;
+                                    }
+
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+
+                                    var match_content = content.substring(start, end);
+
+                                    // highlight all keywords
+                                    keywords.forEach(function (keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, `<em class="search-keyword">${keyword}</em>`);
+                                    });
+
+                                    str += `<span class="content"> ${match_content} ...</span></a>`;
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        if(hasResult) {
+                            $resultPanel.innerHTML = str;
+                        } else {
+                            $resultPanel.innerHTML = text;
+                        }
+
+                    },
+                    complete: function() {
+                        setTimeout(() => {
+                                const loadingBar = $('.search-loading-bar') 
+                                loadingBar.css({
+                                    width:'0%',
+                                    display: 'none'
+                                });
+                        }, 300)
+                    }
+                });
+            })
+
+        });
+    }
+
+    $(document).ready(function() {
+        $('.modal-close').click(function () { 
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+
+        $('.modal-overlay').click(function() {
+            $("#u-search").fadeOut();
+            $("body > .wrapper").removeClass("modal-active")
+        })
+        search(null, ".form-search", false)
+        search("#u-search-modal-form .form-input", ".u-search-modal-form", true)
+    })
+</script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                // pagebody.classList.add('dark-theme');
+                // mobile
+                // document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <!-- <div class="navbar-header header-logo"><a href="/">ZOE&#39;s site</a></div> -->
+            <div class="navbar-header header-logo"><a href="/"><i class="iconfont icon-zhuye" style="font-size: 1em;"></i>ZOE&#39;s site</a></div>
+            <div class="menu navbar-right">
+                <!-- 这里表示的是pc端搜索框 -->
+                
+                
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="pc-search-input"/>
+        </form>
+    </div>
+
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <!-- <label for="switch_default" class="toggleBtn"></label> -->
+            </div>
+        </div>
+    </nav>
+    
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ZOE&#39;s site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="navbar-mobile-right">
+                    
+                    
+    <div class="search ">
+        <!-- <div class="search-btn" onClick="searchToggle()">
+            <img src="/image/search.png" class="search-btn-img" />
+        </div> -->
+        <form class="form-search">
+            <input class="input" placeholder="search" autocomplete="on" id="mobile-search-input"/>
+        </form>
+    </div>
+
+                    <!-- <div class="menu-toggle" onclick="mobileBtn()">&#9776; menu</div> -->
+                </div>
+    
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/ZoeBezos">Github</a>
+                
+                <a class="menu-item" target="_blank" rel="noopener" href="https://www.linkedin.com/in/zoe-bezos/">Linkedin</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Computer Network</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zoe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">September 26, 2024&nbsp;&nbsp;0:03:11</a>
+                        </span>
+                    
+                    
+
+                        <span class="post-category">                        
+                            Category:                        
+                                                    
+                            <a href="/categories/CS-basics/">CS basics</a>
+                            
+                        </span>
+
+                    
+
+                    
+                        
+                        <span class="post-count">                        
+                            Words:                        
+                            <a href="">2.8k</a>                         
+                        </span>
+                        
+                    
+                                                                        
+                    
+                        
+                        <span class="post-count">                        
+                            Time:                        
+                            <a href="">11min</a>                         
+                        </span>
+                        
+                    
+                        
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p> <a target="_blank" rel="noopener" href="https://www.icourse163.org/course/HNKJ-1461816178">计算机网络_湖南科技大学_中国大学MOOC(慕课) (icourse163.org)</a></p>
+</blockquote>
+<h1><span id="1-gai-shu">1 概述</span></h1><h2><span id="1-1-ji-suan-ji-wang-luo-zai-xin-xi-shi-dai-de-zuo-yong">1.1 计算机网络在信息时代的作用</span></h2><h2><span id="1-2-yin-te-wang-gai-shu">1.2 因特网概述</span></h2><h2><span id="1-3-dian-lu-jiao-huan-fen-zu-jiao-huan-he-bao-wen-jiao-huan">1.3 电路交换、分组交换和报文交换</span></h2><h2><span id="1-4-ji-suan-ji-wang-luo-de-ding-yi-he-fen-lei">1.4 计算机网络的定义和分类</span></h2><h2><span id="1-5-ji-suan-ji-wang-luo-de-xing-neng-zhi-biao">1.5 计算机网络的性能指标</span></h2><h3><span id="1-5-1-su-lu-dai-kuan-tun-tu-liang-shi-yan">1.5.1 速率、带宽、吞吐量、时延</span></h3><h3><span id="1-5-2-shi-yan-dai-kuan-ji-wang-fan-shi-jian-li-yong-lu-diu-bao-lu">1.5.2 时延带宽积、往返时间、利用率、丢包率</span></h3><h2><span id="1-6-ji-suan-ji-wang-luo-ti-xi-jie-gou">1.6 计算机网络体系结构</span></h2><h3><span id="1-6-1-chang-jian-de-san-chong-ji-suan-ji-wang-luo-ti-xi-jie-gou">1.6.1 常见的三种计算机网络体系结构</span></h3><h3><span id="1-6-2-ji-suan-ji-wang-luo-ti-xi-jie-gou-fen-ceng-de-bi-yao-xing">1.6.2 计算机网络体系结构分层的必要性</span></h3><h3><span id="1-6-3-ji-suan-ji-wang-luo-ti-xi-jie-gou-fen-ceng-si-xiang-ju-li">1.6.3 计算机网络体系结构分层思想举例</span></h3><h3><span id="1-6-4-ji-suan-ji-wang-luo-ti-xi-jie-gou-zhong-de-zhuan-yong-zhu-yu">1.6.4 计算机网络体系结构中的专用术语</span></h3><h2><span id="kuo-zhan-shi-pin-hu-lian-wang-shi-shi-me">扩展视频：互联网是什么？</span></h2><h1><span id="2-wu-li-ceng">2 物理层</span></h1><h2><span id="2-1-wu-li-ceng-gai-shu">2.1 物理层概述</span></h2><h2><span id="2-2-wu-li-ceng-xia-mian-de-chuan-shu-mei-ti">2.2 物理层下面的传输媒体</span></h2><h2><span id="2-3-chuan-shu-fang-shi">2.3 传输方式</span></h2><h2><span id="2-4-bian-ma-yu-diao-zhi">2.4 编码与调制</span></h2><h2><span id="2-5-xin-dao-de-ji-xian-rong-liang">2.5 信道的极限容量</span></h2><h2><span id="2-6-xin-dao-fu-yong-ji-zhu">2.6 信道复用技术</span></h2><h2><span id="kuo-zhan-shi-pin-hu-lian-wang-dian-xian-dian-lan-he-wifi">扩展视频：互联网：电线、电缆和WiFi</span></h2><h1><span id="3-shu-ju-lian-lu-ceng">3 数据链路层</span></h1><h2><span id="3-1-shu-ju-lian-lu-ceng-gai-shu">3.1 数据链路层概述</span></h2><h2><span id="3-2-shu-ju-lian-lu-ceng-de-san-ge-chong-yao-wen-ti">3.2 数据链路层的三个重要问题</span></h2><h3><span id="3-2-1-feng-zhuang-cheng-zheng">3.2.1 封装成帧</span></h3><h3><span id="3-2-2-chai-cuo-jian-ce">3.2.2 差错检测</span></h3><h3><span id="3-2-3-ke-kao-chuan-shu-ke-kao-chuan-shu-de-xiang-guan-ji-ben-gai-nian">3.2.3 可靠传输-可靠传输的相关基本概念</span></h3><h3><span id="3-2-3-ke-kao-chuan-shu-ting-zhi-deng-dai-xie-yi">3.2.3 可靠传输 — 停止-等待协议</span></h3><h3><span id="3-2-3-ke-kao-chuan-shu-hui-tui-n-zheng-xie-yi">3.2.3 可靠传输 — 回退N帧协议</span></h3><h3><span id="3-2-3-ke-kao-chuan-shu-xuan-ze-chong-chuan-xie-yi">3.2.3 可靠传输 — 选择重传协议</span></h3><h2><span id="3-3-dian-dui-dian-xie-yi-ppp">3.3 点对点协议PPP</span></h2><h2><span id="3-4-gong-xiang-shi-yi-tai-wang">3.4 共享式以太网</span></h2><h3><span id="3-4-1-wang-luo-gua-pei-qi-he-mac-di-zhi">3.4.1 网络适配器和MAC地址</span></h3><h3><span id="3-4-2-csma-cd-xie-yi-ji-ben-yuan-li">3.4.2 CSMA/CD协议 — 基本原理</span></h3><h3><span id="3-4-2-csma-cd-xie-yi-zheng-yong-qi">3.4.2 CSMA/CD协议 — 争用期</span></h3><h3><span id="3-4-2-csma-cd-xie-yi-tui-bi-suan-fa">3.4.2 CSMA/CD协议 — 退避算法</span></h3><h3><span id="3-4-3-shi-yong-ji-xian-qi-de-gong-xiang-shi-yi-tai-wang">3.4.3 使用集线器的共享式以太网</span></h3><h3><span id="3-4-4-zai-wu-li-ceng-kuo-zhan-yi-tai-wang">3.4.4 在物理层扩展以太网</span></h3><h3><span id="3-4-5-zai-shu-ju-lian-lu-ceng-kuo-zhan-yi-tai-wang">3.4.5 在数据链路层扩展以太网</span></h3><h3><span id="3-4-5-zai-shu-ju-lian-lu-ceng-kuo-zhan-yi-tai-wang-tou-ming-wang-qiao-de-zi-xue-xi-he-zhuan-fa-zheng-de-liu-cheng">3.4.5 在数据链路层扩展以太网 — 透明网桥的自学习和转发帧的流程</span></h3><h2><span id="3-5-jiao-huan-shi-yi-tai-wang">3.5 交换式以太网</span></h2><h3><span id="3-5-1-yi-tai-wang-jiao-huan-ji">3.5.1 以太网交换机</span></h3><h3><span id="3-5-2-gong-xiang-shi-yi-tai-wang-he-jiao-huan-shi-yi-tai-wang-de-dui-bi">3.5.2 共享式以太网和交换式以太网的对比</span></h3><h2><span id="3-6-yi-tai-wang-de-mac-zheng-ge-shi">3.6 以太网的MAC帧格式</span></h2><h2><span id="3-7-xu-ni-ju-yu-wang">3.7 虚拟局域网</span></h2><h3><span id="3-7-1-xu-ni-ju-yu-wang-gai-shu">3.7.1 虚拟局域网概述</span></h3><h3><span id="3-7-2-xu-ni-ju-yu-wang-de-shi-xian-ji-zhi">3.7.2 虚拟局域网的实现机制</span></h3><h2><span id="3-8-yi-tai-wang-de-fa-zhan">3.8 以太网的发展</span></h2><h2><span id="3-9-802-11-wu-xian-ju-yu-wang">3.9 802.11无线局域网</span></h2><h3><span id="3-9-1-802-11-wu-xian-ju-yu-wang-de-zu-cheng">3.9.1 802.11无线局域网的组成</span></h3><h3><span id="3-9-2-802-11-wu-xian-ju-yu-wang-de-wu-li-ceng">3.9.2 802.11无线局域网的物理层</span></h3><h3><span id="3-9-3-802-11-wu-xian-ju-yu-wang-de-shu-ju-lian-lu-ceng-shi-yong-csma-ca-xie-yi">3.9.3 802.11无线局域网的数据链路层 — 使用CSMA/CA协议</span></h3><h3><span id="3-9-3-802-11-wu-xian-ju-yu-wang-de-shu-ju-lian-lu-ceng-csma-ca-xie-yi-de-ji-ben-gong-zuo-yuan-li">3.9.3 802.11无线局域网的数据链路层 — CSMA/CA协议的基本工作原理</span></h3><h3><span id="3-9-4-802-11-wu-xian-ju-yu-wang-de-mac-zheng">3.9.4 802.11无线局域网的MAC帧</span></h3><h1><span id="4-wang-luo-ceng">4 网络层</span></h1><h2><span id="4-1-wang-luo-ceng-gai-shu">4.1 网络层概述</span></h2><h2><span id="4-2-wang-ji-xie-yi-ip">4.2 网际协议IP</span></h2><h3><span id="4-2-1-yi-gou-wang-luo-hu-lian">4.2.1 异构网络互连</span></h3><h3><span id="4-2-2-ipv4-di-zhi-ji-qi-bian-zhi-fang-fa-ipv4-di-zhi-de-biao-shi-fang-fa">4.2.2 IPv4地址及其编址方法 — IPv4地址的表示方法</span></h3><h3><span id="4-2-2-ipv4-di-zhi-ji-qi-bian-zhi-fang-fa-fen-lei-bian-zhi">4.2.2 IPv4地址及其编址方法 — 分类编址</span></h3><h3><span id="4-2-2-ipv4-di-zhi-ji-qi-bian-zhi-fang-fa-hua-fen-zi-wang">4.2.2 IPv4地址及其编址方法 — 划分子网</span></h3><h3><span id="4-2-2-ipv4-di-zhi-ji-qi-bian-zhi-fang-fa-wu-fen-lei-bian-zhi">4.2.2 IPv4地址及其编址方法 — 无分类编址</span></h3><h3><span id="4-2-3-ipv4-di-zhi-de-ying-yong-gui-hua">4.2.3 IPv4地址的应用规划</span></h3><h3><span id="4-2-4-ipv4-di-zhi-yu-mac-di-zhi">4.2.4 IPv4地址与MAC地址</span></h3><h3><span id="4-2-5-di-zhi-jie-xi-xie-yi-arp">4.2.5 地址解析协议ARP</span></h3><h3><span id="4-2-6-ip-shu-ju-bao-de-fa-song-he-zhuan-fa-guo-cheng">4.2.6 IP数据报的发送和转发过程</span></h3><h3><span id="4-2-7-ipv4-shu-ju-bao-de-shou-bu-ge-shi">4.2.7 IPv4数据报的首部格式</span></h3><h2><span id="4-3-jing-tai-lu-you-pei-zhi">4.3 静态路由配置</span></h2><h2><span id="4-4-yin-te-wang-de-lu-you-xuan-ze-xie-yi">4.4 因特网的路由选择协议</span></h2><h3><span id="4-4-1-lu-you-xuan-ze-fen-lei">4.4.1 路由选择分类</span></h3><h3><span id="4-4-2-yin-te-wang-cai-yong-fen-ceng-ci-de-lu-you-xuan-ze-xie-yi">4.4.2 因特网采用分层次的路由选择协议</span></h3><h3><span id="4-4-3-lu-you-xin-xi-xie-yi-rip">4.4.3 路由信息协议（RIP）</span></h3><h3><span id="4-4-4-kai-fang-zui-duan-lu-jing-you-xian-ospf">4.4.4 开放最短路径优先（OSPF）</span></h3><h3><span id="4-4-5-bian-jie-wang-guan-xie-yi-bgp">4.4.5 边界网关协议（BGP）</span></h3><h3><span id="4-4-6-lu-you-qi-de-ji-ben-gong-zuo-yuan-li">4.4.6 路由器的基本工作原理</span></h3><h2><span id="4-5-wang-ji-kong-zhi-bao-wen-xie-yi">4.5 网际控制报文协议</span></h2><h2><span id="4-6-xu-ni-zhuan-yong-wang-he-wang-luo-di-zhi-zhuan-huan">4.6 虚拟专用网和网络地址转换</span></h2><h2><span id="4-7-ip-duo-bo">4.7 IP多播</span></h2><h3><span id="4-7-1-ip-duo-bo-ji-zhu-de-xiang-guan-ji-ben-gai-nian">4.7.1 IP多播技术的相关基本概念</span></h3><h3><span id="4-7-2-ip-duo-bo-di-zhi-he-duo-bo-zu">4.7.2 IP多播地址和多播组</span></h3><h3><span id="4-7-3-zai-ju-yu-wang-shang-jin-xing-ying-jian-duo-bo">4.7.3 在局域网上进行硬件多播</span></h3><h3><span id="4-7-4-zai-yin-te-wang-shang-jin-xing-ip-duo-bo-xu-yao-de-liang-chong-xie-yi">4.7.4 在因特网上进行IP多播需要的两种协议</span></h3><h3><span id="4-7-5-wang-ji-zu-guan-li-xie-yi-igmp">4.7.5 网际组管理协议（IGMP）</span></h3><h3><span id="4-7-6-duo-bo-lu-you-xuan-ze-xie-yi">4.7.6 多播路由选择协议</span></h3><h2><span id="4-8-yi-dong-ip-ji-zhu">4.8 移动IP技术</span></h2><h2><span id="4-9-xia-yi-dai-wang-ji-xie-yi-ipv6">4.9 下一代网际协议IPv6</span></h2><h3><span id="4-9-1-ipv6-yin-jin-de-zhu-yao-bian-hua">4.9.1 IPv6引进的主要变化</span></h3><h3><span id="4-9-2-ipv6-shu-ju-bao-de-ji-ben-shou-bu">4.9.2 IPv6数据报的基本首部</span></h3><h3><span id="4-9-2-ipv6-shu-ju-bao-de-kuo-zhan-shou-bu">4.9.2 IPv6数据报的扩展首部</span></h3><h3><span id="4-9-4-ipv6-di-zhi">4.9.4 IPv6地址</span></h3><h3><span id="4-9-5-cong-ipv4-xiang-ipv6-guo-du">4.9.5 从IPv4向IPv6过渡</span></h3><h3><span id="4-9-6-wang-ji-kong-zhi-bao-wen-xie-yi-icmpv6">4.9.6 网际控制报文协议ICMPv6</span></h3><h2><span id="4-10-ruan-jian-ding-yi-wang-luo-sdn">4.10 软件定义网络（SDN）</span></h2><h2><span id="kuo-zhan-shi-pin-hu-lian-wang-fen-zu-lu-you-he-ke-kao-xing">扩展视频：互联网：分组，路由和可靠性</span></h2><h1><span id="5-yun-shu-ceng">5 运输层</span></h1><h2><span id="5-1-yun-shu-ceng-gai-shu">5.1 运输层概述</span></h2><h3><span id="5-1-1-jin-cheng-jian-ji-yu-wang-luo-de-tong-xin">5.1.1 进程间基于网络的通信</span></h3><h3><span id="5-1-2-tcp-ip-ti-xi-jie-gou-yun-shu-ceng-zhong-de-liang-ge-chong-yao-xie-yi">5.1.2 TCP/IP体系结构运输层中的两个重要协议</span></h3><h3><span id="5-1-3-yun-shu-ceng-duan-kou-hao-fu-yong-yu-fen-yong-de-gai-nian">5.1.3 运输层端口号、复用与分用的概念</span></h3><h2><span id="5-2-udp-he-tcp-de-dui-bi">5.2 UDP和TCP的对比</span></h2><h2><span id="5-3-chuan-shu-kong-zhi-xie-yi">5.3 传输控制协议</span></h2><h3><span id="5-3-1-tcp-bao-wen-duan-de-shou-bu-ge-shi">5.3.1 TCP报文段的首部格式</span></h3><h3><span id="5-3-2-tcp-de-yun-shu-lian-jie-guan-li-lian-jie-jian-li">5.3.2 TCP的运输连接管理 — 连接建立</span></h3><h3><span id="5-3-2-tcp-de-yun-shu-lian-jie-guan-li-si-bao-wen-hui-shou-shi-fang-tcp-lian-jie">5.3.2 TCP的运输连接管理 — “四报文挥手”释放TCP连接</span></h3><h3><span id="5-3-3-tcp-de-liu-liang-kong-zhi">5.3.3 TCP的流量控制</span></h3><h3><span id="5-3-4-tcp-de-yong-sai-kong-zhi">5.3.4 TCP的拥塞控制</span></h3><h3><span id="5-3-5-tcp-yong-sai-kong-zhi-yu-wang-ji-ceng-yong-sai-kong-zhi-de-guan-xi">5.3.5 TCP拥塞控制与网际层拥塞控制的关系</span></h3><h3><span id="5-3-6-tcp-ke-kao-chuan-shu-de-shi-xian">5.3.6 TCP可靠传输的实现</span></h3><h3><span id="5-3-7-tcp-chao-shi-chong-chuan-shi-jian-de-xuan-ze">5.3.7 TCP超时重传时间的选择</span></h3><h3><span id="5-3-8-tcp-de-xuan-ze-que-ren-sack">5.3.8 TCP的选择确认SACK</span></h3><h1><span id="6-ying-yong-ceng">6 应用层</span></h1><h2><span id="6-1-ying-yong-ceng-gai-shu">6.1 应用层概述</span></h2><h2><span id="6-2-ke-hu-fu-wu-qi-fang-shi-he-dui-deng-fang-shi">6.2 客户/服务器方式和对等方式</span></h2><h2><span id="6-3-dong-tai-zhu-ji-pei-zhi-xie-yi-dhcp">6.3 动态主机配置协议DHCP</span></h2><h2><span id="6-4-yu-ming-xi-tong-dns">6.4 域名系统（DNS）</span></h2><h2><span id="6-5-wen-jian-chuan-song-xie-yi-ftp">6.5 文件传送协议（FTP）</span></h2><h2><span id="6-6-dian-zi-you-jian">6.6 电子邮件</span></h2><h2><span id="6-7-wan-wei-wang">6.7 万维网</span></h2><h2><span id="kuo-zhan-shi-pin-1-hu-lian-wang-ip-di-zhi-he-dns">扩展视频1：互联网：IP地址和DNS</span></h2><h2><span id="kuo-zhan-shi-pin-2-hu-lian-wang-http-he-html">扩展视频2：互联网：HTTP和HTML</span></h2><h2><span id="kuo-zhan-shi-pin-3-hu-lian-wang-sou-suo-yin-qing-ru-he-gong-zuo">扩展视频3：互联网：搜索引擎如何工作？</span></h2><h1><span id="7-wang-luo-an-quan">7 网络安全</span></h1><h2><span id="7-1-wang-luo-an-quan-gai-shu">7.1 网络安全概述</span></h2><h2><span id="7-2-mi-ma-xue-yu-bao-mi-xing">7.2 密码学与保密性</span></h2><h3><span id="7-2-1-mi-ma-xue-xiang-guan-ji-ben-gai-nian">7.2.1 密码学相关基本概念</span></h3><h3><span id="7-2-2-dui-cheng-mi-yao-mi-ma-ti-zhi">7.2.2 对称密钥密码体制</span></h3><h3><span id="7-2-3-gong-yao-mi-ma-ti-zhi">7.2.3 公钥密码体制</span></h3><h3><span id="7-3-bao-wen-wan-zheng-xing-yu-jian-bie">7.3 报文完整性与鉴别</span></h3><h3><span id="7-3-1-bao-wen-zhai-yao-he-bao-wen-jian-bie-ma">7.3.1 报文摘要和报文鉴别码</span></h3><h3><span id="7-3-2-shu-zi-qian-ming">7.3.2 数字签名</span></h3><h2><span id="7-4-shi-ti-jian-bie">7.4 实体鉴别</span></h2><h2><span id="7-5-mi-yao-fen-fa">7.5 密钥分发</span></h2><h2><span id="7-6-fang-wen-kong-zhi">7.6 访问控制</span></h2><h2><span id="7-7-wang-luo-ti-xi-jie-gou-ge-ceng-cai-qu-de-an-quan-cuo-shi">7.7 网络体系结构各层采取的安全措施</span></h2><h3><span id="7-7-1-wu-li-ceng-an-quan-shi-li-xin-dao-jia-mi">7.7.1 物理层安全实例：信道加密</span></h3><h3><span id="7-7-2-shu-ju-lian-lu-ceng-an-quan-shi-li-802-11i">7.7.2 数据链路层安全实例：802.11i</span></h3><h3><span id="7-7-3-wang-luo-ceng-an-quan-shi-li-ipsec">7.7.3 网络层安全实例：IPSec</span></h3><h3><span id="7-7-4-yun-shu-ceng-an-quan-shi-li-ssl-tls">7.7.4 运输层安全实例：SSL/TLS</span></h3><h3><span id="7-7-5-ying-yong-ceng-an-quan-shi-li-pgp">7.7.5 应用层安全实例：PGP</span></h3><h2><span id="7-8-fang-huo-qiang-fang-wen-kong-zhi-yu-ru-qin-jian-ce-xi-tong">7.8 防火墙访问控制与入侵检测系统</span></h2><h2><span id="7-9-chang-jian-de-wang-luo-gong-ji-ji-qi-fang-fan">7.9 常见的网络攻击及其防范</span></h2><h1><span id="8-dong-shou-zuo-ji-suan-ji-wang-luo-fang-zhen-shi-yan-ji-yu-packet-tracer">8 动手做计算机网络仿真实验-基于Packet Tracer</span></h1><h2><span id="di-1-zhang-ren-shi-packet-tracer-fang-zhen-ruan-jian">第1章 认识Packet Tracer仿真软件</span></h2><h3><span id="1-1-packet-tracer-ruan-jian-de-huo-qu-an-zhuang-yi-ji-yun-xing">1.1 Packet Tracer软件的获取、安装以及运行</span></h3><h3><span id="1-2-packet-tracer-ruan-jian-de-ji-ben-shi-yong-fang-fa">1.2 Packet Tracer软件的基本使用方法</span></h3><h3><span id="1-3-ios-ming-ling-xing-mo-shi">1.3 IOS命令行模式</span></h3><h3><span id="1-4-ios-ming-ling-fu-zhu">1.4 IOS命令辅助</span></h3><h3><span id="di-2-zhang-wu-li-ceng-xiang-guan-shi-yan">第2章 物理层相关实验</span></h3><h3><span id="shi-yan-2-1-shou-xi-chang-yong-wang-luo-she-bei-ji-qi-hu-lian">实验2-1 熟悉常用网络设备及其互连</span></h3><h2><span id="di-3-zhang-shu-ju-lian-lu-ceng-xiang-guan-shi-yan">第3章 数据链路层相关实验</span></h2><h3><span id="3-1-shi-yan-3-1-yan-zheng-dian-dui-dian-xie-yi">3.1 实验3-1 验证点对点协议</span></h3><h3><span id="3-2-shi-yan-3-2-shi-yong-ji-xian-qi-gou-jian-gong-xiang-shi-yi-tai-wang">3.2 实验3-2 使用集线器构建共享式以太网</span></h3><h3><span id="3-3-shi-yan-3-3-shi-yong-jiao-huan-ji-gou-jian-jiao-huan-shi-yi-tai-wang">3.3 实验3-3 使用交换机构建交换式以太网</span></h3><h3><span id="3-4-shi-yan-3-4-yi-tai-wang-jiao-huan-ji-zi-xue-xi-he-zhuan-fa-zheng-de-guo-cheng">3.4 实验3-4 以太网交换机自学习和转发帧的过程</span></h3><h3><span id="3-5-shi-yan-3-5-yi-tai-wang-de-kuo-zhan-ji-xian-qi-he-jiao-huan-ji-de-dui-bi">3.5 实验3-5 以太网的扩展（集线器和交换机的对比）</span></h3><h3><span id="3-6-shi-yan-3-6-yan-zheng-yi-tai-wang-jiao-huan-ji-de-sheng-cheng-shu-xie-yi">3.6 实验3-6 验证以太网交换机的生成树协议</span></h3><h3><span id="3-7-shi-yan-3-7-hua-fen-xu-ni-ju-yu-wang">3.7 实验3-7 划分虚拟局域网</span></h3><h2><span id="di-4-zhang-wang-luo-ceng-xiang-guan-shi-yan">第4章 网络层相关实验</span></h2><h3><span id="4-1-shi-yan-4-1-yan-zheng-di-zhi-jie-xi-xie-yi-de-ji-ben-gong-zuo-yuan-li">4.1 实验4-1 验证地址解析协议的基本工作原理</span></h3><h3><span id="4-2-shi-yan-4-2-di-zhi-jie-xi-xie-yi-bu-neng-kua-wang-luo-zhi-jie-shi-yong">4.2 实验4-2 地址解析协议不能跨网络直接使用</span></h3><h3><span id="4-3-shi-yan-4-3-ipv4-di-zhi-de-fen-lei-bian-zhi-fang-fa">4.3 实验4-3 IPv4地址的分类编址方法</span></h3><h3><span id="4-4-shi-yan-4-4-ipv4-di-zhi-de-hua-fen-zi-wang-bian-zhi-fang-fa">4.4 实验4-4 IPv4地址的划分子网编址方法</span></h3><h3><span id="4-5-shi-yan-4-5-ipv4-di-zhi-de-wu-fen-lei-bian-zhi-fang-fa">4.5 实验4-5 IPv4地址的无分类编址方法</span></h3><h3><span id="4-6-shi-yan-4-6-mo-ren-lu-you-he-te-ding-zhu-ji-lu-you-de-pei-zhi">4.6 实验4-6 默认路由和特定主机路由的配置</span></h3><h3><span id="4-7-shi-yan-4-7-lu-you-huan-lu-wen-ti">4.7 实验4-7 路由环路问题</span></h3><h3><span id="4-8-shi-yan-4-8-yan-zheng-lu-you-qi-ji-ge-chi-peng-zhuang-yu-ye-ge-chi-guang-bo-yu">4.8 实验4-8 验证路由器既隔离碰撞域也隔离广播域</span></h3><h3><span id="4-9-shi-yan-4-9-yan-zheng-lu-you-xin-xi-xie-yi-ripv1">4.9 实验4-9 验证路由信息协议RIPv1</span></h3><h3><span id="4-10-shi-yan-4-10-lu-you-xin-xi-xie-yi-ripv2-yu-ripv1-de-dui-bi">4.10 实验4-10 路由信息协议RIPv2与RIPv1的对比</span></h3><h3><span id="4-11-shi-yan-4-11-yan-zheng-kai-fang-zui-duan-lu-jing-you-xian-xie-yi">4.11 实验4-11 验证开放最短路径优先协议</span></h3><h3><span id="4-12-shi-yan-4-12-yan-zheng-ospf-ke-yi-hua-fen-qu-yu">4.12 实验4-12 验证OSPF可以划分区域</span></h3><h3><span id="4-13-shi-yan-4-13-yan-zheng-bian-jie-wang-guan-xie-yi">4.13 实验4-13 验证边界网关协议</span></h3><h3><span id="4-14-shi-yan-4-14-wang-ji-kong-zhi-bao-wen-xie-yi-de-ying-yong">4.14 实验4-14 网际控制报文协议的应用</span></h3><h3><span id="4-15-shi-yan-4-15-wang-luo-di-zhi-yu-duan-kou-hao-zhuan-huan">4.15 实验4-15 网络地址与端口号转换</span></h3><h3><span id="4-16-shi-yan-4-16-cong-ipv4-xiang-ipv6-guo-du-suo-shi-yong-de-sui-dao-ji-zhu">4.16 实验4-16 从IPv4向IPv6过渡所使用的隧道技术</span></h3><h3><span id="4-17-shi-yan-4-17-vlan-jian-dan-bo-tong-xin-de-shi-xian-fang-fa-duo-bi-lu-you">4.17 实验4-17 VLAN间单播通信的实现方法——“多臂路由”</span></h3><h3><span id="4-18-shi-yan-4-18-vlan-jian-dan-bo-tong-xin-de-shi-xian-fang-fa-dan-bi-lu-you">4.18 实验4-18 VLAN间单播通信的实现方法——“单臂路由”</span></h3><h3><span id="4-19-shi-yan-4-19-vlan-jian-dan-bo-tong-xin-de-shi-xian-fang-fa-shi-yong-san-ceng-jiao-huan-ji">4.19 实验4-19 VLAN间单播通信的实现方法——使用三层交换机</span></h3><h2><span id="di-5-zhang-yun-shu-ceng-xiang-guan-shi-yan">第5章 运输层相关实验</span></h2><h3><span id="5-1-shi-yan-5-1-tcp-de-yun-shu-lian-jie-guan-li">5.1 实验5-1 TCP的运输连接管理</span></h3><h3><span id="5-2-shi-yan-5-2-shou-xi-yong-hu-shu-ju-bao-xie-yi">5.2 实验5-2 熟悉用户数据报协议</span></h3><h2><span id="di-6-zhang-ying-yong-ceng-xiang-guan-shi-yan">第6章 应用层相关实验</span></h2><h3><span id="6-1-shi-yan-6-1-shou-xi-dong-tai-zhu-ji-pei-zhi-xie-yi">6.1 实验6-1 熟悉动态主机配置协议</span></h3><h3><span id="6-2-shi-yan-6-2-pei-zhi-dhcp-zhong-ji-dai-li">6.2 实验6-2 配置DHCP中继代理</span></h3><h3><span id="6-3-shi-yan-6-3-shou-xi-yu-ming-xi-tong-de-di-gui-cha-xun-fang-fa">6.3 实验6-3 熟悉域名系统的递归查询方法</span></h3><h3><span id="6-4-shi-yan-6-4-shou-xi-wen-jian-chuan-song-xie-yi">6.4 实验6-4 熟悉文件传送协议</span></h3><h3><span id="6-5-shi-yan-6-5-shou-xi-dian-zi-you-jian-xiang-guan-xie-yi">6.5 实验6-5 熟悉电子邮件相关协议</span></h3><h3><span id="6-6-shi-yan-6-6-shou-xi-wan-wei-wang-wen-dang-de-zuo-yong-he-chao-wen-ben-3-chuan-shu-xie-yi">6.6 实验6-6 熟悉万维网文档的作用和超文本3传输协议</span></h3><h2><span id="di-7-zhang-wang-luo-an-quan-xiang-guan-shi-yan">第7章 网络安全相关实验</span></h2><h3><span id="7-1-shi-yan-7-1-pei-zhi-fang-wen-kong-zhi-lie-biao">7.1 实验7-1 配置访问控制列表</span></h3><h3><span id="7-2-shi-yan-7-2-pei-zhi-ji-yu-ipsec-de-xu-ni-zhuan-yong-wang-vpn">7.2 实验7-2 配置基于IPSec的虚拟专用网VPN</span></h3><h2><span id="di-8-zhang-zong-he-shi-yan">第8章 综合实验</span></h2><h3><span id="shi-yan-8-1-gou-jian-cai-yong-san-ceng-wang-luo-jia-gou-de-xiao-xing-yuan-qu-wang">实验8-1 构建采用三层网络架构的小型园区网</span></h3><h1><span id="9-ji-suan-ji-wang-luo-fang-zhen-shi-yan">9  计算机网络仿真实验</span></h1><h2><span id="8-1-fang-zhen-ruan-jian-de-huo-qu-an-zhuang-he-han-hua">8.1 仿真软件的获取、安装和汉化</span></h2><h2><span id="8-2-fang-zhen-ruan-jian-de-shi-yong">8.2 仿真软件的使用</span></h2><h2><span id="8-3-shi-yan-1-fang-wen-web-fu-wu-qi-jia-shen-dui-wang-luo-ti-xi-jie-gou-de-li-jie">8.3 实验1 访问WEB服务器（加深对网络体系结构的理解）</span></h2><h2><span id="8-4-shi-yan-2-mac-di-zhi-ip-di-zhi-arp-xie-yi">8.4 实验2 MAC地址，IP地址，ARP协议</span></h2><h2><span id="8-5-shi-yan-3-zong-xian-xing-yi-tai-wang-de-te-xing-guang-bo-jing-zheng-zong-xian-chong-tu">8.5 实验3 总线型以太网的特性（广播，竞争总线，冲突）</span></h2><h2><span id="8-6-shi-yan-4-ji-xian-qi-he-jiao-huan-ji-de-qu-bie">8.6 实验4 集线器和交换机的区别</span></h2><h2><span id="8-7-shi-yan-5-jiao-huan-ji-de-zi-xue-xi-suan-fa">8.7 实验5 交换机的自学习算法</span></h2><h2><span id="8-8-shi-yan-6-sheng-cheng-shu-xie-yi-stp-de-gong-neng">8.8 实验6 生成树协议STP的功能</span></h2><h2><span id="8-9-shi-yan-7-xu-ni-ju-yu-wang-vlan">8.9 实验7 虚拟局域网VLAN</span></h2><h2><span id="8-10-shi-yan-8-ipv4-di-zhi-fen-lei-di-zhi">8.10 实验8 IPv4地址— 分类地址</span></h2><h2><span id="8-11-shi-yan-9-ipv4-di-zhi-hua-fen-zi-wang">8.11 实验9 IPv4地址— 划分子网</span></h2><h2><span id="8-12-shi-yan-10-ipv4-di-zhi-gou-zao-chao-wang-wu-fen-lei-bian-zhi">8.12 实验10 IPv4地址 — 构造超网（无分类编址）</span></h2><h2><span id="8-13-shi-yan-11-ip-shu-ju-bao-de-fa-song-he-zhuan-fa-liu-cheng">8.13 实验11 IP数据报的发送和转发流程</span></h2><h2><span id="8-14-shi-yan-12-mo-ren-lu-you-he-te-ding-zhu-ji-lu-you">8.14 实验12 默认路由和特定主机路由</span></h2><h2><span id="8-15-shi-yan-13-jing-tai-lu-you-pei-zhi-cuo-wu-dao-zhi-de-lu-you-huan-lu-wen-ti">8.15 实验13 静态路由配置错误导致的路由环路问题</span></h2><h2><span id="8-16-shi-yan-14-ju-he-liao-bu-cun-zai-de-wang-luo-dao-zhi-de-lu-you-huan-lu-wen-ti">8.16 实验14 聚合了不存在的网络导致的路由环路问题</span></h2><h2><span id="8-17-shi-yan-15-wang-luo-gu-zhang-dao-zhi-de-lu-you-huan-lu-wen-ti">8.17 实验15 网络故障导致的路由环路问题</span></h2><h2><span id="8-18-shi-yan-16-lu-you-xin-xi-xie-yi-rip">8.18 实验16 路由信息协议RIP</span></h2><h2><span id="8-19-shi-yan-17-kai-fang-zui-duan-lu-jing-you-xian-ospf">8.19 实验17 开放最短路径优先OSPF</span></h2><h2><span id="8-20-shi-yan-18-bian-jie-wang-guan-xie-yi-bgp">8.20 实验18 边界网关协议BGP</span></h2><h2><span id="8-21-shi-yan-19-wang-ji-kong-zhi-bao-wen-xie-yi-icmp-de-ying-yong">8.21 实验19 网际控制报文协议ICMP的应用</span></h2><h2><span id="8-22-shi-yan-20-yun-shu-ceng-duan-kou">8.22 实验20 运输层端口</span></h2><h2><span id="8-23-shi-yan-21-vlan-jian-tong-xin-de-shi-xian-fang-fa-duo-bi-lu-you-2">8.23 实验21 VLAN间通信的实现方法—“多臂路由”2</span></h2><h2><span id="8-24-shi-yan-22-vlan-jian-tong-xin-de-shi-xian-fang-fa-dan-bi-lu-you">8.24 实验22 VLAN间通信的实现方法—“单臂路由”</span></h2><h2><span id="8-25-shi-yan-23-vlan-jian-tong-xin-de-shi-xian-shi-yong-san-ceng-jiao-huan-ji">8.25 实验23 VLAN间通信的实现—使用三层交换机</span></h2><h2><span id="8-26-shi-yan-24-tcp-de-yun-shu-lian-jie-guan-li-7-27-shi-yan-25-dong-tai-zhu-ji-pei-zhi-xie-yi-dhcp-de-zuo-yong">8.26 实验24 TCP的运输连接管理7.27 实验25 动态主机配置协议DHCP的作用</span></h2>
+        </div>
+
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        
+            <script src='https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js'></script>
+            <script>
+                if (window.mermaid) {
+                    mermaid.initialize({
+                        startOnLoad: true,
+                        theme: 'neural',
+                    });
+                }
+            </script>
+        
+        <span>© zoe | <a href="https://hexo.io" target="_blank"></a>  <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank"></a>
+              
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<span class="site-uv">
+
+👤
+
+ <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+
+</span>&nbsp;
+
+
+
+
+
+<span class="site-pv">
+
+ | 👁️
+
+ <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+
+</span>
+
+
+  
+               
+        </span>
+    </div>
+</footer>
+
+    </div>
+
+    <!-- 搜索功能 -->
+    <!-- Chic/layout.ejs -->
+    <div id="u-search">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="container">
+                    <form id="u-search-modal-form" class="u-search-modal-form">
+                        <button type="submit" class="form-submit-btn">
+                            <img src="/image/search.png" class="search-btn-img" />
+                        </button>
+                        <input placeholder="搜索文章。。。" class="form-input" onchange="inputChange(event)" id="modal-form-input">
+                    </form>
+                    <a class="modal-close">x</a>
+                </div>
+                <div class="search-loading">
+                    <div class="search-loading-bar"></div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- <ul class="modal-results">
+                    <li class="result-item">
+                        <a class="result-item-detail">
+                            <span class="title">页面配置</span>
+                            <span class="content">
+                                网址，例如： front-matter---layout: postdate: <b mark></b>
+                                7-07-05title: [转]如何搭建基于Hexo的独立博客categories: [Dev, Hexo]tags: - Hexoauthor: name: xaoxuu avatar: https://cdn.jsdelivr.......
+                            </span>
+                        </a>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+        <div class="modal-overlay"></div>
+    </div>
+
+
+</body>
+
+
+
+</html>
+
+

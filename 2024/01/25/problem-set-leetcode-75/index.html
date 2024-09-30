@@ -348,6 +348,72 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
 
     
     <article class="post-wrap">
@@ -379,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">17</a>                         
+                            <a href="">470</a>                         
                         </span>
                         
                     
@@ -388,7 +454,7 @@
                         
                         <span class="post-count">                        
                             Time:                        
-                            <a href="">1min</a>                         
+                            <a href="">2min</a>                         
                         </span>
                         
                     
@@ -398,18 +464,59 @@
         </header>
 
         <div class="post-content">
-            <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Sorry, the password you entered is wrong. Please check it and enter it again." data-whm="Sorry, the current article cannot be checked, but you can still take a look at the decrypted content.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="1a644cce8229cbc92df02a24768799cf8d91527b4b1fc30663ceb037b8b2def1">9ab8eeb89182dbd47bc9c58c85287dafab1f550aa59fc36539a53cf1c54e13569179b4689faff99a9d2e72d9a09e102c1fbbe80be766d47096c771b197f17507076bd86c8e19be5b05507f9f86ce738714ae780b55dc82387ad89d8271227c8f561daa569155b878ce60a5cbc16bcf4de1e9b2d8a60f506ace846230443bc4bce363ff762d52899b6f45fc44ff42aad8aca5e20bfdbfebb99c2bccfbff0f4ca7db39a814c7495f08601c08f9be8b1d6936f08636fe21aa3f2e72ab218f037a8a329291455f9fa42bc091f53f8f36d8366d01293c6fb8557b6bbd2b048e9b7688fcb6a3d0d07db23f4dc07c0fd22b26537526e72dad81ae5af37b2060ca1af966fe2e657f6b4a77a624abd424c720b7f9257d1f21a1246d896d9126a2d547d20774900fe13f428e13f4562951cd3b6e70ec8145b46017f5870a93ca5c7b9d6ad80c25ca62cedf1c58f8d4c4015dee23603cfaec87578799312be51a7cd545cd46426a4f589b9a589435d94b9cfc0d69d2c0f556a8aa10516b940ddd8309aedc928cfd125c7eac2e99959274926591d809df0fa6e8681c5d42d4979e1352ae948b046c7fce3b202b2f9bf9239a762d46e1865de6d990924f1417c0f1388a425eb8976d2b805cab44286c2856fb4000a6427992d187118c828f94414fde6441161d1362bc04c60e26677e1171501eb0842eb0495286c37e91c7ff3a693eeee5d90fb82e9e052a8c2297fae213dbc11d8b10d642b031f863756d2a79d7079c02a82cee06e283a05017b5ad4fe5b5e13edc5d862908e45575e8629b75d1f7a9eda0fabd4a036ea5874d07b2ba3a4bdf9dd70dc64e15f466a4c136940f8045b620ff973523ced7de2cbcbae139148fcc4aab10f479dd24612f7f86235b4e5f50220fd23fc731a79324114d5f98f3025df431294bdbe6a305cd44026f7bf7fa8494faffae26d4a064292b977b7f2bdb5f107dcf6e3836aa8b495edf18a577897b5895af1c89e8833810c739f870b4ebdec4eafd2150db3161b5a72012e131a9042c8b0a03a865f1d28fc010f707fa2c4b2d4c1788ebb05c2da458bc5811f0fc3c8d2da5e10003ebfa9074049c5d33fd9df5d85efb5e240aa783b7a7c5288dc12d4bd4cf63b5c0efc344c91ec09d7670060d20b69d7dc17d98b324cd040b9babe4616b24a7aec858f91c26eb87e1020d1a361d6b3b1d8f9776598631b60fde575aecb2c956f3b6387b79a6acbfda0910f05a241e7b808010839ce2747ee7124135860cc7b2cd44f470045c06e58c3dfe835f9f19f82f492edb951896b192c26cc5f3bbdc7818127e6cbbcdd69426aa2e12bf76a840bf354d6fb3f1ae5b04843cda353e7d630f40ac431b5074d3f19c868a22605996b703a7d6b12edfb63745735a6359ed472989b0726eee7fbd160fc990ac91dfc0d4766ed63d346f01d32000dcc8454f4ef3f7109ebbd9007de74b077c1776312b274e44228bf8c0dabde5ff6ea715354d1129d4e85be4fda82ed2acc7a314f5f8d947576e21e4931d224c17e0baa4a762cd68a55c05813e997a0b1c27036557f5f328316378203a5b7c248ed8c5e81f6b79c32d4791665eee27903a27a176019b4f7135be8ad0474fdc048f4cc8db59870fbfdb9b94d20cd693d369b05bb44c862a57cef6bccced1b78d9f91ec5d8a052a493ffbdaed3b65475bb19308206ea07501af1b1df54fc4e3442133675bd15ef2f83dfafaea786908ac0246538e111c15899d762ff456dfa547929ff9c7c4165eb65b3dafebc87e6cf51396ca2a8b9acb35adbb87c35ba3950da91eeadcb31b327e47f371988ebc0fa0f5a5b2b02a806116f36af1434478c85e70f263a1858c16b4c521f7babf04a4935f5366746184abbe444985a36d3cc51abdd590539b7983e451d8edf7ba92a8c32191256e4445ae952451d5f5752cc71b838b3a5f0369ff91032eedd2af1a4f810f84a4c128555e332221ef961a594c3f7e8fe6974ef0fea0b9c6d22857e2eb0d9c7e27d32c035cab7e8f825906b7ba50a5f3d545664c623d62a79c0953c8ddcd18bfc6089fe861ef6722bf1a1194810dfe132f680e5849623f5180128c1e4b227b77267498660cc3d5e2e4a8cc2f79daeb05b2ba4c41da428bbdc37e964950d8826281a0d9ad132f1e3f5f7aa81d57283d88d56fe39</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">The current article is not visible to the public, please enter the password and check it!</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+            <blockquote>
+<p> <a target="_blank" rel="noopener" href="https://leetcode.cn/studyplan/leetcode-75/">LeetCode 75 - 学习计划 - 力扣（LeetCode）全球极客挚爱的技术成长平台</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>题号</th>
+<th>完成</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数组/字符串</td>
+<td>🟢1768.交替合并字符串</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1><span id="shu-zu-zi-fu-chuan">数组/字符串</span></h1><h2><span id="1768-jiao-ti-he-bing-zi-fu-chuan">🟢1768.交替合并字符串</span></h2><blockquote>
+<p> 给你两个字符串 <code>word1</code> 和 <code>word2</code> 。请你从 <code>word1</code> 开始，通过交替添加字母来合并字符串。如果一个字符串比另一个字符串长，就将多出来的字母追加到合并后字符串的末尾。</p>
+<p> 返回 <strong>合并后的字符串</strong> 。</p>
+<p> <strong>示例 1：</strong></p>
+ <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：word1 = "abc", word2 = "pqr"</span><br><span class="line">输出："apbqcr"</span><br><span class="line">解释：字符串合并情况如下所示：</span><br><span class="line">word1：  a   b   c</span><br><span class="line">word2：    p   q   r</span><br><span class="line">合并后：  a p b q c r</span><br></pre></td></tr></tbody></table></figure>
+
+<p> <strong>示例 2：</strong></p>
+ <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：word1 = "ab", word2 = "pqrs"</span><br><span class="line">输出："apbqrs"</span><br><span class="line">解释：注意，word2 比 word1 长，"rs" 需要追加到合并后字符串的末尾。</span><br><span class="line">word1：  a   b </span><br><span class="line">word2：    p   q   r   s</span><br><span class="line">合并后：  a p b q   r   s</span><br></pre></td></tr></tbody></table></figure>
+
+<p> <strong>示例 3：</strong></p>
+ <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：word1 = "abcd", word2 = "pq"</span><br><span class="line">输出："apbqcd"</span><br><span class="line">解释：注意，word1 比 word2 长，"cd" 需要追加到合并后字符串的末尾。</span><br><span class="line">word1：  a   b   c   d</span><br><span class="line">word2：    p   q </span><br><span class="line">合并后：  a p b q c   d</span><br></pre></td></tr></tbody></table></figure>
+
+<p> <strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= word1.length, word2.length &lt;= 100</code></li>
+<li><code>word1</code> 和 <code>word2</code> 由小写英文字母组成</li>
+</ul>
+<p> Related Topics</p>
+<p> 双指针</p>
+<p> 字符串</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">mergeAlternately</span><span class="params">(String word1, String word2)</span> {</span><br><span class="line">        <span class="type">int</span> <span class="variable">len1</span> <span class="operator">=</span> word1.length(), len2 = word2.length();</span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> Math.min(len1, len2), max = Math.max(len1, len2);</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">res</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; min; i++) {</span><br><span class="line">            res.append(word1.charAt(i));</span><br><span class="line">            res.append(word2.charAt(i));</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (min &lt; len1) {</span><br><span class="line">            res.append(word1.substring(min));</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (min &lt; len2) {</span><br><span class="line">            res.append(word2.substring(min));</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res.toString();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1><span id="shuang-zhi-zhen">双指针</span></h1><h1><span id="hua-dong-chuang-kou">滑动窗口</span></h1><h1><span id="qian-zhui-he">前缀和</span></h1><h1><span id="ha-xi-biao-ha-xi-ji-he">哈希表/哈希集合</span></h1><h1><span id="zhan">栈</span></h1><h1><span id="dui-lie">队列</span></h1><h1><span id="lian-biao">链表</span></h1><h1><span id="er-cha-shu-shen-du-you-xian-sou-suo">二叉树-深度优先搜索</span></h1><h1><span id="er-cha-shu-shen-du-you-xian-bian-li">二叉树-深度优先遍历</span></h1><h1><span id="er-cha-sou-suo-shu">二叉搜索树</span></h1><h1><span id="tu-shen-du-you-xian-sou-suo">图-深度优先搜索</span></h1><h1><span id="tu-guang-du-you-xian-sou-suo">图-广度优先搜索</span></h1><h1><span id="dui-you-xian-dui-lie">堆/优先队列</span></h1><h1><span id="er-fen-cha-zhao">二分查找</span></h1><h1><span id="hui-su">回溯</span></h1><h1><span id="dong-tai-gui-hua-yi-wei">动态规划-一维</span></h1><h1><span id="dong-tai-gui-hua-duo-wei">动态规划-多维</span></h1><h1><span id="wei-yun-suan">位运算</span></h1><h1><span id="qian-zhui-shu">前缀树</span></h1><h1><span id="qu-jian-ji-he">区间集合</span></h1><h1><span id="dan-diao-zhan">单调栈</span></h1>
         </div>
 
 

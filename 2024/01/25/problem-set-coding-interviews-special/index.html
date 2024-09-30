@@ -348,6 +348,72 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
 
     
     <article class="post-wrap">
@@ -379,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">17</a>                         
+                            <a href="">107</a>                         
                         </span>
                         
                     
@@ -398,18 +464,10 @@
         </header>
 
         <div class="post-content">
-            <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Sorry, the password you entered is wrong. Please check it and enter it again." data-whm="Sorry, the current article cannot be checked, but you can still take a look at the decrypted content.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="bfb04c84bc3393f77d15641c86f57246fa7d6826c4197292a7746481b48b60cd">9ab8eeb89182dbd47bc9c58c85287dafab1f550aa59fc36539a53cf1c54e13569179b4689faff99a9d2e72d9a09e102c1fbbe80be766d47096c771b197f17507076bd86c8e19be5b05507f9f86ce738714ae780b55dc82387ad89d8271227c8f561daa569155b878ce60a5cbc16bcf4de1e9b2d8a60f506ace846230443bc4bce363ff762d52899b6f45fc44ff42aad8aca5e20bfdbfebb99c2bccfbff0f4ca7db39a814c7495f08601c08f9be8b1d6936f08636fe21aa3f2e72ab218f037a8a329291455f9fa42bc091f53f8f36d8366d01293c6fb8557b6bbd2b048e9b76885eda071b5a6bee91c727b11b4e8a919e6a1d942029e6a341012a2442e618c6f71a237292f9bf8310eeb059bb4cea6b4a882d97a47a066c6d24caed0885392370e62d4849f0ccf30bac6b2ab9b5b2317cebbbd4cf02a9d478cacd3c06f2be791fb35178b7fe80b91d9da47851df7612e141d25e922c8b105858debbf982c97a4d34f4ed6f3e7b70e5fe60059cf0e2cc8510dac5871d02485d98eada4b8c0fa73ea0da8ba7929f71666db87d9902509ba1b054a7031593ab6933f2f61a4d43d93ad2e650b5e344316bab6c523d0cbce90893baebeb317ab2361c55d2dd7c4ebbd588a852cd269d8cd0a6099a2246fe15c72f92dd9541ca8713bef8db253dde49388ad74db56f0e4b4c5d9e3070f8b097ff6df70898ce9894efacda9a171538a940ac4a48621090c003b12a7b3d9db71aab2d9e8d99fa24a5ee1838c43d0698e5220b1a8cff366b56b4a47d53c87c0cd85830938812e5f0795cadc639cfc21cee9bd59cf4fb15f7e47e9bdbd425b32fbb6114e4c9635f09d33e810a2c013631f0eed248379486e47ff7db452fa9ddb9a97dbf6fa9dc0418d989c56cfe2f297a01cc15bec4aeac082b29b5f08fcf1229bfe0abf0f1695f96d6820d7c43b69d5dd1ea57a3629b583328d13dbc43f3e90aedb7835cc9deb8b947aed2e6ce0cbd35a6fe5e50f904649f4ee980c2ef099cb1bf84c96457efa5eafc3c598684246e05c266f5cc48679f14614ab126cf7db32dbf66f7aa494641b36450d6eab9ed8f64ae86f25e9eeb05bce7fb7a99bd30b2d606659e46f0a2348183276c37cc796f6618bcb7477e2efee8be4cd31a34fa57c7885c50727cdb784818a14d471b1e12b0d5b97815eb5b8fdbbcd689cc7af309cfb4221069cb11870951300ccb1d458bf6b44f9693c376547736d07bb263eda114ef4346a97891e9553c981983df19248abc59196458ca2eab4b128e47f5363baa13b69f6b1835dfd4c9479e46d30e74ee1d42a94d7b7e3ea9a4a6c0bb5a5b00d817e6242f86ac724024fc54836b67b07240034423277c9f7f185f9638fd6bb8670e4ae731c37b382392300c47ac2d4e6e3cb21450af9e5842196eeaba9a121e568d7cc01ec768cbe6a5834bc8a53bf0b46331d1be8201ba918f036a20406f7ee02e53e9e82e4ec9b8222ad769ac3d8495f4e2828395002f934ff87350ce583829dc325e99c4b89c2067bc222f09bc2d9ffab7ee559d1e765df7073954bd3488b76a76a04dd1065b19689e0ef06aa010ffbee99ad08b2e044eeab74dab27566260c02a806217c7b492f31cf3194fe88fa42fd1b197f447410b945793f79332d614e7fee4dbb10e72d376a13c0810fe43ada4d23d9544c02783943e5acc92fa5b2eb386974e7f3f27e7f1153b914c6edabcbdf48d8dcd2027e292660707cb31f985634d</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">The current article is not visible to the public, please enter the password and check it!</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+            <blockquote>
+<p> <a target="_blank" rel="noopener" href="https://leetcode.cn/studyplan/coding-interviews-special/">119 经典题变种挑战 - 学习计划 - 力扣（LeetCode）全球极客挚爱的技术成长平台</a></p>
+</blockquote>
+<h1><span id="tiao-zhan-1-zheng-shu">挑战1：整数</span></h1><h1><span id="tiao-zhan-2-shu-zu">挑战2：数组</span></h1><h1><span id="tiao-zhan-3-zi-fu-chuan">挑战3：字符串</span></h1><h1><span id="tiao-zhan-4-lian-biao">挑战4：链表</span></h1><h1><span id="tiao-zhan-5-ha-xi-biao">挑战5：哈希表</span></h1><h1><span id="tiao-zhan-6-zhan">挑战6：栈</span></h1><h1><span id="tiao-zhan-7-dui-lie">挑战7：队列</span></h1><h1><span id="tiao-zhan-8-shu">挑战8：树</span></h1><h1><span id="tiao-zhan-9-dui">挑战9：堆</span></h1><h1><span id="tiao-zhan-10-qian-zhui-shu">挑战10：前缀树</span></h1><h1><span id="tiao-zhan-11-er-fen-cha-zhao">挑战11：二分查找</span></h1><h1><span id="tiao-zhan-12-pai-xu">挑战12：排序</span></h1><h1><span id="tiao-zhan-13-hui-su-fa">挑战13：回溯法</span></h1><h1><span id="tiao-zhan-14-dong-tai-gui-hua">挑战14：动态规划</span></h1><h1><span id="tiao-zhan-15-tu">挑战15：图</span></h1><h1><span id></span></h1>
         </div>
 
 
