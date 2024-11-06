@@ -348,6 +348,72 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+    
 
     
     <article class="post-wrap">
@@ -379,7 +445,7 @@
                         
                         <span class="post-count">                        
                             Words:                        
-                            <a href="">42</a>                         
+                            <a href="">81</a>                         
                         </span>
                         
                     
@@ -401,9 +467,32 @@
             <blockquote>
 <p> 视频资源一（2024-04-23）：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1S142197x7/?spm_id_from=333.999.0.0&amp;vd_source=7213f8cda7f8cf9dc59fb736cd897d74">SpringCloud微服务开发与实战_哔哩哔哩_bilibili</a></p>
 <p> 文档资源：<a target="_blank" rel="noopener" href="https://b11et3un53m.feishu.cn/wiki/R4Sdwvo8Si4kilkSKfscgQX0niB">﻿‬﻿⁠﻿‍‍‬‌⁠‍⁠⁠⁠‬‍﻿‬⁠‍﻿‌‬‬‍⁠‬飞书云文档 (feishu.cn)</a></p>
-<p> 视频资源二：</p>
-<p> 视频资源三：</p>
+<p> 视频资源二（2024-02-27）：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1gW421P7RD/?spm_id_from=333.999.0.0&amp;vd_source=7213f8cda7f8cf9dc59fb736cd897d74">尚硅谷 SpringCloud教程_哔哩哔哩_bilibili</a></p>
+<p> 视频资源三（2023-09-20）：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kH4y1S7wz/?spm_id_from=333.999.0.0&amp;vd_source=7213f8cda7f8cf9dc59fb736cd897d74">黑马程序员SpringCloud微服务_哔哩哔哩_bilibili</a></p>
 </blockquote>
+<h1><span id="wei-fu-wu-shang">微服务（上）</span></h1>
+
+	<div class="row">
+    <embed src="/SpringCloud/微服务01.pdf" width="100%" height="1024px" type="application/pdf">
+	</div>
+
+
+
+<h1><span id="wei-fu-wu-xia">微服务（下）</span></h1>
+
+	<div class="row">
+    <embed src="/SpringCloud/微服务02.pdf" width="100%" height="1024px" type="application/pdf">
+	</div>
+
+
+
+<h1><span id="mian-shi">面试</span></h1>
+
+	<div class="row">
+    <embed src="/SpringCloud/微服务面试篇.pdf" width="100%" height="1024px" type="application/pdf">
+	</div>
+
+
 
         </div>
 

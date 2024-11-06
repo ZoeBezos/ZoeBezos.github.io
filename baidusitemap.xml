@@ -1,11 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://zoebezos.github.io/2024/09/26/projection-skytogo/</loc>
+    <loc>https://zoebezos.github.io/2024/11/06/coding-3254-find-the-power-of-k-size-subarrays-i/</loc>
+    <lastmod>2024-11-06</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/07/algorithm-%F0%9F%9F%A1tree&bitree/</loc>
+    <lastmod>2024-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/11/05/coding-3222-find-the-winning-player-in-coin-game/</loc>
+    <lastmod>2024-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-%F0%9F%9F%A1binary-search/</loc>
+    <lastmod>2024-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/06/algorithm-%F0%9F%9F%A2stack&queue%E2%9C%85/</loc>
+    <lastmod>2024-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-%F0%9F%9F%A1number&bits%E2%9C%85/</loc>
+    <lastmod>2024-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/11/04/coding-633-sum-of-square-numbers/</loc>
+    <lastmod>2024-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/11/02/coding-3226-number-of-bit-changes-to-make-two-integers-equal/</loc>
+    <lastmod>2024-11-02</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/25/problem-set-leetcode-75/</loc>
+    <lastmod>2024-10-28</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/09/10/java-javase/</loc>
+    <lastmod>2024-10-28</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/25/algorithm-%F0%9F%9F%A1graph/</loc>
+    <lastmod>2024-10-19</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/04/algorithm-%F0%9F%9F%A2strings%E2%9C%85/</loc>
+    <lastmod>2024-10-18</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/10/18/coding-3191-minimum-operations-to-make-binary-array-elements-equal-to-one-i/</loc>
+    <lastmod>2024-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-%F0%9F%9F%A1recursion%E2%9C%85/</loc>
+    <lastmod>2024-10-12</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/10/12/coding-3158-find-the-xor-of-numbers-which-appear-twice/</loc>
+    <lastmod>2024-10-12</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/10/11/coding-3164-find-the-number-of-good-pairs-ii/</loc>
+    <lastmod>2024-10-11</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-%F0%9F%9F%A1bit-manipulation%E2%9C%85/</loc>
+    <lastmod>2024-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/05/algorithm-%F0%9F%9F%A2twopointers%E2%9C%85/</loc>
+    <lastmod>2024-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/01/algorithm-%F0%9F%9F%A2array%E2%9C%85/</loc>
+    <lastmod>2024-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2023/09/02/algorithm-%F0%9F%9F%A2linkedlist%E2%9C%85/</loc>
+    <lastmod>2024-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/10/05/coding-2187-minimum-time-to-complete-trips/</loc>
+    <lastmod>2024-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/02/04/coding-292-nim-game/</loc>
+    <lastmod>2024-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/09/23/coding-1014-best-sightseeing-pair/</loc>
+    <lastmod>2024-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/03/01/coding-2369-check-if-there-is-a-valid-partition-for-the-array/</loc>
+    <lastmod>2024-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/05/11/coding-2391-minimum-amount-of-time-to-collect-garbage/</loc>
+    <lastmod>2024-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/09/03/coding-2708-maximum-strength-of-a-group/</loc>
+    <lastmod>2024-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/10/04/coding-1227-airplane-seat-assignment-probability/</loc>
+    <lastmod>2024-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/10/03/java-javaweb/</loc>
+    <lastmod>2024-10-03</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/10/02/coding-1870-minimum-speed-to-arrive-on-time/</loc>
+    <lastmod>2024-10-02</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/10/01/coding-1845-seat-reservation-manager/</loc>
+    <lastmod>2024-10-01</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/09/09/framework-springcloud/</loc>
+    <lastmod>2024-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/01/25/problem-set-coding-interviews-special/</loc>
+    <lastmod>2024-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/09/07/framework-mybatis-plus/</loc>
+    <lastmod>2024-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/09/03/database-mongodb/</loc>
+    <lastmod>2024-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/09/30/cs-basics-design-pattern/</loc>
+    <lastmod>2024-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/09/30/cs-basics-linux/</loc>
     <lastmod>2024-09-30</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/09/26/mq-rabbitmq/</loc>
+    <lastmod>2024-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/09/30/bug-hexo-js-memory/</loc>
+    <lastmod>2024-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/09/26/projection-skytogo/</loc>
     <lastmod>2024-09-30</lastmod>
   </url>
   <url>
@@ -29,14 +177,6 @@
     <lastmod>2024-09-30</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2024/09/07/framework-mybatis-plus/</loc>
-    <lastmod>2024-09-30</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/09/09/framework-springcloud/</loc>
-    <lastmod>2024-09-30</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2024/09/08/framework-springboot/</loc>
     <lastmod>2024-09-30</lastmod>
   </url>
@@ -50,10 +190,6 @@
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/09/05/framework-springmvc/</loc>
-    <lastmod>2024-09-30</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/09/03/database-mongodb/</loc>
     <lastmod>2024-09-30</lastmod>
   </url>
   <url>
@@ -81,10 +217,6 @@
     <lastmod>2024-09-30</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2024/09/10/java-javase/</loc>
-    <lastmod>2024-09-30</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2024/09/26/language-learning-cantonese/</loc>
     <lastmod>2024-09-28</lastmod>
   </url>
@@ -95,18 +227,6 @@
   <url>
     <loc>https://zoebezos.github.io/2024/01/25/problem-set-top-100/</loc>
     <lastmod>2024-09-28</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/31/algorithm-binary-search/</loc>
-    <lastmod>2024-09-27</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/25/problem-set-coding-interviews-special/</loc>
-    <lastmod>2024-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/25/problem-set-leetcode-75/</loc>
-    <lastmod>2024-09-26</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/25/problem-set-cracking-the-coding-interview/</loc>
@@ -125,47 +245,31 @@
     <lastmod>2024-09-25</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/09/10/algorithm-dp/</loc>
+    <loc>https://zoebezos.github.io/2023/09/10/algorithm-%F0%9F%94%B4dp/</loc>
     <lastmod>2024-09-25</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/09/07/algorithm-tree&bitree/</loc>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-%F0%9F%9F%A1prefix-sum/</loc>
     <lastmod>2024-09-25</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2024/01/31/algorithm-prefix-sum/</loc>
+    <loc>https://zoebezos.github.io/2023/09/11/algorithm-%F0%9F%94%B4monotonic-stack/</loc>
     <lastmod>2024-09-25</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/09/11/algorithm-monotonic-stack/</loc>
+    <loc>https://zoebezos.github.io/2023/09/09/algorithm-%F0%9F%9F%A1greedy/</loc>
     <lastmod>2024-09-25</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/09/09/algorithm-greedy/</loc>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-%F0%9F%94%B4divide&conquer/</loc>
     <lastmod>2024-09-25</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2024/01/31/algorithm-divide&conquer/</loc>
+    <loc>https://zoebezos.github.io/2023/09/08/algorithm-%F0%9F%94%B4backtraking/</loc>
     <lastmod>2024-09-25</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/09/08/algorithm-backtraking/</loc>
-    <lastmod>2024-09-25</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/25/algorithm-graph/</loc>
-    <lastmod>2024-09-25</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/31/algorithm-recursion%E2%9C%85/</loc>
-    <lastmod>2024-09-24</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/09/23/coding-1014-best-sightseeing-pair/</loc>
-    <lastmod>2024-09-23</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/31/algorithm-sliding-windows%E2%9C%85/</loc>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-%F0%9F%9F%A1sliding-windows/</loc>
     <lastmod>2024-09-22</lastmod>
   </url>
   <url>
@@ -185,7 +289,7 @@
     <lastmod>2024-09-12</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/09/03/algorithm-hashing%E2%9C%85/</loc>
+    <loc>https://zoebezos.github.io/2023/09/03/algorithm-%F0%9F%9F%A1hashing%E2%9C%85/</loc>
     <lastmod>2024-09-10</lastmod>
   </url>
   <url>
@@ -193,15 +297,7 @@
     <lastmod>2024-09-09</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2024/01/31/algorithm-number&bits%E2%9C%85/</loc>
-    <lastmod>2024-09-08</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/31/algorithm-bit-manipulation%E2%9C%85/</loc>
-    <lastmod>2024-09-06</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/01/31/algorithm-sorting%E2%9C%85/</loc>
+    <loc>https://zoebezos.github.io/2024/01/31/algorithm-%F0%9F%9F%A2sorting%E2%9C%85/</loc>
     <lastmod>2024-09-05</lastmod>
   </url>
   <url>
@@ -209,20 +305,8 @@
     <lastmod>2024-09-04</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2024/09/03/coding-2708-maximum-strength-of-a-group/</loc>
-    <lastmod>2024-09-04</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2024/09/04/coding-2860-happy-students/</loc>
     <lastmod>2024-09-04</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/04/algorithm-strings%E2%9C%85/</loc>
-    <lastmod>2024-08-24</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/05/algorithm-twopointers%E2%9C%85/</loc>
-    <lastmod>2024-08-16</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/08/13/coding-3151-special-array-i/</loc>
@@ -233,24 +317,12 @@
     <lastmod>2024-08-12</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2023/09/06/algorithm-stack&queue%E2%9C%85/</loc>
-    <lastmod>2024-08-10</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2024/08/08/coding-3131-find-the-integer-added-to-array-i/</loc>
     <lastmod>2024-08-09</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/08/09/coding-3132-find-the-integer-added-to-array-ii/</loc>
     <lastmod>2024-08-09</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/01/algorithm-array%E2%9C%85/</loc>
-    <lastmod>2024-08-06</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2023/09/02/algorithm-linkedlist%E2%9C%85/</loc>
-    <lastmod>2024-08-06</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/08/04/coding-572-subtree-of-another-tree/</loc>
@@ -287,10 +359,6 @@
   <url>
     <loc>https://zoebezos.github.io/2024/05/14/coding-2244-minimum-time-to-complete-all-tasks/</loc>
     <lastmod>2024-05-15</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/05/11/coding-2391-minimum-amount-of-time-to-collect-garbage/</loc>
-    <lastmod>2024-05-11</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/05/10/coding-2960-count-tested-devices-after-test-operations/</loc>
@@ -341,10 +409,6 @@
     <lastmod>2024-04-02</lastmod>
   </url>
   <url>
-    <loc>https://zoebezos.github.io/2024/03/01/coding-2369-check-if-there-is-a-valid-partition-for-the-array/</loc>
-    <lastmod>2024-04-02</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2024/01/12/coding-2085-count-common-words-with-one-occurrence/</loc>
     <lastmod>2024-04-02</lastmod>
   </url>
@@ -382,10 +446,6 @@
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/01/28/coding-316-remove-duplicate-letters/</loc>
-    <lastmod>2024-04-01</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/02/04/coding-292-nim-game/</loc>
     <lastmod>2024-04-01</lastmod>
   </url>
   <url>
