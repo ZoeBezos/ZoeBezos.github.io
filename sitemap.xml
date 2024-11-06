@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zoebezos.github.io/resume/index.html</loc>
+    
+    <lastmod>2024-11-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/2024/11/06/test/</loc>
+    
+    <lastmod>2024-11-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/2024/11/06/coding-3254-find-the-power-of-k-size-subarrays-i/</loc>
     
     <lastmod>2024-11-06</lastmod>
@@ -257,15 +275,6 @@
     <loc>https://zoebezos.github.io/2024/10/02/coding-1870-minimum-speed-to-arrive-on-time/</loc>
     
     <lastmod>2024-10-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/resume/index.html</loc>
-    
-    <lastmod>2024-10-01</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1289,20 +1298,6 @@
 
   
   <url>
-    <loc>https://zoebezos.github.io/tags/algorithm-Array/</loc>
-    <lastmod>2024-11-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/tags/algorithm-Dynamic-Programming/</loc>
-    <lastmod>2024-11-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://zoebezos.github.io/tags/algorithm-Tree/</loc>
     <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -1318,6 +1313,20 @@
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-BFS/</loc>
+    <lastmod>2024-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/tags/algorithm-Array/</loc>
+    <lastmod>2024-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zoebezos.github.io/tags/algorithm-Dynamic-Programming/</loc>
     <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1387,6 +1396,13 @@
   </url>
   
   <url>
+    <loc>https://zoebezos.github.io/tags/algorithm-Simulation/</loc>
+    <lastmod>2024-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://zoebezos.github.io/tags/algorithm-Binary-Search/</loc>
     <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -1395,13 +1411,6 @@
   
   <url>
     <loc>https://zoebezos.github.io/tags/algorithm-Greedy/</loc>
-    <lastmod>2024-11-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zoebezos.github.io/tags/algorithm-Simulation/</loc>
     <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1578,14 +1587,14 @@
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/categories/algorithm-training/</loc>
+    <loc>https://zoebezos.github.io/categories/language-learning/</loc>
     <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://zoebezos.github.io/categories/language-learning/</loc>
+    <loc>https://zoebezos.github.io/categories/algorithm-training/</loc>
     <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
