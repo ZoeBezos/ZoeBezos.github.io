@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://zoebezos.github.io/2024/11/06/test/</loc>
-    <lastmod>2024-11-06</lastmod>
-  </url>
-  <url>
-    <loc>https://zoebezos.github.io/2024/11/06/coding-3254-find-the-power-of-k-size-subarrays-i/</loc>
-    <lastmod>2024-11-06</lastmod>
-  </url>
-  <url>
     <loc>https://zoebezos.github.io/2023/09/07/algorithm-%F0%9F%9F%A1tree&bitree/</loc>
-    <lastmod>2024-11-05</lastmod>
+    <lastmod>2024-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://zoebezos.github.io/2024/11/10/coding-540-single-element-in-a-sorted-array/</loc>
+    <lastmod>2024-11-10</lastmod>
   </url>
   <url>
     <loc>https://zoebezos.github.io/2024/11/05/coding-3222-find-the-winning-player-in-coin-game/</loc>
